@@ -1,0 +1,21 @@
+我的
+我的认证   icon_authentication
+我的银行卡   icon_bankcard
+商城优惠券 icon_coupons
+客服中心 icon_customer_service
+意见反馈 icon_feedback
+我的设置 icon_setting
+
+首页
+首页
+icon_tab_home
+icon_tab_home_selected
+商城
+icon_tab_shop
+icon_tab_shop_selected
+发现页
+icon_tab_find
+icon_tab_find_selected
+我的
+icon_tab_mine
+icon_tab_mine_selected

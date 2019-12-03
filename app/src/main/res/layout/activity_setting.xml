@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.activity.SettingActivity">
+
+    <include layout="@layout/titlebar_common" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/app_divide_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_list_height"
+        android:background="@drawable/slt_common_item">
+
+        <TextView
+            android:id="@+id/tv_authentication"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:text="@string/text_about_us"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_right_gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/arrow_right_gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/iv_arrow_right_gray"
+            android:background="@color/app_divide_line" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_law_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_list_height"
+        android:background="@drawable/slt_common_item"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_authentication2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_right_gray2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/arrow_right_gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/iv_arrow_right_gray2"
+            android:background="@color/app_divide_line" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_my_authentication3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/setting_list_height"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_authentication3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:text="我的认证"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_right_gray3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/arrow_right_gray" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/iv_arrow_right_gray3"
+            android:background="@color/app_divide_line" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="180dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/slt_btn_corner5_theme_color"
+        android:gravity="center"
+        android:text="@string/text_logout"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+</LinearLayout>

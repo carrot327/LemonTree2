@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!-- 点击背景 -->
+<item android:drawable="@drawable/bg_mine_card_hover" android:state_enabled="true" android:state_pressed="true">
+
+</item>
+
+<!-- 默认背景 -->
+<item android:drawable="@drawable/bg_mine_card" android:state_enabled="true">
+
+</item>
+
+</selector>

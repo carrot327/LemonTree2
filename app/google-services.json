@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "77581740696",
+    "firebase_url": "https://lemontree-d3154.firebaseio.com",
+    "project_id": "lemontree-d3154",
+    "storage_bucket": "lemontree-d3154.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77581740696:android:7ffbae112612f48b10beed",
+        "android_client_info": {
+          "package_name": "com.lemontree.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77581740696-4erdrc72b8bkdhojnfiio43ef4bqmk09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSWVPbBFOpAZ4yqmGAyIhZejKp-LwvOW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77581740696-4erdrc72b8bkdhojnfiio43ef4bqmk09.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

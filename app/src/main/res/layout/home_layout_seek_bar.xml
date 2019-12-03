@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!--借多少-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view_tag1"
+                android:layout_width="5dp"
+                android:layout_height="15dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shape_bg_circle_corner_yellow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="6dp"
+                android:layout_toRightOf="@id/view_tag1"
+                android:text="@string/text_want_amount"
+                android:textColor="@color/text_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <!--借多少-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_shadow_1"
+            android:gravity="center">
+
+            <include
+                android:id="@+id/indicator_yellow"
+                layout="@layout/custom_indicator_oval_yellow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp" />
+
+            <SeekBar
+                android:id="@+id/seek_bar_want_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/indicator_yellow"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:max="1600000"
+                android:maxHeight="8dp"
+                android:progressDrawable="@drawable/seek_bar_bg_yellow"
+                android:splitTrack="false"
+                android:thumb="@drawable/seek_bar_thumb_yellow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar_want_amount"
+                android:layout_alignLeft="@id/seek_bar_want_amount"
+                android:layout_marginTop="4dp"
+                android:text="Rp.200,000"
+                android:textColor="#5F5F5F" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar_want_amount"
+                android:layout_alignRight="@id/seek_bar_want_amount"
+                android:layout_marginTop="4dp"
+                android:text="Rp.1,600,000"
+                android:textColor="#5F5F5F" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--借多久-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="15dp"
+                android:background="@drawable/shape_bg_circle_corner_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:text="@string/text_want_time"
+                android:textColor="@color/text_black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_shadow_1"
+            android:gravity="center">
+
+            <include
+                android:id="@+id/indicator_green"
+                layout="@layout/custom_indicator_oval_green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp" />
+
+            <SeekBar
+                android:id="@+id/seek_bar_want_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/indicator_green"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:max="14"
+                android:maxHeight="8dp"
+                android:progressDrawable="@drawable/seek_bar_bg_green"
+                android:splitTrack="false"
+                android:thumb="@drawable/seek_bar_thumb_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar_want_time"
+                android:layout_alignLeft="@id/seek_bar_want_time"
+                android:layout_marginTop="4dp"
+                android:text="3 hari"
+                android:textColor="#5F5F5F" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar_want_time"
+                android:layout_alignRight="@id/seek_bar_want_time"
+                android:layout_marginTop="4dp"
+                android:text="14 hari"
+                android:textColor="#5F5F5F" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--到期应还-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/text_should_pay"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_should_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Rp.428,000"
+            android:textColor="@color/text_blue"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

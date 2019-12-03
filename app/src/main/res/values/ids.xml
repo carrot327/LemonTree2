@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item type="id" name="titlebar"/>
+    <item type="id" name="titlebar_common"/>
+
+    <item type="id" name="app_titlebar"/>
+    <item type="id" name="btn_titlebar_back"/>
+    <item type="id" name="iv_titlebar_right"/>
+    <item type="id" name="tv_titlebar_title"/>
+    <item type="id" name="tv_titlebar_text_left"/>
+    <item type="id" name="tv_titlebar_text_right"/>
+</resources>

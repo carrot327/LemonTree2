@@ -1,0 +1,101 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+
+    <!-- 自定义dialog的默认样式 -->
+    <style name="dialog_default_style" parent="android:style/Theme.Dialog">
+        <!-- 设置自定义布局的背景透明 -->
+        <item name="android:background">#00000000</item>
+        <!-- 设置window背景透明，也就是去边框 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowFrame">@null</item>
+        <!--<item name="android:windowSoftInputMode">stateAlwaysVisible</item>-->
+        <!--<item name="android:windowBackground">@drawable/dia_bg</item>-->
+        <!--<item name="android:windowIsTranslucent">false</item>-->
+    </style>
+
+    <!-- 统一分割线样式 -->
+    <style name="split_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/app_divide_line</item>
+    </style>
+
+    <!-- 红色按钮的基础样式（圆角）-->
+    <style name="btn_blue_corner_style_borderless" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/slt_btn_circle_corner_theme_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- common dialog -->
+    <style name="common_dialog_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="common_dialog_btn">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/slt_blue_text</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="common_dialog_btn2">
+        <item name="android:background">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/slt_blue_text</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="select_dialog_btn">
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/slt_blue_text2</item>
+        <item name="android:layout_marginLeft">28dp</item>
+        <item name="android:layout_marginRight">28dp</item>
+        <item name="android:background">@drawable/slt_border_theme_color_6</item>
+
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="common_dialog_message_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">18dp</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textColor">@color/Grey900</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="style_seekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/seekbar_layerlist</item>
+        <item name="android:indeterminateDrawable">@drawable/seekbar_layerlist</item>
+        <item name="android:thumb">@drawable/seekbar_thumb</item>
+        <item name="android:thumbnail">@drawable/seekbar_thumb</item>
+        <item name="android:focusable">true</item>
+        <item name="android:maxHeight">0.1dp</item>
+        <item name="android:minHeight">0.1dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
+
+</resources>

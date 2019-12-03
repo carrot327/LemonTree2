@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@android:id/background"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+        <shape>
+            <corners android:radius="20dp" />
+            <solid android:color="#cff4e5" />
+        </shape>
+    </item>
+
+    <item
+        android:id="@android:id/progress"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+        <clip>
+            <shape>
+                <corners android:radius="20dp" />
+                <gradient
+                    android:angle="0"
+                    android:endColor="@color/seek_bar_gradient_green_end"
+                    android:startColor="@color/seek_bar_gradient_green_start" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

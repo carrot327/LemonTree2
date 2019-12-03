@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_shu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_heng1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="155dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_heng2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="184dp" />
+
+    <ImageView
+        android:id="@+id/iv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/bg_recommend_dialog" />
+
+    <!--左边-->
+    <ImageView
+        android:id="@+id/iv_logo_left"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_heng1" />
+
+    <TextView
+        android:id="@+id/tv_product_name_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_logo_left"
+        app:layout_constraintTop_toTopOf="@+id/iv_logo_left"
+        tools:text="自在分期" />
+
+    <TextView
+        android:id="@+id/tv_range_tag_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="额度范围(元)"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_logo_left"
+        app:layout_constraintTop_toBottomOf="@+id/tv_product_name_left" />
+
+    <TextView
+        android:id="@+id/tv_range_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3000～1万"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_range_tag_left"
+        app:layout_constraintTop_toBottomOf="@+id/tv_range_tag_left" />
+
+    <TextView
+        android:id="@+id/tv_speed_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="立即下款"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_range_left"
+        app:layout_constraintTop_toBottomOf="@+id/tv_range_left" />
+
+    <TextView
+        android:id="@+id/tv_month_rate_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="月费率2%"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_speed_left"
+        app:layout_constraintTop_toTopOf="@+id/tv_speed_left" />
+
+    <!--右边-->
+    <ImageView
+        android:id="@+id/iv_logo_right"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="42dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo_left" />
+
+    <TextView
+        android:id="@+id/tv_product_name_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_logo_right"
+        app:layout_constraintTop_toTopOf="@+id/iv_logo_right"
+        tools:text="自在分期" />
+
+    <TextView
+        android:id="@+id/tv_range_tag_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="额度范围(元)"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_logo_right"
+        app:layout_constraintTop_toBottomOf="@+id/tv_product_name_right" />
+
+    <TextView
+        android:id="@+id/tv_range_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3000～1万"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_range_tag_right"
+        app:layout_constraintTop_toBottomOf="@+id/tv_range_tag_right" />
+
+    <TextView
+        android:id="@+id/tv_speed_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="立即下款"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_range_right"
+        app:layout_constraintTop_toBottomOf="@+id/tv_range_right" />
+
+    <TextView
+        android:id="@+id/tv_month_rate_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="月费率2%"
+        android:textColor="#ffffff"
+        android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_speed_right"
+        app:layout_constraintTop_toTopOf="@+id/tv_speed_right" />
+
+    <ImageView
+        android:id="@+id/iv_dialog_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/close_home_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_content" />
+
+    <Button
+        android:id="@+id/btn_recommend_left"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_button_border_white"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_heng2"
+        app:layout_constraintEnd_toEndOf="@+id/iv_content"
+        app:layout_constraintStart_toStartOf="@+id/guideline_shu"
+        app:layout_constraintTop_toTopOf="@+id/tv_range_tag_left"
+        tools:text="立即借贷" />
+
+    <Button
+        android:id="@+id/btn_recommend_right"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
+        android:background="@drawable/bg_button_border_white"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_shu"
+        app:layout_constraintTop_toTopOf="@+id/tv_range_tag_right"
+        tools:text="立即借贷" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

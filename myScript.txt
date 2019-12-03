@@ -1,0 +1,26 @@
+//Dialog
+                        String msg = MessageFormat.format(
+                                "Kamu punya {0} peluang untuk mengajukan perpanjangan pinjaman," +
+                                        "Konfirmasikan aplikasi？", mHomeData.postpone);
+                        DialogFactory.createCommonDialog(mContext, "Prompt", msg, "No", new BaseDialog.OnClickListener() {
+                            @Override
+                            public void onClick(BaseDialog dialog, View view) {
+                                //进入还款页面
+                                dialog.dismiss();
+                                showPayWayDialog(ConstantValue.NORMAL_PAY);
+                            }
+                        }, "Yes", new BaseDialog.OnClickListener() {
+                            @Override
+                            public void onClick(BaseDialog dialog, View view) {
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        //进入展期确认页
+                                        showHomeView(VIEW_PAY_DELAY_4);
+                                        //delay page所有数据为已知的
+                                        setDelayPageData();
+                                    }
+                                }, 400);
+                                dialog.dismiss();
+                            }
+                        }).show();

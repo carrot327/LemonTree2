@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 点击背景 -->
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:radius="@dimen/btn_blue_corner2"/>
+            <solid android:color="#5c85d9"/>
+        </shape>
+    </item>
+
+    <!-- 不可用时的背景 -->
+    <item android:state_enabled="false">
+        <shape>
+            <corners android:radius="@dimen/btn_blue_corner2"/>
+            <solid android:color="#dddddd"/>
+        </shape>
+    </item>
+
+    <!-- 默认背景 -->
+    <item>
+        <shape>
+            <corners android:radius="@dimen/btn_blue_corner2"/>
+            <solid android:color="#618de5"/>
+        </shape>
+    </item>
+
+</selector>

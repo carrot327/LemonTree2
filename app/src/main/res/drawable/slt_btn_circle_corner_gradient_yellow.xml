@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 点击背景 -->
+    <item android:drawable="@drawable/bg_btn_shape_gradient_corners_yellow_hover" android:state_enabled="true" android:state_pressed="true" />
+
+    <!-- 不可用时的背景 -->
+    <item android:drawable="@drawable/bg_btn_shape_gradient_corners_yellow_disable" android:state_enabled="false" android:state_pressed="false" />
+
+    <!-- 默认背景 -->
+    <item android:drawable="@drawable/bg_btn_shape_gradient_corners_yellow" android:state_enabled="true" android:state_pressed="false" />
+
+</selector>

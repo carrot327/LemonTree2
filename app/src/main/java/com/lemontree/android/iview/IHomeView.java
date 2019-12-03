@@ -1,0 +1,41 @@
+package com.lemontree.android.iview;
+
+
+import com.lemontree.android.base.IBaseView;
+import com.lemontree.android.bean.response.BorrowApplyInfoResBean;
+import com.lemontree.android.bean.response.GetPayWayListResBean;
+import com.lemontree.android.bean.response.HomeDataResBean;
+
+public interface IHomeView extends IBaseView {
+    //设置首页数据
+    void setHomeData(HomeDataResBean homeData);
+
+    //刷新首页
+    void refreshHomeData();
+
+    //停止刷新
+    void stopRefresh();
+
+    //设置借款信息
+    void setBorrowInfo(BorrowApplyInfoResBean borrowData);
+
+    //展示借款信息
+    void showLoanInfoLayout();
+
+    //展期费用
+    void showExtendPageData(String fee);
+
+    //set Pay way data
+    void setPayWayData(GetPayWayListResBean data);
+
+
+    //处理运营弹框逻辑
+//    void processShowOperationDialog(OperationDialogResBean responseData);
+
+   /* //设置商城显示隐藏
+//    void setShoppingVisibility(HomeShoppingDataResBean responseData);
+
+    void showRecommendDialogOne(List<RecommendDialogResBean.ProductListBean> bean);
+
+    void showRecommendDialogTwo(List<RecommendDialogResBean.ProductListBean> bean);*/
+}

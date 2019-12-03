@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- WebView进度条 -->
+    <declare-styleable name="WebViewProgressBar">
+        <attr name="max" format="integer" />
+        <attr name="progress" format="integer" />
+        <attr name="progress_color" format="color" />
+    </declare-styleable>
+
+    <!-- CommonDialog -->
+    <declare-styleable name="MaxHeightScrollView">
+        <attr name="mhsv_maxHeight" format="dimension" />
+    </declare-styleable>
+
+
+    <!--首页滑动SlideBar -->
+    <declare-styleable name="SlideBar">
+        <attr name="bottomColor" format="color" />
+        <attr name="doRound" format="boolean" />
+        <attr name="barColor" format="color" />
+        <attr name="slider_text" format="string" />
+        <attr name="roundNum" format="dimension" />
+        <attr name="barLength" format="dimension" />
+        <attr name="slider_textColor" format="color" />
+        <attr name="slider_textSize" format="dimension" />
+        <attr name="borderStrong" format="dimension" />
+        <attr name="borderColor" format="color" />
+        <attr name="autoBack" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SlideBarWithText">
+        <attr name="bottomcolor" format="color" />
+        <attr name="doround" format="boolean" />
+        <attr name="forecolore" format="enum">
+            <enum name="blue" value="0" />
+            <enum name="orange" value="1" />
+            <enum name="low_orange" value="2" />
+        </attr>
+        <attr name="minitext" format="string" />
+        <attr name="maxitext" format="string" />
+        <attr name="roundnum" format="dimension" />
+        <attr name="barresid" format="reference" />
+        <attr name="solidtextcolor" format="color" />
+        <attr name="tipstextcolor" format="color" />
+        <attr name="solidtextsize" format="dimension" />
+        <attr name="tipstextsize" format="dimension" />
+        <attr name="borderstrong" format="dimension" />
+        <attr name="bordercolor" format="color" />
+        <attr name="tipsresid" format="reference" />
+        <attr name="paddingHor" format="dimension" />
+        <attr name="selectmode" format="enum">
+            <enum name="slide" value="0" />
+            <enum name="click" value="1" />
+            <enum name="slide_click" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lemontree.android.ui.fragment.ApplyFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/theme_color">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/title_text_apply_info"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/apply_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:srlEnableAutoLoadmore="false"
+        app:srlEnableLoadmore="false"
+        app:srlEnableLoadmoreWhenContentNotFull="false"
+        app:srlEnableRefresh="true">
+
+        <com.lemontree.android.ui.widget.PtrHeader
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/sv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="28dp"
+                android:paddingRight="28dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/apply_list_height"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/slt_shadow_item">
+
+                    <View
+                        android:id="@+id/view_tag1"
+                        android:layout_width="5dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/shape_bg_circle_corner_grey"
+                        android:clickable="true" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_user_info"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toRightOf="@id/view_tag1"
+                        android:src="@drawable/icon_user_disable" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@id/iv_user_info"
+                        android:text="@string/apply_text_user_info"
+                        android:textColor="@color/CommonTextColor"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrow_apply_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="28dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/arrow_right_gray" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_company_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/apply_list_height"
+                    android:layout_marginTop="@dimen/apply_list_margin_top"
+                    android:background="@drawable/slt_shadow_item">
+
+                    <View
+                        android:id="@+id/view_tag2"
+                        android:layout_width="5dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/shape_bg_circle_corner_grey" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_company"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toRightOf="@id/view_tag2"
+                        android:src="@drawable/icon_company_disable" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/iv_company"
+                        android:text="@string/apply_text_company"
+                        android:textColor="@color/CommonTextColor"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrow_apply_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="28dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/arrow_right_gray" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_contact_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/apply_list_height"
+                    android:layout_marginTop="@dimen/apply_list_margin_top"
+                    android:background="@drawable/slt_shadow_item">
+
+                    <View
+                        android:id="@+id/view_tag3"
+                        android:layout_width="5dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/shape_bg_circle_corner_grey" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_contact"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toRightOf="@id/view_tag3"
+                        android:src="@drawable/icon_contact_disable" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/iv_contact"
+                        android:text="@string/apply_text_contact"
+                        android:textColor="@color/CommonTextColor"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrow_apply_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="28dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/arrow_right_gray" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/apply_list_height"
+                    android:layout_marginTop="@dimen/apply_list_margin_top"
+                    android:background="@drawable/slt_shadow_item">
+
+                    <View
+                        android:id="@+id/view_tag4"
+                        android:layout_width="5dp"
+                        android:layout_height="15dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/shape_bg_circle_corner_grey" />
+
+
+                    <ImageView
+                        android:id="@+id/iv_photo"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="13dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toRightOf="@id/view_tag4"
+                        android:src="@drawable/icon_upload_disable" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@+id/iv_photo"
+                        android:text="@string/apply_text_upload"
+                        android:textColor="@color/CommonTextColor"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_arrow_apply_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="28dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/arrow_right_gray" />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="70dp"
+                    android:background="@drawable/slt_btn_corner5_theme_color"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="@string/btn_text_submit"
+                    android:textColor="@color/white"
+                    android:textSize="19sp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

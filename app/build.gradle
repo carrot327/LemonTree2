@@ -1,0 +1,124 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
+    defaultConfig {
+        applicationId "com.lemontree.android"
+
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 11
+        versionName "1.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true //矢量图支持
+        multiDexEnabled true
+
+        ndk {
+            abiFilters "armeabi-v7a","x86"
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file("haowangjiao.keystore")
+            storePassword "haowangjiao2018"
+            keyAlias "haowangjiao"
+            keyPassword "haowangjiao2018"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    configurations {
+        cleanedAnnotations
+        compile.exclude group: 'org.jetbrains', module: 'annotations'
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        defaultChannel {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChanel"]
+        }
+        white_1104 {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "white_1104"]
+        }
+        sakumanis_1202 {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_1202"]
+        }
+        sakumanis_1202_daoliu {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_1202_daoliu"]
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation project(':JsBridge')
+    implementation project(':Permission')
+    implementation project(':NetworkLite')
+    implementation project(':DFActionLiveness')
+    implementation project(':UpdateSDK')
+
+    implementation files('libs/BaiduLBS_Android.jar')
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'io.reactivex:rxjava:1.2.3'
+
+    //以下为新添加
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+    implementation 'com.jakewharton:butterknife:10.2.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    implementation 'com.google.firebase:firebase-core:17.2.1'
+    implementation 'com.google.firebase:firebase-analytics:17.2.1'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+//    implementation 'com.google.android.material:material:1.0.0'
+
+
+}
+repositories {
+    mavenCentral()
+}

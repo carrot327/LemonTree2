@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="270dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dialog_common_title"
+        style="@style/common_dialog_title"
+        android:textColor="@color/text_black"
+        android:textStyle="bold"
+        tools:text="温馨提示" />
+
+    <FrameLayout
+        android:id="@+id/frame_dialog_common_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <com.lemontree.android.ui.widget.MaxHeightScrollView
+            android:id="@+id/mhsv_dialog_common_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mhsv_maxHeight="180dp">
+
+            <TextView
+                android:id="@+id/tv_dialog_common_message"
+                style="@style/common_dialog_message_text"
+                android:textColor="@color/Grey900"
+                tools:text="提交申请后，您的信息将不可更改，确认提交么？" />
+
+        </com.lemontree.android.ui.widget.MaxHeightScrollView>
+    </FrameLayout>
+
+    <View
+        style="@style/split_line"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_btn_negative"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btn_dialog_common_negative"
+                style="@style/common_dialog_btn"
+                android:layout_width="75dp"
+                android:layout_height="28dp"
+                android:background="@drawable/slt_border_theme_color_6"
+                android:text="Batal" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_dialog_common_positive_btn_part"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_dialog_common_positive"
+                style="@style/common_dialog_btn"
+                android:layout_width="75dp"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/slt_border_theme_color_6"
+                android:text="OK" />
+
+            <ImageView
+                android:id="@+id/iv_dialog_common_loading"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Permission</string>
+
+    <string name="permission_storage">存储权限\n(默认处理)</string>
+    <string name="permission_camera">摄像头权限\n(自定义rational,forbid对话框处理)</string>
+    <string name="permission_contacts">联系人权限\n(自定义forbid对话框,强制校验)</string>
+    <string name="permission_overlay1">悬浮窗权限(不带对话框)</string>
+    <string name="permission_overlay2">悬浮窗权限(带提示对话框)</string>
+    <string name="permission_install">安装权限</string>
+    <string name="permission_mix">多权限</string>
+    <string name="permission_setting">设置权限页</string>
+
+    <string name="runtime_title_dialog">Prompt</string>
+    <string name="setting">Pengaturan</string>
+    <string name="resume">Lanjutkan</string>
+    <string name="cancel2">Batalkan</string>
+
+    <string name="message_permission_rationale">Otorisasi izin berikut untuk memastikan bahwa aplikasi terus berfungsi secara normal：\n\n%1$s</string>
+    <string name="message_install_failed">Silakan otorisasi izin paket instalasi ponsel.</string>
+
+    <string name="permission_name_camera">Kamera</string>
+    <string name="permission_name_contacts">Buku alamat</string>
+    <string name="permission_name_location">Informasi lokasi</string>
+    <string name="permission_name_phone">Telepon</string>
+    <string name="permission_name_sms">SMS</string>
+    <string name="permission_name_storage">Ruang penyimpanan</string>
+
+    <string name="permission_name_calendar">日历</string>
+    <string name="permission_name_microphone">麦克风</string>
+    <string name="permission_name_sensors">身体传感器</string>
+
+    <!--原文
+    <string name="runtime_title_dialog">提示</string>
+    <string name="setting">设置</string>
+    <string name="resume">继续</string>
+    <string name="cancel">取消</string>
+
+    <string name="message_permission_rationale">授权以下权限，保证应用继续正常运行：\n\n%1$s</string>
+    <string name="message_install_failed">请授权手机安装包的权限.</string>
+
+    <string name="permission_name_calendar">日历</string>
+    <string name="permission_name_camera">相机</string>
+    <string name="permission_name_contacts">通讯录</string>
+    <string name="permission_name_location">位置信息</string>
+    <string name="permission_name_microphone">麦克风</string>
+    <string name="permission_name_phone">电话</string>
+    <string name="permission_name_sensors">身体传感器</string>
+    <string name="permission_name_sms">短信</string>
+    <string name="permission_name_storage">存储空间</string>
+-->
+    <string name="permission_alert_window">悬浮窗</string>
+
+</resources>

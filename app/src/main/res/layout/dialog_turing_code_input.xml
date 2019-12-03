@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_round_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dialog_common_title"
+        style="@style/common_dialog_title"
+        android:gravity="center"
+        android:text="@string/dialog_pls_input_turing_code" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_password"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <EditText
+            android:id="@+id/et_turing_code"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_bg_grey_border"
+            android:hint="@string/text_pls_input"
+            android:inputType="text"
+            android:maxLength="16"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="14sp" />
+
+
+        <ImageView
+            android:id="@+id/iv_turing_code"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_topbar_icon_bkds" />
+
+    </LinearLayout>
+
+    <View style="@style/split_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/common_dialog_btn2"
+            android:layout_width="0dp"
+            android:textColor="@color/Grey600"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/dialog_cancel"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            style="@style/common_dialog_btn2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:text="@string/dialog_confirm"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+</LinearLayout>
