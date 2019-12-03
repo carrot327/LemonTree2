@@ -25,8 +25,8 @@
     <color name="yellow_gradient_disable_start">#f8e1b9</color>
     <color name="yellow_gradient_disable_end">#f8e1b9</color>
 
-    <color name="seek_bar_gradient_yellow_start">#FCCB99</color>
-    <color name="seek_bar_gradient_yellow_end">#FDAA55</color>
+    <color name="seek_bar_gradient_yellow_start">#00BCD4</color>
+    <color name="seek_bar_gradient_yellow_end">#03A9F4</color>
     <color name="seek_bar_gradient_green_start">#33DAAB</color>
     <color name="seek_bar_gradient_green_end">#28CB89</color>
 
@@ -85,8 +85,8 @@
     <color name="home_text_grey">#6D6D6D</color>
 
     <!--seek_bar-->
-    <color name="seek_bar_text_yellow">#FE9D4A</color>
-    <color name="seek_bar_progress_yellow">#fdb164</color>
+    <color name="seek_bar_text_yellow">#00BCD4</color>
+    <color name="seek_bar_progress_yellow">#03A9F4</color>
     <color name="seek_bar_track_bg_yellow">#ffebd7</color>
 
     <color name="seek_bar_text_green">#2FCB87</color>

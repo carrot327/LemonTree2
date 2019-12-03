@@ -68,8 +68,6 @@ public class Tools {
      */
     public static String getChannel() {
 
-//        String value = "defaultChannel";
-//        String value = "1114";
         String value = "";
         try {
             ApplicationInfo appInfo = BaseApplication.getInstance().getPackageManager().getApplicationInfo(BaseApplication.getInstance().getPackageName(),
