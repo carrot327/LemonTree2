@@ -25,10 +25,10 @@
     <color name="yellow_gradient_disable_start">#f8e1b9</color>
     <color name="yellow_gradient_disable_end">#f8e1b9</color>
 
-    <color name="seek_bar_gradient_yellow_start">#00BCD4</color>
-    <color name="seek_bar_gradient_yellow_end">#03A9F4</color>
-    <color name="seek_bar_gradient_green_start">#33DAAB</color>
-    <color name="seek_bar_gradient_green_end">#28CB89</color>
+    <color name="seek_bar_gradient_yellow_start">@color/text_theme</color>
+    <color name="seek_bar_gradient_yellow_end">@color/text_theme</color>
+    <color name="seek_bar_gradient_green_start">@color/text_theme</color>
+    <color name="seek_bar_gradient_green_end">@color/text_theme</color>
 
     <!--深黄到浅黄的渐变 -->
     <color name="yellow_gradient_start">#FE9D4A</color>
@@ -85,13 +85,13 @@
     <color name="home_text_grey">#6D6D6D</color>
 
     <!--seek_bar-->
-    <color name="seek_bar_text_yellow">#00BCD4</color>
-    <color name="seek_bar_progress_yellow">#03A9F4</color>
+    <color name="seek_bar_text_yellow">@color/text_theme</color>
+    <color name="seek_bar_progress_yellow">@color/text_theme</color>
     <color name="seek_bar_track_bg_yellow">#ffebd7</color>
 
-    <color name="seek_bar_text_green">#2FCB87</color>
-    <color name="seek_bar_progress_green">#29cb8b</color>
-    <color name="seek_bar_track_bg_green">#cff3e4</color>
+    <color name="seek_bar_text_green">@color/text_theme</color>
+    <color name="seek_bar_progress_green">@color/text_theme</color>
+    <color name="seek_bar_track_bg_green">#ffebd7</color>
 
 
 </resources>
