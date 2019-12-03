@@ -11,14 +11,14 @@ public class UrlHostConfig {
     private static EvnConfig HOST_ENV = EvnConfig.HTTP_RELEASE;
 
     //测试
-    private static final String DEBUG_MAIN_HOST = "http://161.117.185.237:80";
-    private static final String DEBUG_H5_HOST = "http://161.117.185.237:83";
+    private static final String DEBUG_MAIN_HOST = "http://161.117.179.26:80";
+    private static final String DEBUG_H5_HOST = "http://161.117.179.26:83";
     private static final String DEBUG_FLOW_IO_HOST = "";
     private static final String DEBUG_UPDATE_HOST = DEBUG_MAIN_HOST;
 
     //生产
-    private static final String RELEASE_MAIN_HOST = "http://161.117.83.24";
-    private static final String RELEASE_H5_HOST = "http://161.117.188.140";
+    private static final String RELEASE_MAIN_HOST = "http://47.74.255.192";
+    private static final String RELEASE_H5_HOST = "http://161.117.226.202";
     private static final String RELEASE_FLOW_IO_HOST = "";
     private static final String RELEASE_UPDATE_HOST = RELEASE_MAIN_HOST;
 

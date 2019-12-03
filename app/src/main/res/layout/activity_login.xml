@@ -24,7 +24,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="80dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="97dp"
@@ -36,7 +37,7 @@
                 android:id="@+id/ll_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="62dp"
+                android:layout_marginTop="72dp"
                 android:orientation="vertical">
 
                 <!-- 用户名-->
@@ -109,8 +110,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginTop="22dp"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/tv_msg_verify_code"

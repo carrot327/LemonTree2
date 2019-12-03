@@ -60,7 +60,7 @@ public class Tools {
      * 获取appName
      */
     public static String getAppName() {
-        return "android_sakumanis";
+        return "android";
     }
 
     /**

@@ -52,8 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="8dp" />
+                android:layout_centerHorizontal="true" />
 
             <SeekBar
                 android:id="@+id/seek_bar_want_amount"
@@ -63,7 +62,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@null"
                 android:max="1600000"
-                android:maxHeight="8dp"
+                android:maxHeight="3dp"
                 android:progressDrawable="@drawable/seek_bar_bg_yellow"
                 android:splitTrack="false"
                 android:thumb="@drawable/seek_bar_thumb_yellow" />
@@ -133,8 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="8dp" />
+                android:layout_centerHorizontal="true" />
 
             <SeekBar
                 android:id="@+id/seek_bar_want_time"
@@ -144,7 +142,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@null"
                 android:max="14"
-                android:maxHeight="8dp"
+                android:maxHeight="3dp"
                 android:progressDrawable="@drawable/seek_bar_bg_green"
                 android:splitTrack="false"
                 android:thumb="@drawable/seek_bar_thumb_green" />
@@ -196,7 +194,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="Rp.428,000"
-            android:textColor="@color/text_blue"
+            android:textColor="@color/text_theme"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>
