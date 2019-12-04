@@ -110,7 +110,7 @@
             <View
                 android:layout_width="5dp"
                 android:layout_height="15dp"
-                android:background="@drawable/shape_bg_circle_corner_green" />
+                android:background="@drawable/shape_bg_circle_corner_yellow" />
 
             <TextView
                 android:layout_width="wrap_content"
