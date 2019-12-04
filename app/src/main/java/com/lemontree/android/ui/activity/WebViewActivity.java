@@ -103,7 +103,7 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 //        mWebView.loadUrl("file:///android_asset/index.html");
 //        mWebView.loadUrl("http://www.baidu.com");
 //        mWebView.loadUrl("http://10.5.61.148:8080/#/pages/auth/photoAuth/index");
-        Log.d("karl", "WebViewActivity-loadUrl-" + mUrl);
+        Log.d("url", "WebViewActivity-loadUrl-" + mUrl);
     }
 
     @Override

@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
-            android:textColor="@color/text_blue"
+            android:textColor="@color/text_theme_deep"
             android:textSize="16sp"
             tools:text="Rp.142,000"
             android:textStyle="bold" />

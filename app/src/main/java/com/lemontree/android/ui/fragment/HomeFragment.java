@@ -2,12 +2,11 @@ package com.lemontree.android.ui.fragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,9 +54,7 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 import static android.view.Gravity.CENTER;
 import static com.lemontree.android.ui.activity.MainActivity.TAB_APPLY;
@@ -133,8 +130,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvPayDeadlineDelay;
     @BindView(R.id.tv_top_text)
     TextView tvTopText;
-    @BindView(R.id.ll_delay_pay_entry)
-    LinearLayout llDelayPayEntry;
     @BindView(R.id.msg_red_dot)
     View msgRedDot;
     @BindView(R.id.btn_home)
@@ -146,18 +141,25 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @BindView(R.id.include_home_layout_pay)
     LinearLayout includePayAtTime;
     @BindView(R.id.include_home_layout_pay_or_delay)
-    LinearLayout includePayDelay;
+    LinearLayout includeExtendPage;
     @BindView(R.id.include_home_borrow_apply_info)
     LinearLayout includeBorrowApplyInfo;
     @BindView(R.id.include_home_borrow_loan_info)
     LinearLayout includeBorrowLoanInfo;
     @BindView(R.id.ll_borrow_protocol)
     LinearLayout llBorrowProtocol;
-    @BindView(R.id.ll_part_pay)
-    LinearLayout llPartPay;
     @BindView(R.id.tv_borrow_protocol)
     TextView tvBorrowProtocol;
-    Unbinder unbinder;
+    @BindView(R.id.ll_part_pay)
+    LinearLayout llPartPayEntry;
+    @BindView(R.id.ll_delay_pay_entry)
+    LinearLayout llDelayPayEntry;
+    @BindView(R.id.tv_delay_pay_entry)
+    TextView tvDelayPayEntry;
+    @BindView(R.id.tv_part_pay_entry)
+    TextView tvPartPayEntry;
+
+
 
     public static final String VIEW_SEEK_BAR_1 = "viewSeekBar";//home_layout_seek_bar
     public static final String VIEW_BORROW_2 = "viewBorrow";//home_layout_borrow
@@ -212,6 +214,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mSbIndicatorTime.setText("7 hari");
         calcInterest();
 
+        tvPartPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        tvDelayPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+
         btnHome.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -221,7 +226,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 //                ((MainActivity) getActivity()).testDF();
 //                showPayWayDialog(ConstantValue.NORMAL_PAY);
 
-//                startActivity(StartLivenessActivity.createIntent(mContext));
+                startActivity(StartLivenessActivity.createIntent(mContext));
 
 //                IntentUtils.openWebViewActivity(mContext, "//url");
 
@@ -280,10 +285,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             case R.id.iv_home_back:
                 if (VIEW_PAY_EXTENT_4.equals(getCurrentViewTag())) {
                     showHomeView(VIEW_PAY_AT_TIME_3);
-                    if ("8".equals(mHomeData.type)) {//逾期
+                    if ("5".equals(mHomeData.type) || "8".equals(mHomeData.type)) {//逾期
                         llDelayPayEntry.setVisibility(View.VISIBLE);
-                    } else {
-                        delayEntryVisibleControl();
+                        partPayControl();
                     }
                     btnHome.setText(R.string.btn_text_go_pay);//去还款
                 }
@@ -300,16 +304,17 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 showHomeView(VIEW_PAY_EXTENT_4);
                 mPresenter.getExtendFee();
                 llDelayPayEntry.setVisibility(View.GONE);
+                llPartPayEntry.setVisibility(View.GONE);
                 btnHome.setText(R.string.btn_text_extend_pay);
                 break;
-            case R.id.tv_borrow_protocol:
-                startActivity(new Intent(mContext, ProtocolBorrowActivity.class));
-                break;
-            case R.id.ll_part_pay:
+            case R.id.ll_part_pay://部分还款
                 Intent intent = PartPayActivity.createIntent(mContext);
                 intent.putExtra("totalPayAmount", mHomeData.repayAmt);
                 intent.putExtra("payWayArr", mPayWayNameArr);
                 startActivity(intent);
+                break;
+            case R.id.tv_borrow_protocol:
+                startActivity(new Intent(mContext, ProtocolBorrowActivity.class));
                 break;
         }
     }
@@ -325,7 +330,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 //        showToast("type:" + mHomeData.type);
         mHomeData = response;
         btnHome.setEnabled(true);
-        llPartPay.setVisibility(View.GONE);
+        llPartPayEntry.setVisibility(View.GONE);
 
         if ("0000".equals(response.res_code)) {
             String type = response.type;
@@ -408,16 +413,26 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     }
 
     private void setPayCommonView() {
-        if ("1".equals(mHomeData.freeServiceFee)) {//已减免，不再展示部分还款入口
-            llPartPay.setVisibility(View.INVISIBLE);
-        } else {
-            llPartPay.setVisibility(View.VISIBLE);
-        }
-        mPresenter.getPayWayList();//回调 setPayWayData
-        if (includePayDelay.getVisibility() == View.VISIBLE) {
+        partPayControl();
+        if (View.VISIBLE == includeExtendPage.getVisibility()) {
             btnHome.setText(R.string.btn_text_go_delay_pay);//延长到期日
         } else {
             btnHome.setText(R.string.btn_text_go_pay);//去还款    openWebViewActivity
+        }
+        llDelayPayEntry.setVisibility(View.VISIBLE);
+        mPresenter.getPayWayList();//回调 setPayWayData
+    }
+
+    /**
+     * 部分还款
+     */
+    private void partPayControl() {
+        if (mHomeData != null) {
+            if ("1".equals(mHomeData.freeServiceFee)) {//已减免，不再展示部分还款入口
+                llPartPayEntry.setVisibility(View.INVISIBLE);
+            } else {
+                llPartPayEntry.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -465,7 +480,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     break;
                 case "5"://未逾期 待还款
                 case "8"://已逾期
-                    if (includePayDelay.getVisibility() == View.VISIBLE) {
+                    if (View.VISIBLE == includeExtendPage.getVisibility()) {
                         showPayWayDialog(ConstantValue.DELAY_PAY);
                     } else {
                         showPayWayDialog(ConstantValue.NORMAL_PAY);
@@ -496,16 +511,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     }
 
     /**
-     * 是否展示展期入口
-     *
-     * @return
-     */
-    private boolean isNeedShowDelayEntry() {
-        return View.VISIBLE == includePayAtTime.getVisibility()//正常还款页（或逾期页）
-                && "1".equals(mHomeData.popEntrance);
-    }
-
-    /**
      * 设置还款页面数据
      */
     private void setPayLayoutView() {
@@ -528,21 +533,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         tvLeftDay.setTextSize(54f);
         tvTimeText.setVisibility(View.VISIBLE);
         tvBelowHint.setVisibility(View.VISIBLE);
-
-        delayEntryVisibleControl();
-
         tvLeftDay.setText(diffTime + "");
         tvTotalBorrowAmount.setText(formatIndMoney(mHomeData.repayAmt));//待还金额
         tvPayDeadline.setText(mHomeData.finalRepaymentDate);//最后还款日期
 
-    }
-
-    private void delayEntryVisibleControl() {
-        if (isNeedShowDelayEntry()) {
-            llDelayPayEntry.setVisibility(View.VISIBLE);
-        } else {
-            llDelayPayEntry.setVisibility(View.GONE);
-        }
     }
 
     /**
@@ -560,10 +554,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         tvTimeText.setVisibility(View.GONE);
         tvBelowHint.setVisibility(View.GONE);
         tvLeftDay.setTextSize(22f);
-
-        //未逾期时，处于最后还款日时，显示展期入口逾期页展示。逾期时，直接显示展期入口（逾期时，后台应该把值改成1）
-        llDelayPayEntry.setVisibility(View.VISIBLE);
-
     }
 
     private void showHomeView(String contentView) {
@@ -571,7 +561,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         includeSeekBar.setVisibility(View.GONE);
         includeBorrow.setVisibility(View.GONE);
         includePayAtTime.setVisibility(View.GONE);
-        includePayDelay.setVisibility(View.GONE);
+        includeExtendPage.setVisibility(View.GONE);
         mRefreshLayout.setEnableRefresh(true);
         btnTitleBarBack.setVisibility(View.GONE);
         llBorrowProtocol.setVisibility(View.INVISIBLE);
@@ -584,7 +574,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else if (VIEW_PAY_AT_TIME_3.equals(contentView)) {
             includePayAtTime.setVisibility(View.VISIBLE);
         } else if (VIEW_PAY_EXTENT_4.equals(contentView)) {
-            includePayDelay.setVisibility(View.VISIBLE);
+            includeExtendPage.setVisibility(View.VISIBLE);
             mRefreshLayout.setEnableRefresh(false);
             btnTitleBarBack.setVisibility(View.VISIBLE);
         }
@@ -672,7 +662,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     public void showExtendPageData(String extentFee) {
-        int extendDay = 7 + Integer.parseInt(mHomeData.overdueDay);
+        int extendDay = 7;//展期固定天数（后期应通过接口调用）
+        if (mHomeData.overdueDay != null) {
+            extendDay = 7 + Integer.parseInt(mHomeData.overdueDay);
+        }
         tvDelayTime.setText(extendDay + "");
         if (mHomeData.repayAmt == null) {
             mHomeData.repayAmt = "0";
@@ -894,21 +887,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
-            savedInstanceState) {
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -926,10 +904,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         if (VIEW_PAY_EXTENT_4.equals(getCurrentViewTag())) {
             showHomeView(VIEW_PAY_AT_TIME_3);//当前已赋值,无需设置数据
             if (mHomeData != null) {
-                if ("8".equals(mHomeData.type)) {
+                if ("5".equals(mHomeData.type) || "8".equals(mHomeData.type)) {//逾期
                     llDelayPayEntry.setVisibility(View.VISIBLE);
-                } else {
-                    delayEntryVisibleControl();
+                    partPayControl();
                 }
             }
             btnHome.setText(R.string.btn_text_go_pay);//去还款

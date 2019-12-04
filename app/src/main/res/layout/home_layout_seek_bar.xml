@@ -42,9 +42,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/bg_shadow_1"
-            android:gravity="center">
+            android:gravity="center"
+            >
 
             <include
                 android:id="@+id/indicator_yellow"
@@ -95,7 +97,9 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="25dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -122,7 +126,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/bg_shadow_1"
             android:gravity="center">
 
