@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
+import com.lemontree.android.BuildConfig;
 import com.minchainx.permission.util.PermissionListener;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
@@ -84,12 +85,19 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     @Override
                     public void onSuccess(Call call, HomeDataResBean response, int id) {
 //                        CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
-                        if (mView != null) {// FIXME: 2019-10-29 为何mView有时为空？
+                        if (mView != null) {
                             mView.stopRefresh();
                         }
-                        if (response != null && mView != null) {
-                            mView.setHomeData(response);
-                            mOrderId = response.order_Id;
+                        if (response != null) {
+                            if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                                if (mView != null) {
+                                    mView.setHomeData(response);
+                                }
+                                mOrderId = response.order_Id;
+                            } else {
+                                if (BuildConfig.DEBUG)
+                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
+                            }
                         }
                     }
 
@@ -98,6 +106,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                         if (mView != null) {
                             mView.stopRefresh();
                         }
+                        showToast("failure");
                     }
                 });
     }
@@ -120,11 +129,16 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
                     @Override
                     public void onSuccess(Call call, BorrowApplyInfoResBean response, int id) {
-                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            if (mView != null) {
-                                mView.setBorrowInfo(response);
+                        if (response != null) {
+                            if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                                if (mView != null) {
+                                    mView.setBorrowInfo(response);
+                                }
+                                mBorrowApplyInfoResBean = response;
+                            } else {
+                                if (BuildConfig.DEBUG)
+                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
                             }
-                            mBorrowApplyInfoResBean = response;
                         }
                     }
                 });

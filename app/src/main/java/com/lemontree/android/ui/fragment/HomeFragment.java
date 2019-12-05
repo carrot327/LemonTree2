@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.lemontree.android.BuildConfig;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -160,7 +161,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvPartPayEntry;
 
 
-
     public static final String VIEW_SEEK_BAR_1 = "viewSeekBar";//home_layout_seek_bar
     public static final String VIEW_BORROW_2 = "viewBorrow";//home_layout_borrow
     public static final String VIEW_PAY_AT_TIME_3 = "viewPayAtTime";//home_layout_pay
@@ -220,13 +220,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         btnHome.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                if (BuildConfig.DEBUG) {
 //                showSingleAlertDialog();
 //                showSubmitSuccessDialog();
 //                showPayWayDialog();
 //                ((MainActivity) getActivity()).testDF();
 //                showPayWayDialog(ConstantValue.NORMAL_PAY);
 
-                startActivity(StartLivenessActivity.createIntent(mContext));
+//                    startActivity(StartLivenessActivity.createIntent(mContext));
 
 //                IntentUtils.openWebViewActivity(mContext, "//url");
 
@@ -244,7 +245,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 //                    public void error() {
 //                    }
 //                });
-
+                }
                 return true;
             }
         });
@@ -413,26 +414,37 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     }
 
     private void setPayCommonView() {
+        mPresenter.getPayWayList();//回调 setPayWayData
+
+        extendEntryVisibleControl();
         partPayControl();
         if (View.VISIBLE == includeExtendPage.getVisibility()) {
             btnHome.setText(R.string.btn_text_go_delay_pay);//延长到期日
         } else {
             btnHome.setText(R.string.btn_text_go_pay);//去还款    openWebViewActivity
         }
-        llDelayPayEntry.setVisibility(View.VISIBLE);
-        mPresenter.getPayWayList();//回调 setPayWayData
     }
 
     /**
-     * 部分还款
+     * 展期入口显示隐藏控制
+     */
+    private void extendEntryVisibleControl() {
+        if (View.VISIBLE == includePayAtTime.getVisibility()//正常还款页（或逾期页）
+                && "1".equals(mHomeData.popEntrance)) {
+            llDelayPayEntry.setVisibility(View.VISIBLE);
+        } else {
+            llDelayPayEntry.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 部分还款显示隐藏控制
      */
     private void partPayControl() {
-        if (mHomeData != null) {
-            if ("1".equals(mHomeData.freeServiceFee)) {//已减免，不再展示部分还款入口
-                llPartPayEntry.setVisibility(View.INVISIBLE);
-            } else {
-                llPartPayEntry.setVisibility(View.VISIBLE);
-            }
+        if ("1".equals(mHomeData.freeServiceFee)) {//已减免，不再展示部分还款入口
+            llPartPayEntry.setVisibility(View.INVISIBLE);
+        } else {
+            llPartPayEntry.setVisibility(View.VISIBLE);
         }
     }
 
@@ -440,61 +452,65 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      * 处理首页点击 #bbb
      */
     private void handleButtonClick() {
-        if (BaseApplication.sLoginState && !TextUtils.isEmpty(mHomeData.type)) {
-            switch (mHomeData.type) {
-                case "1":
-                default:
-                    IntentUtils.gotoMainActivity(mContext, TAB_APPLY);
-                    break;
-                case "3"://认证成功
-                    // 检查顺序：银行卡-》活体-》信息确认
-                    if (sHasGetBankCardList && sHasGetAuthStatusList) {
-                        if (!sHasBankCard) {
-                            IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_BANK_CARD_LIST(
-                                    sFormatSelectAmount, sFormatSelectTime, sFormatSelectInterest));
-                        } else if (!sHasFacePassed) {
-                            startActivity(StartLivenessActivity.createIntent(mContext));
+        if (BaseApplication.sLoginState) {
+            if (!TextUtils.isEmpty(mHomeData.type)) {
+                switch (mHomeData.type) {
+                    case "1":
+                    default:
+                        IntentUtils.gotoMainActivity(mContext, TAB_APPLY);
+                        break;
+                    case "3"://认证成功
+                        // 检查顺序：银行卡-》活体-》信息确认
+                        if (sHasGetBankCardList && sHasGetAuthStatusList) {
+                            if (!sHasBankCard) {
+                                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_BANK_CARD_LIST(
+                                        sFormatSelectAmount, sFormatSelectTime, sFormatSelectInterest));
+                            } else if (!sHasFacePassed) {
+                                startActivity(StartLivenessActivity.createIntent(mContext));
+                            } else {
+                                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.GET_H5_INFO_CONFIRM());
+                            }
                         } else {
-                            IntentUtils.openWebViewActivity(mContext, UrlHostConfig.GET_H5_INFO_CONFIRM());
+                            mRefreshLayout.autoRefresh(0);
+                            new Handler().postDelayed(() -> btnHome.performClick(), 1000);
                         }
-                    } else {
-                        mRefreshLayout.autoRefresh(0);
-                        new Handler().postDelayed(() -> btnHome.performClick(), 1000);
-                    }
 
-                    break;
-                case "4"://可借款  click
-                    if (includeBorrowApplyInfo.getVisibility() == View.VISIBLE) {
-                        //申请信息页面显示时，点击按钮，触发弹框
-                        showSubmitSuccessDialog();
-                    } else if (includeBorrowLoanInfo.getVisibility() == View.VISIBLE) {
-                        // 此处逻辑应该是走不进来的，当loaninfo页面出现时，type应该是不为4，后面check下。
-                        //Info Pinjaman 页面显示时，点击按钮，刷新页面
+                        break;
+                    case "4"://可借款  click
+                        if (includeBorrowApplyInfo.getVisibility() == View.VISIBLE) {
+                            //申请信息页面显示时，点击按钮，触发弹框
+                            showSubmitSuccessDialog();
+                        } else if (includeBorrowLoanInfo.getVisibility() == View.VISIBLE) {
+                            // 此处逻辑应该是走不进来的，当loaninfo页面出现时，type应该是不为4，后面check下。
+                            //Info Pinjaman 页面显示时，点击按钮，刷新页面
+                            mRefreshLayout.autoRefresh(100);
+                        }
+                        break;
+                    case "2"://审核中
+                    case "9"://额度计算中
+                    case "6"://放款中
                         mRefreshLayout.autoRefresh(100);
-                    }
-                    break;
-                case "2"://审核中
-                case "9"://额度计算中
-                case "6"://放款中
-                    mRefreshLayout.autoRefresh(100);
-                    break;
-                case "5"://未逾期 待还款
-                case "8"://已逾期
-                    if (View.VISIBLE == includeExtendPage.getVisibility()) {
-                        showPayWayDialog(ConstantValue.DELAY_PAY);
-                    } else {
-                        showPayWayDialog(ConstantValue.NORMAL_PAY);
-                    }
-                    break;
-                case "7"://还款中
+                        break;
+                    case "5"://未逾期 待还款
+                    case "8"://已逾期
+                        if (View.VISIBLE == includeExtendPage.getVisibility()) {
+                            showPayWayDialog(ConstantValue.DELAY_PAY);
+                        } else {
+                            showPayWayDialog(ConstantValue.NORMAL_PAY);
+                        }
+                        break;
+                    case "7"://还款中
 
-                    break;
-                case "11"://防止重复借款
-                    DialogFactory.createOneButtonCommonDialog(mContext, "Prompt",
-                            getResources().getString(R.string.dialog_no_amount_type_11), "OK", (dialog, view) -> {
-                                dialog.dismiss();
-                            }).show();
-                    break;
+                        break;
+                    case "11"://防止重复借款
+                        DialogFactory.createOneButtonCommonDialog(mContext, "Prompt",
+                                getResources().getString(R.string.dialog_no_amount_type_11), "OK", (dialog, view) -> {
+                                    dialog.dismiss();
+                                }).show();
+                        break;
+                }
+            } else {
+                showToast("kesalahan");
             }
         } else {
             IntentUtils.startLoginActivityForResult(getActivity(), MainActivity.REQUEST_HOME_FRAGMENT_LOGIN);

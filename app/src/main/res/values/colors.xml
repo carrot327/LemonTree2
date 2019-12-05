@@ -56,7 +56,7 @@
     <color name="transparence">#00000000</color>
     <color name="grey_text_color">#999999</color>
     <color name="Blue500">#2196F3</color>
-    <color name="tab_text">#f9e7c2</color>
+    <color name="tab_text">#FCD594</color>
     <color name="tab_text_hover">#fab02a</color>
 
 
@@ -89,9 +89,10 @@
     <color name="seek_bar_progress_yellow">#fdb164</color>
     <color name="seek_bar_track_bg_yellow">#ffebd7</color>
 
-    <color name="seek_bar_text_green">@color/text_theme</color>
-    <color name="seek_bar_progress_green">@color/text_theme</color>
-    <color name="seek_bar_track_bg_green">#ffebd7</color>
+    <color name="seek_bar_text_green">#2FCB87</color>
+    <color name="seek_bar_progress_green">#29cb8b</color>
+    <color name="seek_bar_track_bg_green">#cff3e4</color>
+
 
 
 </resources>
