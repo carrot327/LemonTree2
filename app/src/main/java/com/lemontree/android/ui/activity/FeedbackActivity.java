@@ -3,6 +3,7 @@ package com.lemontree.android.ui.activity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.lemontree.android.manager.BaseApplication;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 import com.lemontree.android.R;
@@ -65,7 +67,7 @@ public class FeedbackActivity extends BaseActivity {
                             public void onSuccess(Call call, LoginResponseBean response, int id) {
                                 if (response != null) {
                                     if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                                        Toast.makeText(mContext, R.string.text_submit_success, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext, "Terima kasih atas balasan Anda, kami akan menghubungi Anda tepat waktu!", Toast.LENGTH_LONG).show();
                                         finish();
                                     } else {
                                         Toast.makeText(mContext, R.string.text_submit_failed, Toast.LENGTH_SHORT).show();
@@ -101,7 +103,9 @@ public class FeedbackActivity extends BaseActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            mContent = etContent.getText().toString().trim();
+            mContent = BaseApplication.sPhoneNum
+                    + "\n" + BaseApplication.mUserId
+                    + "\n" + etContent.getText().toString().trim();
             if (!TextUtils.isEmpty(mContent)) {
                 btnSubmit.setEnabled(true);
             } else {
