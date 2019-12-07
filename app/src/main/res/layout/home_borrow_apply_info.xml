@@ -36,9 +36,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:text="-"
             android:textColor="@color/text_grey"
             android:textSize="14sp"
-            tools:text="afq" />
+            tools:text="-" />
     </RelativeLayout>
 
     <!--申请金额-->
@@ -63,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="0dp"
+            android:text="-"
             android:textColor="@color/text_grey"
             android:textSize="14sp"
             tools:text="Rp.400,000" />
@@ -89,6 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:text="-"
             android:textColor="@color/text_grey"
             android:textSize="14sp"
             tools:text="7hari" />
@@ -115,6 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:text="-"
             android:textColor="@color/text_grey"
             android:textSize="14sp"
             tools:text="BNP_PARIBAS" />
@@ -141,10 +145,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:text="-"
             android:textColor="@color/text_grey"
             android:textSize="14sp"
             tools:text="44557483928475" />
     </RelativeLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

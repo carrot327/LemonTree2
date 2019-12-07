@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.lemontree.android.manager.ConstantValue.DELAY_PAY;
+import static com.lemontree.android.manager.ConstantValue.EXTEND_PAY;
 import static com.lemontree.android.manager.ConstantValue.NORMAL_PAY;
 import static com.lemontree.android.uploadUtil.UrlHostConfig.getH5BaseHost;
 
@@ -40,7 +40,7 @@ public class PayWaySelectDialog extends Dialog {
         mContext = context;
         if (NORMAL_PAY.equals(from)) {
             mFrom = "1";
-        } else if (DELAY_PAY.equals(from)) {
+        } else if (EXTEND_PAY.equals(from)) {
             mFrom = "2";
         }
     }

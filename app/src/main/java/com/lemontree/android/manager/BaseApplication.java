@@ -137,6 +137,13 @@ public class BaseApplication extends Application implements DFTransferResultInte
 //            mUserId = "3832071";
 //            sPhoneNum = "081290324175";
 
+            //生产 丛丛
+//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+//            sLoginState = true;
+//            sUserName = "写死的登录信息(081290324175)";
+//            mUserId = "3832096";
+//            sPhoneNum = "081290324175";
+
             //生产环境我的id  3832083
 //            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
 //            sLoginState = true;

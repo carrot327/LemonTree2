@@ -29,6 +29,12 @@ public interface IHomeView extends IBaseView {
     void setPayWayData(GetPayWayListResBean data);
 
 
+    //show refuse info Dialog
+    void setRefuseState();
+
+
+
+
     //处理运营弹框逻辑
 //    void processShowOperationDialog(OperationDialogResBean responseData);
 

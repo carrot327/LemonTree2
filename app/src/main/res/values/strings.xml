@@ -22,7 +22,7 @@
     <string name="dialog_text_pay_method">Silahkan pilih metode pembayaran</string>
     <string name="top_text_status_9">Jumlah pinjaman sedang dikalkulasi, perbarui laman untuk melihat</string>
     <string name="top_text_status_4">Pinjaman Anda telah tersedia, silahkan meminjam</string>
-    <string name="top_text_status_4_no_amount">Anda tidak berhak mendapatkan pinjaman</string>
+    <string name="top_text_status_4_no_amount">Maaf, ulasan Anda gagal</string>
     <string name="btn_text_confirm">Konfirmasi</string>
     <string name="btn_text_extend_pay">Perpanjang tanggal pembayaran</string>
     <string name="top_text_check">Dalam peninjauan, harap bersabar</string>
@@ -62,6 +62,7 @@
     <string name="text_submit_success">Berhasil dikirim!</string>
     <string name="text_submit_failed">Pengiriman gagal</string>
     <string name="text_submit_failed_and_try">Pengiriman gagal,Silahkan coba lagi nanti</string>
+    <string name="text_refresh_and_try_again">Harap segarkan dan coba lagi</string>
     <string name="toast_text_get_privacy_failed">Gagal memuat</string>
     <string name="toast_input_phone_num">Silahkan masukkan nomor ponsel Anda</string>
     <string name="err_network_error">Kesalahan jaringan</string>
@@ -87,7 +88,8 @@
     <string name="dialog_pls_input_turing_code">Silahkan masukkan kode verifikasi gambar</string>
     <string name="dialog_confirm">Oke</string>
     <string name="dialog_cancel">Batalkan</string>
-    <string name="dialog_no_amount_type_11">Tidak mendapatkan jumlah, Silahkan hubungi nomor akun Whatsapp kami:\n +62 081284228617</string>
+    <string name="dialog_no_amount_type_11">Tidak mendapatkan jumlah</string>
+    <string name="text_review_refused">Maaf, ulasan Anda gagal!</string>
     <string name="text_pls_input">Silahkan masuk</string>
     <string name="title_register_privacy">Kebijakan privasi</string>
     <string name="text_delay_fee">Biaya perpanjangan:</string>

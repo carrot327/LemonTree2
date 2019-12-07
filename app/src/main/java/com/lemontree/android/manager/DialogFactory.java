@@ -92,7 +92,6 @@ public class DialogFactory {
                                                            BaseDialog.OnClickListener listener) {
         CommonDialog dialog = createCommonDialog(context, title, message, null, null, btnText, listener);
         dialog.setBtnVisibility(false, true);
-
         return dialog;
     }
 

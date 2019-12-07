@@ -73,8 +73,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         HomeDataRequestBean homeTabRequestBean = new HomeDataRequestBean();
         homeTabRequestBean.orderid = "";
 
-//        CProgressDialogUtils.showProgressDialog((Activity) mContext);
-
         NetworkLiteHelper
                 .postJson()
                 .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_HOMEPAGE_TAB)
@@ -84,7 +82,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
                     @Override
                     public void onSuccess(Call call, HomeDataResBean response, int id) {
-//                        CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
                         if (mView != null) {
                             mView.stopRefresh();
                         }
@@ -136,8 +133,9 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                                 }
                                 mBorrowApplyInfoResBean = response;
                             } else {
-                                if (BuildConfig.DEBUG)
-                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
+                                mView.setRefuseState();
+//                                if (BuildConfig.DEBUG)
+//                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
                             }
                         }
                     }

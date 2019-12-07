@@ -33,7 +33,7 @@ public interface ConstantValue {
     String UPLOAD_CONTACT_TIME = "upload_contact_time";
 
     String NORMAL_PAY = "NORMAL";
-    String DELAY_PAY = "DELAY_PAY";
+    String EXTEND_PAY = "EXTEND_PAY";
 
 
     /**
