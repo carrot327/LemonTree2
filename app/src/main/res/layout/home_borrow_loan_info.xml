@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="53dp"
-    android:orientation="vertical">
+    android:background="@drawable/bg_shadow_1"
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +32,8 @@
             android:layout_alignParentStart="true"
             android:text="Nomor Telepon"
             android:textColor="@color/text_grey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_loan_info_phone_num"
@@ -56,7 +59,8 @@
             android:layout_alignParentStart="true"
             android:text="KTP"
             android:textColor="@color/text_grey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_loan_info_ktp"
@@ -83,7 +87,8 @@
             android:layout_alignParentStart="true"
             android:text="Jumlah Pinjaman"
             android:textColor="@color/text_grey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_loan_info_loan_amount"
@@ -109,7 +114,8 @@
             android:layout_alignParentStart="true"
             android:text="Jangka Waktu"
             android:textColor="@color/text_grey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_loan_info_due"
@@ -135,7 +141,8 @@
             android:layout_alignParentStart="true"
             android:text="Bank Penerima"
             android:textColor="@color/text_grey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_loan_info_bank_name"
@@ -160,7 +167,8 @@
             android:layout_alignParentStart="true"
             android:text="Nomor Rekening"
             android:textColor="@color/text_grey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_loan_info_bank_card_number"
@@ -185,7 +193,8 @@
             android:layout_alignParentStart="true"
             android:text="Biaya Pinjaman"
             android:textColor="@color/text_grey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_loan_info_interest"
@@ -210,7 +219,8 @@
             android:layout_alignParentStart="true"
             android:text="Total Pencairan"
             android:textColor="@color/text_grey"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_loan_info_total_get_amount"

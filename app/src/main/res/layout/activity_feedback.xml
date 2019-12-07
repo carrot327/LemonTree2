@@ -34,8 +34,24 @@
         android:gravity="center_vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
+        android:visibility="gone"
         android:text="@string/feedback_your_question"
         android:textColor="@color/text_black"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/et_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:editable="false"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_bg_feedback"
+        android:gravity="start|center"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/grey_text_color"
         android:textSize="12sp" />
 
     <EditText
@@ -47,8 +63,8 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/shape_bg_feedback"
         android:gravity="start"
-        android:hint="@string/feedback_your_300"
-        android:padding="5dp"
+        android:hint="@string/feedback_your_question"
+        android:padding="15dp"
         android:textColor="@color/grey_text_color"
         android:textSize="12sp" />
 

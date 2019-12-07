@@ -30,6 +30,8 @@ public class FeedbackActivity extends BaseActivity {
 
     @BindView(R.id.tv_content)
     EditText etContent;
+    @BindView(R.id.et_mobile)
+    EditText etMobile;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
     @BindView(R.id.iv_feedback_back)
@@ -45,6 +47,8 @@ public class FeedbackActivity extends BaseActivity {
 
     @Override
     protected void initializeView() {
+        etMobile.setText("+86 "+BaseApplication.sPhoneNum);
+
         ivFeedbackBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,8 +107,8 @@ public class FeedbackActivity extends BaseActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            mContent = BaseApplication.sPhoneNum
-                    + "\n" + BaseApplication.mUserId
+            mContent = etMobile.getText().toString().trim()
+                    + "-" + BaseApplication.mUserId
                     + "\n" + etContent.getText().toString().trim();
             if (!TextUtils.isEmpty(mContent)) {
                 btnSubmit.setEnabled(true);
