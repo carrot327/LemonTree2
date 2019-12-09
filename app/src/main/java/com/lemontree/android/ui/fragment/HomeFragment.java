@@ -165,6 +165,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public static final String VIEW_PAY_AT_TIME = "viewPayAtTime";//home_layout_pay
     public static final String VIEW_PAY_EXTENT = "viewPayDelay";//home_layout_delay_pay
 
+    public static final int EXTENSION_DAYS = 7;//展期天数
+
     public String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
 
     private int mSelectAmount = 400000;
@@ -200,9 +202,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 mPresenter.getHomeMainData();
-                if ("9".equals(mHomeData.type) || "4".equals(mHomeData.type) || "2".equals(mHomeData.type) || "6".equals(mHomeData.type)) {
-                    mPresenter.getBorrowApplyInfo();
-                }
+//                if (isNeedShowApplyPage()) {
+////                    mPresenter.getBorrowApplyInfo();
+////                }
             }
         });
         mSeekBarAmount.setProgress(mSelectAmount);
@@ -237,6 +239,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         });
     }
 
+    private boolean isNeedShowApplyPage() {
+        return "9".equals(mHomeData.type) || "4".equals(mHomeData.type) || "2".equals(mHomeData.type) || "6".equals(mHomeData.type);
+    }
+
     @Override
     protected void loadData(boolean hasRequestData) {
     }
@@ -247,9 +253,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         super.onResume();
         if (!isHidden()) {
             mPresenter.getHomeMainData();
-            if ("9".equals(mHomeData.type) || "4".equals(mHomeData.type) || "2".equals(mHomeData.type) || "6".equals(mHomeData.type)) {
-                mPresenter.getBorrowApplyInfo();//回调方法 setBorrowInfo ();
-            }
         }
     }
 
@@ -258,22 +261,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         super.onHiddenChanged(hidden);
         if (!hidden) {
             mPresenter.getHomeMainData();
-            if ("9".equals(mHomeData.type) || "4".equals(mHomeData.type) || "2".equals(mHomeData.type) || "6".equals(mHomeData.type)) {
-                mPresenter.getBorrowApplyInfo();//回调方法 setBorrowInfo ();
-            }
         }
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().removeAllStickyEvents();
     }
 
     @OnClick({R.id.iv_titlebar_right, R.id.iv_home_back, R.id.btn_home, R.id.ll_delay_pay_entry, R.id.tv_borrow_protocol, R.id.ll_part_pay})
@@ -326,19 +314,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void setHomeData(HomeDataResBean response) {
         mHomeData = response;
         btnHome.setEnabled(true);
+        llDelayPayEntry.setVisibility(View.GONE);
         llPartPayEntry.setVisibility(View.GONE);
-        if ("9".equals(mHomeData.type) || "4".equals(mHomeData.type) || "2".equals(mHomeData.type) || "6".equals(mHomeData.type)) {
-            mPresenter.getBorrowApplyInfo();//回调方法 setBorrowInfo ();
-        }
-
+//        if (isNeedShowApplyPage()) {
+//            mPresenter.getBorrowApplyInfo();
+//        }
         if ("0000".equals(response.res_code)) {
             String type = response.type;
             if (!TextUtils.isEmpty(type)) {
-                if ("1".equals(type) || "3".equals(type)) {
-                    ((MainActivity) getActivity()).showApplyTab();
-                } else {
-                    ((MainActivity) getActivity()).hideApplyTab();
-                }
+                setApplyTabVisible(type);
                 switch (type) {
                     case "1":
                     case "11"://防止重复借款
@@ -353,13 +337,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         break;
                     case "9"://额度计算中
                         showHomeView(VIEW_BORROW);
-                        mPresenter.getBorrowApplyInfo();//回调方法 setBorrowInfo ();
+                        mPresenter.getBorrowApplyInfo();
                         tvTopText.setText(getResources().getText(R.string.top_text_status_9));
                         break;
                     case "4"://可借款
                         showHomeView(VIEW_BORROW);
                         showApplyInfoLayout();
-                        mPresenter.getBorrowApplyInfo();//回调方法 setBorrowInfo ();
+                        mPresenter.getBorrowApplyInfo();
                         if (View.VISIBLE == applyInfoPage.getVisibility()) {
                             btnHome.setText(R.string.btn_text_confirm);//点击方法 showSubmitSuccessDialog
                         }
@@ -372,22 +356,22 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                                 tvTopText.setText(R.string.top_text_status_4_no_amount);
                                 btnHome.setEnabled(false);
                             }
-                        }else {
+                        } else {
                             tvTopText.setText(R.string.text_review_refused);
                         }
                         break;
                     case "2"://审核中
                         showHomeView(VIEW_BORROW);
-                        mPresenter.getBorrowApplyInfo();//回调方法 setBorrowInfo ();
+                        mPresenter.getBorrowApplyInfo();
                         showLoanInfoLayout();
                         tvTopText.setText(R.string.top_text_check);
-                        btnHome.setText(R.string.btn_text_shenhe);//点击刷新
+                        btnHome.setText(R.string.btn_text_shenhe);
                         break;
                     case "6"://放款中
                         showHomeView(VIEW_BORROW);
-                        mPresenter.getBorrowApplyInfo();//回调方法 setBorrowInfo ();
+                        mPresenter.getBorrowApplyInfo();
                         tvTopText.setText(R.string.top_text_fangkuan);
-                        btnHome.setText(R.string.btn_text_fangkuan);//点击刷新
+                        btnHome.setText(R.string.btn_text_fangkuan);
                         break;
                     case "5"://未逾期 待还款
                         showHomeView(VIEW_PAY_AT_TIME);
@@ -411,6 +395,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             showHomeView(VIEW_SEEK_BAR);
             showToast(response.res_msg);
+        }
+    }
+
+    private void setApplyTabVisible(String type) {
+        if ("1".equals(type) || "3".equals(type)) {
+            ((MainActivity) getActivity()).showApplyTab();
+        } else {
+            ((MainActivity) getActivity()).hideApplyTab();
         }
     }
 
@@ -694,9 +686,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     public void showExtendPageData(String extentFee) {
-        int extendDay = 7;//展期固定天数（后期应通过接口调用）
+        // TODO: 2019-12-09 展期固定天数（后期应通过接口调用）
+        int extendDay = EXTENSION_DAYS;
         if (mHomeData.overdueDay != null) {
-            extendDay = 7 + Integer.parseInt(mHomeData.overdueDay);
+            extendDay = EXTENSION_DAYS + Integer.parseInt(mHomeData.overdueDay);
         }
         tvDelayTime.setText(extendDay + "");
         if (mHomeData.repayAmt == null) {
@@ -746,8 +739,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     public void setRefuseState() {
-        tvTopText.setText(R.string.text_review_refused);
         isRefuse = true;
+        tvTopText.setText(R.string.text_review_refused);
+
+        tvApplyInfoName.setText("-");
+        tvApplyInfoAmount.setText("-");
+        tvApplyInfoDue.setText("-");
+        tvApplyInfoBankName.setText("-");
+        tvApplyInfoBankCardNumber.setText("-");
     }
 
     private String formatNumber(int selectInterest) {
@@ -757,7 +756,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     /**
      * 选择借款金额
      */
-    SeekBar.OnSeekBarChangeListener seekBarAmountListener = new SeekBar.OnSeekBarChangeListener() {
+    private SeekBar.OnSeekBarChangeListener seekBarAmountListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             mSbIndicatorAmount.setText(formatNumber(progress));
@@ -802,7 +801,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     /**
      * 选择借款期限
      */
-    SeekBar.OnSeekBarChangeListener seekBarTimeListener = new SeekBar.OnSeekBarChangeListener() {
+    private SeekBar.OnSeekBarChangeListener seekBarTimeListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             mSbIndicatorTime.setText(progress + " hari");
@@ -870,4 +869,17 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             btnHome.setText(R.string.btn_text_go_pay);//去还款
         }
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().removeAllStickyEvents();
+    }
+
 }

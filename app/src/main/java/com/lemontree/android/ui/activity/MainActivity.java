@@ -124,7 +124,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     @Override
     protected void loadData() {
         UpdateUtil.checkUpdate(mContext);
-        checkHasUnreadMsg();
+//        checkHasUnreadMsg();
     }
 
     @Override

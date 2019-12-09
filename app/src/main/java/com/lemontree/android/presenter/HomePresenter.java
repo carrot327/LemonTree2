@@ -46,9 +46,6 @@ import static com.lemontree.android.utils.UIUtils.showToast;
 
 public class HomePresenter extends BasePresenter<IHomeView> {
     private Context mContext;
-    private List<String> mUrlList;
-    private boolean mDialogHasShowed;
-    private String mOrderId;
     private BorrowApplyInfoResBean mBorrowApplyInfoResBean;
     private boolean mHasUpdateSmsSuccess;
     private boolean mHasUpdateCallLogSuccess;
@@ -62,7 +59,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     }
 
     public void loadData(boolean showLoading) {
-        //获取首页主借款数据
         getHomeMainData();
     }
 
@@ -90,7 +86,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                                 if (mView != null) {
                                     mView.setHomeData(response);
                                 }
-                                mOrderId = response.order_Id;
                             } else {
                                 if (BuildConfig.DEBUG)
                                     showToast("Code:" + response.res_code + "," + response.res_msg + "");

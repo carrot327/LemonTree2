@@ -116,20 +116,6 @@ public class BaseApplication extends Application implements DFTransferResultInte
      */
     public void initSPData() {
         if (BuildConfig.DEBUG) {
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "登录信息(082142920970)";
-//            mUserId = "3832007";
-//            sPhoneNum = "082142920970";
-
-            //测试环境
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "写死的登录信息(晶晶)";
-//            mUserId = "3832080";
-//            sPhoneNum = "088888888888";
-
-
             //测试 丛丛
 //            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
 //            sLoginState = true;
