@@ -40,7 +40,7 @@
             android:layout_below="@id/tv_time_text"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
-            android:text="Sebelum tanggal jatuh tempo"
+            android:text="Sebelum jatuh tempo"
             android:textColor="@color/text_theme_deep"
             android:textSize="13sp" />
     </RelativeLayout>

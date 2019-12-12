@@ -64,7 +64,7 @@ android {
 
     flavorDimensions "version"
     productFlavors {
-        defaultChannel {
+        defaultChanel {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChanel"]
         }
     }

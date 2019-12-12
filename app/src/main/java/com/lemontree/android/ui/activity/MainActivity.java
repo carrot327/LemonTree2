@@ -85,8 +85,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     public static final String TAB_HOME = "HOME";
     public static final String TAB_APPLY = "APPLY";
     public static final String TAB_MINE = "MINE";
-    public static final String IS_APPLY_TAB_SHOW = "IS_APPLY_TAB_SHOW";
-    private static final int KEY_TO_DETECT_REQUEST_CODE = 327;
     public static boolean sHasNewUnreadMsg;
 
     private MagicIndicator mMagicIndicator;

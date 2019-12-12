@@ -129,8 +129,9 @@ public class PartPayActivity extends BaseActivity {
                             tvHint.setText(R.string.text_part_pay_hint_min);
                             tvHint.setTextColor(getResources().getColor(R.color.Grey400));
                         }
-                        // TODO: 2019-11-01 一会删除
-//                        btnPartPay.setEnabled(true);//为测试放开按钮限制
+                        if (BuildConfig.DEBUG) {
+                            btnPartPay.setEnabled(true);//为测试放开按钮限制
+                        }
                     }
 
                 }

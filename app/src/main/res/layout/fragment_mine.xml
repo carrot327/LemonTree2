@@ -168,7 +168,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/icon_customer_service" />
+                            android:src="@drawable/icon_help_center" />
 
                         <TextView
                             android:id="@+id/tv_my_bank_card"
@@ -244,7 +244,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/setting_list_height"
                         android:layout_marginTop="@dimen/setting_list_margin_top"
-                        android:visibility="gone"
                         android:background="@drawable/slt_shadow_item">
 
                         <ImageView

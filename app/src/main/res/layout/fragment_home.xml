@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
                         android:gravity="center"
-                        android:text="Lunasi sebagian di awal"
+                        android:text="Lunasi sebagian"
                         android:textColor="@color/theme_color"
                         android:textSize="14sp" />
 
