@@ -160,14 +160,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvPartPayEntry;
 
 
-    public static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
-    public static final String VIEW_BORROW = "viewBorrow";//home_layout_borrow
-    public static final String VIEW_PAY_AT_TIME = "viewPayAtTime";//home_layout_pay
-    public static final String VIEW_PAY_EXTENT = "viewPayDelay";//home_layout_delay_pay
+    private static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
+    private static final String VIEW_BORROW = "viewBorrow";//home_layout_borrow
+    private static final String VIEW_PAY_AT_TIME = "viewPayAtTime";//home_layout_pay
+    private static final String VIEW_PAY_EXTENT = "viewPayDelay";//home_layout_delay_pay
 
-    public static final int EXTENSION_DAYS = 7;//展期天数
+    private static final int EXTENSION_DAYS = 7;//展期天数
 
-    public String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
+    private String DEFAULT_SHOW_VIEW = VIEW_BORROW;
 
     private int mSelectAmount = 400000;
     private int mSelectTime = 7;
@@ -316,9 +316,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         btnHome.setEnabled(true);
         llDelayPayEntry.setVisibility(View.GONE);
         llPartPayEntry.setVisibility(View.GONE);
-//        if (isNeedShowApplyPage()) {
-//            mPresenter.getBorrowApplyInfo();
-//        }
         if ("0000".equals(response.res_code)) {
             String type = response.type;
             if (!TextUtils.isEmpty(type)) {
@@ -327,7 +324,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     case "1":
                     case "11"://防止重复借款
                     default:
-                        showHomeView(VIEW_SEEK_BAR);
+                        showHomeView(DEFAULT_SHOW_VIEW);
                         btnHome.setText(R.string.text_apply_loan);
                         break;
                     case "3"://认证成功

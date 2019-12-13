@@ -4,6 +4,126 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <!--借多少-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/view_tag1"
+            android:text="@string/text_want_amount"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!--借多少-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center">
+
+
+            <SeekBar
+                android:id="@+id/seek_bar_want_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:max="1600000"
+                android:maxHeight="3dp"
+                android:progressDrawable="@drawable/seek_bar_bg_yellow"
+                android:splitTrack="false"
+                android:thumb="@drawable/seek_bar_thumb_yellow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar_want_amount"
+                android:layout_alignLeft="@id/seek_bar_want_amount"
+                android:layout_marginTop="4dp"
+                android:text="Rp.200,000"
+                android:textColor="#5F5F5F" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar_want_amount"
+                android:layout_alignRight="@id/seek_bar_want_amount"
+                android:layout_marginTop="4dp"
+                android:text="Rp.1,600,000"
+                android:textColor="#5F5F5F" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <!--借多久-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:text="@string/text_want_time"
+            android:textColor="@color/text_black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center">
+
+            <SeekBar
+                android:id="@+id/seek_bar_want_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:max="14"
+                android:maxHeight="3dp"
+                android:progressDrawable="@drawable/seek_bar_bg_green"
+                android:splitTrack="false"
+                android:thumb="@drawable/seek_bar_thumb_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar_want_time"
+                android:layout_alignLeft="@id/seek_bar_want_time"
+                android:layout_marginTop="4dp"
+                android:text="3 hari"
+                android:textColor="#5F5F5F" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seek_bar_want_time"
+                android:layout_alignRight="@id/seek_bar_want_time"
+                android:layout_marginTop="4dp"
+                android:text="14 hari"
+                android:textColor="#5F5F5F" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
