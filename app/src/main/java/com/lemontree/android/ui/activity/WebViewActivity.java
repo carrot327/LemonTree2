@@ -567,14 +567,10 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
         new UploadDataBySingle().uploadSms(BaseApplication.mUserId, new UploadDataBySingle.UploadSmsListener() {
             @Override
             public void success() {
-//                UIUtils.showToast("上传短信成功");
-                Log.d("karl", "上传短信成功");
             }
 
             @Override
             public void error() {
-                Log.d("karl", "上传短信error");
-
             }
         });
     }

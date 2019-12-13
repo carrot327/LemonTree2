@@ -614,7 +614,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         String manageFee = formatIndMoney(mManageFee);
         String serviceFee = formatIndMoney(mServiceFee);
         String dialogMsg = MessageFormat.format("Catatan：\nBiaya atas pinjaman ini akan dipotongkan di biaya administrasi（{0}）dan biaya administrasi ({1}),jumlah selebihnya akan langsung ditransfer ke akun bank Anda.", manageFee, serviceFee);
-//        String dialogMsg = MessageFormat.format("提示：\n本次借款会提前收取\n账户管理费（{0}）和\n借款服务费({1}),其余金额将打入您的银行卡内", manageFee, serviceFee);
         DialogFactory.createCommonDialog(mContext, getString(R.string.text_submit_success), dialogMsg, getString(R.string.text_cancel), new BaseDialog.OnClickListener() {
             @Override
             public void onClick(BaseDialog dialog, View view) {
@@ -624,7 +623,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public void onClick(BaseDialog dialog, View view) {
                 mPresenter.requestPermissions();
-//                mPresenter.goBorrow();//回调 showLoanInfoLayout
                 dialog.dismiss();
             }
         }).show();
