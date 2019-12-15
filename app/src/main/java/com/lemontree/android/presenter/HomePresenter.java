@@ -141,6 +141,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 去借款
      */
     public void goBorrow() {
+        // TODO: 2019-12-16 把金额和期限传给后台
         if (mBorrowApplyInfoResBean != null) {
             GoBorrowReqBean bean = new GoBorrowReqBean();
             bean.customer_bank_card_id = mBorrowApplyInfoResBean.customer_bank_card_id;

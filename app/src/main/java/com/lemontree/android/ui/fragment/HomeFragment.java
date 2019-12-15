@@ -2,6 +2,7 @@ package com.lemontree.android.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.lemontree.android.BuildConfig;
@@ -78,6 +80,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView mSbIndicatorAmount;
     @BindView(R.id.seek_bar_want_amount)
     SeekBar mSeekBarAmount;
+//    @BindView(R.id.seek_bar_want_amount2)
+//    SeekBar mSeekBarAmount2;
     @BindView(R.id.tv_select_time)
     TextView mSbIndicatorTime;
     @BindView(R.id.seek_bar_want_time)
@@ -130,6 +134,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvPayDeadlineDelay;
     @BindView(R.id.tv_top_text)
     TextView tvTopText;
+    @BindView(R.id.tv_min_amt)
+    TextView tvMinAmt;
+    @BindView(R.id.tv_max_amt)
+    TextView tvMaxAmt;
+    @BindView(R.id.tv_min_time)
+    TextView tvMinTime;
+    @BindView(R.id.tv_max_time)
+    TextView tvMaxTime;
     @BindView(R.id.msg_red_dot)
     View msgRedDot;
     @BindView(R.id.btn_home)
@@ -160,7 +172,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvPartPayEntry;
 
 
-    public static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
+    public static final String VIEW_SEEK_BAR = "viewSeekBar";//
     public static final String VIEW_BORROW = "viewBorrow";//home_layout_borrow
     public static final String VIEW_PAY_AT_TIME = "viewPayAtTime";//home_layout_pay
     public static final String VIEW_PAY_EXTENT = "viewPayDelay";//home_layout_delay_pay
@@ -343,6 +355,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     case "4"://可借款
                         showHomeView(VIEW_BORROW);
                         showApplyInfoLayout();
+                        setSeekBarValue();
                         mPresenter.getBorrowApplyInfo();
                         if (View.VISIBLE == applyInfoPage.getVisibility()) {
                             btnHome.setText(R.string.btn_text_confirm);//点击方法 showSubmitSuccessDialog
@@ -395,6 +408,31 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             showHomeView(VIEW_SEEK_BAR);
             showToast(response.res_msg);
+        }
+    }
+
+    /**
+     * 设置滑条数值范围
+     */
+    private void setSeekBarValue() {
+        //设置金额
+        //mSeekBarAmount.setMin(Integer.parseInt(mHomeData.minAmtRange));//最小值可先写死设定
+        if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
+            mSeekBarAmount.setMax(Integer.parseInt(mHomeData.maxAmtRange));
+            tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
+            mSbIndicatorAmount.setText(formatNumber(1000000));//500RMB
+            mSelectAmount = 1000000;
+        }
+
+        //设置时间
+        if (mHomeData.maxAmtRange != null && Integer.parseInt(mHomeData.maxAmtRange) > 0) {
+            mSeekBarTime.setMax(Integer.parseInt(mHomeData.maxLoanTime));
+            mSeekBarTime.setSelected(false);
+            mSeekBarTime.setProgress(7);
+            mSelectTime = 7;
+        } else {
+            mSeekBarTime.setMax(7);//默认设为7
+            mSelectTime = 7;
         }
     }
 
