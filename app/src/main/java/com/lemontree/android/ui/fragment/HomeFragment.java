@@ -2,6 +2,7 @@ package com.lemontree.android.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.lemontree.android.BuildConfig;
@@ -78,6 +80,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView mSbIndicatorAmount;
     @BindView(R.id.seek_bar_want_amount)
     SeekBar mSeekBarAmount;
+//    @BindView(R.id.seek_bar_want_amount2)
+//    SeekBar mSeekBarAmount2;
     @BindView(R.id.tv_select_time)
     TextView mSbIndicatorTime;
     @BindView(R.id.seek_bar_want_time)
@@ -130,6 +134,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvPayDeadlineDelay;
     @BindView(R.id.tv_top_text)
     TextView tvTopText;
+    @BindView(R.id.tv_min_amt)
+    TextView tvMinAmt;
+    @BindView(R.id.tv_max_amt)
+    TextView tvMaxAmt;
+    @BindView(R.id.tv_min_time)
+    TextView tvMinTime;
+    @BindView(R.id.tv_max_time)
+    TextView tvMaxTime;
     @BindView(R.id.msg_red_dot)
     View msgRedDot;
     @BindView(R.id.btn_home)
@@ -324,7 +336,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     case "1":
                     case "11"://防止重复借款
                     default:
-                        showHomeView(DEFAULT_SHOW_VIEW);
+                        showHomeView(VIEW_SEEK_BAR);
                         btnHome.setText(R.string.text_apply_loan);
                         break;
                     case "3"://认证成功
@@ -340,6 +352,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     case "4"://可借款
                         showHomeView(VIEW_BORROW);
                         showApplyInfoLayout();
+                        setSeekBarValue();
                         mPresenter.getBorrowApplyInfo();
                         if (View.VISIBLE == applyInfoPage.getVisibility()) {
                             btnHome.setText(R.string.btn_text_confirm);//点击方法 showSubmitSuccessDialog
@@ -392,6 +405,31 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             showHomeView(VIEW_SEEK_BAR);
             showToast(response.res_msg);
+        }
+    }
+
+    /**
+     * 设置滑条数值范围
+     */
+    private void setSeekBarValue() {
+        //设置金额
+        //mSeekBarAmount.setMin(Integer.parseInt(mHomeData.minAmtRange));//最小值可先写死设定
+        if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
+            mSeekBarAmount.setMax(Integer.parseInt(mHomeData.maxAmtRange));
+            tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
+            mSbIndicatorAmount.setText(formatNumber(1000000));//500RMB
+            mSelectAmount = 1000000;
+        }
+
+        //设置时间
+        if (mHomeData.maxAmtRange != null && Integer.parseInt(mHomeData.maxAmtRange) > 0) {
+            mSeekBarTime.setMax(Integer.parseInt(mHomeData.maxLoanTime));
+            mSeekBarTime.setSelected(false);
+            mSeekBarTime.setProgress(7);
+            mSelectTime = 7;
+        } else {
+            mSeekBarTime.setMax(7);//默认设为7
+            mSelectTime = 7;
         }
     }
 
@@ -611,6 +649,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         String manageFee = formatIndMoney(mManageFee);
         String serviceFee = formatIndMoney(mServiceFee);
         String dialogMsg = MessageFormat.format("Catatan：\nBiaya atas pinjaman ini akan dipotongkan di biaya administrasi（{0}）dan biaya administrasi ({1}),jumlah selebihnya akan langsung ditransfer ke akun bank Anda.", manageFee, serviceFee);
+//        String dialogMsg = MessageFormat.format("提示：\n本次借款会提前收取\n账户管理费（{0}）和\n借款服务费({1}),其余金额将打入您的银行卡内", manageFee, serviceFee);
         DialogFactory.createCommonDialog(mContext, getString(R.string.text_submit_success), dialogMsg, getString(R.string.text_cancel), new BaseDialog.OnClickListener() {
             @Override
             public void onClick(BaseDialog dialog, View view) {
@@ -620,6 +659,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public void onClick(BaseDialog dialog, View view) {
                 mPresenter.requestPermissions();
+//                mPresenter.goBorrow();//回调 showLoanInfoLayout
                 dialog.dismiss();
             }
         }).show();
