@@ -190,11 +190,6 @@ public interface ConstantValue {
     String NET_REQUEST_URL_CONFIRM_BORROW = "/app/order/confirmAmt";
 
     /**
-     * 借款详情
-     */
-    String NET_REQUEST_URL_ORDER_DETAILS = "/app/order/orderdetails";
-
-    /**
      * 展期费
      */
     String NET_REQUEST_URL_EXTENT_FEE = "/app/repayment/queryAmountByUserId";

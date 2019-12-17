@@ -2,27 +2,24 @@ package com.lemontree.android.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.lemontree.android.BuildConfig;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseDialog;
 import com.lemontree.android.base.BaseFragment;
@@ -47,6 +44,9 @@ import com.lemontree.android.utils.IntentUtils;
 import com.lemontree.android.utils.LogoutUtil;
 import com.lemontree.android.utils.MyTimeUtils;
 import com.lemontree.android.utils.UIUtils;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -78,10 +78,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     ImageView btnTitleBarBack;
     @BindView(R.id.isb_progress_amount)
     TextView mSbIndicatorAmount;
+    @BindView(R.id.isb_progress_amount2)
+    TextView mSbIndicatorAmount2;
     @BindView(R.id.seek_bar_want_amount)
     SeekBar mSeekBarAmount;
-//    @BindView(R.id.seek_bar_want_amount2)
-//    SeekBar mSeekBarAmount2;
+    @BindView(R.id.seek_bar_want_amount2)
+    SeekBar mSeekBarAmount2;
     @BindView(R.id.tv_select_time)
     TextView mSbIndicatorTime;
     @BindView(R.id.seek_bar_want_time)
@@ -170,6 +172,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvDelayPayEntry;
     @BindView(R.id.tv_part_pay_entry)
     TextView tvPartPayEntry;
+    @BindView(R.id.spinner_borrow_time)
+    Spinner spinnerBorrowTime;
 
 
     private static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
@@ -181,8 +185,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     private String DEFAULT_SHOW_VIEW = VIEW_BORROW;
 
-    private int mSelectAmount = 400000;
-    private int mSelectTime = 7;
+    public static int mSelectAmount = 1000000;
+    public static int mSelectTime = 7;
     private HomeDataResBean mHomeData = new HomeDataResBean();
     private GetPayWayListResBean mGetPayWayListResBean;
     private String[] mPayWayList;
@@ -214,14 +218,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 mPresenter.getHomeMainData();
-//                if (isNeedShowApplyPage()) {
-////                    mPresenter.getBorrowApplyInfo();
-////                }
             }
         });
         mSeekBarAmount.setProgress(mSelectAmount);
         mSeekBarTime.setProgress(mSelectTime);
         mSeekBarAmount.setOnSeekBarChangeListener(seekBarAmountListener);
+        mSeekBarAmount2.setOnSeekBarChangeListener(seekBarAmountListener2);
         mSeekBarTime.setOnSeekBarChangeListener(seekBarTimeListener);
 
         mSbIndicatorAmount.setText(formatNumber(400000));
@@ -238,7 +240,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 //                showSubmitSuccessDialog();
 //                showPayWayDialog(ConstantValue.NORMAL_PAY);
 
-//                    startActivity(StartLivenessActivity.createIntent(mContext));
+//                startActivity(StartLivenessActivity.createIntent(mContext));
 
 //                IntentUtils.openWebViewActivity(mContext, "//url");
 
@@ -280,7 +282,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_home_back:
-                if (VIEW_PAY_EXTENT.equals(getCurrentViewTag())) {
+                if (VIEW_PAY_EXTENT.equals(mCurrentView)) {
                     showHomeView(VIEW_PAY_AT_TIME);
                     if ("5".equals(mHomeData.type) || "8".equals(mHomeData.type)) {//逾期
                         llDelayPayEntry.setVisibility(View.VISIBLE);
@@ -316,10 +318,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
-    private String getCurrentViewTag() {
-        return mCurrentView;
-    }
-
     /**
      * 设置首页数据 #aaa
      */
@@ -330,13 +328,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         llPartPayEntry.setVisibility(View.GONE);
         if ("0000".equals(response.res_code)) {
             String type = response.type;
+//            type = "4";
+            mHomeData.maxAmtRange = "1000000";
             if (!TextUtils.isEmpty(type)) {
                 setApplyTabVisible(type);
                 switch (type) {
                     case "1":
                     case "11"://防止重复借款
                     default:
-                        showHomeView(VIEW_SEEK_BAR);
+                        showHomeView(DEFAULT_SHOW_VIEW);
                         btnHome.setText(R.string.text_apply_loan);
                         break;
                     case "3"://认证成功
@@ -408,21 +408,42 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
+    private String[] mBorrowTimeArray;
+
     /**
      * 设置滑条数值范围
      */
     private void setSeekBarValue() {
         //设置金额
-        //mSeekBarAmount.setMin(Integer.parseInt(mHomeData.minAmtRange));//最小值可先写死设定
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
-            mSeekBarAmount.setMax(Integer.parseInt(mHomeData.maxAmtRange));
+            mSeekBarAmount2.setMax(Integer.parseInt(mHomeData.maxAmtRange));
+            mSeekBarAmount2.setProgress(1000000);
             tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
-            mSbIndicatorAmount.setText(formatNumber(1000000));//500RMB
+            mSbIndicatorAmount2.setText("Rp."+formatNumber(1000000));//500RMB
             mSelectAmount = 1000000;
         }
 
         //设置时间
-        if (mHomeData.maxAmtRange != null && Integer.parseInt(mHomeData.maxAmtRange) > 0) {
+//        mHomeData.maxLoanTime = "7";
+        if ("14".equals(mHomeData.maxLoanTime)) {
+            mBorrowTimeArray = new String[]{"7", "14"};
+        } else {
+            mBorrowTimeArray = new String[]{"7"};
+        }
+        spinnerBorrowTime.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, mBorrowTimeArray));
+        spinnerBorrowTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mSelectTime = Integer.parseInt(mBorrowTimeArray[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        //设置时间
+      /*  if (mHomeData.maxLoanTime != null && Integer.parseInt(mHomeData.maxLoanTime) > 0) {
             mSeekBarTime.setMax(Integer.parseInt(mHomeData.maxLoanTime));
             mSeekBarTime.setSelected(false);
             mSeekBarTime.setProgress(7);
@@ -430,7 +451,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             mSeekBarTime.setMax(7);//默认设为7
             mSelectTime = 7;
-        }
+        }*/
     }
 
     private void setApplyTabVisible(String type) {
@@ -833,6 +854,58 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     };
 
+    private SeekBar.OnSeekBarChangeListener seekBarAmountListener2 = new SeekBar.OnSeekBarChangeListener() {
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            if (0 <= progress && progress < 350000) {
+                mSelectAmount = 300000;
+            } else if (350000 <= progress && progress < 500000) {
+                mSelectAmount = 400000;
+            } else if (500000 <= progress && progress < 700000) {
+                mSelectAmount = 600000;
+            } else if (700000 <= progress && progress < 900000) {
+                mSelectAmount = 800000;
+            } else if (900000 <= progress && progress < 1100000) {
+                mSelectAmount = 1000000;
+            } else if (1100000 <= progress && progress < 1350000) {
+                mSelectAmount = 1200000;
+            } else if (1350000 <= progress) {
+                mSelectAmount = 1500000;
+            }
+            mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            //监听用户开始拖动进度条的时候
+            mRefreshLayout.setEnableRefresh(false);
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            //监听用户结束拖动进度条的时候
+            mRefreshLayout.setEnableRefresh(true);
+            //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
+            int currentProgress = seekBar.getProgress();
+            if (0 <= currentProgress && currentProgress < 350000) {
+                mSelectAmount = 300000;
+            } else if (350000 <= currentProgress && currentProgress < 500000) {
+                mSelectAmount = 400000;
+            } else if (500000 <= currentProgress && currentProgress < 700000) {
+                mSelectAmount = 600000;
+            } else if (700000 <= currentProgress && currentProgress < 900000) {
+                mSelectAmount = 800000;
+            } else if (900000 <= currentProgress && currentProgress < 1100000) {
+                mSelectAmount = 1000000;
+            } else if (1100000 <= currentProgress && currentProgress < 1350000) {
+                mSelectAmount = 1200000;
+            } else if (1350000 <= currentProgress) {
+                mSelectAmount = 1500000;
+            }
+            seekBar.setProgress(mSelectAmount);
+        }
+    };
+
     /**
      * 选择借款期限
      */
@@ -893,7 +966,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onBackPressed(BackPressEvent event) {
-        if (VIEW_PAY_EXTENT.equals(getCurrentViewTag())) {
+        if (VIEW_PAY_EXTENT.equals(mCurrentView)) {
             showHomeView(VIEW_PAY_AT_TIME);//当前已赋值,无需设置数据
             if (mHomeData != null) {
                 if ("5".equals(mHomeData.type) || "8".equals(mHomeData.type)) {//逾期

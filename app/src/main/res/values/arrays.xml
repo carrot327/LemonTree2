@@ -45,5 +45,10 @@
         <item>Rp.200,000</item>
         <item>Rp.1,600,000</item>
     </array>
-
+    <string-array name="borrow_time">
+        <item>7</item>
+    </string-array>
+    <!--<integer-array name="borrow_time">
+        <item>7</item>
+    </integer-array>-->
 </resources>

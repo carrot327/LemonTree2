@@ -14,9 +14,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.lemontree.android.BuildConfig;
-import com.minchainx.permission.util.PermissionListener;
-import com.networklite.NetworkLiteHelper;
-import com.networklite.callback.GenericCallback;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BasePresenter;
 import com.lemontree.android.base.BaseResponseBean;
@@ -36,12 +33,15 @@ import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.uploadUtil.UploadDataBySingle;
 import com.lemontree.android.uploadUtil.UploadNecessaryData;
 import com.lemontree.android.utils.CProgressDialogUtils;
-
-import java.util.List;
+import com.minchainx.permission.util.PermissionListener;
+import com.networklite.NetworkLiteHelper;
+import com.networklite.callback.GenericCallback;
 
 import okhttp3.Call;
 
 import static com.lemontree.android.network.OKHttpClientEngine.getNetworkClient;
+import static com.lemontree.android.ui.fragment.HomeFragment.mSelectAmount;
+import static com.lemontree.android.ui.fragment.HomeFragment.mSelectTime;
 import static com.lemontree.android.utils.UIUtils.showToast;
 
 public class HomePresenter extends BasePresenter<IHomeView> {
@@ -140,11 +140,12 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     /**
      * 去借款
      */
-    public void goBorrow() {
-        // TODO: 2019-12-16 把金额和期限传给后台
+    public void goBorrow(int loanAmount, int borrowTime) {
         if (mBorrowApplyInfoResBean != null) {
             GoBorrowReqBean bean = new GoBorrowReqBean();
             bean.customer_bank_card_id = mBorrowApplyInfoResBean.customer_bank_card_id;
+            bean.loan_amount = loanAmount;
+            bean.borrow_type = borrowTime;
             NetworkLiteHelper
                     .postJson()
                     .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_CONFIRM_BORROW)
@@ -296,7 +297,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     @Override
                     public void run() {
                         Log.d("karl", "所有数据传输成功...");
-                        goBorrow();
+                        goBorrow(mSelectAmount, mSelectTime);
                         dialog.dismiss();
                     }
                 });
@@ -310,7 +311,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void run() {
                         Log.e("karl", "所有数据传输失败...");
                         //失败情况也当成功处理
-                        goBorrow();
+                        goBorrow(mSelectAmount, mSelectTime);
                         dialog.dismiss();
                     }
                 });
