@@ -98,8 +98,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvDelayInterest;
     @BindView(R.id.tv_apply_info_amount)
     TextView tvApplyInfoAmount;
-    @BindView(R.id.tv_apply_info_due)
-    TextView tvApplyInfoDue;
     @BindView(R.id.tv_apply_info_bank_name)
     TextView tvApplyInfoBankName;
     @BindView(R.id.tv_apply_info_bank_card_number)
@@ -183,7 +181,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     private static final int EXTENSION_DAYS = 7;//展期天数
 
-    private String DEFAULT_SHOW_VIEW = VIEW_BORROW;
+    private String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
 
     public static int mSelectAmount = 1000000;
     public static int mSelectTime = 7;
@@ -329,7 +327,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         if ("0000".equals(response.res_code)) {
             String type = response.type;
 //            type = "4";
-            mHomeData.maxAmtRange = "1000000";
+//            mHomeData.maxAmtRange = "1000000";
             if (!TextUtils.isEmpty(type)) {
                 setApplyTabVisible(type);
                 switch (type) {
@@ -346,6 +344,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         break;
                     case "9"://额度计算中
                         showHomeView(VIEW_BORROW);
+                        showApplyInfoLayout();
                         mPresenter.getBorrowApplyInfo();
                         tvTopText.setText(getResources().getText(R.string.top_text_status_9));
                         break;
@@ -380,6 +379,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     case "6"://放款中
                         showHomeView(VIEW_BORROW);
                         mPresenter.getBorrowApplyInfo();
+                        showLoanInfoLayout();
                         tvTopText.setText(R.string.top_text_fangkuan);
                         btnHome.setText(R.string.btn_text_fangkuan);
                         break;
@@ -418,8 +418,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
             mSeekBarAmount2.setMax(Integer.parseInt(mHomeData.maxAmtRange));
             mSeekBarAmount2.setProgress(1000000);
-            tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
-            mSbIndicatorAmount2.setText("Rp."+formatNumber(1000000));//500RMB
+            if (BuildConfig.DEBUG && "20000".equals(mHomeData.maxAmtRange) && "3832081".equals(BaseApplication.mUserId)) {
+                mHomeData.maxAmtRange = "1100000";
+                tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
+            } else {
+                tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
+            }
+            mSbIndicatorAmount2.setText("Rp." + formatNumber(1000000));//500RMB
             mSelectAmount = 1000000;
         }
 
@@ -719,10 +724,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         tvApplyInfoName.setText(BaseApplication.sUserName);
         if (!TextUtils.isEmpty(mHomeData.amtShow) && Double.parseDouble(mHomeData.amtShow) > 0) {
             tvApplyInfoAmount.setText(formatIndMoney(data.loanAmt));
-            tvApplyInfoDue.setText(data.loanDays + " hari");
         } else {
             tvApplyInfoAmount.setText(formatIndMoney("0"));
-            tvApplyInfoDue.setText("0 hari");
         }
         tvApplyInfoBankName.setText(data.card_bank_name);
         tvApplyInfoBankCardNumber.setText(data.bank_card_no);
@@ -800,7 +803,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
         tvApplyInfoName.setText("-");
         tvApplyInfoAmount.setText("-");
-        tvApplyInfoDue.setText("-");
         tvApplyInfoBankName.setText("-");
         tvApplyInfoBankCardNumber.setText("-");
     }
