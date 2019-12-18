@@ -3,7 +3,7 @@
 
     <string name="sign_up" translatable="false">Masuk/Daftar</string>
     <string name="text_apply_loan">Ajukan pinjaman</string>
-    <string name="text_want_amount">Berapa banyak yang ingin Anda pinjam?</string>
+    <string name="text_want_amount">Pilih jumlah pinjaman</string>
     <string name="text_want_time">Berapa lama Anda ingin meminjam?</string>
     <string name="text_should_pay">Total Pinjaman</string>
     <string name="text_apply_info">Informasi aplikasi</string>

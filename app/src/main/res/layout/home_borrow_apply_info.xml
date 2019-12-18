@@ -186,12 +186,11 @@
         android:paddingLeft="10dp"
         android:paddingRight="20dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical">
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -206,13 +205,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:maxLines="1"
                 android:textColor="@color/text_black"
                 android:textSize="13sp"
                 tools:text="Rp.300,000" />
-        </LinearLayout>
+        </RelativeLayout>
         <!--借多少-->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -224,7 +223,7 @@
                 android:id="@+id/seek_bar_want_amount2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:background="@null"
                 android:max="1600000"
                 android:maxHeight="3dp"

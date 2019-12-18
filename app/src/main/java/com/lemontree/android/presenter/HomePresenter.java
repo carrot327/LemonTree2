@@ -137,6 +137,37 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 });
     }
 
+    /**
+     * 获取订单信息
+     */
+    public void getOrderDetails() {
+        NetworkLiteHelper
+                .postJson()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_GET_ORDER_DETAILS)
+                .content(new Gson().toJson(new CommonReqBean()))
+                .build()
+                .execute(getNetworkClient(), new GenericCallback<BorrowApplyInfoResBean>() {
+                    @Override
+                    public void onFailure(Call call, Exception exception, int id) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Call call, BorrowApplyInfoResBean response, int id) {
+                        if (response != null) {
+                            if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                                if (mView != null) {
+                                    mView.setOrderInfo(response);
+                                }
+                                mBorrowApplyInfoResBean = response;
+                            } else {
+                                mView.setRefuseState();
+                            }
+                        }
+                    }
+                });
+    }
+
     public void getBorrowApplyInfo(int loanAmount, int selectType) {
         GetBorrowInfoReqBean bean = new GetBorrowInfoReqBean();
         bean.loan_amount = loanAmount;
@@ -193,8 +224,10 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                         public void onSuccess(Call call, BorrowResBean response, int id) {
                             if (response != null) {
                                 if (BaseResponseBean.SUCCESS.equals(response.res_code) && mView != null) {
-                                    mView.showLoanInfoLayout();
-                                    mView.refreshHomeData();
+//                                    mView.showLoanInfoLayout();
+
+//                                    mView.refreshHomeData();
+                                    getOrderDetails();
                                 } else {
                                     showToast(response.res_msg + "");
                                 }
@@ -265,14 +298,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         }, new PermissionListener() {
             @Override
             public void onGranted() {
-                Log.d("karl", "requestPermissions onGranted");
                 uploadAccordingPermissions();
             }
 
             @Override
             public void onDenied() {
-                Log.d("karl", "bbb:" + ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS));
-                Log.d("karl", "requestPermissions onDenied");
                 uploadAccordingPermissions();
             }
         });
@@ -280,21 +310,16 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
     private void uploadAccordingPermissions() {
         if (isGetNecessaryPermission()) {
-            Log.d("karl", "isGetNecessaryPermission");
             uploadNecessaryData();
         } else {
             showToast(R.string.allow_permission_and_try_again);
         }
         if (isGetSMSPermission()) {
-            Log.d("karl", "isGetSMSPermission");
-            Log.d("karl", "mHasUpdateSmsSuccess-" + mHasUpdateSmsSuccess);
             if (!mHasUpdateSmsSuccess) {
                 uploadSmsOnly();
             }
         }
         if (isGetCallLogPermission()) {
-            Log.d("karl", "isGetCallLogPermission");
-            Log.d("karl", "mHasUpdateCallLogSuccess-" + mHasUpdateCallLogSuccess);
             if (!mHasUpdateCallLogSuccess) {
                 uploadCallRecordOnly();
             }

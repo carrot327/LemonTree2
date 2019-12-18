@@ -19,6 +19,9 @@ public interface IHomeView extends IBaseView {
     //设置借款信息
     void setBorrowInfo(BorrowApplyInfoResBean borrowData);
 
+    //设置订单信息
+    void setOrderInfo(BorrowApplyInfoResBean borrowData);
+
     //设置提交借款确认弹框信息
     void setSubmitDialogData(BorrowApplyInfoResBean borrowData);
 

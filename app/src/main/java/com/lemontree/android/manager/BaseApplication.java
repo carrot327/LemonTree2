@@ -6,13 +6,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import androidx.multidex.MultiDex;
-
-import com.liveness.dflivenesslibrary.DFProductResult;
-import com.liveness.dflivenesslibrary.DFTransferResultInterface;
 import com.lemontree.android.BuildConfig;
 import com.lemontree.android.uploadUtil.CLog;
 import com.lemontree.android.utils.SPUtils;
+import com.liveness.dflivenesslibrary.DFProductResult;
+import com.liveness.dflivenesslibrary.DFTransferResultInterface;
 
 public class BaseApplication extends Application implements DFTransferResultInterface {
 
@@ -98,7 +96,6 @@ public class BaseApplication extends Application implements DFTransferResultInte
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(base);
     }
 
     @Override
@@ -117,11 +114,11 @@ public class BaseApplication extends Application implements DFTransferResultInte
     public void initSPData() {
         if (BuildConfig.DEBUG) {
             //测试 晶晶
-            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-            sLoginState = true;
-            sUserName = "写死的登录信息(081287566687)";
-            mUserId = "3832081";
-            sPhoneNum = "081287566687";
+//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+//            sLoginState = true;
+//            sUserName = "写死的登录信息(081287566687)";
+//            mUserId = "3832081";
+//            sPhoneNum = "081287566687";
 
             //生产 晶晶
 //            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);

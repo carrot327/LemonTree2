@@ -16,7 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
-        multiDexEnabled true
 
         ndk {
             abiFilters "armeabi-v7a","x86"
@@ -99,7 +98,6 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
     implementation 'com.google.firebase:firebase-core:17.2.1'

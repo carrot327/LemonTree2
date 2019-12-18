@@ -189,9 +189,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private HomeDataResBean mHomeData = new HomeDataResBean();
     private GetPayWayListResBean mGetPayWayListResBean;
     private String[] mPayWayList;
-    private String mManageFee;
-    private String mServiceFee;
-    private String mExtendFee;
     private String mCurrentView;
     private FirebaseAnalytics mFirebaseAnalytics;
     private boolean isRefuse;
@@ -372,15 +369,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         break;
                     case "2"://审核中
                         showHomeView(VIEW_BORROW);
-                        mPresenter.getBorrowApplyInfo();
-                        showLoanInfoLayout();
+                        mPresenter.getOrderDetails();
                         tvTopText.setText(R.string.top_text_check);
                         btnHome.setText(R.string.btn_text_shenhe);
                         break;
                     case "6"://放款中
                         showHomeView(VIEW_BORROW);
-                        mPresenter.getBorrowApplyInfo();
-                        showLoanInfoLayout();
+                        mPresenter.getOrderDetails();
                         tvTopText.setText(R.string.top_text_fangkuan);
                         btnHome.setText(R.string.btn_text_fangkuan);
                         break;
@@ -714,8 +709,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mRefreshLayout.autoRefresh(100);
     }
 
+    //展示借款信息
     @Override
     public void setBorrowInfo(BorrowApplyInfoResBean data) {
+        showApplyInfoLayout();
+
         isRefuse = false;
         // 赋值(apply和loan一起赋值)
         tvApplyInfoName.setText(BaseApplication.sUserName);
@@ -726,18 +724,22 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
         tvApplyInfoBankName.setText(data.card_bank_name);
         tvApplyInfoBankCardNumber.setText(data.bank_card_no);
+    }
+
+    //展示订单信息
+    @Override
+    public void setOrderInfo(BorrowApplyInfoResBean data) {
+        showLoanInfoLayout();
 
         tvLoanInfoBankCardNumber.setText(data.bank_card_no);
         tvLoanInfoBankName.setText(data.card_bank_name);
-        tvLoanInfoDue.setText(data.loanDays + " hari");
         tvLoanInfoInterest.setText(formatIndMoney(data.baseRate));
         tvLoanInfoKtp.setText(data.ktp);
-        tvLoanInfoLoanAmount.setText(formatIndMoney(data.loanAmt));
-        tvLoanInfoTotalGetAmount.setText(formatIndMoney(data.actAmt));
         tvLoanInfoPhoneNum.setText(data.phone);
 
-        mManageFee = data.adminFee;
-        mServiceFee = data.serviceFee;
+        tvLoanInfoDue.setText(data.loanDays + " hari");
+        tvLoanInfoLoanAmount.setText(formatIndMoney(data.loanAmt));
+        tvLoanInfoTotalGetAmount.setText(formatIndMoney(data.actAmt));
     }
 
     @Override
