@@ -18,6 +18,7 @@ import com.lemontree.android.R;
 import com.lemontree.android.base.BasePresenter;
 import com.lemontree.android.base.BaseResponseBean;
 import com.lemontree.android.bean.request.CommonReqBean;
+import com.lemontree.android.bean.request.GetBorrowInfoReqBean;
 import com.lemontree.android.bean.request.GoBorrowReqBean;
 import com.lemontree.android.bean.request.HomeDataRequestBean;
 import com.lemontree.android.bean.response.BorrowApplyInfoResBean;
@@ -42,6 +43,7 @@ import okhttp3.Call;
 import static com.lemontree.android.network.OKHttpClientEngine.getNetworkClient;
 import static com.lemontree.android.ui.fragment.HomeFragment.mSelectAmount;
 import static com.lemontree.android.ui.fragment.HomeFragment.mSelectTime;
+import static com.lemontree.android.ui.fragment.HomeFragment.mSelectType;
 import static com.lemontree.android.utils.UIUtils.showToast;
 
 public class HomePresenter extends BasePresenter<IHomeView> {
@@ -129,8 +131,38 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                                 mBorrowApplyInfoResBean = response;
                             } else {
                                 mView.setRefuseState();
-//                                if (BuildConfig.DEBUG)
-//                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
+                            }
+                        }
+                    }
+                });
+    }
+
+    public void getBorrowApplyInfo(int loanAmount, int selectType) {
+        GetBorrowInfoReqBean bean = new GetBorrowInfoReqBean();
+        bean.loan_amount = loanAmount;
+        bean.borrow_type = selectType;
+
+        NetworkLiteHelper
+                .postJson()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_BORROW_INFO)
+                .content(new Gson().toJson(bean))
+                .build()
+                .execute(getNetworkClient(), new GenericCallback<BorrowApplyInfoResBean>() {
+                    @Override
+                    public void onFailure(Call call, Exception exception, int id) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Call call, BorrowApplyInfoResBean response, int id) {
+                        if (response != null) {
+                            if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                                if (mView != null) {
+                                    mView.setSubmitDialogData(response);
+                                }
+                                mBorrowApplyInfoResBean = response;
+                            } else {
+                                mView.setRefuseState();
                             }
                         }
                     }
@@ -140,18 +172,12 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     /**
      * 去借款
      */
-    public void goBorrow(int loanAmount, int borrowTime) {
+    public void goBorrow(int loanAmount, int borrowType) {
         if (mBorrowApplyInfoResBean != null) {
             GoBorrowReqBean bean = new GoBorrowReqBean();
             bean.customer_bank_card_id = mBorrowApplyInfoResBean.customer_bank_card_id;
             bean.loan_amount = loanAmount;
-            if (7 == borrowTime) {
-                bean.borrow_type = 1;
-            } else if (14 == borrowTime) {
-                bean.borrow_type = 2;
-            } else {
-                bean.borrow_type = 1;
-            }
+            bean.borrow_type = borrowType;
             NetworkLiteHelper
                     .postJson()
                     .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_CONFIRM_BORROW)
@@ -302,8 +328,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("karl", "所有数据传输成功...");
-                        goBorrow(mSelectAmount, mSelectTime);
+                        goBorrow(mSelectAmount, mSelectType);
                         dialog.dismiss();
                     }
                 });
@@ -315,9 +340,8 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.e("karl", "所有数据传输失败...");
                         //失败情况也当成功处理
-                        goBorrow(mSelectAmount, mSelectTime);
+                        goBorrow(mSelectAmount, mSelectType);
                         dialog.dismiss();
                     }
                 });

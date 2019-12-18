@@ -185,6 +185,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     public static int mSelectAmount = 1000000;
     public static int mSelectTime = 7;
+    public static int mSelectType = 1;//1为7天   2为14天
     private HomeDataResBean mHomeData = new HomeDataResBean();
     private GetPayWayListResBean mGetPayWayListResBean;
     private String[] mPayWayList;
@@ -417,29 +418,26 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         //设置金额
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
             mSeekBarAmount2.setMax(Integer.parseInt(mHomeData.maxAmtRange));
-            mSeekBarAmount2.setProgress(1000000);
+            mSeekBarAmount2.setProgress(mSelectAmount);
+            mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));//500RMB
             if (BuildConfig.DEBUG && "20000".equals(mHomeData.maxAmtRange) && "3832081".equals(BaseApplication.mUserId)) {
                 mHomeData.maxAmtRange = "1100000";
-                tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
-            } else {
-                tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
             }
-            mSbIndicatorAmount2.setText("Rp." + formatNumber(1000000));//500RMB
-            mSelectAmount = 1000000;
+            tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
         }
 
         //设置时间
-//        mHomeData.maxLoanTime = "7";
         if ("14".equals(mHomeData.maxLoanTime)) {
             mBorrowTimeArray = new String[]{"7", "14"};
         } else {
             mBorrowTimeArray = new String[]{"7"};
         }
         spinnerBorrowTime.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, mBorrowTimeArray));
+        spinnerBorrowTime.setSelection(mSelectType - 1);
         spinnerBorrowTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mSelectTime = Integer.parseInt(mBorrowTimeArray[position]);
+                mSelectType = position + 1;
             }
 
             @Override
@@ -541,7 +539,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                             if (Double.parseDouble(mHomeData.amtShow) > 0) {
                                 if (applyInfoPage.getVisibility() == View.VISIBLE) {
                                     //申请信息页面显示时，点击按钮，触发弹框
-                                    showSubmitSuccessDialog();
+                                    mPresenter.getBorrowApplyInfo(mSelectAmount, mSelectType);
                                 } else if (loanInfoPage.getVisibility() == View.VISIBLE) {
                                     // 此处逻辑应该是走不进来的，当loaninfo页面出现时，type应该是不为4，后面check下。
                                     //Info Pinjaman 页面显示时，点击按钮，刷新页面
@@ -671,11 +669,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
-    private void showSubmitSuccessDialog() {
-        String manageFee = formatIndMoney(mManageFee);
-        String serviceFee = formatIndMoney(mServiceFee);
-        String dialogMsg = MessageFormat.format("Catatan：\nBiaya atas pinjaman ini akan dipotongkan di biaya administrasi（{0}）dan biaya administrasi ({1}),jumlah selebihnya akan langsung ditransfer ke akun bank Anda.", manageFee, serviceFee);
-//        String dialogMsg = MessageFormat.format("提示：\n本次借款会提前收取\n账户管理费（{0}）和\n借款服务费({1}),其余金额将打入您的银行卡内", manageFee, serviceFee);
+    private void showSubmitSuccessDialog(String manageFee, String serviceFee) {
+        String manage_fee = formatIndMoney(manageFee);
+        String service_fee = formatIndMoney(serviceFee);
+        String dialogMsg = MessageFormat.format("Catatan:\n" +
+                "Jumlah pinjaman akan secara otomatis dikurangi oleh biaya manajemen ({0}) dan biaya administrasi ({1}) sebelum dicairkan ke akun bank Anda.", manage_fee, service_fee);
         DialogFactory.createCommonDialog(mContext, getString(R.string.text_submit_success), dialogMsg, getString(R.string.text_cancel), new BaseDialog.OnClickListener() {
             @Override
             public void onClick(BaseDialog dialog, View view) {
@@ -685,7 +683,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public void onClick(BaseDialog dialog, View view) {
                 mPresenter.requestPermissions();
-//                mPresenter.goBorrow();//回调 showLoanInfoLayout
                 dialog.dismiss();
             }
         }).show();
@@ -741,6 +738,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
         mManageFee = data.adminFee;
         mServiceFee = data.serviceFee;
+    }
+
+    @Override
+    public void setSubmitDialogData(BorrowApplyInfoResBean borrowData) {
+        showSubmitSuccessDialog(borrowData.adminFee, borrowData.serviceFee);
     }
 
     @Override
