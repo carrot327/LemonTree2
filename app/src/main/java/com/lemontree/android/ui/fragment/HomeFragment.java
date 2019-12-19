@@ -407,17 +407,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private void setSeekBarValue() {
         //设置金额
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
+            if ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+                mHomeData.maxAmtRange = "60000";
+                mSelectAmount = 20000;
+                tvMinAmt.setText("Rp.20,000");
+            }
             mSeekBarAmount2.setMax(Integer.parseInt(mHomeData.maxAmtRange));
             mSeekBarAmount2.setProgress(mSelectAmount);
             mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));//500RMB
             tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
-        }
-
-        //设置时间
-        if ("14".equals(mHomeData.maxLoanTime)) {
-            mBorrowTimeArray = new String[]{"7", "14"};
-        } else {
-            mBorrowTimeArray = new String[]{"7"};
         }
     }
 
@@ -824,21 +822,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private SeekBar.OnSeekBarChangeListener seekBarAmountListener2 = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//            if (0 <= progress && progress < 350000) {
-//                mSelectAmount = 300000;
-//            } else if (350000 <= progress && progress < 500000) {
-//                mSelectAmount = 400000;
-//            } else if (500000 <= progress && progress < 700000) {
-//                mSelectAmount = 600000;
-//            } else if (700000 <= progress && progress < 900000) {
-//                mSelectAmount = 800000;
-//            } else if (900000 <= progress && progress < 1100000) {
-//                mSelectAmount = 1000000;
-//            } else if (1100000 <= progress && progress < 1350000) {
-//                mSelectAmount = 1200000;
-//            } else if (1350000 <= progress) {
-//                mSelectAmount = 1500000;
-//            }
             mSbIndicatorAmount2.setText("Rp." + formatNumber(progress));
         }
 
@@ -849,29 +832,40 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
 
         @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
+        public void onStopTrackingTouch(SeekBar seekBar2) {
             //监听用户结束拖动进度条的时候
             mRefreshLayout.setEnableRefresh(true);
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
-            int currentProgress = seekBar.getProgress();
-            if (0 <= currentProgress && currentProgress < 350000) {
-                mSelectAmount = 300000;
-            } else if (350000 <= currentProgress && currentProgress < 500000) {
-                mSelectAmount = 400000;
-            } else if (500000 <= currentProgress && currentProgress < 700000) {
-                mSelectAmount = 600000;
-            } else if (700000 <= currentProgress && currentProgress < 900000) {
-                mSelectAmount = 800000;
-            } else if (900000 <= currentProgress && currentProgress < 1100000) {
-                mSelectAmount = 1000000;
-            } else if (1100000 <= currentProgress && currentProgress < 1350000) {
-                mSelectAmount = 1200000;
-            } else if (1350000 <= currentProgress) {
-                mSelectAmount = 1500000;
-            }
-            seekBar.setProgress(mSelectAmount);
-            mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));
+            int currentProgress = seekBar2.getProgress();
 
+            if ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+                //20000  40000  60000
+                if (0 <= currentProgress && currentProgress < 30000) {
+                    mSelectAmount = 20000;
+                } else if (30000 <= currentProgress && currentProgress < 50000) {
+                    mSelectAmount = 40000;
+                } else if (50000 <= currentProgress && currentProgress < 70000) {
+                    mSelectAmount = 60000;
+                }
+            } else {
+                if (0 <= currentProgress && currentProgress < 350000) {
+                    mSelectAmount = 300000;
+                } else if (350000 <= currentProgress && currentProgress < 500000) {
+                    mSelectAmount = 400000;
+                } else if (500000 <= currentProgress && currentProgress < 700000) {
+                    mSelectAmount = 600000;
+                } else if (700000 <= currentProgress && currentProgress < 900000) {
+                    mSelectAmount = 800000;
+                } else if (900000 <= currentProgress && currentProgress < 1100000) {
+                    mSelectAmount = 1000000;
+                } else if (1100000 <= currentProgress && currentProgress < 1350000) {
+                    mSelectAmount = 1200000;
+                } else if (1350000 <= currentProgress) {
+                    mSelectAmount = 1500000;
+                }
+            }
+            seekBar2.setProgress(mSelectAmount);
+            mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));
         }
     };
 
