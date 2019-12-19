@@ -415,9 +415,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             mSeekBarAmount2.setMax(Integer.parseInt(mHomeData.maxAmtRange));
             mSeekBarAmount2.setProgress(mSelectAmount);
             mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));//500RMB
-            if (BuildConfig.DEBUG && "20000".equals(mHomeData.maxAmtRange) && "3832081".equals(BaseApplication.mUserId)) {
-                mHomeData.maxAmtRange = "1100000";
-            }
+//            if (BuildConfig.DEBUG && "20000".equals(mHomeData.maxAmtRange) && "3832081".equals(BaseApplication.mUserId)) {
+//                mHomeData.maxAmtRange = "1100000";
+//            }
             tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
         }
 
@@ -546,16 +546,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         }
                         break;
                     case "2"://审核中
-                        mRefreshLayout.autoRefresh(100);
-                        showToast(getResources().getString(R.string.top_text_check));
-                        break;
                     case "9"://额度计算中
-                        mRefreshLayout.autoRefresh(100);
-                        showToast(getResources().getString(R.string.top_text_status_9));
-                        break;
                     case "6"://放款中
                         mRefreshLayout.autoRefresh(100);
-                        showToast(getResources().getString(R.string.top_text_fangkuan));
                         break;
                     case "5"://未逾期 待还款
                     case "8"://已逾期
@@ -570,7 +563,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         break;
                 }
             } else {
-                showToast("Kesalahan");
+                showToast("No type found");
             }
         } else {
             IntentUtils.startLoginActivityForResult(getActivity(), MainActivity.REQUEST_HOME_FRAGMENT_LOGIN);
@@ -863,22 +856,22 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private SeekBar.OnSeekBarChangeListener seekBarAmountListener2 = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            if (0 <= progress && progress < 350000) {
-                mSelectAmount = 300000;
-            } else if (350000 <= progress && progress < 500000) {
-                mSelectAmount = 400000;
-            } else if (500000 <= progress && progress < 700000) {
-                mSelectAmount = 600000;
-            } else if (700000 <= progress && progress < 900000) {
-                mSelectAmount = 800000;
-            } else if (900000 <= progress && progress < 1100000) {
-                mSelectAmount = 1000000;
-            } else if (1100000 <= progress && progress < 1350000) {
-                mSelectAmount = 1200000;
-            } else if (1350000 <= progress) {
-                mSelectAmount = 1500000;
-            }
-            mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));
+//            if (0 <= progress && progress < 350000) {
+//                mSelectAmount = 300000;
+//            } else if (350000 <= progress && progress < 500000) {
+//                mSelectAmount = 400000;
+//            } else if (500000 <= progress && progress < 700000) {
+//                mSelectAmount = 600000;
+//            } else if (700000 <= progress && progress < 900000) {
+//                mSelectAmount = 800000;
+//            } else if (900000 <= progress && progress < 1100000) {
+//                mSelectAmount = 1000000;
+//            } else if (1100000 <= progress && progress < 1350000) {
+//                mSelectAmount = 1200000;
+//            } else if (1350000 <= progress) {
+//                mSelectAmount = 1500000;
+//            }
+            mSbIndicatorAmount2.setText("Rp." + formatNumber(progress));
         }
 
         @Override
@@ -909,6 +902,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 mSelectAmount = 1500000;
             }
             seekBar.setProgress(mSelectAmount);
+            mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));
+
         }
     };
 

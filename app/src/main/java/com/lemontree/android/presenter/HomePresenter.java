@@ -51,6 +51,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     private BorrowApplyInfoResBean mBorrowApplyInfoResBean;
     private boolean mHasUpdateSmsSuccess;
     private boolean mHasUpdateCallLogSuccess;
+    private final ProgressDialog mDialog;
 
 
     public HomePresenter(Context context, IHomeView view, Fragment fragment) {
@@ -58,6 +59,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         this.mContext = context;
 
         loadData(true);
+        mDialog = new ProgressDialog(mContext);
     }
 
     public void loadData(boolean showLoading) {
@@ -68,6 +70,9 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 获取首页主借款数据
      */
     public void getHomeMainData() {
+        final ProgressDialog dialog = new ProgressDialog(mContext);
+        dialog.setMessage("Loading...");
+        dialog.show();
         HomeDataRequestBean homeTabRequestBean = new HomeDataRequestBean();
         homeTabRequestBean.orderid = "";
 
@@ -80,6 +85,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
                     @Override
                     public void onSuccess(Call call, HomeDataResBean response, int id) {
+                        dialog.dismiss();
                         if (mView != null) {
                             mView.stopRefresh();
                         }
@@ -97,6 +103,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
                     @Override
                     public void onFailure(Call call, Exception exception, int id) {
+                        dialog.dismiss();
                         if (mView != null) {
                             mView.stopRefresh();
                         }
@@ -149,17 +156,17 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 .execute(getNetworkClient(), new GenericCallback<BorrowApplyInfoResBean>() {
                     @Override
                     public void onFailure(Call call, Exception exception, int id) {
-
+                        mDialog.dismiss();
                     }
 
                     @Override
                     public void onSuccess(Call call, BorrowApplyInfoResBean response, int id) {
+                        mDialog.dismiss();
                         if (response != null) {
                             if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
                                 if (mView != null) {
                                     mView.setOrderInfo(response);
                                 }
-                                mBorrowApplyInfoResBean = response;
                             } else {
                                 mView.setRefuseState();
                             }
@@ -203,7 +210,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     /**
      * 去借款
      */
-    public void goBorrow(int loanAmount, int borrowType) {
+    private void goBorrow(int loanAmount, int borrowType) {
         if (mBorrowApplyInfoResBean != null) {
             GoBorrowReqBean bean = new GoBorrowReqBean();
             bean.customer_bank_card_id = mBorrowApplyInfoResBean.customer_bank_card_id;
@@ -217,19 +224,17 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     .execute(getNetworkClient(), new GenericCallback<BorrowResBean>() {
                         @Override
                         public void onFailure(Call call, Exception exception, int id) {
-
+                            mDialog.dismiss();
                         }
 
                         @Override
                         public void onSuccess(Call call, BorrowResBean response, int id) {
                             if (response != null) {
                                 if (BaseResponseBean.SUCCESS.equals(response.res_code) && mView != null) {
-//                                    mView.showLoanInfoLayout();
-
-//                                    mView.refreshHomeData();
                                     getOrderDetails();
                                 } else {
                                     showToast(response.res_msg + "");
+                                    mDialog.dismiss();
                                 }
                             }
                         }
@@ -344,9 +349,9 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 上传数据
      */
     private void uploadNecessaryData() {
-        final ProgressDialog dialog = new ProgressDialog(mContext);
-        dialog.setMessage("Loading...");
-        dialog.show();
+        Log.d("karl", "aaa");
+        mDialog.setMessage("Loading...");
+        mDialog.show();
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
             @Override
             public void success() {
@@ -354,7 +359,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     @Override
                     public void run() {
                         goBorrow(mSelectAmount, mSelectType);
-                        dialog.dismiss();
                     }
                 });
             }
@@ -367,7 +371,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void run() {
                         //失败情况也当成功处理
                         goBorrow(mSelectAmount, mSelectType);
-                        dialog.dismiss();
                     }
                 });
             }
