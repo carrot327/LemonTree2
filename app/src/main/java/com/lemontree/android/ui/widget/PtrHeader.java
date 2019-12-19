@@ -23,11 +23,12 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 
 public class PtrHeader extends FrameLayout implements RefreshHeader {
 
-    private static final String PTR_TEXT_PULL_DOWN = "Pull To Refresh";
-    private static final String PTR_TEXT_REFRESHING = "Refreshing...";
+    private static final String PTR_TEXT_PULL_DOWN = "Pull To Perbarui";
+    private static final String PTR_TEXT_REFRESHING = "Perbarui...";
+//    private static final String PTR_TEXT_REFRESHING = "Refreshing...";
     private static final String PTR_TEXT_RELEASE = "Refresh Now";
-    private static final String PTR_TEXT_REFRESH_SUCCESS = "Refresh Success";
-    private static final String PTR_TEXT_REFRESH_FAILED = "Refresh Failed";
+    private static final String PTR_TEXT_REFRESH_SUCCESS = "Perbarui Success";
+    private static final String PTR_TEXT_REFRESH_FAILED = "Perbarui Failed";
 
     private View mHeaderView;
     private TextView mTvHeaderText;

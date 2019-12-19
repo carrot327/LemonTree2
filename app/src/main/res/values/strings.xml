@@ -80,6 +80,7 @@
     <string name="text_check_new_version">Periksa versi baru</string>
     <string name="text_already_newest">Versi terbaru saat ini</string>
     <string name="text_ok">Oke</string>
+    <string name="text_refresh">Perbarui</string>
     <string name="text_cancel">Batalkan</string>
     <string name="title_about">Tentang</string>
     <string name="dialog_logout_confirm">Konfirmasikan keluar？</string>

@@ -94,6 +94,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvCountInterest;
     @BindView(R.id.tv_delay_time)
     TextView tvDelayTime;
+    @BindView(R.id.tv_apply_info_due)
+    TextView tvApplyInfoDue;
     @BindView(R.id.tv_delay_interest)
     TextView tvDelayInterest;
     @BindView(R.id.tv_apply_info_amount)
@@ -170,8 +172,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvDelayPayEntry;
     @BindView(R.id.tv_part_pay_entry)
     TextView tvPartPayEntry;
-    @BindView(R.id.spinner_borrow_time)
-    Spinner spinnerBorrowTime;
 
 
     private static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
@@ -187,10 +187,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public static int mSelectTime = 7;
     public static int mSelectType = 1;//1为7天   2为14天
     private HomeDataResBean mHomeData = new HomeDataResBean();
-    private GetPayWayListResBean mGetPayWayListResBean;
     private String[] mPayWayList;
     private String mCurrentView;
-    private FirebaseAnalytics mFirebaseAnalytics;
     private boolean isRefuse;
 
     @Override
@@ -206,7 +204,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     protected void initializeView(View view) {
         enableLazyLoad(false);
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(mContext);
         showHomeView(DEFAULT_SHOW_VIEW);
 
         mRefreshLayout.setEnableRefresh(true);
@@ -324,8 +321,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         llPartPayEntry.setVisibility(View.GONE);
         if ("0000".equals(response.res_code)) {
             String type = response.type;
-//            type = "4";
-//            mHomeData.maxAmtRange = "1000000";
             if (!TextUtils.isEmpty(type)) {
                 setApplyTabVisible(type);
                 switch (type) {
@@ -377,7 +372,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         showHomeView(VIEW_BORROW);
                         mPresenter.getOrderDetails();
                         tvTopText.setText(R.string.top_text_fangkuan);
-                        btnHome.setText(R.string.btn_text_fangkuan);
+                        btnHome.setText(R.string.text_refresh);
                         break;
                     case "5"://未逾期 待还款
                         showHomeView(VIEW_PAY_AT_TIME);
@@ -415,9 +410,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             mSeekBarAmount2.setMax(Integer.parseInt(mHomeData.maxAmtRange));
             mSeekBarAmount2.setProgress(mSelectAmount);
             mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));//500RMB
-//            if (BuildConfig.DEBUG && "20000".equals(mHomeData.maxAmtRange) && "3832081".equals(BaseApplication.mUserId)) {
-//                mHomeData.maxAmtRange = "1100000";
-//            }
             tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
         }
 
@@ -427,29 +419,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             mBorrowTimeArray = new String[]{"7"};
         }
-        spinnerBorrowTime.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, mBorrowTimeArray));
-        spinnerBorrowTime.setSelection(mSelectType - 1);
-        spinnerBorrowTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mSelectType = position + 1;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        //设置时间
-      /*  if (mHomeData.maxLoanTime != null && Integer.parseInt(mHomeData.maxLoanTime) > 0) {
-            mSeekBarTime.setMax(Integer.parseInt(mHomeData.maxLoanTime));
-            mSeekBarTime.setSelected(false);
-            mSeekBarTime.setProgress(7);
-            mSelectTime = 7;
-        } else {
-            mSeekBarTime.setMax(7);//默认设为7
-            mSelectTime = 7;
-        }*/
     }
 
     private void setApplyTabVisible(String type) {
@@ -536,7 +505,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                                     //申请信息页面显示时，点击按钮，触发弹框
                                     mPresenter.getBorrowApplyInfo(mSelectAmount, mSelectType);
                                 } else if (loanInfoPage.getVisibility() == View.VISIBLE) {
-                                    // 此处逻辑应该是走不进来的，当loaninfo页面出现时，type应该是不为4，后面check下。
                                     //Info Pinjaman 页面显示时，点击按钮，刷新页面
                                     mRefreshLayout.autoRefresh(100);
                                 }
@@ -715,6 +683,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             tvApplyInfoAmount.setText(formatIndMoney("0"));
         }
+
+//            tvApplyInfoDue.setText(data.loanDays + " hari");// 默认为7天。
         tvApplyInfoBankName.setText(data.card_bank_name);
         tvApplyInfoBankCardNumber.setText(data.bank_card_no);
     }
@@ -729,7 +699,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         tvLoanInfoInterest.setText(formatIndMoney(data.baseRate));
         tvLoanInfoKtp.setText(data.ktp);
         tvLoanInfoPhoneNum.setText(data.phone);
-
         tvLoanInfoDue.setText(data.loanDays + " hari");
         tvLoanInfoLoanAmount.setText(formatIndMoney(data.loanAmt));
         tvLoanInfoTotalGetAmount.setText(formatIndMoney(data.actAmt));
@@ -780,7 +749,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     public void setPayWayData(GetPayWayListResBean data) {
-        mGetPayWayListResBean = data;
         if (data.repay_type_list != null) {
             int size = data.repay_type_list.size();
             mPayWayList = new String[size];
