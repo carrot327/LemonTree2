@@ -66,6 +66,9 @@ android {
         defaultChanel {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChanel"]
         }
+        colada1220 {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "colada1220"]
+        }
     }
 }
 

@@ -399,8 +399,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
-    private String[] mBorrowTimeArray;
-
     /**
      * 设置滑条数值范围
      */
