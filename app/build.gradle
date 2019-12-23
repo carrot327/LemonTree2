@@ -7,12 +7,12 @@ android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
-        applicationId "com.lemontree.android"
+        applicationId "com.sakumanis.android"
 
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 14
-        versionName "1.4"
+        versionCode 220
+        versionName "2.2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
@@ -63,11 +63,14 @@ android {
 
     flavorDimensions "version"
     productFlavors {
-        defaultChanel {
+        defaultChannel {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChanel"]
         }
-        colada1220 {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "colada1220"]
+        sakumanis_1202 {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_1202"]
+        }
+        sakumanis_1202_daoliu {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_1202_daoliu"]
         }
     }
 }

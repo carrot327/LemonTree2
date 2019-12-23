@@ -5,9 +5,9 @@
     <color name="colorAccent">#FF4081</color>
 
     <!--主题颜色 -->
-    <color name="theme_color">#fab02a</color>
-    <color name="theme_color_hover">#FF9800</color>
-    <color name="theme_color_unable">#f2d18d</color>
+    <color name="theme_color">#3575E9</color>
+    <color name="theme_color_hover">#2249B6</color>
+    <color name="theme_color_unable">#96ACFC</color>
 
     <!--深蓝到浅紫的渐变 -->
     <color name="blue_gradient_start">#5b7bf4</color>
@@ -18,6 +18,10 @@
 
     <color name="blue_gradient_disable_start">#ced5fb</color>
     <color name="blue_gradient_disable_end">#e1ecf3</color>
+
+    <!--深黄到浅黄的渐变 -->
+    <color name="yellow_gradient_start">#FE9D4A</color>
+    <color name="yellow_gradient_end">#FCCB9A</color>
 
     <color name="yellow_gradient_hover_start">#ABFDD131</color>
     <color name="yellow_gradient_hover_end">#45F9A416</color>
@@ -30,13 +34,9 @@
     <color name="seek_bar_gradient_green_start">#33DAAB</color>
     <color name="seek_bar_gradient_green_end">#28CB89</color>
 
-    <!--深黄到浅黄的渐变 -->
-    <color name="yellow_gradient_start">#FE9D4A</color>
-    <color name="yellow_gradient_end">#FCCB9A</color>
-
     <!--深绿到浅绿的渐变 -->
-    <color name="green_gradient_start">#79DA4B</color>
-    <color name="green_gradient_end">#AADA93</color>
+    <color name="green_gradient_start">#2FCB87</color>
+    <color name="green_gradient_end">#31DBAC</color>
     <!--文字颜色 -->
     <color name="text_black">#333333</color>
     <color name="text_grey">#666666</color>
@@ -44,8 +44,7 @@
     <color name="text_blue_deep">#3575E9</color>
     <color name="text_light">#cccccc</color>
     <color name="text_light_background">#e4e8eb</color>
-    <color name="text_theme_deep">#f57635</color>
-    <color name="text_theme">@color/theme_color</color>
+    <color name="text_theme">#FC766A</color>
     <color name="text_theme_unable">#FBD9D9</color>
 
     <color name="white">#ffffff</color>
@@ -56,8 +55,8 @@
     <color name="transparence">#00000000</color>
     <color name="grey_text_color">#999999</color>
     <color name="Blue500">#2196F3</color>
-    <color name="tab_text">#FCD594</color>
-    <color name="tab_text_hover">#fab02a</color>
+    <color name="tab_text">#A4C7FF</color>
+    <color name="tab_text_hover">#3575E9</color>
 
 
     <!-- Grey -->
@@ -92,7 +91,6 @@
     <color name="seek_bar_text_green">#2FCB87</color>
     <color name="seek_bar_progress_green">#29cb8b</color>
     <color name="seek_bar_track_bg_green">#cff3e4</color>
-
 
 
 </resources>
