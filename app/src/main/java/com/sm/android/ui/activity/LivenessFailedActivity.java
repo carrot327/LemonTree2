@@ -1,0 +1,36 @@
+package com.sm.android.ui.activity;
+
+import android.content.Context;
+import android.content.Intent;
+
+import android.view.View;
+
+import com.sm.android.R;
+import com.sm.android.base.BaseActivity;
+
+public class LivenessFailedActivity extends BaseActivity {
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, LivenessFailedActivity.class);
+    }
+
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_liveness_failed;
+    }
+
+    @Override
+    protected void initializeView() {
+        findViewById(R.id.btn_confirm).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void loadData() {
+
+    }
+}

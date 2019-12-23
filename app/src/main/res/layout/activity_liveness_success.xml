@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.lemontree.android.ui.activity.LivenessSuccessActivity">
+    tools:context="com.sm.android.ui.activity.LivenessSuccessActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

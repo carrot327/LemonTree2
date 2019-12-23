@@ -54,7 +54,7 @@
 
         <provider
             android:name="com.minchainx.permission.util.FileProvider"
-            android:authorities="com.lemontree.android.file.path.share"
+            android:authorities="com.sm.android.file.path.share"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

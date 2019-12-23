@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -40,8 +42,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/bg_shadow_1"
             android:gravity="center">
 
@@ -51,7 +52,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp" />
 
             <SeekBar
                 android:id="@+id/seek_bar_want_amount"
@@ -61,7 +63,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@null"
                 android:max="1600000"
-                android:maxHeight="3dp"
+                android:maxHeight="8dp"
                 android:progressDrawable="@drawable/seek_bar_bg_yellow"
                 android:splitTrack="false"
                 android:thumb="@drawable/seek_bar_thumb_yellow" />
@@ -94,9 +96,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="25dp"
-        android:orientation="vertical"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,8 +123,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/bg_shadow_1"
             android:gravity="center">
 
@@ -134,7 +133,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp" />
 
             <SeekBar
                 android:id="@+id/seek_bar_want_time"
@@ -144,7 +144,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@null"
                 android:max="14"
-                android:maxHeight="3dp"
+                android:maxHeight="8dp"
                 android:progressDrawable="@drawable/seek_bar_bg_green"
                 android:splitTrack="false"
                 android:thumb="@drawable/seek_bar_thumb_green" />
@@ -196,7 +196,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:text="Rp.428,000"
-            android:textColor="@color/text_theme"
+            android:textColor="@color/text_blue"
             android:textSize="24sp"
             android:textStyle="bold" />
     </LinearLayout>

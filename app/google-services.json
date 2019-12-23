@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "77581740696",
-    "firebase_url": "https://lemontree-d3154.firebaseio.com",
-    "project_id": "lemontree-d3154",
-    "storage_bucket": "lemontree-d3154.appspot.com"
+    "project_number": "357772737584",
+    "firebase_url": "https://saku-manis.firebaseio.com",
+    "project_id": "saku-manis",
+    "storage_bucket": "saku-manis.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:77581740696:android:7ffbae112612f48b10beed",
+        "mobilesdk_app_id": "1:357772737584:android:348485ff6f714c2be881f5",
         "android_client_info": {
-          "package_name": "com.lemontree.android"
+          "package_name": "com.sakumanis.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "77581740696-4erdrc72b8bkdhojnfiio43ef4bqmk09.apps.googleusercontent.com",
+          "client_id": "357772737584-400ikg3jlibn4ku03ca12kpajuk98vfi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCSWVPbBFOpAZ4yqmGAyIhZejKp-LwvOW4"
+          "current_key": "AIzaSyDtbxaK4cK8xLkJJiMahB4tgeqCD4HQoOU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "77581740696-4erdrc72b8bkdhojnfiio43ef4bqmk09.apps.googleusercontent.com",
+              "client_id": "357772737584-400ikg3jlibn4ku03ca12kpajuk98vfi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
