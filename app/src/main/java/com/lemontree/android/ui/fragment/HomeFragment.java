@@ -6,19 +6,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.lemontree.android.BuildConfig;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseDialog;

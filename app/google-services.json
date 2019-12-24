@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "77581740696",
-    "firebase_url": "https://lemontree-d3154.firebaseio.com",
-    "project_id": "lemontree-d3154",
-    "storage_bucket": "lemontree-d3154.appspot.com"
+    "project_number": "916264121936",
+    "firebase_url": "https://cocotree-ddd04.firebaseio.com",
+    "project_id": "cocotree-ddd04",
+    "storage_bucket": "cocotree-ddd04.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:77581740696:android:7ffbae112612f48b10beed",
+        "mobilesdk_app_id": "1:916264121936:android:82d5d0f09431cabfb38355",
         "android_client_info": {
-          "package_name": "com.lemontree.android"
+          "package_name": "com.cocotree.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "77581740696-4erdrc72b8bkdhojnfiio43ef4bqmk09.apps.googleusercontent.com",
+          "client_id": "916264121936-i37jdiq3p80me306ib39tsgdp0b1sggk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCSWVPbBFOpAZ4yqmGAyIhZejKp-LwvOW4"
+          "current_key": "AIzaSyBp7RmwnjMSO0J_O_1E5uPxIC6MJaUlkQY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "77581740696-4erdrc72b8bkdhojnfiio43ef4bqmk09.apps.googleusercontent.com",
+              "client_id": "916264121936-i37jdiq3p80me306ib39tsgdp0b1sggk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
