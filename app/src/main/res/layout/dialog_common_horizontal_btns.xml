@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-        <com.lemontree.android.ui.widget.MaxHeightScrollView
+        <com.cocotree.android.ui.widget.MaxHeightScrollView
             android:id="@+id/mhsv_dialog_common_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 android:textColor="@color/Grey900"
                 tools:text="提交申请后，您的信息将不可更改，确认提交么？" />
 
-        </com.lemontree.android.ui.widget.MaxHeightScrollView>
+        </com.cocotree.android.ui.widget.MaxHeightScrollView>
     </FrameLayout>
 
     <View

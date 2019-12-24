@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.lemontree.android.ui.fragment.ApplyFragment">
+    tools:context="com.cocotree.android.ui.fragment.ApplyFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
         app:srlEnableLoadmoreWhenContentNotFull="false"
         app:srlEnableRefresh="true">
 
-        <com.lemontree.android.ui.widget.PtrHeader
+        <com.cocotree.android.ui.widget.PtrHeader
             android:layout_width="match_parent"
             android:layout_height="60dp" />
 

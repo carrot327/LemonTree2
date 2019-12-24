@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.lemontree.android.ui.widget.AppTitleBar
+    <com.cocotree.android.ui.widget.AppTitleBar
         android:id="@+id/app_titlebar"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
