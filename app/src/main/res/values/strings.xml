@@ -113,5 +113,6 @@
     <string name="text_analysis_failed">Verifikasi gagal, Silahkan coba lagi</string>
     <string name="text_try_again">Coba lagi</string>
     <string name="text_liveness_success">Selamat！ Analisa berhasil</string>
+    <string name="toast_7_days_only">Saat ini hanya menyediakan tenor selama 7 hari</string>
 
 </resources>

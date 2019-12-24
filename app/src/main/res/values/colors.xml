@@ -85,13 +85,13 @@
     <color name="home_text_grey">#6D6D6D</color>
 
     <!--seek_bar-->
-    <color name="seek_bar_text_yellow">@color/theme_color</color>
-    <color name="seek_bar_progress_yellow">@color/theme_color</color>
-    <color name="seek_bar_track_bg_yellow">@color/theme_color</color>
+    <color name="seek_bar_text_yellow">#FE9D4A</color>
+    <color name="seek_bar_progress_yellow">#fdb164</color>
+    <color name="seek_bar_track_bg_yellow">#ffebd7</color>
 
-    <color name="seek_bar_text_blue">#FE9D4A</color>
-    <color name="seek_bar_progress_blue">#fdb164</color>
-    <color name="seek_bar_track_bg_blue">#ffebd7</color>
+    <color name="seek_bar_text_theme">@color/theme_color</color>
+    <color name="seek_bar_progress_theme">@color/theme_color</color>
+    <color name="seek_bar_track_bg_theme">@color/theme_color</color>
 
     <color name="seek_bar_text_green">#2FCB87</color>
     <color name="seek_bar_progress_green">#29cb8b</color>
