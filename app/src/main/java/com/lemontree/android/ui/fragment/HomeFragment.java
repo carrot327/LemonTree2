@@ -888,23 +888,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             mRefreshLayout.setEnableRefresh(true);
-            //3  5  7  10  14
-            int currentProgress = seekBar.getProgress();
-            if (0 <= currentProgress && currentProgress < 4) {
-                mSelectTime = 3;
-            } else if (4 <= currentProgress && currentProgress < 6) {
-                mSelectTime = 5;
-            } else if (6 <= currentProgress && currentProgress < 8) {
-                mSelectTime = 7;
-            } else if (8 <= currentProgress && currentProgress < 12) {
-                mSelectTime = 10;
-            } else if (12 <= currentProgress && currentProgress <= 14) {
-                mSelectTime = 14;
-            }
+            mSelectTime = 7;
             seekBar.setProgress(mSelectTime);
             mSbIndicatorTime.setText(mSelectTime + " hari");
             calcInterest();
-
+            showToast(getString(R.string.toast_7_days_only));
         }
     };
 
