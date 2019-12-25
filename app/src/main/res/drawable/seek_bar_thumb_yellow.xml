@@ -11,6 +11,6 @@
         android:endColor="@color/seek_bar_gradient_yellow_end"
         android:startColor="@color/seek_bar_gradient_yellow_start" />
     <size
-        android:width="15dp"
-        android:height="15dp" />
+        android:width="25dp"
+        android:height="25dp" />
 </shape>

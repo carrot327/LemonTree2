@@ -17,8 +17,8 @@ public class UrlHostConfig {
     private static final String DEBUG_UPDATE_HOST = DEBUG_MAIN_HOST;
 
     //生产
-    private static final String RELEASE_MAIN_HOST = "http://47.74.255.192";
-    private static final String RELEASE_H5_HOST = "http://161.117.226.202";
+    private static final String RELEASE_MAIN_HOST = "http://47.74.255.114";
+    private static final String RELEASE_H5_HOST = "http://161.117.196.133";
     private static final String RELEASE_FLOW_IO_HOST = "";
     private static final String RELEASE_UPDATE_HOST = RELEASE_MAIN_HOST;
 

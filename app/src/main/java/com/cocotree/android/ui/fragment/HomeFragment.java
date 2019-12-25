@@ -86,8 +86,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     SeekBar mSeekBarTime;
     @BindView(R.id.tv_apply_info_name)
     TextView tvApplyInfoName;
-    @BindView(R.id.tv_should_pay)
-    TextView tvCountInterest;
     @BindView(R.id.tv_delay_time)
     TextView tvDelayTime;
     @BindView(R.id.tv_apply_info_due)
@@ -217,8 +215,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
         mSbIndicatorAmount.setText(formatNumber(400000));
         mSbIndicatorTime.setText("7 hari");
-        calcInterest();
-
         tvPartPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         tvDelayPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
@@ -776,7 +772,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             mSbIndicatorAmount.setText(formatNumber(progress));
             mSelectAmount = progress;
-            calcInterest();
         }
 
         @Override
@@ -807,9 +802,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 mSelectAmount = 1600000;
             }
             seekBar.setProgress(mSelectAmount);
-
-            //计算利息
-            calcInterest();
         }
     };
 
@@ -871,7 +863,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             mSbIndicatorTime.setText(progress + " hari");
             mSelectTime = progress;
-            calcInterest();
         }
 
         @Override
@@ -898,19 +889,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             }
             seekBar.setProgress(mSelectTime);
             mSbIndicatorTime.setText(mSelectTime + " hari");
-            calcInterest();
-
         }
     };
-
-    private void calcInterest() {
-        int selectInterest = mSelectAmount + (mSelectAmount * mSelectTime * 1 / 100);
-
-        sFormatSelectAmount = formatNumber(mSelectAmount);
-        sFormatSelectTime = mSelectTime + "";
-        sFormatSelectInterest = formatNumber(selectInterest);
-        tvCountInterest.setText(String.format("Rp.%s", sFormatSelectInterest));
-    }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void showMsgDot(NewMsgEvent event) {

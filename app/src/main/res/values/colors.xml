@@ -5,9 +5,11 @@
     <color name="colorAccent">#FF4081</color>
 
     <!--主题颜色 -->
-    <color name="theme_color">#fab02a</color>
-    <color name="theme_color_hover">#FF9800</color>
-    <color name="theme_color_unable">#f2d18d</color>
+    <!--    <color name="theme_color">#f95e4a</color>-->
+    <color name="theme_color">#e93345</color>
+    <!--    <color name="theme_color">#F26671</color>-->
+    <color name="theme_color_hover">#C1515A</color>
+    <color name="theme_color_unable">#f8aaaf</color>
 
     <!--深蓝到浅紫的渐变 -->
     <color name="blue_gradient_start">#5b7bf4</color>
@@ -25,8 +27,8 @@
     <color name="yellow_gradient_disable_start">#f8e1b9</color>
     <color name="yellow_gradient_disable_end">#f8e1b9</color>
 
-    <color name="seek_bar_gradient_yellow_start">#FCCB99</color>
-    <color name="seek_bar_gradient_yellow_end">#FDAA55</color>
+    <color name="seek_bar_gradient_yellow_start">#FF9800</color>
+    <color name="seek_bar_gradient_yellow_end">#FFEB3B</color>
     <color name="seek_bar_gradient_green_start">#33DAAB</color>
     <color name="seek_bar_gradient_green_end">#28CB89</color>
 
@@ -56,8 +58,8 @@
     <color name="transparence">#00000000</color>
     <color name="grey_text_color">#999999</color>
     <color name="Blue500">#2196F3</color>
-    <color name="tab_text">#FCD594</color>
-    <color name="tab_text_hover">#fab02a</color>
+    <color name="tab_text">@color/theme_color_unable</color>
+    <color name="tab_text_hover">@color/theme_color</color>
 
 
     <!-- Grey -->
@@ -92,7 +94,6 @@
     <color name="seek_bar_text_green">#2FCB87</color>
     <color name="seek_bar_progress_green">#29cb8b</color>
     <color name="seek_bar_track_bg_green">#cff3e4</color>
-
 
 
 </resources>

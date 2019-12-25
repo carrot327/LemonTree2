@@ -79,9 +79,9 @@
 
                     <ImageView
                         android:id="@+id/iv_user_avatar"
-                        android:layout_width="44dp"
-                        android:layout_height="47dp"
-                        android:src="@drawable/icon_avatar_user" />
+                        android:layout_width="57dp"
+                        android:layout_height="57dp"
+                        android:src="@drawable/icon_mine_avatar_user" />
 
 
                     <TextView
@@ -89,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="24dp"
+                        android:layout_marginLeft="36dp"
                         android:text="@string/sign_up"
                         android:textColor="@color/theme_color"
                         android:textSize="17sp"
@@ -107,6 +107,7 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
 
+
                     <RelativeLayout
                         android:id="@+id/rl_my_loan"
                         android:layout_width="match_parent"
@@ -115,15 +116,15 @@
 
                         <ImageView
                             android:id="@+id/iv_my_authentication"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="8dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/icon_my_loan" />
+                            android:src="@drawable/icon_mine_my_loan" />
 
                         <TextView
                             android:id="@+id/tv_authentication"
@@ -150,7 +151,6 @@
 
                     </RelativeLayout>
 
-
                     <RelativeLayout
                         android:id="@+id/rl_help_center"
                         android:layout_width="match_parent"
@@ -160,15 +160,15 @@
 
                         <ImageView
                             android:id="@+id/iv_help_center"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/icon_help_center" />
+                            android:src="@drawable/icon_mine_help_center" />
 
                         <TextView
                             android:id="@+id/tv_my_bank_card"
@@ -204,8 +204,8 @@
 
                         <ImageView
                             android:id="@+id/iv_about_us"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
@@ -248,15 +248,15 @@
 
                         <ImageView
                             android:id="@+id/iv_online_customer_service"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/icon_customer_service" />
+                            android:src="@drawable/icon_mine_customer_service" />
 
                         <TextView
                             android:id="@+id/tv_online_customer_service"
@@ -292,8 +292,8 @@
 
                         <ImageView
                             android:id="@+id/iv_privacy_policy"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
@@ -335,15 +335,15 @@
 
                         <ImageView
                             android:id="@+id/iv_setting"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
                             android:layout_alignParentStart="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/icon_setting" />
+                            android:src="@drawable/icon_mine_setting" />
 
                         <TextView
                             android:id="@+id/tv_my_setting3"
