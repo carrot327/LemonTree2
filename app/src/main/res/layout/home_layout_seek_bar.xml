@@ -72,7 +72,7 @@
                 android:layout_below="@id/seek_bar_want_amount"
                 android:layout_alignLeft="@id/seek_bar_want_amount"
                 android:layout_marginTop="4dp"
-                android:text="Rp.200,000"
+                android:text="Rp.300,000"
                 android:textColor="#5F5F5F" />
 
             <TextView
@@ -81,7 +81,7 @@
                 android:layout_below="@id/seek_bar_want_amount"
                 android:layout_alignRight="@id/seek_bar_want_amount"
                 android:layout_marginTop="4dp"
-                android:text="Rp.1,600,000"
+                android:text="Rp.1,500,000"
                 android:textColor="#5F5F5F" />
         </RelativeLayout>
 

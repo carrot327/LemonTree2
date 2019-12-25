@@ -6,19 +6,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.lemontree.android.BuildConfig;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseDialog;
@@ -214,13 +210,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             }
         });
         mSeekBarAmount.setProgress(mSelectAmount);
-        mSeekBarTime.setProgress(mSelectTime);
         mSeekBarAmount.setOnSeekBarChangeListener(seekBarAmountListener);
-        mSeekBarAmount2.setOnSeekBarChangeListener(seekBarAmountListener2);
-        mSeekBarTime.setOnSeekBarChangeListener(seekBarTimeListener);
+        mSbIndicatorAmount.setText(formatNumber(mSelectAmount));
 
-        mSbIndicatorAmount.setText(formatNumber(400000));
-        mSbIndicatorTime.setText("7 hari");
+        mSeekBarTime.setOnSeekBarChangeListener(seekBarTimeListener);
+        mSeekBarTime.setProgress(mSelectTime);
+        mSbIndicatorTime.setText(mSelectTime + " hari");
+
+
+        mSeekBarAmount2.setOnSeekBarChangeListener(seekBarAmountListener2);
         calcInterest();
 
         tvPartPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -403,14 +401,17 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      * 设置滑条数值范围
      */
     private void setSeekBarValue() {
-        //设置金额
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
             if ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
                 mHomeData.maxAmtRange = "60000";
                 mSelectAmount = 20000;
                 tvMinAmt.setText("Rp.20,000");
             }
-            mSeekBarAmount2.setMax(Integer.parseInt(mHomeData.maxAmtRange));
+            int maxAmountRange = Integer.parseInt(mHomeData.maxAmtRange);
+            mSeekBarAmount2.setMax(maxAmountRange);
+            if (mSelectAmount > maxAmountRange) {
+                mSelectAmount = maxAmountRange;
+            }
             mSeekBarAmount2.setProgress(mSelectAmount);
             mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));//500RMB
             tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
