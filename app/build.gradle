@@ -18,7 +18,7 @@ android {
         vectorDrawables.useSupportLibrary = true //矢量图支持
 
         ndk {
-            abiFilters "armeabi-v7a","x86"
+            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
     }
     signingConfigs {
@@ -31,13 +31,13 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
 //            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -65,6 +65,9 @@ android {
     productFlavors {
         defaultChannel {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChannel"]
+        }
+        google_play {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "google_play"]
         }
     }
 }
