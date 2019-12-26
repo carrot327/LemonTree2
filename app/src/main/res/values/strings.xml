@@ -46,7 +46,7 @@
     <string name="login_text_privacy">Klik login make anda telah menyetujui Perjanjian Layanan Registrasi dan Privasi</string>
     <string name="login_text_Privasi">Perjanjian Layanan Registrasi dan Privasi</string>
     <string name="login_text_send_again">Kirim ulang</string>
-    <string name="sms_code_unreceived_tips">Tidak menerima kode sms? Coba lagi atau alihkan mode pesawat, Atau hubungi Whatsapp kami di +62 81290324175</string>
+    <string name="sms_code_unreceived_tips">Tidak menerima kode sms? Coba lagi atau alihkan mode pesawat, Atau hubungi Whatsapp kami di +62 81287566687</string>
 
     <string name="privacy_policy">Kebijakan privasi</string>
     <string name="register_policy">Perjanjian pendaftaran</string>
@@ -113,5 +113,6 @@
     <string name="text_analysis_failed">Verifikasi gagal, Silahkan coba lagi</string>
     <string name="text_try_again">Coba lagi</string>
     <string name="text_liveness_success">Selamat！ Analisa berhasil</string>
+    <string name="text_home_tip">Jika dapat melunasi tepat pada waktu nya, pada pengajuan berikut nya anda akan mendapatkan limit pinjaman yang lebih tinggi.</string>
 
 </resources>

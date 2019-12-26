@@ -80,10 +80,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     SeekBar mSeekBarAmount;
     @BindView(R.id.seek_bar_want_amount2)
     SeekBar mSeekBarAmount2;
-    @BindView(R.id.tv_select_time)
-    TextView mSbIndicatorTime;
-    @BindView(R.id.seek_bar_want_time)
-    SeekBar mSeekBarTime;
     @BindView(R.id.tv_apply_info_name)
     TextView tvApplyInfoName;
     @BindView(R.id.tv_delay_time)
@@ -134,10 +130,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvMinAmt;
     @BindView(R.id.tv_max_amt)
     TextView tvMaxAmt;
-    @BindView(R.id.tv_min_time)
-    TextView tvMinTime;
-    @BindView(R.id.tv_max_time)
-    TextView tvMaxTime;
     @BindView(R.id.msg_red_dot)
     View msgRedDot;
     @BindView(R.id.btn_home)
@@ -178,7 +170,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
 
     public static int mSelectAmount = 1000000;
-    public static int mSelectTime = 7;
     public static int mSelectType = 1;//1为7天   2为14天
     private HomeDataResBean mHomeData = new HomeDataResBean();
     private String[] mPayWayList;
@@ -208,13 +199,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             }
         });
         mSeekBarAmount.setProgress(mSelectAmount);
-        mSeekBarTime.setProgress(mSelectTime);
         mSeekBarAmount.setOnSeekBarChangeListener(seekBarAmountListener);
         mSeekBarAmount2.setOnSeekBarChangeListener(seekBarAmountListener2);
-        mSeekBarTime.setOnSeekBarChangeListener(seekBarTimeListener);
 
-        mSbIndicatorAmount.setText(formatNumber(400000));
-        mSbIndicatorTime.setText("7 hari");
+        mSbIndicatorAmount.setText(formatNumber(mSelectAmount));
         tvPartPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
         tvDelayPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
@@ -222,24 +210,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-//                showSubmitSuccessDialog();
-//                showPayWayDialog(ConstantValue.NORMAL_PAY);
 
-//                startActivity(StartLivenessActivity.createIntent(mContext));
-
-//                IntentUtils.openWebViewActivity(mContext, "//url");
-
-//                mPresenter.requestPermissions();
-
-//                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_CONTACT());
                 }
                 return true;
             }
         });
-    }
-
-    private boolean isNeedShowApplyPage() {
-        return "9".equals(mHomeData.type) || "4".equals(mHomeData.type) || "2".equals(mHomeData.type) || "6".equals(mHomeData.type);
     }
 
     @Override
@@ -402,7 +377,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 mSelectAmount = 20000;
                 tvMinAmt.setText("Rp.20,000");
             }
-            mSeekBarAmount2.setMax(Integer.parseInt(mHomeData.maxAmtRange));
+            int maxAmountRange = Integer.parseInt(mHomeData.maxAmtRange);
+            mSeekBarAmount2.setMax(maxAmountRange);
+            if (mSelectAmount > maxAmountRange) {
+                mSelectAmount = maxAmountRange;
+            }
             mSeekBarAmount2.setProgress(mSelectAmount);
             mSbIndicatorAmount2.setText("Rp." + formatNumber(mSelectAmount));//500RMB
             tvMaxAmt.setText(formatIndMoney(mHomeData.maxAmtRange));
@@ -784,22 +763,22 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         public void onStopTrackingTouch(SeekBar seekBar) {
             //监听用户结束拖动进度条的时候
             mRefreshLayout.setEnableRefresh(true);
-            //200,000  400,000  800,000  1000,000  1200,000  1500,000
+            //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
             int currentProgress = seekBar.getProgress();
-            if (0 <= currentProgress && currentProgress < 300000) {
-                mSelectAmount = 200000;
-            } else if (300000 <= currentProgress && currentProgress < 600000) {
+            if (0 <= currentProgress && currentProgress < 350000) {
+                mSelectAmount = 300000;
+            } else if (350000 <= currentProgress && currentProgress < 500000) {
                 mSelectAmount = 400000;
-            } else if (600000 <= currentProgress && currentProgress < 900000) {
+            } else if (500000 <= currentProgress && currentProgress < 700000) {
+                mSelectAmount = 600000;
+            } else if (700000 <= currentProgress && currentProgress < 900000) {
                 mSelectAmount = 800000;
             } else if (900000 <= currentProgress && currentProgress < 1100000) {
                 mSelectAmount = 1000000;
             } else if (1100000 <= currentProgress && currentProgress < 1350000) {
                 mSelectAmount = 1200000;
-            } else if (1350000 <= currentProgress && currentProgress < 1550000) {
+            } else if (1350000 <= currentProgress) {
                 mSelectAmount = 1500000;
-            } else if (1550000 <= currentProgress) {
-                mSelectAmount = 1600000;
             }
             seekBar.setProgress(mSelectAmount);
         }
@@ -855,42 +834,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     };
 
-    /**
-     * 选择借款期限
-     */
-    private SeekBar.OnSeekBarChangeListener seekBarTimeListener = new SeekBar.OnSeekBarChangeListener() {
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            mSbIndicatorTime.setText(progress + " hari");
-            mSelectTime = progress;
-        }
-
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-            mRefreshLayout.setEnableRefresh(false);
-
-        }
-
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            mRefreshLayout.setEnableRefresh(true);
-            //3  5  7  10  14
-            int currentProgress = seekBar.getProgress();
-            if (0 <= currentProgress && currentProgress < 4) {
-                mSelectTime = 3;
-            } else if (4 <= currentProgress && currentProgress < 6) {
-                mSelectTime = 5;
-            } else if (6 <= currentProgress && currentProgress < 8) {
-                mSelectTime = 7;
-            } else if (8 <= currentProgress && currentProgress < 12) {
-                mSelectTime = 10;
-            } else if (12 <= currentProgress && currentProgress <= 14) {
-                mSelectTime = 14;
-            }
-            seekBar.setProgress(mSelectTime);
-            mSbIndicatorTime.setText(mSelectTime + " hari");
-        }
-    };
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void showMsgDot(NewMsgEvent event) {

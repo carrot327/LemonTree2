@@ -2,19 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="150dp"
+    android:layout_marginBottom="70dp"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="15dp"
-        android:text="Pinjaman lebih mudah"
-        android:textColor="#FF9800"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="15dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pinjaman lebih mudah"
+            android:textColor="@color/theme_color"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <!--借多少-->
     <LinearLayout
@@ -76,7 +89,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@null"
-                android:max="1600000"
+                android:max="1500000"
                 android:maxHeight="10dp"
                 android:progressDrawable="@drawable/seek_bar_bg_yellow"
                 android:splitTrack="false"
@@ -89,7 +102,7 @@
                 android:layout_alignLeft="@id/seek_bar_want_amount"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="4dp"
-                android:text="Rp.200,000"
+                android:text="Rp.300,000"
                 android:textColor="@color/white" />
 
             <TextView
@@ -99,9 +112,21 @@
                 android:layout_alignRight="@id/seek_bar_want_amount"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="25dp"
-                android:text="Rp.1,600,000"
+                android:text="Rp.1,500,000"
                 android:textColor="@color/white" />
         </RelativeLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/text_home_tip"
+        android:textColor="#FF9800"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 </LinearLayout>

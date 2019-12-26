@@ -32,7 +32,7 @@
             android:textColor="@color/white"
             android:textSize="26sp"
             android:textStyle="bold"
-            tools:text="400000" />
+            tools:text="1000000" />
     </LinearLayout>
 
     <View
