@@ -94,8 +94,8 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                                     mView.setHomeData(response);
                                 }
                             } else {
-                                if (BuildConfig.DEBUG)
-                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
+//                                if (BuildConfig.DEBUG)
+//                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
                             }
                         }
                     }

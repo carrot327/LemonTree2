@@ -1,6 +1,7 @@
 package com.cocotree.android.ui.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -8,7 +9,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +20,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.cocotree.android.manager.DialogFactory;
+import com.cocotree.android.utils.PermissionUtils;
+import com.cocotree.android.utils.SPUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -106,6 +113,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     public static String sFormatSelectInterest;
     private FrameLayout mainFrameLayout;
 
+    private List<String> permissionsList = new ArrayList<>();
+    private ArrayList orderedlist = new ArrayList();
+
     @Override
     protected int getLayoutResId() {
         return R.layout.activity_main;
@@ -117,12 +127,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         mListFragments = mListFragments3Tab;
         initIndicator(tabResourceBean3Tab);
         switchTab(0);
+        if (checkStartPermissions()) {
+            showPermissionDialog();
+        }
+        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
+            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
+            DialogFactory.createPrivacyAgreementDialog(mContext).show();
+        }
     }
 
     @Override
     protected void loadData() {
         UpdateUtil.checkUpdate(mContext);
-//        checkHasUnreadMsg();
     }
 
     @Override
@@ -130,7 +146,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         LocationService.getInstance().registerListener();
-        checkStartPermission();
+//        checkStartPermission();
 
         if (!BuildConfig.DEBUG) {
             onCheckGooglePlayServices();
@@ -567,5 +583,99 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             }
 
         }
+    }
+
+    // 是否显示权限Dialog
+    private boolean checkStartPermissions() {
+
+        // 位置权限
+        boolean hasCoarseLocationPermission = PermissionUtils.checkPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION, getPackageName());
+        boolean hasFineLocationPermission = PermissionUtils.checkPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, getPackageName());
+
+
+        // 读写权限
+        boolean hasWriteExternalStoragePermission = PermissionUtils.checkPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, getPackageName());
+        boolean hasReadExternalStoragePermission = PermissionUtils.checkPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE, getPackageName());
+
+        // 把缺少的权限添加到集合中
+        if (!hasCoarseLocationPermission) {
+            permissionsList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+            int size = orderedlist.size() + 1;
+            orderedlist.add(size + ".Lokasi");
+        }
+
+
+        if (!hasFineLocationPermission) {
+            permissionsList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            if (!orderedlist.contains(orderedlist.size() + ".Lokasi")) {
+                int size = orderedlist.size() + 1;
+                orderedlist.add(size + ".Lokasi");
+            }
+        }
+
+
+        if (!hasWriteExternalStoragePermission) {
+            permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            int size = orderedlist.size() + 1;
+            orderedlist.add(size + ".Penyimpanan");
+        }
+
+        if (!hasReadExternalStoragePermission) {
+            permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+            if (!orderedlist.contains(orderedlist.size() + ".Penyimpanan")) {
+                int size = orderedlist.size() + 1;
+                orderedlist.add(size + ".Penyimpanan");
+            }
+        }
+        // 只要有一项没权限就弹出Dialog
+        if (!hasFineLocationPermission || !hasCoarseLocationPermission
+                || !hasReadExternalStoragePermission
+                || !hasWriteExternalStoragePermission) {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void showPermissionDialog() {
+        View view = View.inflate(this, R.layout.dialog_permission, null);
+        ListView lv = view.findViewById(R.id.lv_permission);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext, R.layout.item_permission);
+        for (int i = 0; i < orderedlist.size(); i++) {
+            adapter.add((String) orderedlist.get(i));
+        }
+
+        Button btn = view.findViewById(R.id.btn_ok);
+
+        lv.setAdapter(adapter);
+        final Dialog dialog1 = DialogFactory.newDialog(this, view, false);
+        dialog1.show();
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog1.dismiss();
+
+                new Permission(mContext, new String[]{
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+//                        Manifest.permission.READ_CONTACTS
+                }, new PermissionListener() {
+                    //成功授权和失败授权回调中，都检查下是否给了定位权限
+                    @Override
+                    public void onGranted() {
+                        startLocationService();
+                    }
+
+                    @Override
+                    public void onDenied() {
+                        startLocationService();
+                    }
+                });
+            }
+        });
     }
 }
