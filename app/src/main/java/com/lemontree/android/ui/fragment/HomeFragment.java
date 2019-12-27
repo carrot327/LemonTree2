@@ -211,14 +211,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         });
         mSeekBarAmount.setProgress(mSelectAmount);
         mSeekBarAmount.setOnSeekBarChangeListener(seekBarAmountListener);
+        mSeekBarAmount2.setOnSeekBarChangeListener(seekBarAmountListener2);
+
         mSbIndicatorAmount.setText(formatNumber(mSelectAmount));
 
         mSeekBarTime.setOnSeekBarChangeListener(seekBarTimeListener);
         mSeekBarTime.setProgress(mSelectTime);
         mSbIndicatorTime.setText(mSelectTime + " hari");
-
-
-        mSeekBarAmount2.setOnSeekBarChangeListener(seekBarAmountListener2);
         calcInterest();
 
         tvPartPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -228,24 +227,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-//                showSubmitSuccessDialog();
-//                showPayWayDialog(ConstantValue.NORMAL_PAY);
 
-//                startActivity(StartLivenessActivity.createIntent(mContext));
-
-//                IntentUtils.openWebViewActivity(mContext, "//url");
-
-//                mPresenter.requestPermissions();
-
-//                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_CONTACT());
                 }
                 return true;
             }
         });
-    }
-
-    private boolean isNeedShowApplyPage() {
-        return "9".equals(mHomeData.type) || "4".equals(mHomeData.type) || "2".equals(mHomeData.type) || "6".equals(mHomeData.type);
     }
 
     @Override
@@ -794,22 +780,22 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         public void onStopTrackingTouch(SeekBar seekBar) {
             //监听用户结束拖动进度条的时候
             mRefreshLayout.setEnableRefresh(true);
-            //200,000  400,000  800,000  1000,000  1200,000  1500,000
+            //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
             int currentProgress = seekBar.getProgress();
-            if (0 <= currentProgress && currentProgress < 300000) {
-                mSelectAmount = 200000;
-            } else if (300000 <= currentProgress && currentProgress < 600000) {
+            if (0 <= currentProgress && currentProgress < 350000) {
+                mSelectAmount = 300000;
+            } else if (350000 <= currentProgress && currentProgress < 500000) {
                 mSelectAmount = 400000;
-            } else if (600000 <= currentProgress && currentProgress < 900000) {
+            } else if (500000 <= currentProgress && currentProgress < 700000) {
+                mSelectAmount = 600000;
+            } else if (700000 <= currentProgress && currentProgress < 900000) {
                 mSelectAmount = 800000;
             } else if (900000 <= currentProgress && currentProgress < 1100000) {
                 mSelectAmount = 1000000;
             } else if (1100000 <= currentProgress && currentProgress < 1350000) {
                 mSelectAmount = 1200000;
-            } else if (1350000 <= currentProgress && currentProgress < 1550000) {
+            } else if (1350000 <= currentProgress) {
                 mSelectAmount = 1500000;
-            } else if (1550000 <= currentProgress) {
-                mSelectAmount = 1600000;
             }
             seekBar.setProgress(mSelectAmount);
 
