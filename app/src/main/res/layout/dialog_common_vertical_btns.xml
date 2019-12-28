@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-        <com.cocotree.android.ui.widget.MaxHeightScrollView
+        <com.cocotreedebug.android.ui.widget.MaxHeightScrollView
             android:id="@+id/mhsv_dialog_common_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 style="@style/common_dialog_message_text"
                 android:text="msg" />
 
-        </com.cocotree.android.ui.widget.MaxHeightScrollView>
+        </com.cocotreedebug.android.ui.widget.MaxHeightScrollView>
     </FrameLayout>
 
     <View style="@style/split_line" />

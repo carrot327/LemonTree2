@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cocotree.android">
+    package="com.cocotreedebug.android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,7 +19,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
-        android:name="com.cocotree.android.manager.BaseApplication"
+        android:name="com.cocotreedebug.android.manager.BaseApplication"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,13 +36,13 @@
             android:value="${ANDROID_CHANNEL_VALUE}" />
 
 
-        <activity android:name="com.cocotree.android.ui.activity.PartPayActivity"/>
-        <activity android:name="com.cocotree.android.ui.activity.LivenessFailedActivity" />
-        <activity android:name="com.cocotree.android.ui.activity.LivenessSuccessActivity" />
-        <activity android:name="com.cocotree.android.ui.activity.StartLivenessActivity" />
-        <activity android:name="com.cocotree.android.ui.activity.TestActivity" />
+        <activity android:name="com.cocotreedebug.android.ui.activity.PartPayActivity"/>
+        <activity android:name="com.cocotreedebug.android.ui.activity.LivenessFailedActivity" />
+        <activity android:name="com.cocotreedebug.android.ui.activity.LivenessSuccessActivity" />
+        <activity android:name="com.cocotreedebug.android.ui.activity.StartLivenessActivity" />
+        <activity android:name="com.cocotreedebug.android.ui.activity.TestActivity" />
         <activity
-            android:name="com.cocotree.android.ui.activity.LaunchActivity"
+            android:name="com.cocotreedebug.android.ui.activity.LaunchActivity"
             android:hardwareAccelerated="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,23 +51,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.cocotree.android.ui.activity.MainActivity"
+            android:name="com.cocotreedebug.android.ui.activity.MainActivity"
             android:hardwareAccelerated="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity
-            android:name="com.cocotree.android.ui.activity.LoginActivity"
+            android:name="com.cocotreedebug.android.ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.cocotree.android.ui.activity.SettingActivity"
+            android:name="com.cocotreedebug.android.ui.activity.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cocotree.android.ui.activity.AboutUsActivity"
+            android:name="com.cocotreedebug.android.ui.activity.AboutUsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cocotree.android.ui.activity.WebViewActivity"
+            android:name="com.cocotreedebug.android.ui.activity.WebViewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
@@ -81,30 +81,30 @@
             -->
         </activity>
         <activity
-            android:name="com.cocotree.android.ui.activity.FeedbackActivity"
+            android:name="com.cocotreedebug.android.ui.activity.FeedbackActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.cocotree.android.ui.activity.ProtocolPrivacyPolicyActivity"
+            android:name="com.cocotreedebug.android.ui.activity.ProtocolPrivacyPolicyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cocotree.android.ui.activity.ProtocolRegisterActivity"
+            android:name="com.cocotreedebug.android.ui.activity.ProtocolRegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cocotree.android.ui.activity.ProtocolBorrowActivity"
+            android:name="com.cocotreedebug.android.ui.activity.ProtocolBorrowActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cocotree.android.ui.activity.BorrowRecordActivity"
+            android:name="com.cocotreedebug.android.ui.activity.BorrowRecordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cocotree.android.ui.activity.BankCardManageActivity"
+            android:name="com.cocotreedebug.android.ui.activity.BankCardManageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.cocotree.android.ui.activity.ProductDetailActivity"
+            android:name="com.cocotreedebug.android.ui.activity.ProductDetailActivity"
             android:screenOrientation="portrait" />
 
         <service
-            android:name="com.cocotree.android.service.MyFirebaseMessagingService"
+            android:name="com.cocotreedebug.android.service.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

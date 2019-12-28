@@ -1,0 +1,41 @@
+package com.cocotreedebug.android.uploadUtil;
+
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import androidx.core.content.ContextCompat;
+
+/**
+ * Created by LaiYingtang on 2016/5/18.
+ * <p/>
+ * 检查权限的工具类
+ */
+public class CheckPermission {
+
+    private static final String TAG = "CheckPermission";
+    private final Context context;
+
+    //构造器
+    public CheckPermission(Context context) {
+        this.context = context.getApplicationContext();
+    }
+
+    //检查权限时，判断系统的权限集合
+    public boolean permissionSet(String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (String permission : permissions) {
+                if (isLackPermission(permission)) {//是否添加完全部权限集合
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //检查系统权限是，判断当前是否缺少权限(PERMISSION_DENIED:权限是否足够)
+    private boolean isLackPermission(String permission) {
+        int flag = ContextCompat.checkSelfPermission(context, permission);
+        return flag == PackageManager.PERMISSION_DENIED;
+    }
+
+}
