@@ -632,7 +632,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         if (!hasReadContactsPermission) {
             permissionsList.add(Manifest.permission.READ_CONTACTS);
             int size = orderedlist.size() + 1;
-            orderedlist.add(size + ".Akses kontak");
+            orderedlist.add(size + ".Akses kontak(Pilih kontak dengan cepat)");
         }
 //        if (!hasReadExternalStoragePermission) {
 //            permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
