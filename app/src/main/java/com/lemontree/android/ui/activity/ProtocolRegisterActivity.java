@@ -1,5 +1,6 @@
 package com.lemontree.android.ui.activity;
 
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
 import com.lemontree.android.bean.response.DisclaimerResponseBean;
 import com.lemontree.android.manager.ConstantValue;
+import com.lemontree.android.manager.DialogFactory;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
 import com.networklite.NetworkLiteHelper;
@@ -50,7 +52,7 @@ public class ProtocolRegisterActivity extends BaseActivity {
     @Override
     protected void loadData() {
         /*获取注册服务协议*/
-        NetworkLiteHelper
+       /* NetworkLiteHelper
                 .get()
                 .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_PROTOCOL_REG)
                 .build()
@@ -68,6 +70,7 @@ public class ProtocolRegisterActivity extends BaseActivity {
                     public void onFailure(Call call, Exception exception, int id) {
                         Toast.makeText(mContext, R.string.toast_text_get_privacy_failed, Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
+        tvContent.setText(Html.fromHtml(DialogFactory.privacy_content));
     }
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="500dp"
+    android:orientation="vertical"
+    android:paddingBottom="15dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Deklarasi"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_privacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/slt_btn_corner5_theme_color2"
+        android:enabled="false"
+        android:minHeight="50dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="mengertidan setuju"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_privacy"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:button="@drawable/slt_select_icon"
+        android:padding="5dp"
+        android:text="Ditanggung sepenuhnya oleh peminjam"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <ScrollView
+        android:id="@+id/sv_privacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/checkbox"
+        android:layout_below="@id/tv_title"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tv_privacy_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black" />
+    </ScrollView>
+
+</RelativeLayout>

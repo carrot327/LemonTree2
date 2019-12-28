@@ -210,7 +210,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     /**
      * 去借款
      */
-    private void goBorrow(int loanAmount, int borrowType) {
+    public void goBorrow(int loanAmount, int borrowType) {
         if (mBorrowApplyInfoResBean != null) {
             GoBorrowReqBean bean = new GoBorrowReqBean();
             bean.customer_bank_card_id = mBorrowApplyInfoResBean.customer_bank_card_id;
@@ -258,29 +258,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                             if (mView != null) {
                                 mView.setPayWayData(response);
                             }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call call, Exception exception, int id) {
-                    }
-                });
-    }
-
-    /**
-     * 还款码设置为失效
-     */
-    public void setPayCodeInvalid() {
-        NetworkLiteHelper
-                .postJson()
-                .url(NetConstantValue.BASE_HOST + NetConstantValue.SET_PAY_CODE_INVALID)
-                .content(new Gson().toJson(new CommonReqBean()))
-                .build()
-                .execute(getNetworkClient(), new GenericCallback<BaseResponseBean>() {
-                    @Override
-                    public void onSuccess(Call call, BaseResponseBean response, int id) {
-                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            Log.d("karl", "setPayCodeInvalid success");
                         }
                     }
 

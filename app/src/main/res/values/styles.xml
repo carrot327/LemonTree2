@@ -98,4 +98,8 @@
         <item name="android:paddingRight">16dp</item>
     </style>
 
+    <style name="style_bg_transparent_dialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

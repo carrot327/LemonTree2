@@ -63,8 +63,8 @@ android {
 
     flavorDimensions "version"
     productFlavors {
-        defaultChanel {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChanel"]
+        defaultChannel {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChannel"]
         }
         colada1220 {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "colada1220"]

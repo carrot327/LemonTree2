@@ -184,8 +184,8 @@ public class UrlHostConfig {
     }
     //协议
 
-    public static String GET_H5_AGREEMENT() {
-        return appendUrlWithParamsAndHost(ConstantValue.H5_AGREEMENT);
+    public static String GET_H5_PRIVACY_AGREEMENT() {
+        return appendUrlWithParamsAndHost(ConstantValue.H5_PRIVACY_AGREEMENT);
     }
 
     //个人信息

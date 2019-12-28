@@ -60,8 +60,8 @@ public interface ConstantValue {
     String H5_BORROW_LIST = "/#/pages/borrowlist/borrowlist";
     //还款
     String H5_REPAY = "/#/pages/repay/repay";
-    //协议
-    String H5_AGREEMENT = "/#/agreement/agreement";
+    //隐私协议
+    String H5_PRIVACY_AGREEMENT = "/#/pages/agreement/agreement?type=reg";
 
     //个人信息
     String H5_USER_INFO = "/#/pages/auth/identityAuth/index";

@@ -90,8 +90,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvCountInterest;
     @BindView(R.id.tv_delay_time)
     TextView tvDelayTime;
-    @BindView(R.id.tv_apply_info_due)
-    TextView tvApplyInfoDue;
     @BindView(R.id.tv_delay_interest)
     TextView tvDelayInterest;
     @BindView(R.id.tv_apply_info_amount)

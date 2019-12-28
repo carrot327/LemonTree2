@@ -8,12 +8,16 @@ import android.net.Uri;
 
 import androidx.appcompat.app.AlertDialog;
 
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -359,34 +363,18 @@ public class DialogFactory {
      * @param context
      * @return
      */
-    public static Dialog payWaySelectDialog(final Context context, String from) {
-        PayWaySelectDialog dialog = new PayWaySelectDialog(context, from);
-        Window dialogWindow = dialog.getWindow();
-        if (dialogWindow != null) {
-            dialogWindow.setBackgroundDrawableResource(R.color.transparence);
-        }
-        dialog.setCanceledOnTouchOutside(false);
-        return dialog;
-    }
-
-    /**
-     * 还款选择框
-     *
-     * @param context
-     * @return
-     */
     public static AlertDialog payWaySelectMaterialDialog(
             final Context context, String title, String[] items, String from, String payAmount) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(title);
 
         //replace ConvenienceStore to Toko serba ada
-        String[] myItems=new String[items.length];
+        String[] myItems = new String[items.length];
         for (int i = 0; i < items.length; i++) {
             if ("ConvenienceStore".equals(items[i])) {
                 myItems[i] = "Toko serba ada";
-            }else {
-                myItems[i]   = items[i];
+            } else {
+                myItems[i] = items[i];
             }
         }
 
@@ -413,4 +401,81 @@ public class DialogFactory {
         return builder.create();
     }
 
+    public static Dialog newDialog(Context context, View view, boolean b) {
+        Dialog dialog = new AlertDialog.Builder(context, R.style.style_bg_transparent_dialog)
+                .setView(view)
+                .setCancelable(b)
+                .create();
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+        return dialog;
+    }
+
+    /**
+     * 隐私协议弹框
+     *
+     * @param context
+     * @return
+     */
+    public static Dialog createPrivacyAgreementDialog(final Context context) {
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_privacy_agreement, null);
+        CheckBox checkBox = view.findViewById(R.id.checkbox);
+        TextView tv_privacy_content = view.findViewById(R.id.tv_privacy_content);
+        Button btn_privacy = view.findViewById(R.id.btn_privacy);
+
+        Dialog dialog = new Dialog(context);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.setContentView(view);
+
+        tv_privacy_content.setText(Html.fromHtml(privacy_content));
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (checkBox.isChecked()) {
+                btn_privacy.setEnabled(true);
+            } else {
+                btn_privacy.setEnabled(false);
+            }
+        });
+        btn_privacy.setOnClickListener(v -> dialog.dismiss());
+
+        Window dialogWindow = dialog.getWindow();
+        if (dialogWindow != null) {
+            dialogWindow.setGravity(Gravity.CENTER);
+            WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+            lp.width = UIUtils.getScreenWidth() * 7 / 8;
+            lp.height = UIUtils.getScreenHeight() * 3 / 4;
+            dialogWindow.setAttributes(lp);
+        }
+        return dialog;
+    }
+
+   public static String privacy_content = "<b><big>Colada Perjanjian Privasi</big></b><br><br> Kebijakan Privasi ini telah disusun untuk menjelaskan aplikasi perangkat lunak kami, situs web kami dan pengumpulan, penggunaan dan pengungkapan informasi tentang pengguna layanan lain yang kami sediakan (secara kolektif).\n" +
+            "\n" +
+            "<br><br><b>Kami meminta Anda untuk memberikan izin untuk data berikut:</b>\n" +
+            "<br><br>1. Informasi pendaftaran. Ketika Anda mendaftar ke Akun colada, kami akan meminta Anda untuk memberikan kami informasi pribadi seperti nama, email, dan nomor telepon Anda.\n" +
+            "<br><br>2. Data seluler. Ketika Anda menginstal aplikasi kami, kami meminta akses ke aktivitas Anda di ponsel Anda, seperti (tetapi tidak terbatas pada): instalasi aplikasi, SMS, nama, email, dan nomor telepon Anda.\n" +
+            "<br><br>3. Gunakan informasi. Kami juga mengumpulkan informasi tentang bagaimana Anda menggunakan layanan kami, termasuk bagaimana Anda melihat dan berinteraksi dengannya, bagaimana Anda menggunakan berbagai bagian dari layanan kami, informasi apa yang Anda cari, apa yang Anda lihat, dan apa yang Anda lakukan.\n" +
+            "<br><br>4. Informasi arsip. Dalam bentuk pinjaman aplikasi, analisis kami membutuhkan data pribadi yang benar, data yang diperlukan dalam bentuk berikut: KTP, penggajian dan data lainnya.\n" +
+            "<br><br>5. Perekaman data. Jika Anda menggunakan layanan kami, kami akan menggunakan (\"Data Log\") untuk secara otomatis merekam informasi tentang penggunaan Anda.\n" +
+            "<br><br>6. Investigasi dan promosi. Kami akan menyelidiki dan mempromosikan dari waktu ke waktu, dan kami dapat memberi Anda peluang untuk berpartisipasi dalam survei, kontes, atau undian melalui layanan Anda. Jika Anda berpartisipasi, kami dapat meminta Anda beberapa informasi tambahan.\n" +
+            "\n" +
+            "<br><br><b>Bagaimana kami menggunakan informasi yang kami kumpulkan:</b><br>\n" +
+            "<br><br>1. Kami menggunakan informasi yang kami kumpulkan (termasuk informasi pendaftaran, ID pengguna dan ID perangkat Anda, informasi tentang layanan dan media sosial, dan informasi survei dan promosi) untuk menyediakan dan meningkatkan layanan kami, mengembangkan penawaran baru dan meningkatkan dan Personalisasi pengalaman Anda di kantong kami, termasuk konten dan iklan yang Anda lihat.\n" +
+            "<br><br>2. Kami menggunakan informasi yang dikumpulkan (termasuk informasi pendaftaran, ID pengguna dan ID perangkat, data seluler, data keuangan, dan media sosial Anda) untuk memverifikasi dan meningkatkan kemungkinan mendapatkan persetujuan untuk produk-produk Pocket yang kami tawarkan. Kami juga dapat menggunakan informasi yang kami kumpulkan untuk memverifikasi identitas Anda untuk mencegah penipuan, mencetak riwayat kredit, mengkonfirmasi informasi pekerjaan Anda, dan mengembangkan model statistik yang terkait dengan mesin pemeringkat kredit.\n" +
+            "<br><br>3. Kami dapat menggunakan informasi pendaftaran Anda untuk mengirim berita penting tentang layanan ini, serta materi pemasaran yang menurut kami menarik bagi Anda. Jika Anda memutuskan bahwa Anda tidak lagi ingin menerima buletin pemasaran kami, silakan ikuti instruksi berhenti berlangganan di buletin itu.\n" +
+            "\n" +
+            "<br><br><b>Pengungkapan informasi yang kami kumpulkan:</b><br>\n" +
+            "<br><br>1. Informasi yang Anda berikan. Kantong kami hanya untuk penggunaan pribadi dan konten yang Anda ungkapkan tidak tersedia untuk orang lain.\n" +
+            "<br><br>2. Berdasarkan persetujuan Anda, kami dapat mengungkapkan informasi yang dikumpulkan dengan pihak ketiga setelah menerima persetujuan Anda.\n" +
+            "<br><br>3. Informasi non-pribadi atau non-pribadi. Kami dapat mengungkapkan informasi agregat dan non-pribadi yang kami kumpulkan. Pengungkapan seperti itu tidak termasuk informasi pribadi dan non-publik tentang pengguna individu.\n" +
+            "<br><br>4. Penyedia layanan. Kami mempekerjakan pihak ketiga untuk membantu kami dalam menyediakan dan meningkatkan layanan (seperti, tetapi tidak terbatas pada, pemeliharaan, manajemen basis data, dan perusahaan analisis jaringan). Jika pihak ketiga ini menerima informasi pribadi dan non-publik tentang Anda, mereka berkewajiban untuk tidak mengungkapkan atau menggunakannya untuk tujuan lain untuk melakukan tugas kami.\n" +
+            "<br><br>5. Kepatuhan dengan hukum dan penegakan hukum. Kami telah bekerja dengan pejabat pemerintah, lembaga penegak hukum dan kelompok swasta untuk menegakkan dan mematuhi hukum. Kami akan mengungkapkan informasi apa pun tentang Anda kepada pejabat pemerintah, lembaga penegak hukum atau kelompok swasta karena kami yakin kami percaya perlu atau pantas untuk menanggapi klaim dan prosedur hukum (termasuk tetapi tidak terbatas pada panggilan pengadilan) untuk melindungi hak-hak properti dan hak-hak saku. Atau pihak ketiga untuk melindungi keselamatan masyarakat atau orang lain, atau untuk mencegah atau membatasi apa yang kami yakini ilegal, tidak etis atau dapat ditindaklanjuti secara hukum, atau mungkin merupakan tindakan ilegal.\n" +
+            "\n" +
+            "<br><br><b>Informasi keselamatan</b><br>\n" +
+            "colada menggunakan langkah-langkah keamanan fisik, teknis, dan administratif yang wajar untuk melindungi informasi yang kami kumpulkan. Tidak ada cara untuk mengirim melalui Internet, dan tidak ada metode penyimpanan elektronik 100% aman. Karena itu, meskipun kami menggunakan metode yang dapat diterima secara komersial untuk melindungi informasi yang kami kumpulkan, kami tidak dapat menjamin bahwa itu benar-benar aman. Jika Pocket menyadari bahwa pelanggaran keamanan dapat menyebabkan pengungkapan informasi pendaftaran Anda yang tidak sah, kami dapat mencoba untuk memberi tahu Anda secara elektronik melalui Layanan sehingga Anda dapat mengambil tindakan perlindungan yang sesuai. colada juga dapat mengirim email ke alamat email yang Anda berikan kepada kami sesuai dengan paragraf ini untuk pemberitahuan.\n" +
+            "\n" +
+            "<br><br><b>Phishing</b><br>\n" +
+            "Pencurian identitas dan apa yang sekarang dikenal sebagai \"phishing\" telah membuat Sakuji North sangat terkejut. Melindungi informasi untuk melindungi Anda dari pencurian identitas adalah prioritas. Kami tidak akan dan tidak akan menanyakan informasi kartu kredit Anda, kata sandi login atau nomor ID Anda kapan saja melalui email atau komunikasi telepon yang tidak aman atau tidak diminta.";
 }

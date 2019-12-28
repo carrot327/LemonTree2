@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.lemontree.android.uploadUtil.UrlHostConfig;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 import com.lemontree.android.R;
@@ -185,7 +186,7 @@ public class LoginActivity extends BaseActivity {
                 if (rlMsg.getVisibility() == View.VISIBLE) {
                     if (etMsgVerifyCode.getText().toString().trim().length() >= 4) {
                         login();
-                    }else {
+                    } else {
                         showToast("Silakan masukkan kode verifikasi");
                     }
                 } else {
