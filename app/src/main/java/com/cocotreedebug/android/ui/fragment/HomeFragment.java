@@ -288,6 +288,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         llPartPayEntry.setVisibility(View.GONE);
         if ("0000".equals(response.res_code)) {
             String type = response.type;
+            showToast("Type:" + type);
             if (!TextUtils.isEmpty(type)) {
                 setApplyTabVisible(type);
                 switch (type) {

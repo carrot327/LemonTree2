@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
-                        android:text="输入手机号，直接登录 @Carrie @丛丛"
+                        android:text="输入UserId或手机号，直接登录 @Carrie @丛丛"
                         android:textColor="#BCCCE4"
                         android:textSize="11sp" />
 
@@ -179,7 +179,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="80dp"
                     android:background="@drawable/slt_btn_corner5_theme_color"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:gravity="center"
                     android:text="@string/sign_up"
                     android:textAllCaps="false"
