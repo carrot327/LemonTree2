@@ -384,12 +384,12 @@ public class DialogFactory {
         builder.setTitle(title);
 
         //replace ConvenienceStore to Toko serba ada
-        String[] myItems=new String[items.length];
+        String[] myItems = new String[items.length];
         for (int i = 0; i < items.length; i++) {
             if ("ConvenienceStore".equals(items[i])) {
                 myItems[i] = "Toko serba ada";
-            }else {
-                myItems[i]   = items[i];
+            } else {
+                myItems[i] = items[i];
             }
         }
 
@@ -466,7 +466,7 @@ public class DialogFactory {
         return dialog;
     }
 
-   public static String privacy_content = "<b><big>Coco Tree Perjanjian Privasi</big></b><br><br> Kebijakan Privasi ini telah disusun untuk menjelaskan aplikasi perangkat lunak kami, situs web kami dan pengumpulan, penggunaan dan pengungkapan informasi tentang pengguna layanan lain yang kami sediakan (secara kolektif).\n" +
+    public static String privacy_content = "<b><big>Coco Tree Perjanjian Privasi</big></b><br><br> Kebijakan Privasi ini telah disusun untuk menjelaskan aplikasi perangkat lunak kami, situs web kami dan pengumpulan, penggunaan dan pengungkapan informasi tentang pengguna layanan lain yang kami sediakan (secara kolektif).\n" +
             "\n" +
             "<br><br><b>Kami meminta Anda untuk memberikan izin untuk data berikut:</b>\n" +
             "<br><br>1. Informasi pendaftaran. Ketika Anda mendaftar ke Akun Coco Tree, kami akan meminta Anda untuk memberikan kami informasi pribadi seperti nama, email, dan nomor telepon Anda.\n" +
