@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="7dp"
-                        android:text="@string/sms_code_unreceived_tips"
+                        android:text="输入手机号，直接登录 @Carrie @丛丛"
                         android:textColor="#BCCCE4"
                         android:textSize="11sp" />
 

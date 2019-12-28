@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Coco Tree</string>
+    <string name="app_name">CocoTree快速登录</string>
 
     <string name="sign_up" translatable="false">Masuk/Daftar</string>
     <string name="text_apply_loan">Ajukan pinjaman</string>
