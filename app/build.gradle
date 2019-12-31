@@ -10,9 +10,9 @@ android {
         applicationId "com.sakumanis.android"
 
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 230
-        versionName "2.3.0"
+        targetSdkVersion 28
+        versionCode 240
+        versionName "2.4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
@@ -69,9 +69,6 @@ android {
         sakumanis_1202 {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_1202"]
         }
-        sakumanis_1202_daoliu {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_1202_daoliu"]
-        }
     }
 }
 
@@ -91,7 +88,7 @@ dependencies {
 
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'io.reactivex:rxjava:1.2.3'
+//    implementation 'io.reactivex:rxjava:1.2.3'
 
     //以下为新添加
     implementation 'com.github.hackware1993:MagicIndicator:1.5.0'

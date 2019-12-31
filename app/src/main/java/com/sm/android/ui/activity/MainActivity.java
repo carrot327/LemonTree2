@@ -122,7 +122,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     @Override
     protected void loadData() {
         UpdateUtil.checkUpdate(mContext);
-//        checkHasUnreadMsg();
     }
 
     @Override
@@ -431,36 +430,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         LocationService.getInstance().unregisterListener(); //注销掉监听
         LocationService.getInstance().stop(); //停止定位服务
         EventBus.getDefault().unregister(this);
-    }
-
-    /**
-     * 新消息提示
-     */
-    public void checkHasUnreadMsg() {
-        NetworkLiteHelper
-                .postJson()
-                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_NEW_MSG_REMIND)
-                .content(new Gson().toJson(new CommonReqBean()))
-                .build()
-                .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<UnreadMsgStateResBean>() {
-                    @Override
-                    public void onFailure(Call call, Exception exception, int id) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(Call call, UnreadMsgStateResBean response, int id) {
-                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            if ("1".equals(response.status)) {
-                                sHasNewUnreadMsg = true;
-                            } else {
-                                sHasNewUnreadMsg = false;
-                            }
-                            EventBus.getDefault().post(new NewMsgEvent());
-
-                        }
-                    }
-                });
     }
 
     /**
