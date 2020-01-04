@@ -158,6 +158,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvDelayPayEntry;
     @BindView(R.id.tv_part_pay_entry)
     TextView tvPartPayEntry;
+    @BindView(R.id.rl_seek_bar_2)
+    RelativeLayout rlSeekBar2;
 
 
     private static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
@@ -317,16 +319,18 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                             btnHome.setText(R.string.btn_text_confirm);//点击方法 showSubmitSuccessDialog
                         }
 
-                        if (!isRefuse) {
+                        if (isRefuse) {
+                            tvTopText.setText(R.string.top_text_status_4_no_amount);
+                            hideSeekBar2();
+                        } else {
                             if (Double.parseDouble(response.amtShow) > 0) {
                                 tvTopText.setText(R.string.top_text_status_4);
                                 btnHome.setEnabled(true);
                             } else {
+                                hideSeekBar2();
                                 tvTopText.setText(R.string.top_text_status_4_no_amount);
                                 btnHome.setEnabled(false);
                             }
-                        } else {
-                            tvTopText.setText(R.string.text_review_refused);
                         }
                         break;
                     case "2"://审核中
@@ -366,11 +370,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
+    private void hideSeekBar2() {
+        rlSeekBar2.setVisibility(View.INVISIBLE);
+        mSbIndicatorAmount2.setText("Rp.0");
+    }
+
     /**
      * 设置滑条数值范围
      */
     private void setSeekBarValue() {
-        //设置金额
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
             if ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
                 mHomeData.maxAmtRange = "60000";
@@ -711,6 +719,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     private void showApplyInfoLayout() {
         applyInfoPage.setVisibility(View.VISIBLE);
+        rlSeekBar2.setVisibility(View.VISIBLE);
         loanInfoPage.setVisibility(View.GONE);
     }
 
@@ -731,8 +740,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setRefuseState() {
         isRefuse = true;
-        tvTopText.setText(R.string.text_review_refused);
-
+        tvTopText.setText(R.string.top_text_status_4_no_amount);
         tvApplyInfoName.setText("-");
         tvApplyInfoAmount.setText("-");
         tvApplyInfoBankName.setText("-");
