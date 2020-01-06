@@ -279,7 +279,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            Log.d("karl", "setPayCodeInvalid success");
                         }
                     }
 
@@ -348,7 +347,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 上传数据
      */
     private void uploadNecessaryData() {
-        Log.d("karl", "aaa");
         mDialog.setMessage("Loading...");
         mDialog.show();
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
@@ -401,15 +399,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         new UploadDataBySingle().uploadSms(BaseApplication.mUserId, new UploadDataBySingle.UploadSmsListener() {
             @Override
             public void success() {
-//                UIUtils.showToast("上传短信成功");
-                Log.d("karl", "上传短信成功");
                 mHasUpdateSmsSuccess = true;
             }
 
             @Override
             public void error() {
-                Log.d("karl", "上传短信error");
-
             }
         });
     }
@@ -438,14 +432,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         new UploadDataBySingle().uploadCallRecord(BaseApplication.mUserId, new UploadDataBySingle.UploadCallRecordListener() {
             @Override
             public void success() {
-//                UIUtils.showToast("上传短信成功");
-                Log.d("karl", "上传通话记录成功");
                 mHasUpdateCallLogSuccess = true;
             }
 
             @Override
             public void error() {
-                Log.d("karl", "上传通话记录error");
             }
         });
     }

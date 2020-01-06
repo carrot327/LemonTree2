@@ -28,7 +28,6 @@
         android:id="@+id/include_home_borrow_apply_info"
         layout="@layout/home_borrow_apply_info"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:visibility="visible" />
 

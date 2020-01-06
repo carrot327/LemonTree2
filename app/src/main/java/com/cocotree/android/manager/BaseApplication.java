@@ -113,40 +113,11 @@ public class BaseApplication extends Application implements DFTransferResultInte
      */
     public void initSPData() {
         if (BuildConfig.DEBUG) {
-            //测试 晶晶
 //            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
 //            sLoginState = true;
-//            sUserName = "写死的登录信息(081287566687)";
-//            mUserId = "3832081";
-//            sPhoneNum = "081287566687";
-
-            //生产 晶晶
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "写死的登录信息(081287566687)";
-//            mUserId = "3832085";
-//            sPhoneNum = "081287566687";
-
-            //生产 丛丛
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "写死的登录信息(081290324175)";
-//            mUserId = "3832096";
-//            sPhoneNum = "081290324175";
-
-            //生产环境我的id  3832083
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "登录信息(081284228637)";
-//            mUserId = "3832083";
-//            sPhoneNum = "081284228637";
-
-            //线上用户
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "登录信息(081266568320)";
-//            mUserId = "3835061";
-//            sPhoneNum = "081266568320";
+//            sUserName = "";
+//            mUserId = "";
+//            sPhoneNum = "";
         }
 
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
