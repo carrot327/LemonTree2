@@ -113,7 +113,7 @@
     <string name="text_analysis_failed">Verifikasi gagal, Silahkan coba lagi</string>
     <string name="text_try_again">Coba lagi</string>
     <string name="text_liveness_success">Selamat！ Analisa berhasil</string>
-    <string name="text_home_tip">Jika dapat melunasi tepat pada waktu nya, pada pengajuan berikut nya anda akan mendapatkan limit pinjaman yang lebih tinggi.</string>
+    <string name="text_home_tip">Jika Anda dapat melunasi pinjaman tepat waktu, aplikasi Anda berikutnya akan mendapatkan batas pinjaman atau jangka waktu pinjaman yang lebih tinggi.</string>
 
     <string name="permission_desc">Yth, agar dapat melayani dengan cepat, tepat dan Berkualitas, silahkan memberikan otorisasi hak akses Mobile Aplikasi :</string>
     <string name="permission_cancel">Tolak</string>

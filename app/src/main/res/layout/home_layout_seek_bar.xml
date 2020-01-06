@@ -50,7 +50,7 @@
             android:paddingTop="3dp"
             android:paddingRight="7dp"
             android:paddingBottom="3dp"
-            android:text="7 Hari"
+            android:text="9 Hari"
             android:textColor="#FF9800"
             android:textSize="14sp"
             android:visibility="visible" />

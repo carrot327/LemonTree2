@@ -214,7 +214,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
             GoBorrowReqBean bean = new GoBorrowReqBean();
             bean.customer_bank_card_id = mBorrowApplyInfoResBean.customer_bank_card_id;
             bean.loan_amount = loanAmount;
-            bean.borrow_type = borrowType;
+            bean.borrow_type = borrowType;//0为默认(当前为9天)   1为7天   2为14天
             NetworkLiteHelper
                     .postJson()
                     .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_CONFIRM_BORROW)

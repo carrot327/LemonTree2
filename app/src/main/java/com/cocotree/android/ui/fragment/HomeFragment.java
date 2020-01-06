@@ -172,7 +172,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
 
     public static int mSelectAmount = 1000000;
-    public static int mSelectType = 1;//1为7天   2为14天
+    public static int mSelectType = 3;//1为7天   2为14天  3为9天
     private HomeDataResBean mHomeData = new HomeDataResBean();
     private String[] mPayWayList;
     private String mCurrentView;
