@@ -214,28 +214,15 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
             JSONObject obj = new JSONObject(data);
             // 1 orc 认证 2 抓取到短信、通讯录等 3 重新抓取到短信、通讯录等 4 返回首页
             if (obj.optInt("type") == 1) {//orc 认证  跳OCR认证页面
-//                Intent intent = new Intent(this, InfoAuthenticationActivity.class);
-//                intent.putExtra("user_id", obj.optString("user_id"));
-//                startActivityForResult(intent, OCR_AUTHENTICATE);
             } else if (obj.optInt("type") == 2) {//2 点击获取额度时
                 handleType2(obj, function);
-                //开始强读通讯录，弱读短信、通话记录
             } else if (obj.optInt("type") == 3) {//3 借款时候
-//                handleType3(obj, function);  //目前没有type=3的状态
-                //开始强读通讯录，弱读短信、通话记录
             } else if (obj.optInt("type") == 4 || obj.optInt("type") == 5) {//4 5 返回首页
                 IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
                 finish();
             } else if (obj.optInt("type") == 7) {//借款成功
-//                IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
-//                HomeFragment.sHasBorrowSuccessed = true;
-//                finish();
             } else if (obj.optInt("type") == 8) {//还款成功
-//                IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
-//                HomeFragment.sHasPaySuccessed = true;
-//                finish();
             } else if (obj.optInt("type") == 12) {//四要素成功，关闭上一个ocr页面
-//                InfoAuthenticationActivity.getInstance().finish();
             } else if (obj.optInt("type") == 13) {//进行活体识别
                 startActivity(StartLivenessActivity.createIntent(mContext));
                 finish();

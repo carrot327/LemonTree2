@@ -23,6 +23,7 @@ import com.lemontree.android.base.BaseResponseBean;
 import com.lemontree.android.bean.enventbus.BackPressEvent;
 import com.lemontree.android.bean.enventbus.NewMsgEvent;
 import com.lemontree.android.bean.response.BorrowApplyInfoResBean;
+import com.lemontree.android.bean.response.GetExtendFeeResBean;
 import com.lemontree.android.bean.response.GetPayWayListResBean;
 import com.lemontree.android.bean.response.HomeDataResBean;
 import com.lemontree.android.iview.IHomeView;
@@ -55,6 +56,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static android.view.Gravity.CENTER;
+import static com.lemontree.android.manager.BaseApplication.isOpenGodMode;
 import static com.lemontree.android.ui.activity.MainActivity.TAB_APPLY;
 import static com.lemontree.android.ui.activity.MainActivity.sFormatSelectAmount;
 import static com.lemontree.android.ui.activity.MainActivity.sFormatSelectInterest;
@@ -124,8 +126,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvTotalBorrowAmount;
     @BindView(R.id.tv_pay_deadline)
     TextView tvPayDeadline;
-    @BindView(R.id.tv_total_borrow_amount_delay)
-    TextView tvTotalBorrowAmountDelay;
     @BindView(R.id.tv_pay_deadline_delay)
     TextView tvPayDeadlineDelay;
     @BindView(R.id.tv_top_text)
@@ -134,10 +134,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvMinAmt;
     @BindView(R.id.tv_max_amt)
     TextView tvMaxAmt;
-    @BindView(R.id.tv_min_time)
-    TextView tvMinTime;
-    @BindView(R.id.tv_max_time)
-    TextView tvMaxTime;
     @BindView(R.id.msg_red_dot)
     View msgRedDot;
     @BindView(R.id.btn_home)
@@ -320,16 +316,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         ((MainActivity) getActivity()).getBankCardList();
                         break;
                     case "9"://额度计算中
-                        showHomeView(VIEW_BORROW);
-                        showApplyInfoLayout();
-                        mPresenter.getBorrowApplyInfo();
+                        setBorrowPageBaseInfo();
                         tvTopText.setText(getResources().getText(R.string.top_text_status_9));
                         break;
                     case "4"://可借款
-                        showHomeView(VIEW_BORROW);
-                        showApplyInfoLayout();
+                        setBorrowPageBaseInfo();
                         setSeekBarValue();
-                        mPresenter.getBorrowApplyInfo();
                         if (View.VISIBLE == applyInfoPage.getVisibility()) {
                             btnHome.setText(R.string.btn_text_confirm);//点击方法 showSubmitSuccessDialog
                         }
@@ -385,6 +377,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
+    private void setBorrowPageBaseInfo() {
+        showHomeView(VIEW_BORROW);
+        showApplyInfoLayout();
+        mPresenter.getBorrowApplyInfo();
+    }
+
     private void hideSeekBar2() {
         rlSeekBar2.setVisibility(View.INVISIBLE);
         mSbIndicatorAmount2.setText("Rp.0");
@@ -395,9 +393,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     private void setSeekBarValue() {
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
-            if ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
-                mHomeData.maxAmtRange = "60000";
-                mSelectAmount = 20000;
+            if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+                mHomeData.maxAmtRange = "90000";
+//                mSelectAmount = 20000;
                 tvMinAmt.setText("Rp.20,000");
             }
             int maxAmountRange = Integer.parseInt(mHomeData.maxAmtRange);
@@ -699,31 +697,17 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         showSubmitSuccessDialog(borrowData.adminFee, borrowData.serviceFee);
     }
 
+
+    /**
+     * 设置展期页面数据
+     *
+     * @param data 展期接口数据
+     */
     @Override
-    public void showExtendPageData(String extentFee) {
-        // TODO: 2019-12-09 展期固定天数（后期应通过接口调用）
-        int extendDay = EXTENSION_DAYS;
-        if (mHomeData.overdueDay != null) {
-            extendDay = EXTENSION_DAYS + Integer.parseInt(mHomeData.overdueDay);
-        }
-        tvDelayTime.setText(extendDay + "");
-        if (mHomeData.repayAmt == null) {
-            mHomeData.repayAmt = "0";
-        }
-        if (!TextUtils.isEmpty(mHomeData.repayAmt)) {
-            tvTotalBorrowAmountDelay.setText(formatIndMoney(Integer.parseInt(mHomeData.repayAmt) + Integer.parseInt(extentFee) + ""));
-        }
-        String nextPayDate = "";
-        try {
-            if (mHomeData.finalRepaymentDate != null) {
-                nextPayDate = MyTimeUtils.plusDay(extendDay, mHomeData.finalRepaymentDate);
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        tvPayDeadlineDelay.setText(nextPayDate);
-        //设置展期费用
-        tvDelayInterest.setText(String.format("Rp.%s", formatNumber(Integer.parseInt(extentFee))));
+    public void showExtendPageData(GetExtendFeeResBean data) {
+        tvDelayTime.setText(data.extendDays);
+        tvPayDeadlineDelay.setText(MyTimeUtils.timeStamp2Date(data.shouldReturnTime));
+        tvDelayInterest.setText(String.format("Rp.%s", formatNumber(Integer.parseInt(data.extendFee))));
     }
 
     @Override
@@ -830,7 +814,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
             int currentProgress = seekBar2.getProgress();
 
-            if ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+            if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
                 //20000  40000  60000
                 if (0 <= currentProgress && currentProgress < 30000) {
                     mSelectAmount = 20000;
@@ -838,6 +822,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     mSelectAmount = 40000;
                 } else if (50000 <= currentProgress && currentProgress < 70000) {
                     mSelectAmount = 60000;
+                } else if (70000 <= currentProgress && currentProgress < 90000) {
+                    mSelectAmount = 80000;
+                } else if (90000 == currentProgress) {
+                    mSelectAmount = 90000;
                 }
             } else {
                 if (0 <= currentProgress && currentProgress < 350000) {

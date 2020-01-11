@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="40dp">
 
     <RelativeLayout
         android:layout_width="217dp"
@@ -30,7 +31,7 @@
             android:layout_marginTop="0dp"
             android:text="Hari"
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_below_hint"
@@ -40,7 +41,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
             android:gravity="center"
-            android:text="@string/text_delay_time"
+            android:text="Waktu pinjaman di perpanjang"
             android:textColor="@color/white"
             android:textSize="12sp" />
     </RelativeLayout>
@@ -61,23 +62,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_total_borrow_amount_delay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="26dp"
+                android:text="@string/text_delay_fee"
                 android:textColor="@color/white"
-                android:textSize="19sp"
-                tools:text="Rp.428,000" />
+                android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tv_delay_interest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="9dp"
-                android:text="Total Jumlah Pelunasan"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="19sp"
+                tools:text="Rp.142,000" />
         </LinearLayout>
 
         <LinearLayout
@@ -89,62 +90,23 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_pay_deadline_delay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="26dp"
+                android:text="Tanggal Jatuh Tempo"
                 android:textColor="@color/white"
-                android:textSize="19sp"
-                tools:text="03-10-2019" />
+                android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/tv_pay_deadline_delay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="9dp"
-                android:text="Tanggal Jatuh Tempo"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="19sp"
+                tools:text="03-10-2019" />
         </LinearLayout>
-
-
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="20dp">
-
-        <View
-            android:id="@+id/view_tag"
-            android:layout_width="5dp"
-            android:layout_height="15dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/shape_bg_circle_corner_blue" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_toRightOf="@id/view_tag"
-            android:text="@string/text_delay_fee"
-            android:textColor="@color/text_black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_delay_interest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
-            android:textColor="@color/text_theme_deep"
-            android:textSize="16sp"
-            tools:text="Rp.142,000"
-            android:textStyle="bold" />
-    </RelativeLayout>
 </LinearLayout>

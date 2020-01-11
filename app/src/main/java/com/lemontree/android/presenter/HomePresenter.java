@@ -444,7 +444,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void onSuccess(Call call, GetExtendFeeResBean response, int id) {
                         CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
                         if (response != null && mView != null) {
-                            mView.showExtendPageData(response.data + "");
+                            mView.showExtendPageData(response);
                         }
                     }
 
