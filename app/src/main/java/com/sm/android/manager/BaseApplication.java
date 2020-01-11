@@ -22,6 +22,7 @@ public class BaseApplication extends Application implements DFTransferResultInte
     public static String mUserId = "";
     public static String sPhoneNum = "";
     public static String mSharedPreferencesName;
+    public static boolean isOpenGodMode;
     private DFProductResult mResult;
 
 
@@ -108,34 +109,6 @@ public class BaseApplication extends Application implements DFTransferResultInte
      */
     public void initSPData() {
         if (BuildConfig.DEBUG) {
-            //测试 晶晶
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "写死的登录信息(081287566687)";
-//            mUserId = "3832081";
-//            sPhoneNum = "81287566687";
-
-            //生产 晶晶
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "写死的登录信息(081287566687)";
-//            mUserId = "3832253";
-//            sPhoneNum = "081287566687";
-
-            //生产 丛丛
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "写死的登录信息(081290324175)";
-//            mUserId = "3832096";
-//            sPhoneNum = "081290324175";
-
-            //生产环境我的id  3832083
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "登录信息(081284228637)";
-//            mUserId = "3832083";
-//            sPhoneNum = "081284228637";
-
             //线上用户
 //            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
 //            sLoginState = true;
@@ -143,7 +116,6 @@ public class BaseApplication extends Application implements DFTransferResultInte
 //            mUserId = "3835061";
 //            sPhoneNum = "081266568320";
         }
-
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);
         if (!TextUtils.isEmpty(mSharedPreferencesName)) {
@@ -151,5 +123,6 @@ public class BaseApplication extends Application implements DFTransferResultInte
             sPhoneNum = SPUtils.getString(ConstantValue.PHONE_NUMBER, "");
             sUserName = SPUtils.getString(ConstantValue.KEY_LATEST_LOGIN_NAME, "");
         }
+        isOpenGodMode = SPUtils.getBoolean(ConstantValue.GOD_MODE, false);
     }
 }

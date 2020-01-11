@@ -94,7 +94,7 @@
     <string name="text_review_refused">@string/top_text_status_4_no_amount</string>
     <string name="text_pls_input">Silahkan masuk</string>
     <string name="title_register_privacy">Kebijakan privasi</string>
-    <string name="text_delay_fee">Biaya perpanjangan:</string>
+    <string name="text_delay_fee">Biaya perpanjangan</string>
     <string name="dialog_loading">Loading...</string>
     <string name="text_liveness_btn">Mulai verifikasi</string>
     <string name="text_liveness_hint">Arahkan wajah Anda ke layar ponsel dan pastikan ada pencahayaan yang cukup</string>
