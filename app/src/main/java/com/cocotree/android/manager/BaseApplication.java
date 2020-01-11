@@ -22,6 +22,7 @@ public class BaseApplication extends Application implements DFTransferResultInte
     public static String mUserId = "";
     public static String sPhoneNum = "";
     public static String mSharedPreferencesName;
+    public static boolean isOpenGodMode;
     private DFProductResult mResult;
 
 
@@ -119,7 +120,6 @@ public class BaseApplication extends Application implements DFTransferResultInte
 //            mUserId = "";
 //            sPhoneNum = "";
         }
-
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);
         if (!TextUtils.isEmpty(mSharedPreferencesName)) {
@@ -127,5 +127,6 @@ public class BaseApplication extends Application implements DFTransferResultInte
             sPhoneNum = SPUtils.getString(ConstantValue.PHONE_NUMBER, "");
             sUserName = SPUtils.getString(ConstantValue.KEY_LATEST_LOGIN_NAME, "");
         }
+        isOpenGodMode = SPUtils.getBoolean(ConstantValue.GOD_MODE, false);
     }
 }

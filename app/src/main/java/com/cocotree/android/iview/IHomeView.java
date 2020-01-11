@@ -3,6 +3,7 @@ package com.cocotree.android.iview;
 
 import com.cocotree.android.base.IBaseView;
 import com.cocotree.android.bean.response.BorrowApplyInfoResBean;
+import com.cocotree.android.bean.response.GetExtendFeeResBean;
 import com.cocotree.android.bean.response.GetPayWayListResBean;
 import com.cocotree.android.bean.response.HomeDataResBean;
 
@@ -29,7 +30,7 @@ public interface IHomeView extends IBaseView {
     void showLoanInfoLayout();
 
     //展期费用
-    void showExtendPageData(String fee);
+    void showExtendPageData(GetExtendFeeResBean fee);
 
     //set Pay way data
     void setPayWayData(GetPayWayListResBean data);

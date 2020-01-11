@@ -214,7 +214,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
             GoBorrowReqBean bean = new GoBorrowReqBean();
             bean.customer_bank_card_id = mBorrowApplyInfoResBean.customer_bank_card_id;
             bean.loan_amount = loanAmount;
-            bean.borrow_type = borrowType;//0为默认(当前为9天)   1为7天   2为14天
+            bean.borrow_type = borrowType;//1为7天   2为14天  3为9天
             NetworkLiteHelper
                     .postJson()
                     .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_CONFIRM_BORROW)
@@ -457,7 +457,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void onSuccess(Call call, GetExtendFeeResBean response, int id) {
                         CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
                         if (response != null && mView != null) {
-                            mView.showExtendPageData(response.data + "");
+                            mView.showExtendPageData(response);
                         }
                     }
 

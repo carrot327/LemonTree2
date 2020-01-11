@@ -4,6 +4,7 @@ public interface ConstantValue {
 
     String FIRST_OPEN_APP = "first_open_app";
     String LOGIN_STATE = "login_state";
+    String GOD_MODE = "god_mode";
     String JWT_KEY = "jwt";
     String KEY_SERVER_TIME_OFFSET = "serverTimeOffset";
     String KEY_LATEST_LOGIN_NAME = "lastLoginName";
