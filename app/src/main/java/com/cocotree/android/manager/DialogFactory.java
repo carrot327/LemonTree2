@@ -10,6 +10,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -188,7 +190,6 @@ public class DialogFactory {
      * 首页运营弹框(图片+文字)
      *
      * @param context
-     * @param bean
      * @return
      */
     public static Dialog createHomeOperationDialog(final Context context, OperationDialogResBean bean) {
@@ -235,6 +236,42 @@ public class DialogFactory {
 
             dialogWindow.setBackgroundDrawableResource(R.color.transparence);
         }
+        return dialog;
+    }
+
+    /**
+     * 优惠券弹框
+     *
+     * @param context
+     * @return
+     */
+    public static Dialog createCouponDialog(final Context context) {
+        View contentView = LayoutInflater.from(context).inflate(R.layout.home_coupon_dialog, null);
+        ImageView ivBackground = contentView.findViewById(R.id.iv_coupon_background);
+        Button btn = contentView.findViewById(R.id.btn_coupon);
+        ivBackground.setMinimumWidth(UIUtils.getScreenWidth() * 6 / 7);
+        ivBackground.setMinimumHeight(UIUtils.getScreenWidth());
+//        btn.setMinimumWidth(UIUtils.getScreenWidth() * 1 / 2);
+
+
+        Dialog dialog = new Dialog(context);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(contentView);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparence);
+
+        ivBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
         return dialog;
     }
 

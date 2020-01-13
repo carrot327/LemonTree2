@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import androidx.annotation.Nullable;
 
+import com.cocotree.android.manager.DialogFactory;
 import com.gyf.barlibrary.ImmersionBar;
 import com.cocotree.android.R;
 import com.cocotree.android.base.BaseActivity;
@@ -64,9 +65,11 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(mContext, MainActivity.class);
-            mContext.startActivity(intent);
-            finish();
+//            Intent intent = new Intent(mContext, MainActivity.class);
+//            mContext.startActivity(intent);
+            DialogFactory.createCouponDialog(mContext).show();
+
+//            finish();
         }, 1000);
     }
 }
