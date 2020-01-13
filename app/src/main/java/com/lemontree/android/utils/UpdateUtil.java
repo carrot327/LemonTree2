@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
+import com.update.updatesdk.BuildConfig;
 import com.update.updatesdk.UpdateAgent;
 import com.update.updatesdk.UpdateListener;
 import com.update.updatesdk.UpdateReqBean;
@@ -49,6 +50,9 @@ public class UpdateUtil {
                         break;
                     default:
                         if (context instanceof AboutUsActivity) {
+                            if (BuildConfig.DEBUG) {
+                                Toast.makeText(context, updateStatus + "", Toast.LENGTH_SHORT).show();
+                            }
                             Toast.makeText(context, "Sudah versi terbaru", Toast.LENGTH_SHORT).show();
                         }
                         break;

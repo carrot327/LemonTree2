@@ -22,3 +22,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# 实体类，设置成自己的包名路径
+-keep class com.update.updatesdk.**{*;}

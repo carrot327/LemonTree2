@@ -69,14 +69,14 @@ public class AboutUsActivity extends BaseActivity {
                     if (mMultiClickHelper.click()) {
                         if (isOpenGodMode) {
                             isOpenGodMode = false;
-                            Toast.makeText(mContext, "上帝模式已关闭", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mContext, "上帝模式已关闭", Toast.LENGTH_SHORT).show();
                         } else {
                             isOpenGodMode = true;
-                            Toast.makeText(mContext, "上帝模式已开启", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mContext, "上帝模式已开启", Toast.LENGTH_SHORT).show();
                         }
                         SPUtils.putBoolean(ConstantValue.GOD_MODE, isOpenGodMode);
                         if (isOpenGodMode) {
-                            tvCurrentVersion.setText("Version " + Tools.getAppVersion() + "-debug-上帝模式");
+                            tvCurrentVersion.setText("Version " + Tools.getAppVersion() + "-debug-god");
                         } else {
                             tvCurrentVersion.setText("Version " + Tools.getAppVersion() + "-debug");
                         }
