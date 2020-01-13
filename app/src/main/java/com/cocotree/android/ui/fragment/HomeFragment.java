@@ -122,8 +122,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvTotalBorrowAmount;
     @BindView(R.id.tv_pay_deadline)
     TextView tvPayDeadline;
-    @BindView(R.id.tv_total_borrow_amount_delay)
-    TextView tvTotalBorrowAmountDelay;
     @BindView(R.id.tv_pay_deadline_delay)
     TextView tvPayDeadlineDelay;
     @BindView(R.id.tv_top_text)
