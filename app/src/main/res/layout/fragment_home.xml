@@ -7,8 +7,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white">
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/iv_home_back"
@@ -43,10 +44,10 @@
                 android:id="@+id/iv_titlebar_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
                 android:background="@null"
                 android:padding="5dp"
-                android:src="@drawable/icon_mine_notice_blue" />
+                android:src="@drawable/icon_mine_notice_blue"
+                android:visibility="invisible" />
 
             <View
                 android:id="@+id/msg_red_dot"
@@ -83,8 +84,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="16dp">
+                android:orientation="vertical">
 
                 <!--滑条布局-->
                 <include
@@ -132,7 +132,7 @@
                     android:id="@+id/ll_delay_pay_entry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:orientation="horizontal"
@@ -154,11 +154,12 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_part_pay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="13dp"
                     android:gravity="center"
                     android:orientation="horizontal"

@@ -114,11 +114,13 @@ public class BaseApplication extends Application implements DFTransferResultInte
      */
     public void initSPData() {
         if (BuildConfig.DEBUG) {
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "";
-//            mUserId = "";
-//            sPhoneNum = "";
+            //3836000 晶晶    //3832079  丛丛
+
+            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+            sLoginState = true;
+            sUserName = "asdf";
+            mUserId = "3836000";
+            sPhoneNum = "81290324175";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);

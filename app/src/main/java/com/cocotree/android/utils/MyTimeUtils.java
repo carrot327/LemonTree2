@@ -144,6 +144,7 @@ public class MyTimeUtils {
             return "";
         }
         if (format == null || format.isEmpty()) {
+//            format = "yyyy-MM-dd HH:mm:ss";
             format = "yyyy-MM-dd";
         }
         SimpleDateFormat sdf = new SimpleDateFormat(format);

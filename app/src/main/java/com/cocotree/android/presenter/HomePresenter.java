@@ -7,13 +7,12 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.cocotree.android.bean.response.CouponResBean;
 import com.google.gson.Gson;
-import com.cocotree.android.BuildConfig;
 import com.cocotree.android.R;
 import com.cocotree.android.base.BasePresenter;
 import com.cocotree.android.base.BaseResponseBean;
@@ -465,6 +464,45 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void onFailure(Call call, Exception exception, int id) {
                         CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
                         showToast("Harap kembali dan coba lagi");
+                    }
+                });
+    }
+
+    /**
+     * 获取优惠券信息
+     */
+    public void getCouponInfo(boolean isNoNeedShowDialog) {
+        NetworkLiteHelper
+                .postJson()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_GET_COUPON_INFO)
+                .content(new Gson().toJson(new CommonReqBean()))
+                .build()
+                .execute(getNetworkClient(), new GenericCallback<CouponResBean>() {
+
+                    @Override
+                    public void onSuccess(Call call, CouponResBean response, int id) {
+                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                            if (mView != null) {
+                                mView.handleCouponInfo(response);
+                            }
+
+//                            if (isNoNeedShowDialog) {
+//                                if ("1".equals(response.couponStatus)) {//1已激活
+//                                    mView.setCouponInfo(response);
+//                                } else if ("0".equals(response.couponStatus) || "2".equals(response.couponStatus)) {//0 未激活  2已使用
+//                                    mView.noCoupon();
+//                                    mView.setBorrowPageCouponText();
+//                                }
+//                            } else {
+//                                mView.showCouponDialog(response);
+//                            }
+                        } else {
+                            mView.noCoupon(response);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Exception exception, int id) {
                     }
                 });
     }

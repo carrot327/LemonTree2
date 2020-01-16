@@ -8,10 +8,9 @@ import android.net.Uri;
 
 import androidx.appcompat.app.AlertDialog;
 
+import android.os.Build;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,15 +18,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.cocotree.android.BuildConfig;
 import com.cocotree.android.R;
 import com.cocotree.android.base.BaseDialog;
+import com.cocotree.android.bean.response.CouponResBean;
+import com.cocotree.android.bean.response.HomeDataResBean;
 import com.cocotree.android.bean.response.HomeDialogDataResBean;
 import com.cocotree.android.bean.response.OperationDialogResBean;
 import com.cocotree.android.bean.response.RecommendDialogResBean;
+import com.cocotree.android.ui.activity.MainActivity;
 import com.cocotree.android.ui.widget.CommonDialog;
 import com.cocotree.android.ui.widget.HomePromptDialog;
 import com.cocotree.android.ui.widget.HomeRecommendDialogOne;
@@ -36,6 +42,8 @@ import com.cocotree.android.ui.widget.PayWaySelectDialog;
 import com.cocotree.android.uploadUtil.Tools;
 import com.cocotree.android.utils.MarkUtil;
 import com.cocotree.android.utils.IntentUtils;
+import com.cocotree.android.utils.MyTimeUtils;
+import com.cocotree.android.utils.SPUtils;
 import com.cocotree.android.utils.StringUtils;
 import com.cocotree.android.utils.UIUtils;
 
@@ -186,73 +194,20 @@ public class DialogFactory {
         return commonDialog;
     }
 
+
     /**
-     * 首页运营弹框(图片+文字)
+     * 普通运营弹框
      *
      * @param context
      * @return
      */
-    public static Dialog createHomeOperationDialog(final Context context, OperationDialogResBean bean) {
-        View contentView = LayoutInflater.from(context).inflate(R.layout.home_operation_dialog, null);
-        ImageView ivBackground = contentView.findViewById(R.id.iv_background);
-        ImageView ivClose = contentView.findViewById(R.id.iv_dialog_close);
-
-        Dialog dialog = new Dialog(context);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setCancelable(false);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(contentView);
-
-        if (!TextUtils.isEmpty(bean.image_url)) {
-            Glide.with(context).load(bean.image_url).into(ivBackground);
-        }
-        ivBackground.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(bean.redirect_url)) {
-                    Uri uri = Uri.parse(bean.redirect_url);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                    context.startActivity(intent);
-                    MarkUtil.postEvent(context, "home_alert_confirm");
-                    dialog.dismiss();
-                }
-            }
-        });
-        ivClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                MarkUtil.postEvent(context, "home_alert_cancel");
-            }
-        });
-
-        Window dialogWindow = dialog.getWindow();
-        if (dialogWindow != null) {
-            dialogWindow.setGravity(Gravity.CENTER);
-            WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-            lp.width = UIUtils.getScreenWidth() * 4 / 5;
-            lp.height = UIUtils.getScreenWidth();
-            dialogWindow.setAttributes(lp);
-
-            dialogWindow.setBackgroundDrawableResource(R.color.transparence);
-        }
-        return dialog;
-    }
-
-    /**
-     * 优惠券弹框
-     *
-     * @param context
-     * @return
-     */
-    public static Dialog createCouponDialog(final Context context) {
-        View contentView = LayoutInflater.from(context).inflate(R.layout.home_coupon_dialog, null);
-        ImageView ivBackground = contentView.findViewById(R.id.iv_coupon_background);
+    public static Dialog createNoticeDialog(final Context context, String noticeContent) {
+        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_notice, null);
+        ImageView ivBackground = contentView.findViewById(R.id.iv_notice_background);
+        TextView tvContent = contentView.findViewById(R.id.tv_notice_content);
         Button btn = contentView.findViewById(R.id.btn_coupon);
-        ivBackground.setMinimumWidth(UIUtils.getScreenWidth() * 6 / 7);
-        ivBackground.setMinimumHeight(UIUtils.getScreenWidth());
-//        btn.setMinimumWidth(UIUtils.getScreenWidth() * 1 / 2);
-
+        if (!TextUtils.isEmpty(noticeContent))
+            tvContent.setText(noticeContent);
 
         Dialog dialog = new Dialog(context);
         dialog.setCanceledOnTouchOutside(false);
@@ -274,6 +229,101 @@ public class DialogFactory {
         });
         return dialog;
     }
+
+    /**
+     * 优惠券弹框
+     *
+     * @param context
+     * @return
+     */
+    public static Dialog createCouponDialog(final Context context, CouponResBean bean) {
+        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_coupon, null);
+        ImageView ivBackground = contentView.findViewById(R.id.iv_coupon_background);
+        Button btn = contentView.findViewById(R.id.btn_coupon);
+        TextView tv_coupon_proportion = contentView.findViewById(R.id.tv_coupon_proportion);
+        TextView tv_coupon_deadline = contentView.findViewById(R.id.tv_coupon_deadline);
+        tv_coupon_proportion.setText("Rp." + bean.couponCutAmount);
+        tv_coupon_deadline.setText("Tanggal jatuh tempo：\n\n" + MyTimeUtils.timeStamp2Date(bean.active_time) + " 23:59");
+        ivBackground.setMinimumWidth(UIUtils.getScreenWidth() * 5 / 6);
+        ivBackground.setMinimumHeight(UIUtils.getScreenWidth());
+
+        Dialog dialog = new Dialog(context);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(contentView);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparence);
+
+
+        ivBackground.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        return dialog;
+    }
+
+    /**
+     * @param context
+     * @return
+     */
+    public static Dialog createSelectCouponDialog(final Context context, TextView tvCoupon, TextView tvFinalPayAmount, String originPayAmount, String afterCutAmount, CouponResBean bean) {
+        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_select_coupon, null);
+        LinearLayout ll = contentView.findViewById(R.id.ll_coupon);
+        Button btn = contentView.findViewById(R.id.btn_confirm);
+        TextView tv_coupon_amount = contentView.findViewById(R.id.tv_coupon_amount);
+        TextView tv_coupon_deadline = contentView.findViewById(R.id.tv_coupon_deadline);
+        CheckBox checkBox = contentView.findViewById(R.id.checkbox_coupon);
+        if (0 == SPUtils.getInt(ConstantValue.IS_SELECT_COUPON, 1)) {
+            checkBox.setChecked(false);
+        } else {
+            checkBox.setChecked(true);
+        }
+        tv_coupon_amount.setText("Diskon Pokok: Rp." + bean.couponCutAmount);
+        tv_coupon_deadline.setText("Tanggal jatuh tempo: " + MyTimeUtils.timeStamp2Date(bean.active_time) + " 23:59");
+
+        ll.setMinimumWidth(UIUtils.getScreenWidth() * 5 / 6);
+
+        Dialog dialog = new Dialog(context);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(contentView);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.transparence);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkBox.isChecked()) {
+                    tvCoupon.setText("-Rp." + bean.couponCutAmount);
+                    tvFinalPayAmount.setText("Rp." + afterCutAmount);
+                } else {
+                    tvCoupon.setText("Kupon x1");
+                    tvFinalPayAmount.setText(originPayAmount);
+                }
+                dialog.dismiss();
+            }
+        });
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    SPUtils.putInt(ConstantValue.IS_SELECT_COUPON, 1);
+                } else {
+                    SPUtils.putInt(ConstantValue.IS_SELECT_COUPON, 0);
+                }
+            }
+        });
+
+        return dialog;
+    }
+
 
     /**
      * 首页 借款攻略/产品简介
@@ -444,9 +494,17 @@ public class DialogFactory {
                         "&phone=" + BaseApplication.sPhoneNum +
                         "&user_id=" + BaseApplication.mUserId +
                         "&repayment_amount=" + payAmount +
+                        "&isUseCoupon=" + SPUtils.getInt(ConstantValue.IS_SELECT_COUPON, 0) +
                         "&user_name=" + StringUtils.toUTF8(BaseApplication.sUserName);
 
                 IntentUtils.openWebViewActivity(context, url);
+                if (BuildConfig.DEBUG) {
+                    if (0 == SPUtils.getInt(ConstantValue.IS_SELECT_COUPON, 0)) {
+                        Toast.makeText(context, "未选用优惠券", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "已选用优惠券", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 dialog.dismiss();
             }
         });

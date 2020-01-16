@@ -3,12 +3,13 @@ package com.cocotree.android.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.annotation.Nullable;
 
-import com.cocotree.android.manager.DialogFactory;
-import com.gyf.barlibrary.ImmersionBar;
 import com.cocotree.android.R;
 import com.cocotree.android.base.BaseActivity;
+import com.cocotree.android.manager.DialogFactory;
+import com.gyf.barlibrary.ImmersionBar;
 
 public class LaunchActivity extends BaseActivity {
 
@@ -65,11 +66,13 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Handler().postDelayed(() -> {
-//            Intent intent = new Intent(mContext, MainActivity.class);
-//            mContext.startActivity(intent);
-            DialogFactory.createCouponDialog(mContext).show();
+            Intent intent = new Intent(mContext, MainActivity.class);
+            mContext.startActivity(intent);
+//            DialogFactory.createCouponDialog(mContext).show();
+//            DialogFactory.createNoticeDialog(mContext,null).show();
+//            DialogFactory.createSelectCouponDialog(mContext,null).show();
 
-//            finish();
+            finish();
         }, 1000);
     }
 }

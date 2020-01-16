@@ -3,6 +3,7 @@ package com.cocotree.android.iview;
 
 import com.cocotree.android.base.IBaseView;
 import com.cocotree.android.bean.response.BorrowApplyInfoResBean;
+import com.cocotree.android.bean.response.CouponResBean;
 import com.cocotree.android.bean.response.GetExtendFeeResBean;
 import com.cocotree.android.bean.response.GetPayWayListResBean;
 import com.cocotree.android.bean.response.HomeDataResBean;
@@ -40,7 +41,10 @@ public interface IHomeView extends IBaseView {
     void setRefuseState();
 
 
+    //优惠券信息
+    void handleCouponInfo(CouponResBean data);
 
+    void noCoupon(CouponResBean data);
 
     //处理运营弹框逻辑
 //    void processShowOperationDialog(OperationDialogResBean responseData);

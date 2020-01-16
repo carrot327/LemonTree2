@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="50dp"
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:textSize="50sp"
             tools:text="0" />
@@ -75,65 +76,154 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="15dp"
         android:layout_marginRight="14dp"
         android:layout_marginBottom="15dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_shadow_3"
-            android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/app_divide_line"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Total Jumlah Pelunasan"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_total_borrow_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="26dp"
-                android:textColor="@color/white"
-                android:textSize="19sp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="12sp"
                 tools:text="Rp.428,000" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="9dp"
-                android:text="Total Jumlah Pelunasan"
-                android:textColor="@color/white"
+                android:text="Tanggal Jatuh Tempo"
+                android:textColor="@color/CommonTextColor"
                 android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:layout_marginLeft="15dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_shadow_3"
-            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_pay_deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="26dp"
-                android:textColor="@color/white"
-                android:textSize="19sp"
-                tools:text="03-10-2019" />
+                android:layout_alignParentRight="true"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="12sp"
+                tools:text="2020-01-14" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/app_divide_line"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/rl_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_centerVertical="true"
                 android:layout_marginTop="9dp"
-                android:text="Tanggal Jatuh Tempo"
+                android:text="Kupon"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/iv_arrow_right"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/icon_right_arrow" />
+
+            <TextView
+                android:id="@+id/tv_coupon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/iv_arrow_right"
+                android:background="@drawable/bg_btn_shape_gradient_corners_red"
+                android:drawableLeft="@drawable/icon_coupon3"
+                android:drawablePadding="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="3dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="3dp"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
-        </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/app_divide_line"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Jumlah pembayaran terakhir"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_final_pay_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_theme"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Rp.428,000" />
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
