@@ -1,7 +1,7 @@
-package com.cocotree.android.bean.response;
+package com.cocotreedebug.android.bean.response;
 
 
-import com.cocotree.android.base.BaseResponseBean;
+import com.cocotreedebug.android.base.BaseResponseBean;
 
 public class CouponResBean extends BaseResponseBean {
     public String user_id;

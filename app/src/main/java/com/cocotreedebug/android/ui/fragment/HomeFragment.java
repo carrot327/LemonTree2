@@ -23,6 +23,8 @@ import com.cocotreedebug.android.base.BaseResponseBean;
 import com.cocotreedebug.android.bean.enventbus.BackPressEvent;
 import com.cocotreedebug.android.bean.enventbus.NewMsgEvent;
 import com.cocotreedebug.android.bean.response.BorrowApplyInfoResBean;
+import com.cocotreedebug.android.bean.response.CouponResBean;
+import com.cocotreedebug.android.bean.response.GetExtendFeeResBean;
 import com.cocotreedebug.android.bean.response.GetPayWayListResBean;
 import com.cocotreedebug.android.bean.response.HomeDataResBean;
 import com.cocotreedebug.android.iview.IHomeView;
@@ -39,6 +41,7 @@ import com.cocotreedebug.android.utils.CurrencyFormatUtils;
 import com.cocotreedebug.android.utils.IntentUtils;
 import com.cocotreedebug.android.utils.LogoutUtil;
 import com.cocotreedebug.android.utils.MyTimeUtils;
+import com.cocotreedebug.android.utils.SPUtils;
 import com.cocotreedebug.android.utils.UIUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -55,6 +58,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 import static android.view.Gravity.CENTER;
+import static com.cocotreedebug.android.manager.BaseApplication.isOpenGodMode;
 import static com.cocotreedebug.android.ui.activity.MainActivity.TAB_APPLY;
 import static com.cocotreedebug.android.ui.activity.MainActivity.sFormatSelectAmount;
 import static com.cocotreedebug.android.ui.activity.MainActivity.sFormatSelectInterest;
@@ -120,8 +124,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvTotalBorrowAmount;
     @BindView(R.id.tv_pay_deadline)
     TextView tvPayDeadline;
-    @BindView(R.id.tv_total_borrow_amount_delay)
-    TextView tvTotalBorrowAmountDelay;
     @BindView(R.id.tv_pay_deadline_delay)
     TextView tvPayDeadlineDelay;
     @BindView(R.id.tv_top_text)

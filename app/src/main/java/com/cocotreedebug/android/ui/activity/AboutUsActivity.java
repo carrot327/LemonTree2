@@ -9,14 +9,17 @@ import android.widget.Toast;
 import com.cocotreedebug.android.BuildConfig;
 import com.cocotreedebug.android.R;
 import com.cocotreedebug.android.base.BaseActivity;
+import com.cocotreedebug.android.manager.ConstantValue;
 import com.cocotreedebug.android.uploadUtil.Tools;
 import com.cocotreedebug.android.uploadUtil.UrlHostConfig;
+import com.cocotreedebug.android.utils.MultiClickHelper;
+import com.cocotreedebug.android.utils.SPUtils;
 import com.cocotreedebug.android.utils.UpdateUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static com.cocotree.android.manager.BaseApplication.isOpenGodMode;
+import static com.cocotreedebug.android.manager.BaseApplication.isOpenGodMode;
 
 public class AboutUsActivity extends BaseActivity {
 

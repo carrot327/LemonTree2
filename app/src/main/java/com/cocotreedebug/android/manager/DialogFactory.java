@@ -5,10 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-
-import androidx.appcompat.app.AlertDialog;
-
-import android.os.Build;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -24,9 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.appcompat.app.AlertDialog;
+
+import com.cocotreedebug.android.BuildConfig;
 import com.cocotreedebug.android.R;
 import com.cocotreedebug.android.base.BaseDialog;
+import com.cocotreedebug.android.bean.response.CouponResBean;
 import com.cocotreedebug.android.bean.response.HomeDialogDataResBean;
 import com.cocotreedebug.android.bean.response.OperationDialogResBean;
 import com.cocotreedebug.android.bean.response.RecommendDialogResBean;
@@ -36,8 +35,10 @@ import com.cocotreedebug.android.ui.widget.HomeRecommendDialogOne;
 import com.cocotreedebug.android.ui.widget.HomeRecommendDialogTwo;
 import com.cocotreedebug.android.ui.widget.PayWaySelectDialog;
 import com.cocotreedebug.android.uploadUtil.Tools;
-import com.cocotreedebug.android.utils.MarkUtil;
 import com.cocotreedebug.android.utils.IntentUtils;
+import com.cocotreedebug.android.utils.MarkUtil;
+import com.cocotreedebug.android.utils.MyTimeUtils;
+import com.cocotreedebug.android.utils.SPUtils;
 import com.cocotreedebug.android.utils.StringUtils;
 import com.cocotreedebug.android.utils.UIUtils;
 

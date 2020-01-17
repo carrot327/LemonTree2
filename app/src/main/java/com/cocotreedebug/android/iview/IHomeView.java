@@ -3,6 +3,8 @@ package com.cocotreedebug.android.iview;
 
 import com.cocotreedebug.android.base.IBaseView;
 import com.cocotreedebug.android.bean.response.BorrowApplyInfoResBean;
+import com.cocotreedebug.android.bean.response.CouponResBean;
+import com.cocotreedebug.android.bean.response.GetExtendFeeResBean;
 import com.cocotreedebug.android.bean.response.GetPayWayListResBean;
 import com.cocotreedebug.android.bean.response.HomeDataResBean;
 
