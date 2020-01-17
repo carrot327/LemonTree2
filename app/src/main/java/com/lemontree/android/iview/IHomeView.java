@@ -40,11 +40,11 @@ public interface IHomeView extends IBaseView {
     //show refuse info Dialog
     void setRefuseState();
 
+
     //优惠券信息
     void handleCouponInfo(CouponResBean data);
 
-
-
+    void noCoupon(CouponResBean data);
 
     //处理运营弹框逻辑
 //    void processShowOperationDialog(OperationDialogResBean responseData);

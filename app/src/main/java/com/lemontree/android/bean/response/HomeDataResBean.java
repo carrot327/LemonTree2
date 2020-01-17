@@ -24,6 +24,7 @@ public class HomeDataResBean extends BaseResponseBean {
     public String maxAmtRange;//可选择金额范围
     public String maxLoanTime;//可选择时间范围
     public String postpone;//剩余申请延期次数
+    public String loan_number;//已借款次数
     public String freeServiceFee;//部分还款入口是否展示
     public String popEntrance;//展期是否展示，1 弹 0 不弹
 }

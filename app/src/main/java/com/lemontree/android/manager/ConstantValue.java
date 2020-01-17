@@ -44,6 +44,11 @@ public interface ConstantValue {
     String OPERATION_DIALOG_HAS_SHOWED = "operationDialogHasShowed";
     String DIALOG_HAS_SHOWED_FOR_ONCE = "dialogHasShowedForOnce";
     String OPERATION_DIALOG_MSG_MD5 = "operationDialogMsgMd5";
+    String COUPON_DIALOG_HAS_SHOWED = "couponDialogHasShowed";
+    String OPERATION_NORMAL_DIALOG_HAS_SHOWED = "operationNormalDialogHasShowed";
+
+    String IS_SELECT_COUPON = "isSelectCoupon"; //"1" 选中， "0" 未选中
+    String LAST_ORDER_ID = "lastOrderId"; //"1" 选中， "0" 未选中
 
 
     /**

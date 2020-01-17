@@ -8,5 +8,4 @@ public class UpdateReqBean implements Serializable {
     public String app_clientid;
     public String user_id;
     public String phone;
-
 }

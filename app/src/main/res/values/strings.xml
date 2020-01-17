@@ -94,7 +94,7 @@
     <string name="text_review_refused">@string/top_text_status_4_no_amount</string>
     <string name="text_pls_input">Silahkan masuk</string>
     <string name="title_register_privacy">Kebijakan privasi</string>
-    <string name="text_delay_fee">Biaya perpanjangan</string>
+    <string name="text_delay_fee">Biaya perpanjangan:</string>
     <string name="dialog_loading">Loading...</string>
     <string name="text_liveness_btn">Mulai verifikasi</string>
     <string name="text_liveness_hint">Arahkan wajah Anda ke layar ponsel dan pastikan ada pencahayaan yang cukup</string>
@@ -115,6 +115,10 @@
     <string name="text_try_again">Coba lagi</string>
     <string name="text_liveness_success">Selamat！ Analisa berhasil</string>
     <string name="toast_7_days_only">Saat ini hanya menyediakan tenor selama 7 hari</string>
+    <string name="text_home_tip">Jika Anda dapat melunasi pinjaman tepat waktu, aplikasi Anda berikutnya akan mendapatkan batas pinjaman atau jangka waktu pinjaman yang lebih tinggi.</string>
+    <string name="text_remind_review_time">Waktu peninjuan kami adalah pukul 08:30 sampai 17:30.Jika anda mengajukan pinjaman lebih dari pukul 17:30, kita akan proses pinjaman anda di esok hari.</string>
+    <string name="text_remind_answer_the_phone">Analis kami akan tinjau data anda hari ini atau akan Bungin anda besok. Harap di perhatikan telfon yang masuk.</string>
+
     <string name="permission_desc">Yth, agar dapat melayani dengan cepat, tepat dan Berkualitas, silahkan memberikan otorisasi hak akses Mobile Aplikasi :</string>
     <string name="permission_cancel">Tolak</string>
     <string name="permission_confirm">Setuju</string>
