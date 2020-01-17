@@ -199,4 +199,9 @@ public interface ConstantValue {
      * 获取订单信息
      */
     String NET_REQUEST_URL_GET_ORDER_DETAILS = "/app/order/getOrderdetails";
+
+    /**
+     * 获取优惠券信息
+     */
+    String NET_REQUEST_URL_GET_COUPON_INFO = "/app/repayment/getAppCashCoupon";
 }

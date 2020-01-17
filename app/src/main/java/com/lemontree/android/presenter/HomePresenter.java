@@ -23,6 +23,7 @@ import com.lemontree.android.bean.request.GoBorrowReqBean;
 import com.lemontree.android.bean.request.HomeDataRequestBean;
 import com.lemontree.android.bean.response.BorrowApplyInfoResBean;
 import com.lemontree.android.bean.response.BorrowResBean;
+import com.lemontree.android.bean.response.CouponResBean;
 import com.lemontree.android.bean.response.GetExtendFeeResBean;
 import com.lemontree.android.bean.response.GetPayWayListResBean;
 import com.lemontree.android.bean.response.HomeDataResBean;
@@ -42,7 +43,6 @@ import okhttp3.Call;
 
 import static com.lemontree.android.network.OKHttpClientEngine.getNetworkClient;
 import static com.lemontree.android.ui.fragment.HomeFragment.mSelectAmount;
-import static com.lemontree.android.ui.fragment.HomeFragment.mSelectTime;
 import static com.lemontree.android.ui.fragment.HomeFragment.mSelectType;
 import static com.lemontree.android.utils.UIUtils.showToast;
 
@@ -451,6 +451,31 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     @Override
                     public void onFailure(Call call, Exception exception, int id) {
                         CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
+                        showToast("Harap kembali dan coba lagi");
+                    }
+                });
+    }
+
+    /**
+     * 获取优惠券信息
+     */
+    public void getCouponInfo() {
+        NetworkLiteHelper
+                .postJson()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_GET_COUPON_INFO)
+                .content(new Gson().toJson(new CommonReqBean()))
+                .build()
+                .execute(getNetworkClient(), new GenericCallback<CouponResBean>() {
+
+                    @Override
+                    public void onSuccess(Call call, CouponResBean response, int id) {
+                        if (response != null && mView != null) {
+                            mView.handleCouponInfo(response);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Exception exception, int id) {
                         showToast("Harap kembali dan coba lagi");
                     }
                 });

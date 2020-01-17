@@ -3,6 +3,7 @@ package com.lemontree.android.iview;
 
 import com.lemontree.android.base.IBaseView;
 import com.lemontree.android.bean.response.BorrowApplyInfoResBean;
+import com.lemontree.android.bean.response.CouponResBean;
 import com.lemontree.android.bean.response.GetExtendFeeResBean;
 import com.lemontree.android.bean.response.GetPayWayListResBean;
 import com.lemontree.android.bean.response.HomeDataResBean;
@@ -38,6 +39,9 @@ public interface IHomeView extends IBaseView {
 
     //show refuse info Dialog
     void setRefuseState();
+
+    //优惠券信息
+    void handleCouponInfo(CouponResBean data);
 
 
 

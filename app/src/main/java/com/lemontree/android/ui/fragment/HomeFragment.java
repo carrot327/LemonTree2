@@ -23,6 +23,7 @@ import com.lemontree.android.base.BaseResponseBean;
 import com.lemontree.android.bean.enventbus.BackPressEvent;
 import com.lemontree.android.bean.enventbus.NewMsgEvent;
 import com.lemontree.android.bean.response.BorrowApplyInfoResBean;
+import com.lemontree.android.bean.response.CouponResBean;
 import com.lemontree.android.bean.response.GetExtendFeeResBean;
 import com.lemontree.android.bean.response.GetPayWayListResBean;
 import com.lemontree.android.bean.response.HomeDataResBean;
@@ -327,6 +328,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         }
 
                         if (isRefuse) {
+                            // TODO: 2020-01-13 翻译要确定。这里有点不正确
                             tvTopText.setText(R.string.top_text_status_4_no_amount);
                             hideSeekBar2();
                         } else {
@@ -339,6 +341,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                                 btnHome.setEnabled(false);
                             }
                         }
+
+                        mPresenter.getCouponInfo();
                         break;
                     case "2"://审核中
                         showHomeView(VIEW_BORROW);
@@ -744,6 +748,25 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         tvApplyInfoAmount.setText("-");
         tvApplyInfoBankName.setText("-");
         tvApplyInfoBankCardNumber.setText("-");
+    }
+
+
+    private boolean hasShowCouponDialog;
+    private boolean hasShowNormalOperationDialog;
+
+    @Override
+    public void handleCouponInfo(CouponResBean data) {
+        if ("5".equals(mHomeData.type)) {//逾期待还款如何处理？
+
+        }
+
+        if ("0".equals(data.loan_number)) {//此时第一次可借款状态
+
+        } else {
+            if ("4".equals(mHomeData.type)) {
+
+            }
+        }
     }
 
     private String formatNumber(int selectInterest) {
