@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context="com.cocotreedebug.android.ui.activity.PartPayActivity">
+    tools:context="com.cocotree.android.ui.activity.PartPayActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

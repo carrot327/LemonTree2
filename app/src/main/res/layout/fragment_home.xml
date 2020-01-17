@@ -72,7 +72,7 @@
         app:srlEnableLoadmoreWhenContentNotFull="false"
         app:srlEnableRefresh="true">
 
-        <com.cocotreedebug.android.ui.widget.PtrHeader
+        <com.cocotree.android.ui.widget.PtrHeader
             android:layout_width="match_parent"
             android:layout_height="60dp" />
 
