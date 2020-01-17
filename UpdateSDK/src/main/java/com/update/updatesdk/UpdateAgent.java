@@ -85,8 +85,6 @@ public class UpdateAgent {
                     public void onSuccess(okhttp3.Call call, UpdateResBean response, int id) {
                         if (response != null) {
                             sUpdateResBean = response;
-//                            sUpdateResBean.res_msg = ;
-//                            sFinalDownloadLink = "https://yn-bao.oss-ap-southeast-1.aliyuncs.com/FlashLoan_pro.apk";
                             if (UpdateResBean.SUCCESS.equals(response.res_code)) {
                                 if (sUpdateListener != null) {
                                     sUpdateListener.onUpdateStatuesReturned(UpdateState.NO_UPDATE, response);

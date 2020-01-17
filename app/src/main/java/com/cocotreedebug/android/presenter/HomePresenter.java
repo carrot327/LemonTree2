@@ -7,32 +7,32 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.cocotree.android.bean.response.CouponResBean;
 import com.google.gson.Gson;
-import com.cocotreedebug.android.R;
-import com.cocotreedebug.android.base.BasePresenter;
-import com.cocotreedebug.android.base.BaseResponseBean;
-import com.cocotreedebug.android.bean.request.CommonReqBean;
-import com.cocotreedebug.android.bean.request.GetBorrowInfoReqBean;
-import com.cocotreedebug.android.bean.request.GoBorrowReqBean;
-import com.cocotreedebug.android.bean.request.HomeDataRequestBean;
-import com.cocotreedebug.android.bean.response.BorrowApplyInfoResBean;
-import com.cocotreedebug.android.bean.response.BorrowResBean;
-import com.cocotreedebug.android.bean.response.GetExtendFeeResBean;
-import com.cocotreedebug.android.bean.response.GetPayWayListResBean;
-import com.cocotreedebug.android.bean.response.HomeDataResBean;
-import com.cocotreedebug.android.iview.IHomeView;
-import com.cocotreedebug.android.manager.BaseApplication;
-import com.cocotreedebug.android.manager.ConstantValue;
-import com.cocotreedebug.android.manager.NetConstantValue;
-import com.cocotreedebug.android.uploadUtil.Permission;
-import com.cocotreedebug.android.uploadUtil.UploadDataBySingle;
-import com.cocotreedebug.android.uploadUtil.UploadNecessaryData;
-import com.cocotreedebug.android.utils.CProgressDialogUtils;
+import com.cocotree.android.R;
+import com.cocotree.android.base.BasePresenter;
+import com.cocotree.android.base.BaseResponseBean;
+import com.cocotree.android.bean.request.CommonReqBean;
+import com.cocotree.android.bean.request.GetBorrowInfoReqBean;
+import com.cocotree.android.bean.request.GoBorrowReqBean;
+import com.cocotree.android.bean.request.HomeDataRequestBean;
+import com.cocotree.android.bean.response.BorrowApplyInfoResBean;
+import com.cocotree.android.bean.response.BorrowResBean;
+import com.cocotree.android.bean.response.GetExtendFeeResBean;
+import com.cocotree.android.bean.response.GetPayWayListResBean;
+import com.cocotree.android.bean.response.HomeDataResBean;
+import com.cocotree.android.iview.IHomeView;
+import com.cocotree.android.manager.BaseApplication;
+import com.cocotree.android.manager.ConstantValue;
+import com.cocotree.android.manager.NetConstantValue;
+import com.cocotree.android.uploadUtil.Permission;
+import com.cocotree.android.uploadUtil.UploadDataBySingle;
+import com.cocotree.android.uploadUtil.UploadNecessaryData;
+import com.cocotree.android.utils.CProgressDialogUtils;
 import com.minchainx.permission.util.PermissionListener;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
@@ -213,7 +213,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
             GoBorrowReqBean bean = new GoBorrowReqBean();
             bean.customer_bank_card_id = mBorrowApplyInfoResBean.customer_bank_card_id;
             bean.loan_amount = loanAmount;
-            bean.borrow_type = borrowType;
+            bean.borrow_type = borrowType;//1为7天   2为14天  3为9天
             NetworkLiteHelper
                     .postJson()
                     .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_CONFIRM_BORROW)
@@ -278,7 +278,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            Log.d("karl", "setPayCodeInvalid success");
                         }
                     }
 
@@ -347,7 +346,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 上传数据
      */
     private void uploadNecessaryData() {
-        Log.d("karl", "aaa");
         mDialog.setMessage("Loading...");
         mDialog.show();
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
@@ -400,15 +398,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         new UploadDataBySingle().uploadSms(BaseApplication.mUserId, new UploadDataBySingle.UploadSmsListener() {
             @Override
             public void success() {
-//                UIUtils.showToast("上传短信成功");
-                Log.d("karl", "上传短信成功");
                 mHasUpdateSmsSuccess = true;
             }
 
             @Override
             public void error() {
-                Log.d("karl", "上传短信error");
-
             }
         });
     }
@@ -437,14 +431,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         new UploadDataBySingle().uploadCallRecord(BaseApplication.mUserId, new UploadDataBySingle.UploadCallRecordListener() {
             @Override
             public void success() {
-//                UIUtils.showToast("上传短信成功");
-                Log.d("karl", "上传通话记录成功");
                 mHasUpdateCallLogSuccess = true;
             }
 
             @Override
             public void error() {
-                Log.d("karl", "上传通话记录error");
             }
         });
     }
@@ -465,7 +456,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void onSuccess(Call call, GetExtendFeeResBean response, int id) {
                         CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
                         if (response != null && mView != null) {
-                            mView.showExtendPageData(response.data + "");
+                            mView.showExtendPageData(response);
                         }
                     }
 
@@ -473,6 +464,45 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void onFailure(Call call, Exception exception, int id) {
                         CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
                         showToast("Harap kembali dan coba lagi");
+                    }
+                });
+    }
+
+    /**
+     * 获取优惠券信息
+     */
+    public void getCouponInfo(boolean isNoNeedShowDialog) {
+        NetworkLiteHelper
+                .postJson()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_GET_COUPON_INFO)
+                .content(new Gson().toJson(new CommonReqBean()))
+                .build()
+                .execute(getNetworkClient(), new GenericCallback<CouponResBean>() {
+
+                    @Override
+                    public void onSuccess(Call call, CouponResBean response, int id) {
+                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                            if (mView != null) {
+                                mView.handleCouponInfo(response);
+                            }
+
+//                            if (isNoNeedShowDialog) {
+//                                if ("1".equals(response.couponStatus)) {//1已激活
+//                                    mView.setCouponInfo(response);
+//                                } else if ("0".equals(response.couponStatus) || "2".equals(response.couponStatus)) {//0 未激活  2已使用
+//                                    mView.noCoupon();
+//                                    mView.setBorrowPageCouponText();
+//                                }
+//                            } else {
+//                                mView.showCouponDialog(response);
+//                            }
+                        } else {
+                            mView.noCoupon(response);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Exception exception, int id) {
                     }
                 });
     }

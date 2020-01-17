@@ -11,14 +11,14 @@ android {
 
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.1"
+        versionCode 5
+        versionName "1.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
 
         ndk {
-            abiFilters "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
+            abiFilters "armeabi-v7a","x86"
         }
     }
     signingConfigs {
@@ -31,13 +31,14 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-//            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -68,6 +69,9 @@ android {
         }
         google_play {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "google_play"]
+        }
+        nine_day {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "nine_day"]
         }
     }
 }

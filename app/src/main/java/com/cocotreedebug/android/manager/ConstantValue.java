@@ -4,6 +4,7 @@ public interface ConstantValue {
 
     String FIRST_OPEN_APP = "first_open_app";
     String LOGIN_STATE = "login_state";
+    String GOD_MODE = "god_mode";
     String JWT_KEY = "jwt";
     String KEY_SERVER_TIME_OFFSET = "serverTimeOffset";
     String KEY_LATEST_LOGIN_NAME = "lastLoginName";
@@ -20,7 +21,6 @@ public interface ConstantValue {
     String USER_ID = "user_id";    // 用户id
     String LOGIN_PASSWORD = "login_password"; //登录密码
     String PHONE_NUMBER = "phone_number";
-
 
     String KEY_FROM = "from";
     int FROM_HOME = 1;
@@ -43,6 +43,11 @@ public interface ConstantValue {
     String OPERATION_DIALOG_HAS_SHOWED = "operationDialogHasShowed";
     String DIALOG_HAS_SHOWED_FOR_ONCE = "dialogHasShowedForOnce";
     String OPERATION_DIALOG_MSG_MD5 = "operationDialogMsgMd5";
+    String COUPON_DIALOG_HAS_SHOWED = "couponDialogHasShowed";
+    String OPERATION_NORMAL_DIALOG_HAS_SHOWED = "operationNormalDialogHasShowed";
+
+    String IS_SELECT_COUPON = "isSelectCoupon"; //"1" 选中， "0" 未选中
+    String LAST_ORDER_ID = "lastOrderId"; //"1" 选中， "0" 未选中
 
 
     /**
@@ -198,4 +203,9 @@ public interface ConstantValue {
      * 获取订单信息
      */
     String NET_REQUEST_URL_GET_ORDER_DETAILS = "/app/order/getOrderdetails";
+
+    /**
+     * 获取优惠券信息
+     */
+    String NET_REQUEST_URL_GET_COUPON_INFO = "/app/repayment/getAppCashCoupon";
 }

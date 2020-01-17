@@ -387,7 +387,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
             System.exit(0);
         } else {
-            Toast.makeText(this, getString(R.string.logout_hint), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, getString(R.string.logout_hint), Toast.LENGTH_SHORT).show();
         }
         EventBus.getDefault().post(new BackPressEvent());
     }

@@ -29,7 +29,7 @@ public interface IHomeView extends IBaseView {
     void showLoanInfoLayout();
 
     //展期费用
-    void showExtendPageData(String fee);
+    void showExtendPageData(GetExtendFeeResBean fee);
 
     //set Pay way data
     void setPayWayData(GetPayWayListResBean data);
@@ -39,7 +39,10 @@ public interface IHomeView extends IBaseView {
     void setRefuseState();
 
 
+    //优惠券信息
+    void handleCouponInfo(CouponResBean data);
 
+    void noCoupon(CouponResBean data);
 
     //处理运营弹框逻辑
 //    void processShowOperationDialog(OperationDialogResBean responseData);

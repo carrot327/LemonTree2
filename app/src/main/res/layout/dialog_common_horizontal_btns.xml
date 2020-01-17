@@ -72,9 +72,10 @@
                 android:id="@+id/btn_dialog_common_positive"
                 style="@style/common_dialog_btn"
                 android:layout_width="75dp"
+                android:textColor="@drawable/slt_blue_text_3"
                 android:layout_height="28dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/slt_border_theme_color_6"
+                android:background="@drawable/slt_fill_theme_color_6"
                 android:text="OK" />
 
             <ImageView

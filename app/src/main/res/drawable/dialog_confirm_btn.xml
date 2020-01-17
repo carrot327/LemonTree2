@@ -9,6 +9,6 @@
 
 
     <gradient
-        android:endColor="#4185ea"
-        android:startColor="#3bb4fd" />
+        android:endColor="@color/text_theme"
+        android:startColor="@color/theme_color_hover" />
 </shape>
