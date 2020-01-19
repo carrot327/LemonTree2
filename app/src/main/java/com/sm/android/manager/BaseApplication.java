@@ -114,6 +114,7 @@ public class BaseApplication extends Application implements DFTransferResultInte
 //            sLoginState = true;
 //            sUserName = "登录信息(081266568320)";
 //            mUserId = "3835061";
+//            mUserId = "3848839";
 //            sPhoneNum = "081266568320";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);

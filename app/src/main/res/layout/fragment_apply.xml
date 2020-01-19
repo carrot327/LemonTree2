@@ -103,6 +103,13 @@
 
                 </RelativeLayout>
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/icon_down_arrow" />
+
                 <RelativeLayout
                     android:id="@+id/rl_company_info"
                     android:layout_width="match_parent"
@@ -156,6 +163,13 @@
 
                 </RelativeLayout>
 
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/icon_down_arrow" />
+
                 <RelativeLayout
                     android:id="@+id/rl_contact_info"
                     android:layout_width="match_parent"
@@ -208,6 +222,13 @@
                         android:src="@drawable/arrow_right_gray" />
 
                 </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/icon_down_arrow" />
 
                 <RelativeLayout
                     android:id="@+id/rl_photo"
@@ -267,7 +288,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="50dp"
                     android:background="@drawable/slt_btn_corner5_theme_color"
                     android:enabled="false"
                     android:gravity="center"

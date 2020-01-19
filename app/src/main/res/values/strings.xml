@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Saku Manis</string>
 
-    <string name="sign_up" translatable="false">Masuk/Daftar</string>
+    <string name="sign_up" translatable="false">Daftar</string>
     <string name="text_apply_loan">Ajukan pinjaman</string>
-    <string name="text_want_amount">Berapa banyak yang ingin Anda pinjam?</string>
-    <string name="text_want_amount2">Pilih jumlah pinjaman</string>
+    <string name="text_want_amount">Silakan pilih jumlah pinjaman</string>
     <string name="text_want_time">Berapa lama Anda ingin meminjam?</string>
     <string name="text_should_pay">Total Pinjaman</string>
     <string name="text_apply_info">Informasi aplikasi</string>
@@ -13,7 +12,7 @@
     <string name="text_bank">Bank penerima</string>
     <string name="text_bank_card">Akun koleksi</string>
     <string name="text_borrow_hint">*Apakah akan mengkonfirmasi pinjaman</string>
-    <string name="text_delay_hint">Kesulitan melunasi? Coba fitur tunda pelunasan!</string>
+    <string name="text_delay_hint">Coba fitur tunda pelunasan</string>
     <string name="title_mine">Saya</string>
     <string name="text_login">Masuk</string>
     <string name="text_item_my_loan">Pinjaman saya</string>
@@ -103,7 +102,7 @@
     <string name="text_liveness_hint3">Silahkan letakkan wajah Anda di tengah</string>
     <string name="text_liveness_hint4">Harap menjauh dari sedikit</string>
     <string name="allow_permission_and_try_again">Harap beri otorisasi dan coba lagi</string>
-    <string name="text_delay_time">Batas waktu \npembayaran ini</string>
+    <string name="text_delay_time">Batas waktu pembayaran ini</string>
     <string name="text_no_pay_way">Tidak ada saluran pembayaran</string>
     <string name="text_part_pay_hint_min">Jumlah pembayaran minimum tidak boleh kurang dari Rp.100,000</string>
     <string name="text_part_pay_hint_max">Jumlahnya sudah terlampaui, Silahkan masukkan kembali</string>

@@ -43,10 +43,10 @@
                 android:id="@+id/iv_titlebar_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
                 android:background="@null"
                 android:padding="5dp"
-                android:src="@drawable/icon_mine_notice_blue" />
+                android:src="@drawable/icon_mine_notice_blue"
+                android:visibility="invisible" />
 
             <View
                 android:id="@+id/msg_red_dot"
@@ -130,13 +130,13 @@
 
                 <LinearLayout
                     android:id="@+id/ll_delay_pay_entry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:visibility="invisible">
+                    android:visibility="visible">
 
                     <ImageView
                         android:layout_width="15dp"
@@ -148,21 +148,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
-                        android:gravity="center"
+                        android:layout_marginRight="30dp"
+                        android:background="@color/text_bg_blue"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="7dp"
                         android:text="@string/text_delay_hint"
-                        android:textColor="@color/theme_color"
+                        android:textColor="#48b0f5"
                         android:textSize="14sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_part_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="25dp"
                     android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:visibility="invisible">
+                    android:visibility="visible">
 
                     <ImageView
                         android:layout_width="15dp"
@@ -174,9 +180,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
-                        android:gravity="center"
+                        android:layout_marginRight="30dp"
+                        android:background="@color/text_bg_blue"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="7dp"
                         android:text="Lunasi sebagian"
-                        android:textColor="@color/theme_color"
+                        android:textColor="#48b0f5"
                         android:textSize="14sp" />
 
                 </LinearLayout>

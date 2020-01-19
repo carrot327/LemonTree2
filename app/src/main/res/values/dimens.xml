@@ -28,5 +28,5 @@
     <dimen name="setting_list_margin_top">5dp</dimen>
 
     <dimen name="apply_list_height">78dp</dimen>
-    <dimen name="apply_list_margin_top">13dp</dimen>
+    <dimen name="apply_list_margin_top">7dp</dimen>
 </resources>

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -225,16 +226,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mSeekBarAmount.setProgress(mSelectAmount);
         mSeekBarAmount.setOnSeekBarChangeListener(seekBarAmountListener);
         mSeekBarAmount2.setOnSeekBarChangeListener(seekBarAmountListener2);
+        mSeekBarTime.setOnSeekBarChangeListener(seekBarTimeListener);
 
         mSbIndicatorAmount.setText(formatNumber(mSelectAmount));
-
-        mSeekBarTime.setOnSeekBarChangeListener(seekBarTimeListener);
         mSeekBarTime.setProgress(mSelectTime);
         mSbIndicatorTime.setText(mSelectTime + " hari");
         calcInterest();
-
-        tvPartPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-        tvDelayPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         btnHome.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -757,7 +754,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     @Override
     public void showExtendPageData(GetExtendFeeResBean data) {
-        tvDelayTime.setText(data.extendDays);
+        tvDelayTime.setText("+ "+data.extendDays);
         tvPayDeadlineDelay.setText(MyTimeUtils.timeStamp2Date(data.shouldReturnTime));
         tvDelayInterest.setText(String.format("Rp.%s", formatNumber(Integer.parseInt(data.extendFee))));
     }
@@ -978,11 +975,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             mRefreshLayout.setEnableRefresh(true);
-            mSelectTime = 7;
             seekBar.setProgress(mSelectTime);
             mSbIndicatorTime.setText(mSelectTime + " hari");
             calcInterest();
-            showToast(getString(R.string.toast_7_days_only));
         }
     };
 

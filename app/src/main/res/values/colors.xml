@@ -10,6 +10,8 @@
     <color name="theme_color_unable">#96ACFC</color>
     <color name="text_theme_deep">#3575E9</color>
 
+    <color name="text_bg_blue">#e3f4fc</color>
+
     <!--深蓝到浅紫的渐变 -->
     <color name="blue_gradient_start">#5b7bf4</color>
     <color name="blue_gradient_end">#6c64f2</color>
