@@ -57,8 +57,7 @@ public class AboutUsActivity extends BaseActivity {
         ivLogo.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(mContext, "AppName: " + Tools.getAppName() + "\nChannel: " + Tools.getChannel(), Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(mContext, "AppName: " + Tools.getAppName() + "\nChannel: " + Tools.getChannel() + "\nCode: " + Tools.getAppVersionCode(mContext), Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -101,9 +100,6 @@ public class AboutUsActivity extends BaseActivity {
                 break;
             case R.id.rl_version_update:
                 UpdateUtil.checkUpdate(AboutUsActivity.this);
-                break;
-            case R.id.rl_rate:
-//                Toast.makeText(mContext, "正在开发，敬请期待~", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

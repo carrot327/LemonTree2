@@ -96,7 +96,7 @@ public class LoginActivity extends BaseActivity {
                 mPhoneNum = etPhoneNum.getText().toString().trim();
                 setUsernameDeleteButtonState(!TextUtils.isEmpty(mPhoneNum));
 
-                if (rlMsg.getVisibility() == View.VISIBLE) {
+              /*  if (rlMsg.getVisibility() == View.VISIBLE) {
                     if (etPhoneNum.getText().toString().trim().length() >= 9
                             && etPhoneNum.getText().toString().trim().length() <= 13
                             && etMsgVerifyCode.getText().toString().trim().length() >= 4) {
@@ -111,7 +111,7 @@ public class LoginActivity extends BaseActivity {
                     } else {
                         btnLoginConfirm.setEnabled(false);
                     }
-                }
+                }*/
             }
         });
         etMsgVerifyCode.addTextChangedListener(new TextWatcher() {
@@ -127,12 +127,12 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (etPhoneNum.getText().toString().trim().length() >= 9
+              /*  if (etPhoneNum.getText().toString().trim().length() >= 9
                         && etMsgVerifyCode.getText().toString().trim().length() >= 4) {
                     btnLoginConfirm.setEnabled(true);
                 } else {
                     btnLoginConfirm.setEnabled(false);
-                }
+                }*/
             }
         });
 
@@ -190,7 +190,23 @@ public class LoginActivity extends BaseActivity {
                         showToast("Silakan masukkan kode verifikasi");
                     }
                 } else {
-                    checkIsUserAtPayState();
+                    if (mPhoneNum.length() == 7) {//userId登录
+                        String userId = etPhoneNum.getText().toString().trim();
+                        SPUtils.putString(ConstantValue.KEY_LATEST_LOGIN_NAME, "用户ID:" + userId, false);
+                        SPUtils.putString(ConstantValue.KEY_USER_ID, etPhoneNum.getText().toString().trim(), true);
+                        SPUtils.putString(ConstantValue.PHONE_NUMBER, "08888888888", false);
+                        SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+                        BaseApplication.sLoginState = true;
+                        BaseApplication.sUserName = "用户ID:" + userId;
+                        BaseApplication.mUserId = userId;
+                        BaseApplication.sPhoneNum = "08888888888";
+                        //跳到首页
+                        showToast("当前登录的用户ID：" + userId);
+                        EventBus.getDefault().post(new LoginSuccessEvent());
+                        IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
+                    } else {//电话号码登录，直接输入电话号码就可以登录
+                        checkIsUserAtPayState();
+                    }
                 }
                 break;
             case R.id.tv_registration_protocol:
@@ -221,24 +237,20 @@ public class LoginActivity extends BaseActivity {
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<GetUserTypeState>() {
                     @Override
                     public void onSuccess(Call call, GetUserTypeState response, int id) {
-                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code) && response.data != null) {
-                            if (5 == response.data.userState || 6 == response.data.userState) {
-                                Toast.makeText(mContext, R.string.toast_login_success, Toast.LENGTH_SHORT).show();
+                        if (response != null && response.data != null && !TextUtils.isEmpty(response.data.userId)) {
+                            Toast.makeText(mContext, R.string.toast_login_success, Toast.LENGTH_SHORT).show();
 
-                                SPUtils.putString(ConstantValue.KEY_LATEST_LOGIN_NAME, response.data.userName, false);
-                                SPUtils.putString(ConstantValue.KEY_USER_ID, response.data.userId, true);
-                                SPUtils.putString(ConstantValue.PHONE_NUMBER, mPhoneNum, false);
-                                SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-                                BaseApplication.sLoginState = true;
-                                BaseApplication.sUserName = response.data.userName;
-                                BaseApplication.mUserId = response.data.userId;
-                                BaseApplication.sPhoneNum = mPhoneNum;
-                                //跳到首页
-                                EventBus.getDefault().post(new LoginSuccessEvent());
-                                IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
-                            } else {
-                                rlMsg.setVisibility(View.VISIBLE);
-                            }
+                            SPUtils.putString(ConstantValue.KEY_LATEST_LOGIN_NAME, response.data.userName, false);
+                            SPUtils.putString(ConstantValue.KEY_USER_ID, response.data.userId, true);
+                            SPUtils.putString(ConstantValue.PHONE_NUMBER, mPhoneNum, false);
+                            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+                            BaseApplication.sLoginState = true;
+                            BaseApplication.sUserName = response.data.userName;
+                            BaseApplication.mUserId = response.data.userId;
+                            BaseApplication.sPhoneNum = mPhoneNum;
+                            //跳到首页
+                            EventBus.getDefault().post(new LoginSuccessEvent());
+                            IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
                         } else {
                             rlMsg.setVisibility(View.VISIBLE);
                         }

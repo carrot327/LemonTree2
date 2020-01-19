@@ -3,6 +3,7 @@ package com.lemontree.android.uploadUtil;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
@@ -12,7 +13,9 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+
 import androidx.core.app.ActivityCompat;
+
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -54,6 +57,23 @@ public class Tools {
             e.printStackTrace();
         }
         return appVersion;
+    }
+
+    public static long getAppVersionCode(Context context) {
+        long appVersionCode = 0;
+        try {
+            PackageInfo packageInfo = context.getApplicationContext()
+                    .getPackageManager()
+                    .getPackageInfo(context.getPackageName(), 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                appVersionCode = packageInfo.getLongVersionCode();
+            } else {
+                appVersionCode = packageInfo.versionCode;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e("", e.getMessage());
+        }
+        return appVersionCode;
     }
 
     /**
@@ -123,6 +143,7 @@ public class Tools {
         CLog.d("compressImage", "compressImage: " + file);
         return file;
     }
+
     public static File convertByteArrayToFile(byte[] bytes) {
 
         File file = new File(Environment.getExternalStorageDirectory(), Tools.getFileNameByTime());
@@ -661,7 +682,7 @@ public class Tools {
     }
 
     /**
-     *获取电话号码
+     * 获取电话号码
      */
     public static String getNativePhoneNumber(Context context) {
 
