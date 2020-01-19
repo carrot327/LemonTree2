@@ -23,6 +23,7 @@ import com.sm.android.base.BaseResponseBean;
 import com.sm.android.bean.enventbus.BackPressEvent;
 import com.sm.android.bean.enventbus.NewMsgEvent;
 import com.sm.android.bean.response.BorrowApplyInfoResBean;
+import com.sm.android.bean.response.CouponResBean;
 import com.sm.android.bean.response.GetExtendFeeResBean;
 import com.sm.android.bean.response.GetPayWayListResBean;
 import com.sm.android.bean.response.HomeDataResBean;
@@ -40,6 +41,7 @@ import com.sm.android.utils.CurrencyFormatUtils;
 import com.sm.android.utils.IntentUtils;
 import com.sm.android.utils.LogoutUtil;
 import com.sm.android.utils.MyTimeUtils;
+import com.sm.android.utils.SPUtils;
 import com.sm.android.utils.UIUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -166,6 +168,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvPartPayEntry;
     @BindView(R.id.rl_seek_bar_2)
     RelativeLayout rlSeekBar2;
+    @BindView(R.id.rl_coupon)
+    RelativeLayout rlCoupon;
+    @BindView(R.id.rl_coupon_borrow)
+    RelativeLayout rlCouponBorrow;
+    @BindView(R.id.tv_coupon)
+    TextView tvCoupon;
+    @BindView(R.id.tv_coupon_borrow)
+    TextView tvCouponBorrow;
+    @BindView(R.id.tv_final_pay_amount)
+    TextView tvFinalPayAmount;
 
 
     private static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
@@ -184,6 +196,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private String[] mPayWayList;
     private String mCurrentView;
     private boolean isRefuse;
+    private CouponResBean mCouponData;
+    private String mAfterCutAmount;
+    private String mOriginPayAmount;
 
     @Override
     protected int getLayoutResId() {
@@ -253,7 +268,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
-    @OnClick({R.id.iv_titlebar_right, R.id.iv_home_back, R.id.btn_home, R.id.ll_delay_pay_entry, R.id.tv_borrow_protocol, R.id.ll_part_pay})
+    @OnClick({R.id.iv_titlebar_right, R.id.iv_home_back, R.id.btn_home, R.id.ll_delay_pay_entry, R.id.tv_borrow_protocol, R.id.ll_part_pay, R.id.rl_coupon, R.id.rl_coupon_borrow})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_home_back:
@@ -290,6 +305,18 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             case R.id.tv_borrow_protocol:
                 startActivity(new Intent(mContext, ProtocolBorrowActivity.class));
                 break;
+            case R.id.rl_coupon:
+                if (mCouponData != null && "1".equals(mCouponData.couponStatus)) {
+                    DialogFactory.createSelectCouponDialog(mContext, tvCoupon, tvFinalPayAmount, mOriginPayAmount, mAfterCutAmount, mCouponData).show();
+                } else {//0 未激活  2已使用   或逾期
+                    DialogFactory.createNoticeDialog(mContext, "Jika anda bisa bayarkan pinjaman anda sebelum tanggal jatuh tempo, anda akan mendapatkan kupon diskon untuk pembayaran pinjaman berikutnya. Dan limit pinjaman anda juga akan naik.").show();
+                }
+                break;
+            case R.id.rl_coupon_borrow:
+                if (mCouponData != null && !TextUtils.isEmpty(mCouponData.premium_rate)) {
+                    DialogFactory.createNoticeDialog(mContext, "Setelah melunasi pinjaman kali ini anda akan mendapatkan satu kupon yang bisa potong " + mCouponData.premium_rate + "% dari jumlah pinjaman.").show();
+                }
+                break;
         }
     }
 
@@ -298,6 +325,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     public void setHomeData(HomeDataResBean response) {
         mHomeData = response;
+        checkIsNewOrderId(response);
         btnHome.setEnabled(true);
         llDelayPayEntry.setVisibility(View.GONE);
         llPartPayEntry.setVisibility(View.GONE);
@@ -341,6 +369,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                                 btnHome.setEnabled(false);
                             }
                         }
+                        if (!"0".equals(response.loan_number)) {//第一次可借款时，无弹框。
+                            mPresenter.getCouponInfo(false);
+                        }
                         break;
                     case "2"://审核中
                         showHomeView(VIEW_BORROW);
@@ -358,11 +389,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         showHomeView(VIEW_PAY_AT_TIME);
                         setPayLayoutView();
                         setPayCommonView();
+                        mPresenter.getCouponInfo(false);
                         break;
                     case "8"://已逾期
                         showHomeView(VIEW_PAY_AT_TIME);
                         setOverdueLayoutView();
                         setPayCommonView();
+                        SPUtils.putInt(ConstantValue.IS_SELECT_COUPON, 0);
+                        tvCoupon.setText("Kupon x0");
+                        tvFinalPayAmount.setText(formatIndMoney(mHomeData.repayAmt));
                         break;
                     case "7"://还款中
                         showHomeView(VIEW_PAY_AT_TIME);
@@ -376,6 +411,21 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             showHomeView(VIEW_SEEK_BAR);
             showToast(response.res_msg);
+        }
+    }
+
+
+    /**
+     * 检查是否是新订单
+     */
+    private void checkIsNewOrderId(HomeDataResBean response) {
+        if (!TextUtils.isEmpty(response.order_Id)) {
+            if (!response.order_Id.equals(SPUtils.getString(ConstantValue.LAST_ORDER_ID, ""))) {
+                SPUtils.putString(ConstantValue.LAST_ORDER_ID, response.order_Id);
+                SPUtils.putBoolean(ConstantValue.OPERATION_NORMAL_DIALOG_HAS_SHOWED, false);
+                SPUtils.putBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, false);
+                SPUtils.putInt(ConstantValue.IS_SELECT_COUPON, 1);
+            }
         }
     }
 
@@ -748,6 +798,51 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         tvApplyInfoBankCardNumber.setText("-");
     }
 
+    @Override
+    public void handleCouponInfo(CouponResBean data) {
+        mCouponData = data;
+        mOriginPayAmount = formatIndMoney(mHomeData.repayAmt);
+        if (!TextUtils.isEmpty(mHomeData.repayAmt) && !TextUtils.isEmpty(data.couponCutAmount)) {
+            mAfterCutAmount = formatNumber((int) (Double.parseDouble(mHomeData.repayAmt) - Double.parseDouble(data.couponCutAmount)));
+        }
+        if ("4".equals(mHomeData.type) && !SPUtils.getBoolean(ConstantValue.OPERATION_NORMAL_DIALOG_HAS_SHOWED, false)) {
+            SPUtils.putBoolean(ConstantValue.OPERATION_NORMAL_DIALOG_HAS_SHOWED, true);
+            DialogFactory.createNoticeDialog(mContext, "Jumlah pinjaman maksimum mencapai \nRp." + mHomeData.maxAmtRange).show();
+        } else if ("5".equals(mHomeData.type) && !SPUtils.getBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, false) && "1".equals(data.couponStatus)) {
+            SPUtils.putBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, true);
+            DialogFactory.createCouponDialog(mContext, data).show();
+        }
+
+        if (View.VISIBLE == includeBorrow.getVisibility()) {
+            if ("0".equals(data.couponStatus)) {//未激活
+                rlCouponBorrow.setVisibility(View.VISIBLE);
+                tvCouponBorrow.setText("Kupon x1");
+            } else {
+                rlCouponBorrow.setVisibility(View.GONE);
+            }
+        } else {
+            if ("1".equals(data.couponStatus)) {//1 优惠券已激活
+                if (0 == SPUtils.getInt(ConstantValue.IS_SELECT_COUPON, 1)) {//未选择优惠券
+                    tvCoupon.setText("Kupon x1");
+                    tvFinalPayAmount.setText(mOriginPayAmount);
+                } else {
+                    tvCoupon.setText("- Rp." + data.couponCutAmount);
+                    tvFinalPayAmount.setText("Rp." + mAfterCutAmount);
+                }
+            } else if ("0".equals(data.couponStatus) || "2".equals(data.couponStatus) || "8".equals(mHomeData.type)) {//0 未激活  2已使用
+                tvCoupon.setText("Kupon x0");
+                tvFinalPayAmount.setText(mOriginPayAmount);
+            }
+        }
+    }
+
+    @Override
+    public void noCoupon(CouponResBean data) {
+        mCouponData = data;
+        tvCoupon.setText("Kupon x0");
+        tvFinalPayAmount.setText(formatIndMoney(mHomeData.repayAmt));
+    }
+
     private String formatNumber(int selectInterest) {
         return CurrencyFormatUtils.formatDecimal(String.valueOf(selectInterest));
     }
@@ -776,20 +871,26 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
             int currentProgress = seekBar.getProgress();
             if (0 <= currentProgress && currentProgress < 350000) {
-                mSelectAmount = 300000;
-            } else if (350000 <= currentProgress && currentProgress < 500000) {
-                mSelectAmount = 400000;
-            } else if (500000 <= currentProgress && currentProgress < 700000) {
-                mSelectAmount = 600000;
-            } else if (700000 <= currentProgress && currentProgress < 900000) {
-                mSelectAmount = 800000;
-            } else if (900000 <= currentProgress && currentProgress < 1100000) {
-                mSelectAmount = 1000000;
-            } else if (1100000 <= currentProgress && currentProgress < 1350000) {
-                mSelectAmount = 1200000;
-            } else if (1350000 <= currentProgress) {
-                mSelectAmount = 1500000;
-            }
+                    mSelectAmount = 300000;
+                } else if (350000 <= currentProgress && currentProgress < 500000) {
+                    mSelectAmount = 400000;
+                } else if (500000 <= currentProgress && currentProgress < 700000) {
+                    mSelectAmount = 600000;
+                } else if (700000 <= currentProgress && currentProgress < 900000) {
+                    mSelectAmount = 800000;
+                } else if (900000 <= currentProgress && currentProgress < 1100000) {
+                    mSelectAmount = 1000000;
+                } else if (1100000 <= currentProgress && currentProgress < 1350000) {
+                    mSelectAmount = 1200000;
+                } else if (1350000 <= currentProgress && currentProgress < 1550000) {
+                    mSelectAmount = 1500000;
+                } else if (1550000 <= currentProgress && currentProgress < 1650000) {
+                    mSelectAmount = 1600000;
+                } else if (1650000 <= currentProgress && currentProgress < 1950000) {
+                    mSelectAmount = 1800000;
+                } else if (1950000 <= currentProgress) {
+                    mSelectAmount = 2000000;
+                }
             seekBar.setProgress(mSelectAmount);
 
             //计算利息
@@ -813,7 +914,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         public void onStopTrackingTouch(SeekBar seekBar2) {
             //监听用户结束拖动进度条的时候
             mRefreshLayout.setEnableRefresh(true);
-            //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
+            //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000   1600,000  1800,000  2000,000
             int currentProgress = seekBar2.getProgress();
 
             if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
@@ -842,8 +943,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     mSelectAmount = 1000000;
                 } else if (1100000 <= currentProgress && currentProgress < 1350000) {
                     mSelectAmount = 1200000;
-                } else if (1350000 <= currentProgress) {
+                } else if (1350000 <= currentProgress && currentProgress < 1550000) {
                     mSelectAmount = 1500000;
+                } else if (1550000 <= currentProgress && currentProgress < 1650000) {
+                    mSelectAmount = 1600000;
+                } else if (1650000 <= currentProgress && currentProgress < 1950000) {
+                    mSelectAmount = 1800000;
+                } else if (1950000 <= currentProgress) {
+                    mSelectAmount = 2000000;
                 }
             }
             seekBar2.setProgress(mSelectAmount);

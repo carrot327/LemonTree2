@@ -3,6 +3,7 @@ package com.sm.android.iview;
 
 import com.sm.android.base.IBaseView;
 import com.sm.android.bean.response.BorrowApplyInfoResBean;
+import com.sm.android.bean.response.CouponResBean;
 import com.sm.android.bean.response.GetExtendFeeResBean;
 import com.sm.android.bean.response.GetPayWayListResBean;
 import com.sm.android.bean.response.HomeDataResBean;
@@ -40,7 +41,10 @@ public interface IHomeView extends IBaseView {
     void setRefuseState();
 
 
+    //优惠券信息
+    void handleCouponInfo(CouponResBean data);
 
+    void noCoupon(CouponResBean data);
 
     //处理运营弹框逻辑
 //    void processShowOperationDialog(OperationDialogResBean responseData);

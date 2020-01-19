@@ -109,4 +109,83 @@
         </LinearLayout>
     </LinearLayout>
 
+    <RelativeLayout
+        android:id="@+id/rl_coupon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="14dp"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="9dp"
+            android:text="Kupon"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_right"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/icon_right_arrow" />
+
+        <TextView
+            android:id="@+id/tv_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/iv_arrow_right"
+            android:background="@drawable/bg_btn_shape_gradient_corners_red"
+            android:drawableLeft="@drawable/icon_coupon3"
+            android:drawablePadding="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="3dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="3dp"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/app_divide_line"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="14dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Jumlah pembayaran terakhir"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_final_pay_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/text_theme"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Rp.428,000" />
+    </RelativeLayout>
 </LinearLayout>

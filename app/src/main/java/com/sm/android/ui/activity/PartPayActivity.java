@@ -66,7 +66,6 @@ public class PartPayActivity extends BaseActivity {
         if (!TextUtils.isEmpty(totalPayAmountString)) {
             mTotalPayAmount = Integer.valueOf(totalPayAmountString);
         }
-//        mTotalPayAmount = 21000;
         mPayWayNameArr = getIntent().getStringArrayExtra("payWayArr");
 
     }
@@ -103,13 +102,10 @@ public class PartPayActivity extends BaseActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
-                Log.d("karl", "beforeTextChanged");
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                Log.d("karl", "afterTextChanged");
-
                 String currentContent = editText.getText().toString();
                 mInputNumString = currentContent.replace(",", "");
 
@@ -164,7 +160,7 @@ public class PartPayActivity extends BaseActivity {
                         }
                     }
                 }
-                showPayWayDialog(ConstantValue.NORMAL_PAY);
+                showPayWayDialog(ConstantValue.PART_PAY);
                 break;
             case R.id.tv_edit:
                 //调起键盘

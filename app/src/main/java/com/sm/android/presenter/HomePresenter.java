@@ -23,6 +23,7 @@ import com.sm.android.bean.request.GoBorrowReqBean;
 import com.sm.android.bean.request.HomeDataRequestBean;
 import com.sm.android.bean.response.BorrowApplyInfoResBean;
 import com.sm.android.bean.response.BorrowResBean;
+import com.sm.android.bean.response.CouponResBean;
 import com.sm.android.bean.response.GetExtendFeeResBean;
 import com.sm.android.bean.response.GetPayWayListResBean;
 import com.sm.android.bean.response.HomeDataResBean;
@@ -94,8 +95,8 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                                     mView.setHomeData(response);
                                 }
                             } else {
-                                if (BuildConfig.DEBUG)
-                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
+//                                if (BuildConfig.DEBUG)
+//                                    showToast("Code:" + response.res_code + "," + response.res_msg + "");
                             }
                         }
                     }
@@ -325,7 +326,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 上传数据
      */
     private void uploadNecessaryData() {
-        Log.d("karl", "aaa");
         mDialog.setMessage("Loading...");
         mDialog.show();
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
@@ -378,15 +378,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         new UploadDataBySingle().uploadSms(BaseApplication.mUserId, new UploadDataBySingle.UploadSmsListener() {
             @Override
             public void success() {
-//                UIUtils.showToast("上传短信成功");
-                Log.d("karl", "上传短信成功");
                 mHasUpdateSmsSuccess = true;
             }
 
             @Override
             public void error() {
-                Log.d("karl", "上传短信error");
-
             }
         });
     }
@@ -415,14 +411,11 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         new UploadDataBySingle().uploadCallRecord(BaseApplication.mUserId, new UploadDataBySingle.UploadCallRecordListener() {
             @Override
             public void success() {
-//                UIUtils.showToast("上传短信成功");
-                Log.d("karl", "上传通话记录成功");
                 mHasUpdateCallLogSuccess = true;
             }
 
             @Override
             public void error() {
-                Log.d("karl", "上传通话记录error");
             }
         });
     }
@@ -451,6 +444,45 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void onFailure(Call call, Exception exception, int id) {
                         CProgressDialogUtils.cancelProgressDialog((Activity) mContext);
                         showToast("Harap kembali dan coba lagi");
+                    }
+                });
+    }
+
+    /**
+     * 获取优惠券信息
+     */
+    public void getCouponInfo(boolean isNoNeedShowDialog) {
+        NetworkLiteHelper
+                .postJson()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_GET_COUPON_INFO)
+                .content(new Gson().toJson(new CommonReqBean()))
+                .build()
+                .execute(getNetworkClient(), new GenericCallback<CouponResBean>() {
+
+                    @Override
+                    public void onSuccess(Call call, CouponResBean response, int id) {
+                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                            if (mView != null) {
+                                mView.handleCouponInfo(response);
+                            }
+
+//                            if (isNoNeedShowDialog) {
+//                                if ("1".equals(response.couponStatus)) {//1已激活
+//                                    mView.setCouponInfo(response);
+//                                } else if ("0".equals(response.couponStatus) || "2".equals(response.couponStatus)) {//0 未激活  2已使用
+//                                    mView.noCoupon();
+//                                    mView.setBorrowPageCouponText();
+//                                }
+//                            } else {
+//                                mView.showCouponDialog(response);
+//                            }
+                        } else {
+                            mView.noCoupon(response);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Exception exception, int id) {
                     }
                 });
     }

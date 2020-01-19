@@ -34,6 +34,7 @@ public interface ConstantValue {
     String UPLOAD_CONTACT_TIME = "upload_contact_time";
 
     String NORMAL_PAY = "NORMAL";
+    String PART_PAY = "PART_PAY";
     String EXTEND_PAY = "EXTEND_PAY";
 
 
@@ -44,6 +45,11 @@ public interface ConstantValue {
     String OPERATION_DIALOG_HAS_SHOWED = "operationDialogHasShowed";
     String DIALOG_HAS_SHOWED_FOR_ONCE = "dialogHasShowedForOnce";
     String OPERATION_DIALOG_MSG_MD5 = "operationDialogMsgMd5";
+    String COUPON_DIALOG_HAS_SHOWED = "couponDialogHasShowed";
+    String OPERATION_NORMAL_DIALOG_HAS_SHOWED = "operationNormalDialogHasShowed";
+
+    String IS_SELECT_COUPON = "isSelectCoupon"; //"1" 选中， "0" 未选中
+    String LAST_ORDER_ID = "lastOrderId"; //"1" 选中， "0" 未选中
 
 
     /**
@@ -199,4 +205,9 @@ public interface ConstantValue {
      * 获取订单信息
      */
     String NET_REQUEST_URL_GET_ORDER_DETAILS = "/app/order/getOrderdetails";
+
+    /**
+     * 获取优惠券信息
+     */
+    String NET_REQUEST_URL_GET_COUPON_INFO = "/app/repayment/getAppCashCoupon";
 }
