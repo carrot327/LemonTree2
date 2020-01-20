@@ -302,6 +302,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             case R.id.rl_coupon_borrow:
                 if (mCouponData != null && !TextUtils.isEmpty(mCouponData.premium_rate)) {
                     DialogFactory.createNoticeDialog(mContext, "Setelah melunasi pinjaman kali ini anda akan mendapatkan satu kupon yang bisa potong " + mCouponData.premium_rate + "% dari jumlah pinjaman.").show();
+                }else {
+                    DialogFactory.createNoticeDialog(mContext, "Jika anda bisa bayarkan pinjaman anda sebelum tanggal jatuh tempo, anda akan mendapatkan kupon diskon untuk pembayaran pinjaman berikutnya. Dan limit pinjaman anda juga akan naik.").show();
                 }
                 break;
         }
@@ -827,6 +829,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void noCoupon(CouponResBean data) {
         mCouponData = data;
         tvCoupon.setText("Kupon x0");
+        tvCouponBorrow.setText("Kupon x0");
         tvFinalPayAmount.setText(formatIndMoney(mHomeData.repayAmt));
     }
 

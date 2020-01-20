@@ -164,7 +164,7 @@ public class PartPayActivity extends BaseActivity {
                         }
                     }
                 }
-                showPayWayDialog(ConstantValue.NORMAL_PAY);
+                showPayWayDialog(ConstantValue.PART_PAY);
                 break;
             case R.id.tv_edit:
                 //调起键盘

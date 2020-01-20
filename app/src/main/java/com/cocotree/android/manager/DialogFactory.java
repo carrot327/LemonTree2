@@ -49,6 +49,7 @@ import com.cocotree.android.utils.UIUtils;
 
 import java.util.List;
 
+import static com.cocotree.android.manager.ConstantValue.EXTEND_PAY;
 import static com.cocotree.android.manager.ConstantValue.NORMAL_PAY;
 import static com.cocotree.android.uploadUtil.UrlHostConfig.getH5BaseHost;
 
@@ -484,8 +485,12 @@ public class DialogFactory {
             @Override
             public void onClick(DialogInterface dialog, int position) {
                 String pay_way = items[position];
-                String pay_or_delay_pay = NORMAL_PAY.equals(from) ? "1" : "2";
-                String suffixURL = ConstantValue.H5_REPAY + "?type=" + pay_way + "&from=" + pay_or_delay_pay;
+                String pay_type = EXTEND_PAY.equals(from) ? "2" : "1";//NORMAL_PAY和PART_PAY为1
+                String isUseCoupon = "0";
+                if (NORMAL_PAY.equals(from) && 1 == (SPUtils.getInt(ConstantValue.IS_SELECT_COUPON, 1))) {
+                    isUseCoupon = "1";
+                }
+                String suffixURL = ConstantValue.H5_REPAY + "?type=" + pay_way + "&from=" + pay_type;
 
                 String url = getH5BaseHost() + suffixURL + "&" +
                         "app_clientid=" + Tools.getChannel() +
@@ -494,12 +499,12 @@ public class DialogFactory {
                         "&phone=" + BaseApplication.sPhoneNum +
                         "&user_id=" + BaseApplication.mUserId +
                         "&repayment_amount=" + payAmount +
-                        "&isUseCoupon=" + SPUtils.getInt(ConstantValue.IS_SELECT_COUPON, 0) +
+                        "&isUseCoupon=" + isUseCoupon +
                         "&user_name=" + StringUtils.toUTF8(BaseApplication.sUserName);
 
                 IntentUtils.openWebViewActivity(context, url);
                 if (BuildConfig.DEBUG) {
-                    if (0 == SPUtils.getInt(ConstantValue.IS_SELECT_COUPON, 0)) {
+                    if ("0".equals(isUseCoupon)) {
                         Toast.makeText(context, "未选用优惠券", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, "已选用优惠券", Toast.LENGTH_SHORT).show();
