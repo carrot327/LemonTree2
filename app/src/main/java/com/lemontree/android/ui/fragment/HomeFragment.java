@@ -313,6 +313,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             case R.id.rl_coupon_borrow:
                 if (mCouponData != null && !TextUtils.isEmpty(mCouponData.premium_rate)) {
                     DialogFactory.createNoticeDialog(mContext, "Setelah melunasi pinjaman kali ini anda akan mendapatkan satu kupon yang bisa potong " + mCouponData.premium_rate + "% dari jumlah pinjaman.").show();
+                } else {
+                    DialogFactory.createNoticeDialog(mContext, "Jika anda bisa bayarkan pinjaman anda sebelum tanggal jatuh tempo, anda akan mendapatkan kupon diskon untuk pembayaran pinjaman berikutnya. Dan limit pinjaman anda juga akan naik.").show();
                 }
                 break;
         }
@@ -839,6 +841,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void noCoupon(CouponResBean data) {
         mCouponData = data;
         tvCoupon.setText("Kupon x0");
+        tvCouponBorrow.setText("Kupon x0");
         tvFinalPayAmount.setText(formatIndMoney(mHomeData.repayAmt));
     }
 
@@ -870,26 +873,26 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
             int currentProgress = seekBar.getProgress();
             if (0 <= currentProgress && currentProgress < 350000) {
-                    mSelectAmount = 300000;
-                } else if (350000 <= currentProgress && currentProgress < 500000) {
-                    mSelectAmount = 400000;
-                } else if (500000 <= currentProgress && currentProgress < 700000) {
-                    mSelectAmount = 600000;
-                } else if (700000 <= currentProgress && currentProgress < 900000) {
-                    mSelectAmount = 800000;
-                } else if (900000 <= currentProgress && currentProgress < 1100000) {
-                    mSelectAmount = 1000000;
-                } else if (1100000 <= currentProgress && currentProgress < 1350000) {
-                    mSelectAmount = 1200000;
-                } else if (1350000 <= currentProgress && currentProgress < 1550000) {
-                    mSelectAmount = 1500000;
-                } else if (1550000 <= currentProgress && currentProgress < 1650000) {
-                    mSelectAmount = 1600000;
-                } else if (1650000 <= currentProgress && currentProgress < 1950000) {
-                    mSelectAmount = 1800000;
-                } else if (1950000 <= currentProgress) {
-                    mSelectAmount = 2000000;
-                }
+                mSelectAmount = 300000;
+            } else if (350000 <= currentProgress && currentProgress < 500000) {
+                mSelectAmount = 400000;
+            } else if (500000 <= currentProgress && currentProgress < 700000) {
+                mSelectAmount = 600000;
+            } else if (700000 <= currentProgress && currentProgress < 900000) {
+                mSelectAmount = 800000;
+            } else if (900000 <= currentProgress && currentProgress < 1100000) {
+                mSelectAmount = 1000000;
+            } else if (1100000 <= currentProgress && currentProgress < 1350000) {
+                mSelectAmount = 1200000;
+            } else if (1350000 <= currentProgress && currentProgress < 1550000) {
+                mSelectAmount = 1500000;
+            } else if (1550000 <= currentProgress && currentProgress < 1650000) {
+                mSelectAmount = 1600000;
+            } else if (1650000 <= currentProgress && currentProgress < 1950000) {
+                mSelectAmount = 1800000;
+            } else if (1950000 <= currentProgress) {
+                mSelectAmount = 2000000;
+            }
             seekBar.setProgress(mSelectAmount);
 
             //计算利息

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Colada</string>
+    <string name="app_name">Lemon Tree</string>
 
     <string name="sign_up" translatable="false">Masuk/Daftar</string>
     <string name="text_apply_loan">Ajukan pinjaman</string>
@@ -121,8 +121,8 @@
     <string name="permission_desc">Yth, agar dapat melayani dengan cepat, tepat dan Berkualitas, silahkan memberikan otorisasi hak akses Mobile Aplikasi :</string>
     <string name="permission_cancel">Tolak</string>
     <string name="permission_confirm">Setuju</string>
-    <string name="permission_confirm2"><b>Colada</b> Kebijakan Privasi</string>
-    <string name="privacy_content"><b>Colada</b> Kebijakan Privasi ini telah disusun untuk menjelaskan aplikasi perangkat lunak kami, situs web kami dan pengumpulan, penggunaan dan pengungkapan informasi tentang pengguna layanan lain yang kami sediakan (secara kolektif).
+    <string name="permission_confirm2"><b>Lemon Tree</b> Kebijakan Privasi</string>
+    <string name="privacy_content"><b>Lemon Tree</b> Kebijakan Privasi ini telah disusun untuk menjelaskan aplikasi perangkat lunak kami, situs web kami dan pengumpulan, penggunaan dan pengungkapan informasi tentang pengguna layanan lain yang kami sediakan (secara kolektif).
 Dengan menggunakan layanan kami, Anda menyetujui syarat dan ketentuan yang berlaku berikut, pengungkapan dan penggunaan informasi Anda lainnya, kami akan terus meningkatkan kantong kami, dan kami dapat memperbarui kebijakan privasi kami dari waktu ke waktu. Pada saat itu, kami tidak akan membuat perubahan penting pada kebijakan privasi kami tanpa terlebih dahulu memberi tahu perubahan ini melalui layanan kami.
 
 <b>Kami meminta Anda untuk memberikan izin untuk data berikut:</b>
