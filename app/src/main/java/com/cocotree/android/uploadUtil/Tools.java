@@ -80,6 +80,13 @@ public class Tools {
     }
 
     /**
+     * 获取渠道类型
+     */
+    public static boolean isNotGooglePlayChannel() {
+        return !"google_play".equals(Tools.getChannel());
+    }
+
+    /**
      * 图片保存的文件命名
      */
     public static String getFileNameByTime() {

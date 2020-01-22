@@ -22,6 +22,13 @@ public class MyTimeUtils {
         return days;
     }
 
+    /**
+     * 通过时间秒毫秒数判断两个时间的间隔天数
+     *
+     * @param start
+     * @param end
+     * @return
+     */
     public static int countDaysByMillisecond(long start, long end) {
         int days = (int) ((end - start) / (1000 * 3600 * 24));
         return days;

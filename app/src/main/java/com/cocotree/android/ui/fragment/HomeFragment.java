@@ -36,6 +36,7 @@ import com.cocotree.android.ui.activity.MainActivity;
 import com.cocotree.android.ui.activity.PartPayActivity;
 import com.cocotree.android.ui.activity.ProtocolBorrowActivity;
 import com.cocotree.android.ui.activity.StartLivenessActivity;
+import com.cocotree.android.uploadUtil.Tools;
 import com.cocotree.android.uploadUtil.UrlHostConfig;
 import com.cocotree.android.utils.CurrencyFormatUtils;
 import com.cocotree.android.utils.IntentUtils;
@@ -68,6 +69,7 @@ import static com.cocotree.android.ui.activity.MainActivity.sHasFacePassed;
 import static com.cocotree.android.ui.activity.MainActivity.sHasGetAuthStatusList;
 import static com.cocotree.android.ui.activity.MainActivity.sHasGetBankCardList;
 import static com.cocotree.android.ui.activity.MainActivity.sHasNewUnreadMsg;
+import static com.cocotree.android.uploadUtil.Tools.isNotGooglePlayChannel;
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
     @BindView(R.id.home_refresh_layout)
@@ -88,7 +90,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvApplyInfoName;
     @BindView(R.id.tv_delay_time)
     TextView tvDelayTime;
-    @BindView(R.id.tv_apply_info_due)
+    @BindView(R.id.tv_apply_info_time)
     TextView tvApplyInfoDue;
     @BindView(R.id.tv_delay_interest)
     TextView tvDelayInterest;
@@ -172,6 +174,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvCouponBorrow;
     @BindView(R.id.tv_final_pay_amount)
     TextView tvFinalPayAmount;
+    @BindView(R.id.tv_top_right_content)
+    TextView tvBorrowTimeRangeTint;
+    @BindView(R.id.iv_question_loan_time)
+    ImageView ivLoanTimeQuestion;
 
 
     private static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
@@ -227,7 +233,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-//                    DialogFactory.createCouponDialog(mContext).show();
+//                    startActivity(StartLivenessActivity.createIntent(mContext));
+//                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
+//                    DialogFactory.createNoticeDialog(mContext, "Maaf, berdasarkan informasi Anda, kami saat ini hanya dapat memberi Anda pinjaman 9 hari.").show();
                 }
                 return true;
             }
@@ -302,7 +310,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             case R.id.rl_coupon_borrow:
                 if (mCouponData != null && !TextUtils.isEmpty(mCouponData.premium_rate)) {
                     DialogFactory.createNoticeDialog(mContext, "Setelah melunasi pinjaman kali ini anda akan mendapatkan satu kupon yang bisa potong " + mCouponData.premium_rate + "% dari jumlah pinjaman.").show();
-                }else {
+                } else {
                     DialogFactory.createNoticeDialog(mContext, "Jika anda bisa bayarkan pinjaman anda sebelum tanggal jatuh tempo, anda akan mendapatkan kupon diskon untuk pembayaran pinjaman berikutnya. Dan limit pinjaman anda juga akan naik.").show();
                 }
                 break;
@@ -652,6 +660,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             mRefreshLayout.setEnableRefresh(false);
             btnTitleBarBack.setVisibility(View.VISIBLE);
         }
+        if (isNotGooglePlayChannel()) {
+            tvBorrowTimeRangeTint.setText("9 Hari");
+        } else {
+            tvBorrowTimeRangeTint.setText("91-180 Hari");
+        }
     }
 
     private void showSubmitSuccessDialog(String manageFee, String serviceFee) {
@@ -703,7 +716,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setBorrowInfo(BorrowApplyInfoResBean data) {
         showApplyInfoLayout();
-
         isRefuse = false;
         // 赋值(apply和loan一起赋值)
         tvApplyInfoName.setText(BaseApplication.sUserName);
@@ -712,8 +724,19 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             tvApplyInfoAmount.setText(formatIndMoney("0"));
         }
+        tvApplyInfoDue.setText("9 hari");// 采用默认值，9天
+        if (isNotGooglePlayChannel()) {
+            ivLoanTimeQuestion.setVisibility(View.INVISIBLE);
+        } else {
+            ivLoanTimeQuestion.setVisibility(View.VISIBLE);
+            ivLoanTimeQuestion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogFactory.createNoticeDialog(mContext, "Maaf, berdasarkan informasi Anda, kami saat ini hanya dapat memberi Anda pinjaman 9 hari.").show();
+                }
+            });
+        }
 
-//            tvApplyInfoDue.setText(data.loanDays + " hari");// 默认为7天。
         tvApplyInfoBankName.setText(data.card_bank_name);
         tvApplyInfoBankCardNumber.setText(data.bank_card_no);
     }
@@ -860,26 +883,26 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
             int currentProgress = seekBar.getProgress();
             if (0 <= currentProgress && currentProgress < 350000) {
-                    mSelectAmount = 300000;
-                } else if (350000 <= currentProgress && currentProgress < 500000) {
-                    mSelectAmount = 400000;
-                } else if (500000 <= currentProgress && currentProgress < 700000) {
-                    mSelectAmount = 600000;
-                } else if (700000 <= currentProgress && currentProgress < 900000) {
-                    mSelectAmount = 800000;
-                } else if (900000 <= currentProgress && currentProgress < 1100000) {
-                    mSelectAmount = 1000000;
-                } else if (1100000 <= currentProgress && currentProgress < 1350000) {
-                    mSelectAmount = 1200000;
-                } else if (1350000 <= currentProgress && currentProgress < 1550000) {
-                    mSelectAmount = 1500000;
-                } else if (1550000 <= currentProgress && currentProgress < 1650000) {
-                    mSelectAmount = 1600000;
-                } else if (1650000 <= currentProgress && currentProgress < 1950000) {
-                    mSelectAmount = 1800000;
-                } else if (1950000 <= currentProgress) {
-                    mSelectAmount = 2000000;
-                }
+                mSelectAmount = 300000;
+            } else if (350000 <= currentProgress && currentProgress < 500000) {
+                mSelectAmount = 400000;
+            } else if (500000 <= currentProgress && currentProgress < 700000) {
+                mSelectAmount = 600000;
+            } else if (700000 <= currentProgress && currentProgress < 900000) {
+                mSelectAmount = 800000;
+            } else if (900000 <= currentProgress && currentProgress < 1100000) {
+                mSelectAmount = 1000000;
+            } else if (1100000 <= currentProgress && currentProgress < 1350000) {
+                mSelectAmount = 1200000;
+            } else if (1350000 <= currentProgress && currentProgress < 1550000) {
+                mSelectAmount = 1500000;
+            } else if (1550000 <= currentProgress && currentProgress < 1650000) {
+                mSelectAmount = 1600000;
+            } else if (1650000 <= currentProgress && currentProgress < 1950000) {
+                mSelectAmount = 1800000;
+            } else if (1950000 <= currentProgress) {
+                mSelectAmount = 2000000;
+            }
             seekBar.setProgress(mSelectAmount);
         }
     };
