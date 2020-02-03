@@ -663,7 +663,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         if (isNotGooglePlayChannel()) {
             tvBorrowTimeRangeTint.setText("9 Hari");
         } else {
-            tvBorrowTimeRangeTint.setText("91-180 Hari");
+            tvBorrowTimeRangeTint.setText("Paling lama 180 hari");
         }
     }
 
@@ -724,15 +724,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             tvApplyInfoAmount.setText(formatIndMoney("0"));
         }
-        tvApplyInfoDue.setText("9 hari");// 采用默认值，9天
         if (isNotGooglePlayChannel()) {
+            tvApplyInfoDue.setText("9 hari");//
             ivLoanTimeQuestion.setVisibility(View.INVISIBLE);
         } else {
+            tvApplyInfoDue.setText("7 hari");// 采用默认值，9天
             ivLoanTimeQuestion.setVisibility(View.VISIBLE);
             ivLoanTimeQuestion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DialogFactory.createNoticeDialog(mContext, "Maaf, berdasarkan informasi Anda, kami saat ini hanya dapat memberi Anda pinjaman 9 hari.").show();
+                    DialogFactory.createNoticeDialog(mContext, "Maaf, sesuai dengan data pribadi yang anda kirim, saat ini kami hanya dapat memberikan pinjaman dengan tenor 9 Hari.").show();
                 }
             });
         }
