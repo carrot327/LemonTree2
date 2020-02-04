@@ -56,7 +56,7 @@ public class AboutUsActivity extends BaseActivity {
         ivLogo.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(mContext, "AppName: " + Tools.getAppName() + "\nChannel: " + Tools.getChannel(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "AppName: " + Tools.getAppName() + "\nChannel: " + Tools.getChannel()+ "\nutmSource: " + Tools.getUtmSource(), Toast.LENGTH_SHORT).show();
 
                 return false;
             }

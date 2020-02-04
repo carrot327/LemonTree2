@@ -457,6 +457,7 @@ public class LoginActivity extends BaseActivity {
         LoginReqBean loginReqBean = new LoginReqBean();
         loginReqBean.mobile = mPhoneNum;
         loginReqBean.verifycode = etMsgVerifyCode.getText().toString().trim();
+        loginReqBean.utmSource = Tools.getUtmSource();
 
         NetworkLiteHelper
                 .postJson()

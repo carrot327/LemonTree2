@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.cocotree.android.BuildConfig;
 import com.cocotree.android.uploadUtil.CLog;
+import com.cocotree.android.uploadUtil.Tools;
 import com.cocotree.android.utils.SPUtils;
 import com.liveness.dflivenesslibrary.DFProductResult;
 import com.liveness.dflivenesslibrary.DFTransferResultInterface;

@@ -36,7 +36,7 @@
             android:value="${ANDROID_CHANNEL_VALUE}" />
 
 
-        <activity android:name="com.cocotree.android.ui.activity.PartPayActivity"/>
+        <activity android:name="com.cocotree.android.ui.activity.PartPayActivity" />
         <activity android:name="com.cocotree.android.ui.activity.LivenessFailedActivity" />
         <activity android:name="com.cocotree.android.ui.activity.LivenessSuccessActivity" />
         <activity android:name="com.cocotree.android.ui.activity.StartLivenessActivity" />
@@ -111,14 +111,16 @@
             </intent-filter>
         </service>
 
-        <receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+        <receiver
+            android:name="com.cocotree.android.utils.MyRefferReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-        <service android:name="com.google.android.gms.analytics.CampaignTrackingService"
+        <service
+            android:name="com.google.android.gms.analytics.CampaignTrackingService"
             android:enabled="true"
             android:exported="false" />
     </application>

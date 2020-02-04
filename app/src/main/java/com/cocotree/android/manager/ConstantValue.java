@@ -50,6 +50,7 @@ public interface ConstantValue {
     String IS_SELECT_COUPON = "isSelectCoupon"; //"1" 选中， "0" 未选中
     String LAST_ORDER_ID = "lastOrderId"; //"1" 选中， "0" 未选中
 
+    String UTM_SOURCE = "utmSource";
 
     /**
      * ======    H5    ======
