@@ -135,40 +135,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
             DialogFactory.createPrivacyAgreementDialog(mContext).show();
         }
-      /*  InstallReferrerClient mReferrerClient = InstallReferrerClient.newBuilder(this).build();
-        mReferrerClient.startConnection(new InstallReferrerStateListener() {
-            @Override
-            public void onInstallReferrerSetupFinished(int responseCode) {
-                switch (responseCode) {
-                    case InstallReferrerClient.InstallReferrerResponse.OK:
-                        // Connection established 已建立连接
-                        ReferrerDetails response = null;
-                        try {
-                            response = mReferrerClient.getInstallReferrer();
-                            response.getInstallReferrer();
-                            response.getReferrerClickTimestampSeconds();
-                            response.getInstallBeginTimestampSeconds();
-                            Log.v("ReferrerDemo", response.getInstallReferrer());
-                            showToast(response.getInstallReferrer());
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
-                        // API not available on the current Play Store app 已安装的Play Store应用程序不支持的Referrer API
-                        break;
-                    case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
-                        // Connection could not be established 由不正确的用法引起的一般错误
-                        break;
-                }
-            }
-
-            @Override
-            public void onInstallReferrerServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-            }
-        });*/
     }
 
     @Override
@@ -190,11 +156,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                         @Override
                         public void onComplete(@NonNull Task<InstanceIdResult> task) {
                             if (!task.isSuccessful()) {
-                                Log.w("firebase", "getInstanceId failed", task.getException());
                                 return;
                             }
                             String token = task.getResult().getToken();
-                            Log.d("karl", token);
                         }
                     });
         }
