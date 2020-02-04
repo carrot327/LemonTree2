@@ -190,7 +190,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
 
     public static int mSelectAmount = 1000000;
-    public static int mSelectType = 3;//1为7天   2为14天  3为9天
+    public static int mSelectType;//1为7天   2为14天  3为9天
     private HomeDataResBean mHomeData = new HomeDataResBean();
     private String[] mPayWayList;
     private String mCurrentView;
@@ -213,7 +213,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     protected void initializeView(View view) {
         enableLazyLoad(false);
         showHomeView(DEFAULT_SHOW_VIEW);
-
+        if (isNotGooglePlayChannel()) {
+            mSelectType = 3;//1为7天   2为14天  3为9天
+        } else {
+            mSelectType = 1;
+        }
         mRefreshLayout.setEnableRefresh(true);
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
@@ -233,9 +237,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-//                    startActivity(StartLivenessActivity.createIntent(mContext));
-//                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
-//                    DialogFactory.createNoticeDialog(mContext, "Maaf, berdasarkan informasi Anda, kami saat ini hanya dapat memberi Anda pinjaman 9 hari.").show();
                 }
                 return true;
             }
