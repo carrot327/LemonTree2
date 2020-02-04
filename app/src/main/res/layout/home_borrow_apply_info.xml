@@ -154,7 +154,7 @@
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:maxLines="1"
-            android:text="9 hari"
+            tools:text="9 hari"
             android:textColor="@color/text_black"
             android:textSize="13sp" />
 

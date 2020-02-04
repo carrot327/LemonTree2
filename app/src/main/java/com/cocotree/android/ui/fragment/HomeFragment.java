@@ -725,15 +725,15 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             tvApplyInfoAmount.setText(formatIndMoney("0"));
         }
         if (isNotGooglePlayChannel()) {
-            tvApplyInfoDue.setText("9 hari");//
+            tvApplyInfoDue.setText("9 hari");
             ivLoanTimeQuestion.setVisibility(View.INVISIBLE);
         } else {
-            tvApplyInfoDue.setText("7 hari");// 采用默认值，9天
+            tvApplyInfoDue.setText("7 hari");
             ivLoanTimeQuestion.setVisibility(View.VISIBLE);
             ivLoanTimeQuestion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DialogFactory.createNoticeDialog(mContext, "Maaf, sesuai dengan data pribadi yang anda kirim, saat ini kami hanya dapat memberikan pinjaman dengan tenor 9 Hari.").show();
+                    DialogFactory.createNoticeDialog(mContext, "Maaf, sesuai dengan data pribadi yang anda kirim, saat ini kami hanya dapat memberikan pinjaman dengan tenor 7 Hari.").show();
                 }
             });
         }

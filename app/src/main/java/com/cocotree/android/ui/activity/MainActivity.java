@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -134,6 +135,40 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
             DialogFactory.createPrivacyAgreementDialog(mContext).show();
         }
+      /*  InstallReferrerClient mReferrerClient = InstallReferrerClient.newBuilder(this).build();
+        mReferrerClient.startConnection(new InstallReferrerStateListener() {
+            @Override
+            public void onInstallReferrerSetupFinished(int responseCode) {
+                switch (responseCode) {
+                    case InstallReferrerClient.InstallReferrerResponse.OK:
+                        // Connection established 已建立连接
+                        ReferrerDetails response = null;
+                        try {
+                            response = mReferrerClient.getInstallReferrer();
+                            response.getInstallReferrer();
+                            response.getReferrerClickTimestampSeconds();
+                            response.getInstallBeginTimestampSeconds();
+                            Log.v("ReferrerDemo", response.getInstallReferrer());
+                            showToast(response.getInstallReferrer());
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
+                        // API not available on the current Play Store app 已安装的Play Store应用程序不支持的Referrer API
+                        break;
+                    case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
+                        // Connection could not be established 由不正确的用法引起的一般错误
+                        break;
+                }
+            }
+
+            @Override
+            public void onInstallReferrerServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+            }
+        });*/
     }
 
     @Override
