@@ -427,7 +427,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     /**
      * 满足条件时上传通话记录
      */
-    public void prepareUploadCallRecordData() {
+    private void prepareUploadCallRecordData() {
         new Permission(mContext, new String[]{Manifest.permission.READ_CALL_LOG}, new PermissionListener() {
             @Override
             public void onGranted() {

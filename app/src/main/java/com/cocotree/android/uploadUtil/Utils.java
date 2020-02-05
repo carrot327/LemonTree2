@@ -218,9 +218,6 @@ public class Utils {
         map.put("locationX", LocationService.getInstance().getLocationX() + "");
         map.put("locationY", LocationService.getInstance().getLocationY() + "");
         map.put("location", LocationService.getInstance().getLocation() + "");
-//        Log.d("karl2", "LocationService.getInstance().getLocationX():" + LocationService.getInstance().getLocationX());
-//        Log.d("karl2", "LocationService.getInstance().getLocationY():" + LocationService.getInstance().getLocationY());
-//        Log.d("karl2", LocationService.getInstance().getLocation());
 
         return map;
     }

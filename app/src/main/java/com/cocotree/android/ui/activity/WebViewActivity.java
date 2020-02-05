@@ -228,15 +228,8 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
                 IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
                 finish();
             } else if (obj.optInt("type") == 7) {//借款成功
-//                IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
-//                HomeFragment.sHasBorrowSuccessed = true;
-//                finish();
             } else if (obj.optInt("type") == 8) {//还款成功
-//                IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
-//                HomeFragment.sHasPaySuccessed = true;
-//                finish();
             } else if (obj.optInt("type") == 12) {//四要素成功，关闭上一个ocr页面
-//                InfoAuthenticationActivity.getInstance().finish();
             } else if (obj.optInt("type") == 13) {//进行活体识别
                 startActivity(StartLivenessActivity.createIntent(mContext));
                 finish();
@@ -441,7 +434,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
         if (tagBeforeLocationPR != tagAfterLocationPR) {//刚获取到定位权限
             LocationService.getInstance().restart();
         }
-
 
         if (isGetNecessaryPermission()) {
             uploadNecessaryData(type2or3Obj, type2or3Function, true);

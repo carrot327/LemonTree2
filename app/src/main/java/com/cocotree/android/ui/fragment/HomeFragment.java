@@ -69,6 +69,7 @@ import static com.cocotree.android.ui.activity.MainActivity.sHasFacePassed;
 import static com.cocotree.android.ui.activity.MainActivity.sHasGetAuthStatusList;
 import static com.cocotree.android.ui.activity.MainActivity.sHasGetBankCardList;
 import static com.cocotree.android.ui.activity.MainActivity.sHasNewUnreadMsg;
+import static com.cocotree.android.uploadUtil.Tools.isGooglePlayChannel;
 import static com.cocotree.android.uploadUtil.Tools.isNotGooglePlayChannel;
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
@@ -213,10 +214,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     protected void initializeView(View view) {
         enableLazyLoad(false);
         showHomeView(DEFAULT_SHOW_VIEW);
-        if (isNotGooglePlayChannel()) {
-            mSelectType = 3;//1为7天   2为14天  3为9天
+        if (isGooglePlayChannel()) {
+            mSelectType = 1;//1为7天
         } else {
-            mSelectType = 1;
+            mSelectType = 3;//3为9天
         }
         mRefreshLayout.setEnableRefresh(true);
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
