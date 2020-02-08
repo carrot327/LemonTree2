@@ -40,6 +40,7 @@ public class BorrowApplyInfoResBean extends BaseResponseBean {
     public String ktp;
     public String serviceFee;//服务费
     public String adminFee;//管理费
+    public String new_old_sign;//是否是旧户    1新户   2旧户
     public List<TimeLimitBean> timeLimit;
 
     public static class TimeLimitBean {

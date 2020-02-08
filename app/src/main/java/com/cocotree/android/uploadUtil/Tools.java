@@ -86,7 +86,11 @@ public class Tools {
      * 获取广告渠道
      */
     public static String getUtmSource() {
-        return SPUtils.getString(ConstantValue.UTM_SOURCE, "gp_default");
+        if (isGooglePlayChannel()) {
+            return SPUtils.getString(ConstantValue.UTM_SOURCE, "gp_default");
+        } else {
+            return SPUtils.getString(ConstantValue.UTM_SOURCE, "");
+        }
     }
 
     /**

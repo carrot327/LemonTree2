@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.cocotree.android.bean.response.CouponResBean;
+import com.cocotree.android.uploadUtil.Tools;
 import com.google.gson.Gson;
 import com.cocotree.android.R;
 import com.cocotree.android.base.BasePresenter;
@@ -74,6 +75,8 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         dialog.show();
         HomeDataRequestBean homeTabRequestBean = new HomeDataRequestBean();
         homeTabRequestBean.orderid = "";
+        homeTabRequestBean.utmSource = Tools.getUtmSource();
+//        showToast(homeTabRequestBean.utmSource + "");
 
         NetworkLiteHelper
                 .postJson()

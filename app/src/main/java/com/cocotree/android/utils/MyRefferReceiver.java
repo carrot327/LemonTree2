@@ -33,12 +33,13 @@ public class MyRefferReceiver extends CampaignTrackingReceiver {
                     last = referrer.lastIndexOf("&utm_medium");
                 }
             }
-            utmSource = referrer.substring(first, last);
+            if (0 < first && last < referrer.length() && (last - first) >= 0) {
+                utmSource = referrer.substring(first, last);
+            }
         }
         SPUtils.putString(ConstantValue.UTM_SOURCE, utmSource);
-
-        Log.v("ReferrerDemo", "referrer:"+referrer);
-        Log.v("ReferrerDemo", Tools.getUtmSource());
+//        Log.v("ReferrerDemo", "referrer:"+referrer);
+//        Log.v("ReferrerDemo", Tools.getUtmSource());
 
     }
 }
