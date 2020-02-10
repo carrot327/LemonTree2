@@ -12,7 +12,9 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+
 import androidx.core.app.ActivityCompat;
+
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -80,11 +82,16 @@ public class Tools {
     }
 
     /**
-     * 获取渠道类型
+     * 是否是GP渠道
      */
-    public static boolean isNotGooglePlayChannel() {
-        return !"google_play".equals(Tools.getChannel());
+    public static boolean isGooglePlayChannel() {
+        return "google_play".equals(Tools.getChannel());
     }
+
+    public static boolean isNotGooglePlayChannel() {
+        return !isGooglePlayChannel();
+    }
+
 
     /**
      * 图片保存的文件命名
@@ -130,6 +137,7 @@ public class Tools {
         CLog.d("compressImage", "compressImage: " + file);
         return file;
     }
+
     public static File convertByteArrayToFile(byte[] bytes) {
 
         File file = new File(Environment.getExternalStorageDirectory(), Tools.getFileNameByTime());
@@ -668,7 +676,7 @@ public class Tools {
     }
 
     /**
-     *获取电话号码
+     * 获取电话号码
      */
     public static String getNativePhoneNumber(Context context) {
 

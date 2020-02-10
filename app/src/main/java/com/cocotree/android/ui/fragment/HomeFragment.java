@@ -69,6 +69,7 @@ import static com.cocotree.android.ui.activity.MainActivity.sHasFacePassed;
 import static com.cocotree.android.ui.activity.MainActivity.sHasGetAuthStatusList;
 import static com.cocotree.android.ui.activity.MainActivity.sHasGetBankCardList;
 import static com.cocotree.android.ui.activity.MainActivity.sHasNewUnreadMsg;
+import static com.cocotree.android.uploadUtil.Tools.isGooglePlayChannel;
 import static com.cocotree.android.uploadUtil.Tools.isNotGooglePlayChannel;
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeView {
@@ -190,8 +191,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
 
     public static int mSelectAmount = 1000000;
-    public static int mSelectType = 3;//1为7天   2为14天  3为9天
-    private HomeDataResBean mHomeData = new HomeDataResBean();
+    public static int mSelectType = 1;//默认为1。  1为7天   2为14天  3为9天
+    private HomeDataResBean mHomeData;
     private String[] mPayWayList;
     private String mCurrentView;
     private boolean isRefuse;
@@ -660,10 +661,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             mRefreshLayout.setEnableRefresh(false);
             btnTitleBarBack.setVisibility(View.VISIBLE);
         }
-        if (isNotGooglePlayChannel()) {
-            tvBorrowTimeRangeTint.setText("9 Hari");
-        } else {
+        if (isGooglePlayChannel()) {
+            tvBorrowTimeRangeTint.setVisibility(View.VISIBLE);
             tvBorrowTimeRangeTint.setText("91-180 Hari");
+        } else {
+            tvBorrowTimeRangeTint.setVisibility(View.INVISIBLE);
+//            tvBorrowTimeRangeTint.setText("7-9 Hari");
         }
     }
 
@@ -724,7 +727,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             tvApplyInfoAmount.setText(formatIndMoney("0"));
         }
-        tvApplyInfoDue.setText("9 hari");// 采用默认值，9天
+        if ("1".equals(data.new_old_sign)) {
+            tvApplyInfoDue.setText("7 hari");// 新户7天
+            mSelectType = 1;
+        } else if ("2".equals(data.new_old_sign)) {//旧户
+            tvApplyInfoDue.setText("9 hari´");// 旧户9天
+            mSelectType = 3;
+        }
         if (isNotGooglePlayChannel()) {
             ivLoanTimeQuestion.setVisibility(View.INVISIBLE);
         } else {

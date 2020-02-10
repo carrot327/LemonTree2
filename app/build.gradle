@@ -11,8 +11,8 @@ android {
 
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 6
-        versionName "1.5"
+        versionCode 8
+        versionName "1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
@@ -72,6 +72,9 @@ android {
         }
         nine_day {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "nine_day"]
+        }
+        seven_day {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "seven_day"]
         }
     }
 }

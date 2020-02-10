@@ -7,23 +7,6 @@ import java.util.List;
 
 public class BorrowApplyInfoResBean extends BaseResponseBean {
 
-
-    /**
-     * user_id : 100001
-     * app_version : 0.0.1
-     * app_name : android
-     * app_clientid : xiaomi
-     * loanAmt : 1200
-     * loanDays : 7
-     * baseRate : 240
-     * actAmt : 960
-     * card_bank_code : 100
-     * card_bank_name : 招商银行
-     * timeLimit : [{"limit_day":"1 期（6 天）","status":"1"},{"limit_day":"2 期（27 天）","status":"0"},{"limit_day":"3 期（36 天）","status":"1"}]
-     * customer_bank_card_id : 1
-     * bank_card_no : 1
-     */
-
     public String user_id;
     public String app_version;
     public String app_name;
@@ -40,6 +23,7 @@ public class BorrowApplyInfoResBean extends BaseResponseBean {
     public String ktp;
     public String serviceFee;//服务费
     public String adminFee;//管理费
+    public String new_old_sign;//是否是旧户    1新户   2旧户
     public List<TimeLimitBean> timeLimit;
 
     public static class TimeLimitBean {

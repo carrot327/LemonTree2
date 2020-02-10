@@ -112,36 +112,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     }
 
 
-    /**
-     * 获取借款信息
-     */
-    public void getBorrowApplyInfo() {
-        NetworkLiteHelper
-                .postJson()
-                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_BORROW_INFO)
-                .content(new Gson().toJson(new CommonReqBean()))
-                .build()
-                .execute(getNetworkClient(), new GenericCallback<BorrowApplyInfoResBean>() {
-                    @Override
-                    public void onFailure(Call call, Exception exception, int id) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(Call call, BorrowApplyInfoResBean response, int id) {
-                        if (response != null) {
-                            if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                                if (mView != null) {
-                                    mView.setBorrowInfo(response);
-                                }
-                                mBorrowApplyInfoResBean = response;
-                            } else {
-                                mView.setRefuseState();
-                            }
-                        }
-                    }
-                });
-    }
 
     /**
      * 获取订单信息
@@ -174,6 +144,42 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 });
     }
 
+    /**
+     * 获取借款信息
+     * 额度计算中（9）和可借款（4）时调用
+     */
+    public void getBorrowApplyInfo() {
+        NetworkLiteHelper
+                .postJson()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_BORROW_INFO)
+                .content(new Gson().toJson(new CommonReqBean()))
+                .build()
+                .execute(getNetworkClient(), new GenericCallback<BorrowApplyInfoResBean>() {
+                    @Override
+                    public void onFailure(Call call, Exception exception, int id) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Call call, BorrowApplyInfoResBean response, int id) {
+                        if (response != null) {
+                            if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                                mBorrowApplyInfoResBean = response;
+                                if (mView != null) {
+                                    mView.setBorrowInfo(response);
+                                }
+                            } else {
+                                mView.setRefuseState();
+                            }
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 获取借款信息
+     * 可借款4点击按钮时调用
+     */
     public void getBorrowApplyInfo(int loanAmount, int selectType) {
         GetBorrowInfoReqBean bean = new GetBorrowInfoReqBean();
         bean.loan_amount = loanAmount;
