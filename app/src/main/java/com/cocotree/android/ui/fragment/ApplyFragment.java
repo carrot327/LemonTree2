@@ -115,44 +115,25 @@ public class ApplyFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_user_info:
-                if (mBaseStatus == 0) {
-                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
-                }else {
-                    showToast(getString(R.string.apply_toast_text_has_done));
-                }
+                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
+
+//                if (mBaseStatus == 0) {
+//                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
+//                }else {
+//                    showToast(getString(R.string.apply_toast_text_has_done));
+//                }
                 break;
             case R.id.rl_company_info:
-                if (mBaseStatus == 0) {
-                    showToast(getString(R.string.apply_toast_text_1));
-                } else if (mCompanyStatus == 0) {
-                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_COMPANY());
-                }else {
-                    showToast(getString(R.string.apply_toast_text_has_done));
-                }
+                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_COMPANY());
+
                 break;
             case R.id.rl_contact_info:
-                if (mBaseStatus == 0) {
-                    showToast(getString(R.string.apply_toast_text_1));
-                } else if (mCompanyStatus == 0) {
-                    showToast(getString(R.string.apply_toast_text_2));
-                } else if (mRelationStatus == 0) {
-                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_CONTACT());
-                }else {
-                    showToast(getString(R.string.apply_toast_text_has_done));
-                }
+                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_CONTACT());
+
                 break;
             case R.id.rl_photo:
-                if (mBaseStatus == 0) {
-                    showToast(getString(R.string.apply_toast_text_1));
-                } else if (mCompanyStatus == 0) {
-                    showToast(getString(R.string.apply_toast_text_2));
-                } else if (mRelationStatus == 0) {
-                    showToast(getString(R.string.apply_toast_text_3));
-                } else if (mOcrStatus == 0) {
-                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
-                }else {
-                    showToast(getString(R.string.apply_toast_text_has_done));
-                }
+                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
+
                 break;
             case R.id.btn_confirm:
                 // 检查顺序：银行卡-》活体-》信息确认

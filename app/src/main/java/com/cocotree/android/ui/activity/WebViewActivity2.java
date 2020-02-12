@@ -17,6 +17,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.DownloadListener;
@@ -28,30 +29,31 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebStorage;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
-import com.cocotree.android.uploadUtil.Tools;
-import com.github.lzyzsd.jsbridge.BridgeHandler;
-import com.github.lzyzsd.jsbridge.BridgeWebView;
-import com.github.lzyzsd.jsbridge.BridgeWebViewClient;
-import com.github.lzyzsd.jsbridge.CallBackFunction;
-import com.google.gson.Gson;
-import com.minchainx.permission.util.PermissionListener;
 import com.cocotree.android.R;
 import com.cocotree.android.base.BaseActivity;
 import com.cocotree.android.manager.BaseApplication;
 import com.cocotree.android.manager.ConstantValue;
+import com.cocotree.android.manager.WebHelper;
 import com.cocotree.android.service.LocationService;
 import com.cocotree.android.uploadUtil.CLog;
 import com.cocotree.android.uploadUtil.Permission;
 import com.cocotree.android.uploadUtil.UploadDataBySingle;
 import com.cocotree.android.uploadUtil.UploadNecessaryData;
 import com.cocotree.android.utils.IntentUtils;
-import com.cocotree.android.utils.MyTimeUtils;
 import com.cocotree.android.utils.SPUtils;
+import com.github.lzyzsd.jsbridge.BridgeHandler;
+import com.github.lzyzsd.jsbridge.BridgeWebView;
+import com.github.lzyzsd.jsbridge.BridgeWebViewClient;
+import com.github.lzyzsd.jsbridge.CallBackFunction;
+import com.google.gson.Gson;
+import com.minchainx.permission.util.PermissionListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,9 +66,10 @@ import java.util.Map;
 
 import static com.cocotree.android.uploadUtil.Tools.isNotGooglePlayChannel;
 
-public class WebViewActivity extends BaseActivity implements BridgeHandler {
+public class WebViewActivity2 extends BaseActivity implements BridgeHandler {
     private final String TAG = "WebViewActivity";
 
+    private LinearLayout llWebView;
     BridgeWebView mWebView;
     ProgressBar mProgressBar;
 
@@ -91,7 +94,7 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_web_view;
+        return R.layout.activity_web_view2;
     }
 
     @Override
@@ -101,21 +104,23 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 
     @Override
     protected void loadData() {
-        if (!isGetLocationPermission()) {
-            requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
+//        if (!isGetLocationPermission()) {
+//            requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION);
+//        }
     }
 
     @Override
     protected void initializeView() {
-        mWebView = findViewById(R.id.wvWebView);
+        mWebView = WebHelper.getWebView();
+        llWebView = findViewById(R.id.ll_web_view);
         mProgressBar = findViewById(R.id.pbWebView);
         initWebViewSetting();
         initWebViewListener();
         mWebView.loadUrl(mUrl);
-//        mWebView.loadUrl("file:///android_asset/index.html");
-//        mWebView.loadUrl("http://10.5.61.148:8080/#/pages/auth/photoAuth/index");
-        Log.d("url", "WebViewActivity-loadUrl-" + mUrl);
+        if (mWebView.getParent()!=null){
+            ((ViewGroup) mWebView.getParent()).removeView(mWebView);
+        }
+        llWebView.addView(mWebView);
     }
 
     private void initWebViewSetting() {
@@ -140,7 +145,7 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
         // 设置UserAgent
         webSettings.setUserAgentString(webSettings.getUserAgentString());
         // 允许跨域
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             webSettings.setAllowUniversalAccessFromFileURLs(true);
         } else {
             try {
@@ -156,7 +161,7 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         //注册register
         mWebView.registerHandler("toAppHandler", this);
         mWebView.registerHandler("close", new BridgeHandler() {
@@ -176,7 +181,7 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
                     JSONObject obj = new JSONObject(data);
                     if (obj.optInt("type") == 1) {
 
-                        new Permission(WebViewActivity.this, new String[]{Manifest.permission.READ_CONTACTS}, new PermissionListener() {
+                        new Permission(WebViewActivity2.this, new String[]{Manifest.permission.READ_CONTACTS}, new PermissionListener() {
                             @Override
                             public void onGranted() {
 
@@ -236,9 +241,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
                 super.onProgressChanged(view, newProgress);
                 mProgressBar.setProgress(newProgress);
                 Log.d("WebViewActivity2", "newProgress:" + newProgress);
-                if (newProgress == 100) {
-                    showToast("100");
-                }
             }
 
             /**
@@ -650,7 +652,7 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
      * 上传数据
      */
     private void uploadNecessaryData(JSONObject obj, CallBackFunction function, boolean isGranted) {
-        final ProgressDialog dialog = new ProgressDialog(WebViewActivity.this);
+        final ProgressDialog dialog = new ProgressDialog(WebViewActivity2.this);
         dialog.setMessage(getString(R.string.dialog_loading));
         if (!mContext.isFinishing()) {
             dialog.show();

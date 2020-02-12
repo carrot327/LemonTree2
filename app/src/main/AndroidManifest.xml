@@ -102,6 +102,7 @@
         <activity
             android:name="com.cocotree.android.ui.activity.ProductDetailActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.WebViewActivity2" />
 
         <service
             android:name="com.cocotree.android.service.MyFirebaseMessagingService"

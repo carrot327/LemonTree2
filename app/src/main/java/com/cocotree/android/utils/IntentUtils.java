@@ -11,6 +11,7 @@ import com.cocotree.android.manager.BaseApplication;
 import com.cocotree.android.ui.activity.LoginActivity;
 import com.cocotree.android.ui.activity.MainActivity;
 import com.cocotree.android.ui.activity.WebViewActivity;
+import com.cocotree.android.ui.activity.WebViewActivity2;
 import com.cocotree.android.uploadUtil.UrlHostConfig;
 
 /**
@@ -59,7 +60,7 @@ public class IntentUtils {
 
 
     public static void openWebViewActivity(@NonNull Context context, String url) {
-        Intent intent = new Intent(context, WebViewActivity.class);
+        Intent intent = new Intent(context, WebViewActivity2.class);
         intent.putExtra("url", url);
         Log.d("h5url", "url-" + url);
 

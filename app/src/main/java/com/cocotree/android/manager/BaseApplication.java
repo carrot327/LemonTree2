@@ -5,9 +5,11 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.cocotree.android.BuildConfig;
 import com.cocotree.android.uploadUtil.CLog;
+import com.cocotree.android.uploadUtil.UrlHostConfig;
 import com.cocotree.android.utils.SPUtils;
 import com.liveness.dflivenesslibrary.DFProductResult;
 import com.liveness.dflivenesslibrary.DFTransferResultInterface;
@@ -75,10 +77,10 @@ public class BaseApplication extends Application implements DFTransferResultInte
             }
         });
 
-        /*资源预加载 预加载webview对象，首次初始化WebView会比第二次慢很多的原因：
-        初始化后，即使webview已经释放，但是WebView的一些共享的对象依然是存在的，
-        我们可以在Application里面提前初始化一个Webview的对象，然后可以直接loadurl加载资源*/
-//        initWebViewSetting();
+        WebHelper.instanceView(getApplicationContext());
+        if (WebHelper.getWebView() != null) {
+            WebHelper.getWebView().loadUrl(UrlHostConfig.H5_USER_INFO());
+        }
     }
 
     public static BaseApplication getInstance() {
@@ -113,15 +115,15 @@ public class BaseApplication extends Application implements DFTransferResultInte
      * 初始化SP数据
      */
     public void initSPData() {
-        if (BuildConfig.DEBUG) {
+        if (true || BuildConfig.DEBUG) {
             //3836000 晶晶    //3832079  丛丛
             //3832081 晶晶测试环境
 
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "asdf";
-//            mUserId = "3832081";
-//            sPhoneNum = "81290324175";
+            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+            sLoginState = true;
+            sUserName = "asdf";
+            mUserId = "38360000";
+            sPhoneNum = "81290324175";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);
