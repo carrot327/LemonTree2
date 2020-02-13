@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rp."
-            android:textColor="@color/white"
+            android:textColor="@color/theme_color"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:maxLines="1"
-            android:textColor="@color/white"
+            android:textColor="@color/text_theme"
             android:textSize="26sp"
             android:textStyle="bold"
             tools:text="1000000" />

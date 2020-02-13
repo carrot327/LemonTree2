@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Kantong Duit</string>
 
-    <string name="sign_up" translatable="false">Masuk/Daftar</string>
+    <string name="sign_up" translatable="false">Mendaftar</string>
     <string name="text_apply_loan">Ajukan pinjaman</string>
     <string name="text_want_amount">Silakan pilih jumlah pinjaman</string>
     <string name="text_want_time">Berapa lama Anda ingin meminjam?</string>
@@ -96,7 +96,7 @@
     <string name="text_delay_fee">Biaya perpanjangan:</string>
     <string name="dialog_loading">Loading...</string>
     <string name="text_liveness_btn">Mulai verifikasi</string>
-    <string name="text_liveness_hint">Arahkan wajah Anda ke layar ponsel dan pastikan ada pencahayaan yang cukup</string>
+    <string name="text_liveness_hint">Arahkan wajah Anda ke layar ponsel dan pastikan ada pencahayaan yang cukup.</string>
     <string name="text_liveness_hint1">Harap tetap diam</string>
     <string name="text_liveness_hint2">*Harap pastikan diri Anda sendiri yang melakukan operasi ini.</string>
     <string name="text_liveness_hint3">Silahkan letakkan wajah Anda di tengah</string>

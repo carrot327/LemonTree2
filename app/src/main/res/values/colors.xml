@@ -6,10 +6,10 @@
 
     <!--主题颜色 -->
     <!--    <color name="theme_color">#f95e4a</color>-->
-    <color name="theme_color">#e93345</color>
+    <color name="theme_color">#1562ff</color>
     <!--    <color name="theme_color">#F26671</color>-->
-    <color name="theme_color_hover">#C1515A</color>
-    <color name="theme_color_unable">#f8aaaf</color>
+    <color name="theme_color_hover">#104AC4</color>
+    <color name="theme_color_unable">#ACC4FA</color>
 
     <!--深蓝到浅紫的渐变 -->
     <color name="blue_gradient_start">#5b7bf4</color>
@@ -31,6 +31,8 @@
     <color name="seek_bar_gradient_yellow_end">#FFEB3B</color>
     <color name="seek_bar_gradient_green_start">#33DAAB</color>
     <color name="seek_bar_gradient_green_end">#28CB89</color>
+    <color name="seek_bar_gradient_theme_start">@color/theme_color</color>
+    <color name="seek_bar_gradient_theme_end">@color/theme_color_hover</color>
 
     <!--深黄到浅黄的渐变 -->
     <color name="yellow_gradient_start">#FE9D4A</color>

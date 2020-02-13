@@ -38,7 +38,6 @@
         android:layout_height="200dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:background="@drawable/bg_shadow_3"
         android:orientation="vertical">
 
         <TextView
@@ -65,7 +64,7 @@
             android:layout_marginLeft="6dp"
             android:layout_marginTop="15dp"
             android:text="@string/text_want_amount"
-            android:textColor="@color/white"
+            android:textColor="@color/text_theme"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -94,9 +93,9 @@
                 android:background="@null"
                 android:max="2000000"
                 android:maxHeight="10dp"
-                android:progressDrawable="@drawable/seek_bar_bg_yellow"
+                android:progressDrawable="@drawable/seek_bar_bg_theme"
                 android:splitTrack="false"
-                android:thumb="@drawable/seek_bar_thumb_yellow" />
+                android:thumb="@drawable/seek_bar_thumb_theme" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -106,7 +105,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="4dp"
                 android:text="Rp.300,000"
-                android:textColor="@color/white" />
+                android:textColor="@color/theme_color" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,7 +115,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="25dp"
                 android:text="Rp.2,000,000"
-                android:textColor="@color/white" />
+                android:textColor="@color/theme_color" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -131,5 +130,6 @@
         android:text="@string/text_home_tip"
         android:textColor="#FF9800"
         android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 </LinearLayout>

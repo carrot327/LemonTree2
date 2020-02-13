@@ -81,7 +81,7 @@
                         android:id="@+id/iv_user_avatar"
                         android:layout_width="57dp"
                         android:layout_height="57dp"
-                        android:src="@drawable/icon_mine_avatar_user" />
+                        android:src="@drawable/icon_tab_mine_selected" />
 
 
                     <TextView
@@ -327,7 +327,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/rl_setting"
+                        android:id="@+id/rl_about"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/setting_list_height"
                         android:layout_marginTop="@dimen/setting_list_margin_top"
@@ -343,7 +343,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/icon_mine_setting" />
+                            android:src="@drawable/icon_about" />
 
                         <TextView
                             android:id="@+id/tv_my_setting3"
@@ -352,7 +352,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginStart="15dp"
                             android:layout_toEndOf="@id/iv_setting"
-                            android:text="@string/text_item_setting"
+                            android:text="@string/text_about_us"
                             android:textColor="@color/CommonTextColor"
                             android:textSize="16sp" />
 

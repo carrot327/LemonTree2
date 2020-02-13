@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.kantong.android.ui.activity.AboutUsActivity;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 import com.kantong.android.R;
@@ -25,7 +26,6 @@ import com.kantong.android.manager.NetConstantValue;
 import com.kantong.android.network.OKHttpClientEngine;
 import com.kantong.android.ui.activity.FeedbackActivity;
 import com.kantong.android.ui.activity.MainActivity;
-import com.kantong.android.ui.activity.SettingActivity;
 import com.kantong.android.uploadUtil.UrlHostConfig;
 import com.kantong.android.utils.IntentUtils;
 import com.kantong.android.utils.SPUtils;
@@ -53,7 +53,7 @@ public class MineFragment extends BaseFragment {
     RelativeLayout rlAboutUs;
     @BindView(R.id.rl_privacy_policy)
     RelativeLayout rlPrivacyPolicy;
-    @BindView(R.id.rl_setting)
+    @BindView(R.id.rl_about)
     RelativeLayout rlSetting;
     @BindView(R.id.iv_titlebar_right)
     ImageView myNoticeMsg;
@@ -120,11 +120,12 @@ public class MineFragment extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.rl_setting, R.id.iv_titlebar_right, R.id.iv_user_avatar, R.id.tv_username, R.id.rl_my_loan, R.id.rl_help_center, R.id.rl_online_customer_service, R.id.rl_about_us, R.id.rl_privacy_policy, R.id.msg_red_dot})
+    @OnClick({R.id.rl_about, R.id.iv_titlebar_right, R.id.iv_user_avatar, R.id.tv_username, R.id.rl_my_loan, R.id.rl_help_center, R.id.rl_online_customer_service, R.id.rl_about_us, R.id.rl_privacy_policy, R.id.msg_red_dot})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.rl_setting:
-                startActivity(new Intent(mContext, SettingActivity.class));
+            case R.id.rl_about:
+//                startActivity(new Intent(mContext, SettingActivity.class));
+                startActivity(new Intent(mContext, AboutUsActivity.class));
                 break;
             case R.id.iv_user_avatar:
             case R.id.tv_username:

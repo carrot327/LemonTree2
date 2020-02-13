@@ -6,7 +6,7 @@
         android:paddingBottom="4dp">
         <shape>
             <corners android:radius="20dp" />
-            <solid android:color="#FF9800" />
+            <solid android:color="@color/theme_color" />
         </shape>
     </item>
 
@@ -19,8 +19,8 @@
                 <corners android:radius="20dp" />
                 <gradient
                     android:angle="0"
-                    android:endColor="@color/seek_bar_gradient_yellow_end"
-                    android:startColor="@color/seek_bar_gradient_yellow_start" />
+                    android:endColor="@color/seek_bar_gradient_theme_end"
+                    android:startColor="@color/seek_bar_gradient_theme_start" />
             </shape>
         </clip>
     </item>

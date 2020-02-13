@@ -41,8 +41,6 @@ public class StartLivenessActivity extends BaseActivity {
     ImageView ivCenterImage;
     @BindView(R.id.tv_hint_text_top)
     TextView tvHintTextTop;
-    @BindView(R.id.tv_hint_text_bottom)
-    TextView tvHintTextBottom;
     @BindView(R.id.btn_confirm)
     Button btnConfirm;
 
@@ -120,7 +118,6 @@ public class StartLivenessActivity extends BaseActivity {
                 //上传照片，上传成功后，跳转到成功页。
                 ivCenterImage.setImageDrawable(getResources().getDrawable(R.drawable.bg_start_liveness));
                 tvHintTextTop.setText(getResources().getString(R.string.text_liveness_hint));
-                tvHintTextBottom.setVisibility(View.VISIBLE);
                 btnConfirm.setText(getResources().getString(R.string.text_liveness_btn));
 
                 getAndUploadImg();
@@ -134,7 +131,6 @@ public class StartLivenessActivity extends BaseActivity {
                 //update view
                 ivCenterImage.setImageDrawable(getResources().getDrawable(R.drawable.bg_liveness_failed));
                 tvHintTextTop.setText(getResources().getString(R.string.text_analysis_failed));
-                tvHintTextBottom.setVisibility(View.INVISIBLE);
                 btnConfirm.setText(getResources().getString(R.string.text_try_again));
             }
         }
@@ -173,14 +169,10 @@ public class StartLivenessActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    Log.d("aaaaa", "1");
-
                     startActivity(LivenessSuccessActivity.createIntent(mContext));
                     finish();//成功时finish页面，失败时保留。
                     break;
                 case 2:
-                    Log.d("aaaaa", "2");
-
                     startActivity(LivenessFailedActivity.createIntent(mContext));
                     break;
             }

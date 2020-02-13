@@ -11,7 +11,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/text_apply_info"
-        android:textColor="@color/seek_bar_text_yellow"
+        android:textColor="@color/text_theme"
         android:textSize="18dp"
         android:textStyle="bold"
         android:visibility="visible" />
@@ -199,7 +199,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:maxLines="1"
-                android:textColor="@color/seek_bar_text_yellow"
+                android:textColor="@color/text_theme"
                 android:textSize="13sp"
                 tools:text="Rp.300,000" />
         </RelativeLayout>
@@ -223,9 +223,9 @@
                 android:background="@null"
                 android:max="1600000"
                 android:maxHeight="3dp"
-                android:progressDrawable="@drawable/seek_bar_bg_yellow"
+                android:progressDrawable="@drawable/seek_bar_bg_theme"
                 android:splitTrack="false"
-                android:thumb="@drawable/seek_bar_thumb_yellow" />
+                android:thumb="@drawable/seek_bar_thumb_theme" />
 
             <TextView
                 android:id="@+id/tv_min_amt"
@@ -308,6 +308,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <ImageView
