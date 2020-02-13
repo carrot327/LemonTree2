@@ -79,7 +79,7 @@ public class BaseApplication extends Application implements DFTransferResultInte
 
         WebHelper.instanceView(getApplicationContext());
         if (WebHelper.getWebView() != null) {
-            WebHelper.getWebView().loadUrl(UrlHostConfig.H5_USER_INFO());
+            WebHelper.getWebView().loadUrl(UrlHostConfig.getH5BaseHost());
         }
     }
 
@@ -115,15 +115,15 @@ public class BaseApplication extends Application implements DFTransferResultInte
      * 初始化SP数据
      */
     public void initSPData() {
-        if (true || BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             //3836000 晶晶    //3832079  丛丛
             //3832081 晶晶测试环境
 
-            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-            sLoginState = true;
-            sUserName = "asdf";
-            mUserId = "38360000";
-            sPhoneNum = "81290324175";
+//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+//            sLoginState = true;
+//            sUserName = "asdf";
+//            mUserId = "38360000";
+//            sPhoneNum = "81290324175";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);
