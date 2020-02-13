@@ -45,7 +45,6 @@
                     android:id="@+id/rl_username"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:background="@drawable/shape_bg_theme_color_border"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:orientation="horizontal">
@@ -101,8 +100,8 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/app_divide_line" />
+                    android:layout_height="1dp"
+                    android:background="@color/app_divide_line2" />
 
                 <!--短信验证码-->
                 <RelativeLayout
@@ -132,7 +131,6 @@
                         android:layout_alignParentStart="true"
                         android:layout_marginRight="8dp"
                         android:layout_toLeftOf="@id/tv_msg_verify_code"
-                        android:background="@drawable/shape_bg_theme_color_border"
                         android:hint="@string/login_hint_SMS_code"
                         android:inputType="number"
                         android:maxLength="8"
@@ -150,27 +148,17 @@
                           android:layout_height="2dp"
                           android:background="@color/app_divide_line" />-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:id="@+id/tv_channel_content"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
                     android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
+                    android:text="@string/sms_code_unreceived_tips"
+                    android:textColor="#BCCCE4"
+                    android:textSize="11sp" />
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:background="@drawable/question_mark_white" />
-
-                    <TextView
-                        android:id="@+id/tv_channel_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="7dp"
-                        android:text="@string/sms_code_unreceived_tips"
-                        android:textColor="#BCCCE4"
-                        android:textSize="11sp" />
-
-                </LinearLayout>
 
                 <Button
                     android:id="@+id/btn_login_confirm"

@@ -95,6 +95,7 @@
     <string name="title_register_privacy">Kebijakan privasi</string>
     <string name="text_delay_fee">Biaya perpanjangan:</string>
     <string name="dialog_loading">Loading...</string>
+    <string name="text_liveness">Identifikasi Wajah</string>
     <string name="text_liveness_btn">Mulai verifikasi</string>
     <string name="text_liveness_hint">Arahkan wajah Anda ke layar ponsel dan pastikan ada pencahayaan yang cukup.</string>
     <string name="text_liveness_hint1">Harap tetap diam</string>

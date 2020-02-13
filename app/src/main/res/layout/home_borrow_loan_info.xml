@@ -4,9 +4,58 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="40dp"
-    android:background="@drawable/bg_shadow_1"
     android:orientation="vertical"
     android:paddingBottom="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_shadow_1"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="30dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:text="Akan dilakukan pencairan dana"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_loan_info_bank_card_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="0dp"
+            android:textColor="@color/text_theme"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="2376485924823734  /  BUKOPIN_SYR" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="15dp"
+            android:text="Jumlah total yang diterima"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_loan_info_total_get_amount_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="0dp"
+            android:textColor="@color/text_theme"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Rp.372,000" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +67,6 @@
         android:textSize="18dp"
         android:textStyle="bold" />
 
-    <!--Name-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,7 +121,69 @@
             tools:text="44557483928475" />
     </RelativeLayout>
 
-    <!--Name-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/app_divide_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Bank Penerima"
+            android:textColor="@color/text_grey"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_loan_info_bank_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/text_grey"
+            android:textSize="14sp"
+            tools:text="BUKOPIN_SYR" />
+    </RelativeLayout><!--Name-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Nomor Rekening"
+            android:textColor="@color/text_grey"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_loan_info_bank_card_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/text_grey"
+            android:textSize="14sp"
+            tools:text="2376485924823734" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/app_divide_line" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -100,59 +210,12 @@
             tools:text="7hari" />
     </RelativeLayout>
 
-    <!--Name-->
-    <RelativeLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="20dp">
+        android:layout_height="3dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/app_divide_line" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="Bank Penerima"
-            android:textColor="@color/text_grey"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_loan_info_bank_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/text_grey"
-            android:textSize="14sp"
-            tools:text="BUKOPIN_SYR" />
-    </RelativeLayout>
-    <!--Name-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:text="Nomor Rekening"
-            android:textColor="@color/text_grey"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_loan_info_bank_card_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:textColor="@color/text_grey"
-            android:textSize="14sp"
-            tools:text="2376485924823734" />
-    </RelativeLayout>
-    <!-- -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -177,8 +240,7 @@
             android:textColor="@color/text_grey"
             android:textSize="14sp"
             tools:text="Rp.400,000" />
-    </RelativeLayout>
-    <!--Name-->
+    </RelativeLayout><!--Name-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -203,8 +265,7 @@
             android:textColor="@color/text_grey"
             android:textSize="14sp"
             tools:text="Rp.28,000" />
-    </RelativeLayout>
-    <!--Name-->
+    </RelativeLayout><!--Name-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

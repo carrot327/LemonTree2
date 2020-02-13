@@ -112,10 +112,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvLoanInfoBankName;
     @BindView(R.id.tv_loan_info_bank_card_number)
     TextView tvLoanInfoBankCardNumber;
+    @BindView(R.id.tv_loan_info_bank_card_info)
+    TextView tvLoanInfoBankCardInfo;
     @BindView(R.id.tv_loan_info_interest)
     TextView tvLoanInfoInterest;
     @BindView(R.id.tv_loan_info_total_get_amount)
     TextView tvLoanInfoTotalGetAmount;
+    @BindView(R.id.tv_loan_info_total_get_amount_top)
+    TextView tvLoanInfoTotalGetAmountTop;
     @BindView(R.id.tv_left_day)
     TextView tvLeftDay;
     @BindView(R.id.tv_time_text)
@@ -233,9 +237,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-                    startActivity(StartLivenessActivity.createIntent(mContext));
+//                    startActivity(StartLivenessActivity.createIntent(mContext));
 //                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
 //                    DialogFactory.createNoticeDialog(mContext, "Maaf, berdasarkan informasi Anda, kami saat ini hanya dapat memberi Anda pinjaman 9 hari.").show();
+//                    IntentUtils.openWebViewActivity(mContext,"http://161.117.239.48:8082/#/pages/auth/workAuth/index?app_clientid=defaultChannel&app_name=android&app_version=2.1&phone=81287566687&user_id=1&user_name=&url_version=1581593843479");
+
                 }
                 return true;
             }
@@ -753,6 +759,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setOrderInfo(BorrowApplyInfoResBean data) {
         showLoanInfoLayout();
+
+        tvLoanInfoBankCardInfo.setText(data.bank_card_no+"  /  "+data.card_bank_name);
+        tvLoanInfoTotalGetAmountTop.setText(formatIndMoney(data.actAmt));
 
         tvLoanInfoBankCardNumber.setText(data.bank_card_no);
         tvLoanInfoBankName.setText(data.card_bank_name);

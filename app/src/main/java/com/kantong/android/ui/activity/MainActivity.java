@@ -29,6 +29,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.Gson;
 import com.gyf.barlibrary.ImmersionBar;
+import com.kantong.android.utils.SPUtils;
 import com.minchainx.permission.util.PermissionListener;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
@@ -125,9 +126,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         mListFragments = mListFragments3Tab;
         initIndicator(tabResourceBean3Tab);
         switchTab(0);
-//        if (checkStartPermissions()) {
-//            showPermissionDialog();
-//        }
+        if (checkStartPermissions()) {
+            showPermissionDialog();
+        }
 //        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
 //            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
 //            DialogFactory.createPrivacyAgreementDialog(mContext).show();

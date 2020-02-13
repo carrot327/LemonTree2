@@ -53,7 +53,6 @@ public class IntentUtils {
         if (flags != 0) {
             intent.addFlags(flags);
         }
-//        intent.putExtra("isHomeToHere", isHomeToHere);
         activity.startActivityForResult(intent, requestCode);
     }
 

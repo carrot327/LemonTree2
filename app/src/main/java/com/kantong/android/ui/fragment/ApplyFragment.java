@@ -42,26 +42,18 @@ import static com.kantong.android.ui.activity.MainActivity.sFormatSelectTime;
 public class ApplyFragment extends BaseFragment {
     @BindView(R.id.apply_refresh_layout)
     SmartRefreshLayout mRefreshLayout;
-    @BindView(R.id.view_tag1)
-    View viewTag1;
     @BindView(R.id.iv_user_info)
     ImageView ivUserInfo;
     @BindView(R.id.rl_user_info)
     RelativeLayout rlUserInfo;
-    @BindView(R.id.view_tag2)
-    View viewTag2;
     @BindView(R.id.iv_company)
     ImageView ivCompany;
     @BindView(R.id.rl_company_info)
     RelativeLayout rlCompanyInfo;
-    @BindView(R.id.view_tag3)
-    View viewTag3;
     @BindView(R.id.iv_contact)
     ImageView ivContact;
     @BindView(R.id.rl_contact_info)
     RelativeLayout rlContactInfo;
-    @BindView(R.id.view_tag4)
-    View viewTag4;
     @BindView(R.id.iv_photo)
     ImageView ivPhoto;
     @BindView(R.id.rl_photo)
@@ -115,25 +107,44 @@ public class ApplyFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_user_info:
-                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
-
-//                if (mBaseStatus == 0) {
-//                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
-//                }else {
-//                    showToast(getString(R.string.apply_toast_text_has_done));
-//                }
+                if (mBaseStatus == 0) {
+                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
+                }else {
+                    showToast(getString(R.string.apply_toast_text_has_done));
+                }
                 break;
             case R.id.rl_company_info:
-                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_COMPANY());
-
+                if (mBaseStatus == 0) {
+                    showToast(getString(R.string.apply_toast_text_1));
+                } else if (mCompanyStatus == 0) {
+                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_COMPANY());
+                }else {
+                    showToast(getString(R.string.apply_toast_text_has_done));
+                }
                 break;
             case R.id.rl_contact_info:
-                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_CONTACT());
-
+                if (mBaseStatus == 0) {
+                    showToast(getString(R.string.apply_toast_text_1));
+                } else if (mCompanyStatus == 0) {
+                    showToast(getString(R.string.apply_toast_text_2));
+                } else if (mRelationStatus == 0) {
+                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_CONTACT());
+                }else {
+                    showToast(getString(R.string.apply_toast_text_has_done));
+                }
                 break;
             case R.id.rl_photo:
-                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
-
+                if (mBaseStatus == 0) {
+                    showToast(getString(R.string.apply_toast_text_1));
+                } else if (mCompanyStatus == 0) {
+                    showToast(getString(R.string.apply_toast_text_2));
+                } else if (mRelationStatus == 0) {
+                    showToast(getString(R.string.apply_toast_text_3));
+                } else if (mOcrStatus == 0) {
+                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
+                }else {
+                    showToast(getString(R.string.apply_toast_text_has_done));
+                }
                 break;
             case R.id.btn_confirm:
                 // 检查顺序：银行卡-》活体-》信息确认
@@ -188,41 +199,33 @@ public class ApplyFragment extends BaseFragment {
                                 Log.d("ApplyFragment", "mOcrStatus:" + mOcrStatus);
 
                                 if (mBaseStatus > 0) {
-                                    viewTag1.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_yellow));
                                     ivUserInfo.setImageDrawable(getResources().getDrawable(R.drawable.icon_user));
                                     ivArrowApply1.setVisibility(View.INVISIBLE);
                                 } else {
-                                    viewTag1.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_grey));
                                     ivUserInfo.setImageDrawable(getResources().getDrawable(R.drawable.icon_user_disable));
                                     ivArrowApply1.setVisibility(View.VISIBLE);
                                 }
 
                                 if (mCompanyStatus > 0) {
-                                    viewTag2.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_green));
                                     ivCompany.setImageDrawable(getResources().getDrawable(R.drawable.icon_company));
                                     ivArrowApply2.setVisibility(View.INVISIBLE);
                                 } else {
-                                    viewTag2.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_grey));
                                     ivCompany.setImageDrawable(getResources().getDrawable(R.drawable.icon_company_disable));
                                     ivArrowApply2.setVisibility(View.VISIBLE);
                                 }
 
                                 if (mRelationStatus > 0) {
-                                    viewTag3.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_blue));
                                     ivContact.setImageDrawable(getResources().getDrawable(R.drawable.icon_contact));
                                     ivArrowApply3.setVisibility(View.INVISIBLE);
                                 } else {
-                                    viewTag3.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_grey));
                                     ivContact.setImageDrawable(getResources().getDrawable(R.drawable.icon_contact_disable));
                                     ivArrowApply3.setVisibility(View.VISIBLE);
                                 }
 
                                 if (mOcrStatus > 0) {
-                                    viewTag4.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_red));
                                     ivPhoto.setImageDrawable(getResources().getDrawable(R.drawable.icon_upload));
                                     ivArrowApply4.setVisibility(View.INVISIBLE);
                                 } else {
-                                    viewTag4.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_grey));
                                     ivPhoto.setImageDrawable(getResources().getDrawable(R.drawable.icon_upload_disable));
                                     ivArrowApply4.setVisibility(View.VISIBLE);
                                 }

@@ -8,17 +8,17 @@ import com.kantong.android.utils.StringUtils;
 
 public class UrlHostConfig {
     //控制在debug模式下是否进入release域名   HTTP_TEST：用测试域名   HTTP_RELEASE:用生产域名
-    private static EvnConfig HOST_ENV = EvnConfig.HTTP_TEST;
+    private static EvnConfig HOST_ENV = EvnConfig.HTTP_RELEASE;
 
-    //测试
-    private static final String DEBUG_MAIN_HOST = "http://161.117.179.26:80";
-    private static final String DEBUG_H5_HOST = "http://161.117.179.26:83";
+    //测试  暂无测试环境
+    private static final String DEBUG_MAIN_HOST = "http://161.117.239.48:80";
+    private static final String DEBUG_H5_HOST = "http://161.117.239.48:8082";
     private static final String DEBUG_FLOW_IO_HOST = "";
     private static final String DEBUG_UPDATE_HOST = DEBUG_MAIN_HOST;
 
     //生产
-    private static final String RELEASE_MAIN_HOST = "http://47.74.255.114";
-    private static final String RELEASE_H5_HOST = "http://161.117.196.133";
+    private static final String RELEASE_MAIN_HOST = "http://161.117.239.48:80";
+    private static final String RELEASE_H5_HOST = "http://161.117.239.48:8082";
     private static final String RELEASE_FLOW_IO_HOST = "";
     private static final String RELEASE_UPDATE_HOST = RELEASE_MAIN_HOST;
 

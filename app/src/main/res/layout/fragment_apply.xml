@@ -54,17 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/apply_list_height"
                     android:layout_marginTop="28dp"
-                    android:background="@drawable/slt_shadow_item">
-
-                    <View
-                        android:id="@+id/view_tag1"
-                        android:layout_width="5dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/shape_bg_circle_corner_grey"
-                        android:clickable="true" />
+                    android:background="@drawable/bg_shadow_2">
 
 
                     <ImageView
@@ -76,7 +66,6 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_toRightOf="@id/view_tag1"
                         android:src="@drawable/icon_user_disable" />
 
                     <TextView
@@ -87,7 +76,8 @@
                         android:layout_toEndOf="@id/iv_user_info"
                         android:text="@string/apply_text_user_info"
                         android:textColor="@color/CommonTextColor"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/iv_arrow_apply_1"
@@ -110,15 +100,6 @@
                     android:layout_marginTop="@dimen/apply_list_margin_top"
                     android:background="@drawable/slt_shadow_item">
 
-                    <View
-                        android:id="@+id/view_tag2"
-                        android:layout_width="5dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/shape_bg_circle_corner_grey" />
-
 
                     <ImageView
                         android:id="@+id/iv_company"
@@ -129,7 +110,6 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_toRightOf="@id/view_tag2"
                         android:src="@drawable/icon_company_disable" />
 
                     <TextView
@@ -140,7 +120,8 @@
                         android:layout_toEndOf="@+id/iv_company"
                         android:text="@string/apply_text_company"
                         android:textColor="@color/CommonTextColor"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/iv_arrow_apply_2"
@@ -163,16 +144,6 @@
                     android:layout_marginTop="@dimen/apply_list_margin_top"
                     android:background="@drawable/slt_shadow_item">
 
-                    <View
-                        android:id="@+id/view_tag3"
-                        android:layout_width="5dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/shape_bg_circle_corner_grey" />
-
-
                     <ImageView
                         android:id="@+id/iv_contact"
                         android:layout_width="24dp"
@@ -182,7 +153,6 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_toRightOf="@id/view_tag3"
                         android:src="@drawable/icon_contact_disable" />
 
                     <TextView
@@ -193,7 +163,8 @@
                         android:layout_toEndOf="@+id/iv_contact"
                         android:text="@string/apply_text_contact"
                         android:textColor="@color/CommonTextColor"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/iv_arrow_apply_3"
@@ -216,16 +187,6 @@
                     android:layout_marginTop="@dimen/apply_list_margin_top"
                     android:background="@drawable/slt_shadow_item">
 
-                    <View
-                        android:id="@+id/view_tag4"
-                        android:layout_width="5dp"
-                        android:layout_height="15dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/shape_bg_circle_corner_grey" />
-
-
                     <ImageView
                         android:id="@+id/iv_photo"
                         android:layout_width="24dp"
@@ -235,7 +196,6 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="8dp"
                         android:layout_marginBottom="10dp"
-                        android:layout_toRightOf="@id/view_tag4"
                         android:src="@drawable/icon_upload_disable" />
 
                     <TextView
@@ -246,7 +206,8 @@
                         android:layout_toEndOf="@+id/iv_photo"
                         android:text="@string/apply_text_upload"
                         android:textColor="@color/CommonTextColor"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/iv_arrow_apply_4"

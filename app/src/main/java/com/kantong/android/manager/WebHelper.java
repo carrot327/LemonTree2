@@ -1,10 +1,14 @@
 package com.kantong.android.manager;
 
 import android.content.Context;
+import android.os.Build;
 import android.webkit.WebSettings;
 import android.widget.LinearLayout;
 
 import com.github.lzyzsd.jsbridge.BridgeWebView;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 
 public class WebHelper {
@@ -43,7 +47,7 @@ public class WebHelper {
         // 设置UserAgent
         webSettings.setUserAgentString(webSettings.getUserAgentString());
         // 允许跨域
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             webSettings.setAllowUniversalAccessFromFileURLs(true);
         } else {
             try {
@@ -59,7 +63,7 @@ public class WebHelper {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
         mWebView.requestFocusFromTouch();
 
     }
