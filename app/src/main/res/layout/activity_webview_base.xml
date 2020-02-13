@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.cocotree.android.ui.widget.WebViewProgressBar
+    <com.kantong.android.ui.widget.WebViewProgressBar
         android:id="@+id/webview_progress"
         android:layout_width="match_parent"
         android:layout_height="2dp"
