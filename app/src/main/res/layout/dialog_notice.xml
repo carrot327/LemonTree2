@@ -25,7 +25,7 @@
         android:background="@drawable/bg_btn_shape_gradient_coupon"
         android:text="Oke"
         android:textAllCaps="false"
-        android:textColor="@color/CommonTextColor" />
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="wrap_content"

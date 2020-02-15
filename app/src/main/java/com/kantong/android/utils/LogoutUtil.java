@@ -18,7 +18,7 @@ public class LogoutUtil {
         SPUtils.remove(ConstantValue.PHONE_NUMBER);
         SPUtils.remove(ConstantValue.KEY_LATEST_LOGIN_NAME);
 
-        WebHelper.getWebView().clearCache(true);
+//        WebHelper.getWebView().clearCache(true);
         WebStorage.getInstance().deleteAllData();
 
 

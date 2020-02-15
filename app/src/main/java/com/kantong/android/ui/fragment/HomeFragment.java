@@ -616,7 +616,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         rlParams.removeRule(0);
         rlParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         rlParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        rlParams.setMargins(0, UIUtils.dip2px(40), 0, 0);
+        rlParams.setMargins(0, UIUtils.dip2px(20), 0, 0);
         tvLeftDay.setLayoutParams(rlParams);
         tvLeftDay.setTextSize(54f);
         tvTimeText.setVisibility(View.VISIBLE);
@@ -670,8 +670,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             tvBorrowTimeRangeTint.setVisibility(View.VISIBLE);
             tvBorrowTimeRangeTint.setText("91-180 Hari");
         } else {
-            tvBorrowTimeRangeTint.setVisibility(View.INVISIBLE);
-//            tvBorrowTimeRangeTint.setText("7-9 Hari");
+            tvBorrowTimeRangeTint.setText("7 Hari");
         }
     }
 
@@ -732,16 +731,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         } else {
             tvApplyInfoAmount.setText(formatIndMoney("0"));
         }
-        if ("1".equals(data.new_old_sign)) {
-            tvApplyInfoDue.setText("7 hari");// 新户7天
-            mSelectType = 1;
-        } else if ("2".equals(data.new_old_sign)) {//旧户
-            tvApplyInfoDue.setText("9 hari´");// 旧户9天
-            mSelectType = 3;
-        }
-        if (isNotGooglePlayChannel()) {
-            ivLoanTimeQuestion.setVisibility(View.INVISIBLE);
-        } else {
+        if (isGooglePlayChannel()) {
             ivLoanTimeQuestion.setVisibility(View.VISIBLE);
             ivLoanTimeQuestion.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -749,6 +739,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     DialogFactory.createNoticeDialog(mContext, "Maaf, berdasarkan informasi Anda, kami saat ini hanya dapat memberi Anda pinjaman 9 hari.").show();
                 }
             });
+        } else {
+            ivLoanTimeQuestion.setVisibility(View.INVISIBLE);
         }
 
         tvApplyInfoBankName.setText(data.card_bank_name);
@@ -760,7 +752,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void setOrderInfo(BorrowApplyInfoResBean data) {
         showLoanInfoLayout();
 
-        tvLoanInfoBankCardInfo.setText(data.bank_card_no+"  /  "+data.card_bank_name);
+        tvLoanInfoBankCardInfo.setText(data.bank_card_no + "  /  " + data.card_bank_name);
         tvLoanInfoTotalGetAmountTop.setText(formatIndMoney(data.actAmt));
 
         tvLoanInfoBankCardNumber.setText(data.bank_card_no);

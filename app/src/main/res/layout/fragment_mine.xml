@@ -152,6 +152,50 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rl_online_customer_service"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/setting_list_height"
+                        android:layout_marginTop="@dimen/setting_list_margin_top"
+                        android:background="@drawable/slt_shadow_item">
+
+                        <ImageView
+                            android:id="@+id/iv_online_customer_service"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/icon_mine_help_center" />
+
+                        <TextView
+                            android:id="@+id/tv_online_customer_service"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="15dp"
+                            android:layout_toEndOf="@+id/iv_online_customer_service"
+                            android:text="@string/text_item_customer_service"
+                            android:textColor="@color/CommonTextColor"
+                            android:textSize="16sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_arrow_right_gray4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="28dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/arrow_right_gray" />
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
                         android:id="@+id/rl_help_center"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/setting_list_height"
@@ -168,7 +212,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginRight="8dp"
                             android:layout_marginBottom="10dp"
-                            android:src="@drawable/icon_mine_help_center" />
+                            android:src="@drawable/icon_mine_customer_service" />
 
                         <TextView
                             android:id="@+id/tv_my_bank_card"
@@ -193,7 +237,6 @@
                             android:layout_marginBottom="10dp"
                             android:src="@drawable/arrow_right_gray" />
                     </RelativeLayout>
-
                     <RelativeLayout
                         android:id="@+id/rl_about_us"
                         android:layout_width="match_parent"
@@ -237,49 +280,6 @@
                             android:layout_marginBottom="10dp"
                             android:src="@drawable/arrow_right_gray" />
 
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rl_online_customer_service"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/setting_list_height"
-                        android:layout_marginTop="@dimen/setting_list_margin_top"
-                        android:background="@drawable/slt_shadow_item">
-
-                        <ImageView
-                            android:id="@+id/iv_online_customer_service"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_marginBottom="10dp"
-                            android:src="@drawable/icon_mine_customer_service" />
-
-                        <TextView
-                            android:id="@+id/tv_online_customer_service"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="15dp"
-                            android:layout_toEndOf="@+id/iv_online_customer_service"
-                            android:text="@string/text_item_customer_service"
-                            android:textColor="@color/CommonTextColor"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            android:id="@+id/iv_arrow_right_gray4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="28dp"
-                            android:layout_marginBottom="10dp"
-                            android:src="@drawable/arrow_right_gray" />
                     </RelativeLayout>
 
                     <RelativeLayout

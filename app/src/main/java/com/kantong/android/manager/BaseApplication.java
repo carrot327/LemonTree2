@@ -76,10 +76,10 @@ public class BaseApplication extends Application implements DFTransferResultInte
             }
         });
 
-        WebHelper.instanceView(getApplicationContext());
-        if (WebHelper.getWebView() != null) {
-            WebHelper.getWebView().loadUrl(UrlHostConfig.getH5BaseHost());
-        }
+//        WebHelper.instanceView(getApplicationContext());
+//        if (WebHelper.getWebView() != null) {
+//            WebHelper.getWebView().loadUrl(UrlHostConfig.getH5BaseHost());
+//        }
     }
 
     public static BaseApplication getInstance() {

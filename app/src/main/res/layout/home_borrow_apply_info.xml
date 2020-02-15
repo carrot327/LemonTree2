@@ -11,7 +11,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:text="@string/text_apply_info"
-        android:textColor="@color/text_theme"
+        android:textColor="@color/CommonTextColor"
         android:textSize="18dp"
         android:textStyle="bold"
         android:visibility="visible" />
@@ -46,8 +46,10 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
         android:background="@color/app_divide_line" />
     <!--Name-->
     <RelativeLayout
@@ -137,8 +139,10 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
         android:background="@color/app_divide_line" />
     <!--申请期限-->
     <RelativeLayout
@@ -164,7 +168,7 @@
             android:layout_alignParentEnd="true"
             android:gravity="center"
             android:maxLines="1"
-            android:text="9 hari"
+            android:text="7 hari"
             android:textColor="@color/text_black"
             android:textSize="13sp" />
 
@@ -181,8 +185,10 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
         android:background="@color/app_divide_line" />
     <!--借多少-->
     <LinearLayout
@@ -237,7 +243,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@null"
                 android:max="1600000"
-                android:maxHeight="3dp"
+                android:maxHeight="2dp"
                 android:progressDrawable="@drawable/seek_bar_bg_theme"
                 android:splitTrack="false"
                 android:thumb="@drawable/seek_bar_thumb_theme" />
@@ -281,9 +287,9 @@
                 android:drawableLeft="@drawable/icon_coupon3"
                 android:drawablePadding="5dp"
                 android:paddingLeft="5dp"
-                android:paddingTop="3dp"
+                android:paddingTop="2dp"
                 android:paddingRight="10dp"
-                android:paddingBottom="3dp"
+                android:paddingBottom="2dp"
                 android:text="Kupon x1"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
@@ -298,20 +304,16 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/question_mark_white" />
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/app_divide_line"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
         android:background="@color/app_divide_line" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

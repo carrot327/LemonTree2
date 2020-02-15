@@ -26,6 +26,7 @@ import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -57,6 +58,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +68,6 @@ import static com.kantong.android.uploadUtil.Tools.isNotGooglePlayChannel;
 public class WebViewActivity extends BaseActivity implements BridgeHandler {
     private final String TAG = "WebViewActivity";
 
-    private LinearLayout llWebView;
     BridgeWebView mWebView;
     ProgressBar mProgressBar;
 
@@ -84,7 +86,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
     private JSONObject type2or3Obj;
 
     private boolean mHasUploadAddressBook;
-    private File faceImageFile;
 
     private boolean tagBeforeLocationPR;
 
@@ -107,19 +108,55 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 
     @Override
     protected void initializeView() {
-        mWebView = WebHelper.getWebView();
-        llWebView = findViewById(R.id.ll_web_view);
+        mWebView = findViewById(R.id.wvWebView);
         mProgressBar = findViewById(R.id.pbWebView);
-        registerHandler();
+        initWebViewSetting();
         initWebViewListener();
         mWebView.loadUrl(mUrl);
-        if (mWebView.getParent()!=null){
-            ((ViewGroup) mWebView.getParent()).removeView(mWebView);
-        }
-        llWebView.addView(mWebView);
+//        mWebView.loadUrl("file:///android_asset/index.html");
+//        mWebView.loadUrl("http://10.5.61.148:8080/#/pages/auth/photoAuth/index");
+        Log.d("url", "WebViewActivity-loadUrl-" + mUrl);
     }
 
-    private void registerHandler() {
+    private void initWebViewSetting() {
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);        // 支持js脚本
+        webSettings.setSupportZoom(false);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setDefaultTextEncodingName("UTF-8");
+        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setAllowFileAccess(true);
+        webSettings.setSavePassword(true);
+
+        // 设置UserAgent
+        webSettings.setUserAgentString(webSettings.getUserAgentString());
+        // 允许跨域
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            webSettings.setAllowUniversalAccessFromFileURLs(true);
+        } else {
+            try {
+                Class<?> clazz = webSettings.getClass();
+                Method method = clazz.getMethod("setAllowUniversalAccessFromFileURLs", boolean.class);
+                if (method != null) {
+                    method.invoke(webSettings, true);
+                }
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
         //注册register
         mWebView.registerHandler("toAppHandler", this);
         mWebView.registerHandler("close", new BridgeHandler() {

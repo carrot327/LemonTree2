@@ -32,20 +32,21 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:background="@drawable/bg_shadow_3">
+        android:paddingBottom="20dp"
+        android:background="@drawable/bg_border_theme_color_6">
 
         <TextView
             android:id="@+id/tv_left_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/white"
+            android:textColor="@color/text_theme"
             android:textSize="50sp"
             tools:text="0" />
 
@@ -57,7 +58,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp"
             android:text="Hari"
-            android:textColor="@color/white"
+            android:textColor="@color/text_theme"
             android:textSize="24sp" />
 
         <TextView
@@ -68,7 +69,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="5dp"
             android:text="Sebelum jatuh tempo"
-            android:textColor="@color/white"
+            android:textColor="@color/text_theme"
             android:textSize="13sp" />
     </RelativeLayout>
 
@@ -232,7 +233,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="15dp"
