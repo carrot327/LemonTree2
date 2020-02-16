@@ -70,6 +70,9 @@ android {
         colada1220 {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "colada1220"]
         }
+        google_play {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "google_play"]
+        }
         saku_api_0213 {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "saku_api_0213"]
         }
