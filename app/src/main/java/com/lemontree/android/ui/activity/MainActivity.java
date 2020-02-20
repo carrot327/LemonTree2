@@ -1,6 +1,5 @@
 package com.lemontree.android.ui.activity;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,13 +32,10 @@ import com.lemontree.android.base.BaseActivity;
 import com.lemontree.android.base.BaseResponseBean;
 import com.lemontree.android.bean.TabResourceBean;
 import com.lemontree.android.bean.enventbus.BackPressEvent;
-import com.lemontree.android.bean.enventbus.LoginSuccessEvent;
-import com.lemontree.android.bean.enventbus.NewMsgEvent;
 import com.lemontree.android.bean.request.BankCardQueryReqBean;
 import com.lemontree.android.bean.request.CommonReqBean;
 import com.lemontree.android.bean.response.AuthStateResBean;
 import com.lemontree.android.bean.response.BankcardListResponseBean;
-import com.lemontree.android.bean.response.UnreadMsgStateResBean;
 import com.lemontree.android.iview.IMainView;
 import com.lemontree.android.manager.ActivityCollector;
 import com.lemontree.android.manager.BaseApplication;
@@ -49,18 +44,14 @@ import com.lemontree.android.manager.DialogFactory;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
 import com.lemontree.android.presenter.MainPresenter;
-import com.lemontree.android.service.LocationService;
 import com.lemontree.android.ui.fragment.ApplyFragment;
 import com.lemontree.android.ui.fragment.HomeFragment;
 import com.lemontree.android.ui.fragment.MineFragment;
 import com.lemontree.android.ui.widget.HomeTabView;
-import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.utils.IntentUtils;
 import com.lemontree.android.utils.MultiClickHelper;
-import com.lemontree.android.utils.PermissionUtils;
 import com.lemontree.android.utils.SPUtils;
 import com.lemontree.android.utils.UpdateUtil;
-import com.minchainx.permission.util.PermissionListener;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 
@@ -71,14 +62,9 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerInd
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import okhttp3.Call;
 
@@ -127,9 +113,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         mListFragments = mListFragments3Tab;
         initIndicator(tabResourceBean3Tab);
         switchTab(0);
-        if (checkStartPermissions()) {
-            showPermissionDialog();
-        }
         if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
             SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
             DialogFactory.createPrivacyAgreementDialog(mContext).show();
@@ -144,9 +127,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-        LocationService.getInstance().registerListener();
-//        checkStartPermission();
 
         if (!BuildConfig.DEBUG) {
             onCheckGooglePlayServices();
@@ -352,8 +332,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         }
     }
 
-    private Map<String, File> imgMap = new HashMap<>();
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -380,14 +358,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
     @Override
     public void onBackPressed() {
-        // 双击退出
         if (mMultiClickHelper.click()) {
             super.onBackPressed();
             ActivityCollector.finishAll();
 
             System.exit(0);
         } else {
-//            Toast.makeText(this, getString(R.string.logout_hint), Toast.LENGTH_SHORT).show();
         }
         EventBus.getDefault().post(new BackPressEvent());
     }
@@ -395,88 +371,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     @Override
     public void onChanged(int index) {
 
-    }
-
-    /**
-     * 开启定位服务
-     */
-    private void startLocationService() {
-        if (isGetLocationPermission()) {
-            LocationService.getInstance().start();
-        }
-    }
-
-    private void checkStartPermission() {
-//        LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-//        if (locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-//            Toast.makeText(mContext, "2222", Toast.LENGTH_SHORT).show();
-//
-//        } else {
-//            // 未打开位置开关，可能导致定位失败或定位不准，提示用户或做相应处理
-//            Toast.makeText(mContext, "未打开位置开关，可能导致定位失败或定位不准，提示用户或做相应处理", Toast.LENGTH_SHORT).show();
-//        }
-
-        new Permission(this, new String[]{
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.READ_PHONE_STATE
-//                Manifest.permission.READ_CONTACTS,
-//                Manifest.permission.READ_SMS
-        }, new PermissionListener() {
-            //成功授权和失败授权回调中，都检查下是否给了定位权限
-            @Override
-            public void onGranted() {
-                startLocationService();
-            }
-
-            @Override
-            public void onDenied() {
-                startLocationService();
-            }
-        });
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void loginSuccess(LoginSuccessEvent event) {
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        LocationService.getInstance().unregisterListener(); //注销掉监听
-        LocationService.getInstance().stop(); //停止定位服务
-        EventBus.getDefault().unregister(this);
-    }
-
-    /**
-     * 新消息提示
-     */
-    public void checkHasUnreadMsg() {
-        NetworkLiteHelper
-                .postJson()
-                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_NEW_MSG_REMIND)
-                .content(new Gson().toJson(new CommonReqBean()))
-                .build()
-                .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<UnreadMsgStateResBean>() {
-                    @Override
-                    public void onFailure(Call call, Exception exception, int id) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(Call call, UnreadMsgStateResBean response, int id) {
-                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            if ("1".equals(response.status)) {
-                                sHasNewUnreadMsg = true;
-                            } else {
-                                sHasNewUnreadMsg = false;
-                            }
-                            EventBus.getDefault().post(new NewMsgEvent());
-
-                        }
-                    }
-                });
     }
 
     /**
@@ -585,69 +479,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         }
     }
 
-    // 是否显示权限Dialog
-    private boolean checkStartPermissions() {
-
-        // 位置权限
-        boolean hasCoarseLocationPermission = PermissionUtils.checkPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION, getPackageName());
-        boolean hasFineLocationPermission = PermissionUtils.checkPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, getPackageName());
-
-
-        // 读写权限
-        boolean hasWriteExternalStoragePermission = PermissionUtils.checkPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE, getPackageName());
-        boolean hasReadExternalStoragePermission = PermissionUtils.checkPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE, getPackageName());
-
-        // 联系人权限
-        boolean hasReadContactsPermission = PermissionUtils.checkPermission(this, Manifest.permission.READ_CONTACTS, getPackageName());
-//        boolean hasWriteContactsPermission = PermissionUtils.checkPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE, getPackageName());
-
-        // 把缺少的权限添加到集合中
-        if (!hasCoarseLocationPermission) {
-            permissionsList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-            int size = orderedlist.size() + 1;
-            orderedlist.add(size + ".Lokasi");
-        }
-        if (!hasFineLocationPermission) {
-            permissionsList.add(Manifest.permission.ACCESS_FINE_LOCATION);
-            if (!orderedlist.contains(orderedlist.size() + ".Lokasi")) {
-                int size = orderedlist.size() + 1;
-                orderedlist.add(size + ".Lokasi");
-            }
-        }
-
-        if (!hasWriteExternalStoragePermission) {
-            permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            int size = orderedlist.size() + 1;
-            orderedlist.add(size + ".Penyimpanan");
-        }
-        if (!hasReadExternalStoragePermission) {
-            permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-            if (!orderedlist.contains(orderedlist.size() + ".Penyimpanan")) {
-                int size = orderedlist.size() + 1;
-                orderedlist.add(size + ".Penyimpanan");
-            }
-        }
-
-        if (!hasReadContactsPermission) {
-            permissionsList.add(Manifest.permission.READ_CONTACTS);
-            int size = orderedlist.size() + 1;
-            orderedlist.add(size + ".Akses kontak(Pilih kontak dengan cepat)");
-        }
-//        if (!hasReadExternalStoragePermission) {
-//            permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-//            if (!orderedlist.contains(orderedlist.size() + ".Penyimpanan")) {
-//                int size = orderedlist.size() + 1;
-//                orderedlist.add(size + ".Penyimpanan");
-//            }
-//        }
-
-
-        // 只要有一项没权限就弹出Dialog
-        return !hasFineLocationPermission || !hasCoarseLocationPermission
-                || !hasReadExternalStoragePermission
-                || !hasWriteExternalStoragePermission || !hasReadContactsPermission;
-    }
-
     private void showPermissionDialog() {
         View view = View.inflate(this, R.layout.dialog_permission, null);
         ListView lv = view.findViewById(R.id.lv_permission);
@@ -666,25 +497,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
             @Override
             public void onClick(View v) {
                 dialog1.dismiss();
-
-                new Permission(mContext, new String[]{
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_CONTACTS
-                }, new PermissionListener() {
-                    //成功授权和失败授权回调中，都检查下是否给了定位权限
-                    @Override
-                    public void onGranted() {
-                        startLocationService();
-                    }
-
-                    @Override
-                    public void onDenied() {
-                        startLocationService();
-                    }
-                });
             }
         });
     }

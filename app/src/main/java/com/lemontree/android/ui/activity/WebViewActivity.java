@@ -38,24 +38,21 @@ import com.github.lzyzsd.jsbridge.BridgeWebView;
 import com.github.lzyzsd.jsbridge.BridgeWebViewClient;
 import com.github.lzyzsd.jsbridge.CallBackFunction;
 import com.google.gson.Gson;
-import com.minchainx.permission.util.PermissionListener;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
 import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.ConstantValue;
-import com.lemontree.android.service.LocationService;
 import com.lemontree.android.uploadUtil.CLog;
 import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.uploadUtil.UploadDataBySingle;
 import com.lemontree.android.uploadUtil.UploadNecessaryData;
 import com.lemontree.android.utils.IntentUtils;
-import com.lemontree.android.utils.MyTimeUtils;
 import com.lemontree.android.utils.SPUtils;
+import com.minchainx.permission.util.PermissionListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -82,11 +79,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
     private JSONObject type2or3Obj;
 
     private boolean mHasUploadAddressBook;
-    private File faceImageFile;
-
-    private boolean mHasUpdateSmsSuccess;
-    private boolean mHasUpdateCallLogSuccess;
-    private boolean tagBeforeLocationPR;
 
     @Override
     protected int getLayoutResId() {
@@ -100,10 +92,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
         initWebViewSetting();
         initWebViewListener();
         mWebView.loadUrl(mUrl);
-//        mWebView.loadUrl("file:///android_asset/index.html");
-//        mWebView.loadUrl("http://www.baidu.com");
-//        mWebView.loadUrl("http://10.5.61.148:8080/#/pages/auth/photoAuth/index");
-        Log.d("url", "WebViewActivity-loadUrl-" + mUrl);
     }
 
     @Override
@@ -113,9 +101,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 
     @Override
     protected void loadData() {
-        if (!isGetLocationPermission()) {
-            requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
     }
 
     private void initWebViewSetting() {
@@ -315,22 +300,12 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 
             @Override
             protected boolean onCustomShouldOverrideUrlLoading(String url) {
-//                if (url == null) return false;
-//                try {
-//                    if (url.startsWith("alipays://")) {
-//                        return true;
-//                    }
-//                } catch (Exception e) { //防止crash (如果手机上没有安装处理某个scheme开头的url的APP, 会导致crash)
-//                    return true;//没有安装该app时，返回true，表示拦截自定义链接，但不跳转，避免弹出上面的错误页面
-//                }
                 return false;
             }
 
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError
                     error) {
-//                handler.proceed();  //接受所有证书
-
                 final SslErrorHandler mHandler;
                 mHandler = handler;
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -401,12 +376,8 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
      * 开始申请权限
      */
     public void requestPermissions() {
-        tagBeforeLocationPR = isGetLocationPermission();
         new Permission(mContext, new String[]{
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.READ_PHONE_STATE,//包含READ_CALL_LOG
-                Manifest.permission.READ_SMS
+                Manifest.permission.READ_CONTACTS
         }, new PermissionListener() {
             @Override
             public void onGranted() {
@@ -422,10 +393,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 
 
     private void uploadAccordingPermissions() {
-        boolean tagAfterLocationPR = isGetLocationPermission();
-        if (tagBeforeLocationPR != tagAfterLocationPR) {//刚获取到定位权限
-            LocationService.getInstance().restart();
-        }
         if (isGetNecessaryPermission()) {
             uploadNecessaryData(type2or3Obj, type2or3Function, true);
         } else {
@@ -434,64 +401,11 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
             if (type2or3Function != null) {
                 type2or3Function.onCallBack(new Gson().toJson(map));//回传数据给web
             }
-//            showToast(getString(R.string.allow_permission_and_try_again));
-            // TODO: 2019-10-22 如果用户拒绝权限，怎么办？（通讯录已经能拿到）
         }
-        //sms
-        if (isGetSMSPermission()) {
-            if (!mHasUpdateSmsSuccess) {
-                uploadSmsOnly();
-            }
-        }
-        //call record
-        if (isGetCallLogPermission()) {
-            if (!mHasUpdateCallLogSuccess) {
-                uploadCallRecordOnly();
-            }
-        }
-        //app list
-        uploadAppListOnly();
     }
 
     private boolean isGetNecessaryPermission() {
-        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean isGetSMSPermission() {
-        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean isGetCallLogPermission() {
-        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    /**
-     * 弱上传通讯录
-     */
-    private void checkReadContactsPermission() {
-        new Permission(this, new String[]{Manifest.permission.READ_CONTACTS}, new PermissionListener() {
-            @Override
-            public void onGranted() {
-                checkIfNeedUploadContacts();
-            }
-
-            @Override
-            public void onDenied() {
-            }
-        });
-    }
-
-    private void checkIfNeedUploadContacts() {
-        boolean hasUploadContactSuccess = SPUtils.getBoolean(ConstantValue.UPLOAD_CONTACT_SUCCESS, false);
-        long lastUploadContactTime = SPUtils.getLong(ConstantValue.UPLOAD_CONTACT_TIME, 0);
-        int differDays = MyTimeUtils.countDaysByMillisecond(lastUploadContactTime, System.currentTimeMillis());
-
-        //如果上次上传不成功，或者间隔>=6天,重新上传
-        if (!hasUploadContactSuccess || differDays >= 6) {
-            uploadContactsOnly();
-        }
+        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
     }
 
     /**
@@ -514,98 +428,15 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
     }
 
     /**
-     * 满足条件时上传短信
-     */
-    private void prepareUploadSmsData() {
-        new Permission(this, new String[]{Manifest.permission.READ_SMS}, new PermissionListener() {
-            @Override
-            public void onGranted() {
-                uploadSmsOnly();
-            }
-
-            @Override
-            public void onDenied() {
-
-            }
-        });
-    }
-
-    /**
-     * 满足条件时上传通话记录
-     */
-    private void prepareUploadCallRecordData() {
-        new Permission(this, new String[]{Manifest.permission.READ_CALL_LOG}, new PermissionListener() {
-            @Override
-            public void onGranted() {
-                uploadCallRecordOnly();
-            }
-
-            @Override
-            public void onDenied() {
-
-            }
-        });
-    }
-
-    /**
-     * 上传短信
-     */
-    private void uploadSmsOnly() {
-        new UploadDataBySingle().uploadSms(BaseApplication.mUserId, new UploadDataBySingle.UploadSmsListener() {
-            @Override
-            public void success() {
-            }
-
-            @Override
-            public void error() {
-            }
-        });
-    }
-
-    /**
-     * 上传通话记录
-     */
-    private void uploadCallRecordOnly() {
-        new UploadDataBySingle().uploadCallRecord(BaseApplication.mUserId, new UploadDataBySingle.UploadCallRecordListener() {
-            @Override
-            public void success() {
-            }
-
-            @Override
-            public void error() {
-            }
-        });
-    }
-
-    /**
-     * 上传app list
-     */
-    private void uploadAppListOnly() {
-        new UploadDataBySingle().uploadAppList(BaseApplication.mUserId, new UploadDataBySingle.UploadAppListListener() {
-            @Override
-            public void success() {
-            }
-
-            @Override
-            public void error() {
-            }
-        });
-    }
-
-
-    /**
      * 开始申请权限
      */
     public void prepareUpdateNecessaryData() {
         String[] startPermission = new String[]{
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.READ_CONTACTS
         };
         new Permission(this, startPermission, new PermissionListener() {
             @Override
             public void onGranted() {
-
                 uploadNecessaryData(type2or3Obj, type2or3Function, true);
             }
 
@@ -741,8 +572,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("karl", "所有数据传输成功...");
-
                         dialog.dismiss();
                         Map<String, String> map = new HashMap<>();
                         map.put("isSucceed", "1");
@@ -772,7 +601,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 
     @Override
     protected void initializeImmersiveMode() {
-        // 不使用ImmersionBar，以防导致输入框不会自动上移
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = mContext.getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

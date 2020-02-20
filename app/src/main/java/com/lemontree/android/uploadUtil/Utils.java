@@ -12,7 +12,6 @@ import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.lemontree.android.service.LocationService;
 import com.google.gson.Gson;
 import com.lemontree.android.manager.BaseApplication;
 
@@ -215,12 +214,9 @@ public class Utils {
         map.put("tokenNo", Tools.getIMEI(BaseApplication.getInstance()));
         map.put("simphone", Tools.getNativePhoneNumber(BaseApplication.getInstance()));
         map.put("locationType", Tools.getNetworkType());
-        map.put("locationX", LocationService.getInstance().getLocationX() + "");
-        map.put("locationY", LocationService.getInstance().getLocationY() + "");
-        map.put("location", LocationService.getInstance().getLocation() + "");
-//        Log.d("karl2", "LocationService.getInstance().getLocationX():" + LocationService.getInstance().getLocationX());
-//        Log.d("karl2", "LocationService.getInstance().getLocationY():" + LocationService.getInstance().getLocationY());
-//        Log.d("karl2", LocationService.getInstance().getLocation());
+//        map.put("locationX", LocationService.getInstance().getLocationX() + "");
+//        map.put("locationY", LocationService.getInstance().getLocationY() + "");
+//        map.put("location", LocationService.getInstance().getLocation() + "");
 
         return map;
     }

@@ -143,8 +143,9 @@
                 android:layout_below="@id/indicator_green"
                 android:layout_marginTop="5dp"
                 android:background="@null"
-                android:max="14"
+                android:max="180"
                 android:maxHeight="3dp"
+                android:min="91"
                 android:progressDrawable="@drawable/seek_bar_bg_green"
                 android:splitTrack="false"
                 android:thumb="@drawable/seek_bar_thumb_green" />
@@ -155,7 +156,7 @@
                 android:layout_below="@id/seek_bar_want_time"
                 android:layout_alignLeft="@id/seek_bar_want_time"
                 android:layout_marginTop="4dp"
-                android:text="3 hari"
+                android:text="91 hari"
                 android:textColor="#5F5F5F" />
 
             <TextView
@@ -164,7 +165,7 @@
                 android:layout_below="@id/seek_bar_want_time"
                 android:layout_alignRight="@id/seek_bar_want_time"
                 android:layout_marginTop="4dp"
-                android:text="14 hari"
+                android:text="180 hari"
                 android:textColor="#5F5F5F" />
         </RelativeLayout>
 

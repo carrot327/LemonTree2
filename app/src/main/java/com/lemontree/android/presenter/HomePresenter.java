@@ -49,15 +49,12 @@ import static com.lemontree.android.utils.UIUtils.showToast;
 public class HomePresenter extends BasePresenter<IHomeView> {
     private Context mContext;
     private BorrowApplyInfoResBean mBorrowApplyInfoResBean;
-    private boolean mHasUpdateSmsSuccess;
-    private boolean mHasUpdateCallLogSuccess;
     private final ProgressDialog mDialog;
 
 
     public HomePresenter(Context context, IHomeView view, Fragment fragment) {
         super(context, view, fragment);
         this.mContext = context;
-
         loadData(true);
         mDialog = new ProgressDialog(mContext);
     }
@@ -273,10 +270,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     public void requestPermissions() {
 
         new Permission(mContext, new String[]{
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.READ_CONTACTS,
-                Manifest.permission.READ_PHONE_STATE,//包含READ_CALL_LOG
-                Manifest.permission.READ_SMS,
+                Manifest.permission.READ_CONTACTS
         }, new PermissionListener() {
             @Override
             public void onGranted() {
@@ -296,37 +290,16 @@ public class HomePresenter extends BasePresenter<IHomeView> {
         } else {
             showToast(R.string.allow_permission_and_try_again);
         }
-        if (isGetSMSPermission()) {
-            if (!mHasUpdateSmsSuccess) {
-                uploadSmsOnly();
-            }
-        }
-        if (isGetCallLogPermission()) {
-            if (!mHasUpdateCallLogSuccess) {
-                uploadCallRecordOnly();
-            }
-        }
     }
 
     private boolean isGetNecessaryPermission() {
-        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean isGetSMSPermission() {
-        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_SMS) == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private boolean isGetCallLogPermission() {
-        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_GRANTED;
+        return ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED;
     }
 
     /**
      * 上传数据
      */
     private void uploadNecessaryData() {
-        Log.d("karl", "aaa");
         mDialog.setMessage("Loading...");
         mDialog.show();
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
@@ -352,73 +325,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                 });
             }
         }, true);
-    }
-
-
-    /**
-     * 满足条件时上传短信
-     */
-    public void prepareUploadSmsData() {
-        new Permission(mContext, new String[]{Manifest.permission.READ_SMS}, new PermissionListener() {
-            @Override
-            public void onGranted() {
-                uploadSmsOnly();
-            }
-
-            @Override
-            public void onDenied() {
-
-            }
-        });
-    }
-
-    /**
-     * 上传短信
-     */
-    private void uploadSmsOnly() {
-        new UploadDataBySingle().uploadSms(BaseApplication.mUserId, new UploadDataBySingle.UploadSmsListener() {
-            @Override
-            public void success() {
-                mHasUpdateSmsSuccess = true;
-            }
-
-            @Override
-            public void error() {
-            }
-        });
-    }
-
-    /**
-     * 满足条件时上传通话记录
-     */
-    public void prepareUploadCallRecordData() {
-        new Permission(mContext, new String[]{Manifest.permission.READ_CALL_LOG}, new PermissionListener() {
-            @Override
-            public void onGranted() {
-                uploadCallRecordOnly();
-            }
-
-            @Override
-            public void onDenied() {
-
-            }
-        });
-    }
-
-    /**
-     * 上传通话记录
-     */
-    private void uploadCallRecordOnly() {
-        new UploadDataBySingle().uploadCallRecord(BaseApplication.mUserId, new UploadDataBySingle.UploadCallRecordListener() {
-            @Override
-            public void success() {
-                mHasUpdateCallLogSuccess = true;
-            }
-
-            @Override
-            public void error() {
-            }
-        });
     }
 
     /**
@@ -466,17 +372,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                             if (mView != null) {
                                 mView.handleCouponInfo(response);
                             }
-
-//                            if (isNoNeedShowDialog) {
-//                                if ("1".equals(response.couponStatus)) {//1已激活
-//                                    mView.setCouponInfo(response);
-//                                } else if ("0".equals(response.couponStatus) || "2".equals(response.couponStatus)) {//0 未激活  2已使用
-//                                    mView.noCoupon();
-//                                    mView.setBorrowPageCouponText();
-//                                }
-//                            } else {
-//                                mView.showCouponDialog(response);
-//                            }
                         } else {
                             mView.noCoupon(response);
                         }

@@ -188,7 +188,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
 
     public static int mSelectAmount = 1000000;
-    public static int mSelectTime = 7;
+    public static int mSelectTime = 120;
     public static int mSelectType = 1;//1为7天   2为14天
     private HomeDataResBean mHomeData = new HomeDataResBean();
     private String[] mPayWayList;
@@ -980,11 +980,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
             mRefreshLayout.setEnableRefresh(true);
-            mSelectTime = 7;
             seekBar.setProgress(mSelectTime);
             mSbIndicatorTime.setText(mSelectTime + " hari");
             calcInterest();
-            showToast(getString(R.string.toast_7_days_only));
         }
     };
 

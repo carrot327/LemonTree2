@@ -18,7 +18,7 @@ android {
         vectorDrawables.useSupportLibrary = true //矢量图支持
 
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters "armeabi-v7a"
         }
     }
     signingConfigs {
@@ -88,8 +88,6 @@ dependencies {
     implementation project(':NetworkLite')
     implementation project(':DFActionLiveness')
     implementation project(':UpdateSDK')
-
-    implementation files('libs/BaiduLBS_Android.jar')
 
     implementation 'com.google.code.gson:gson:2.8.5'
 
