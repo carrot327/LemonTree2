@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,9 +13,10 @@
 
         <RelativeLayout
             android:id="@+id/id_ll_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp">
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
+            android:paddingLeft="20dp">
 
             <ImageView
                 android:layout_width="9dp"
@@ -28,8 +30,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/notice_size" />
+            android:textSize="@dimen/notice_size"
+            tools:text="Silahkan letakkan wajah Anda di tengah" />
 
     </RelativeLayout>
 
@@ -37,7 +41,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp">
+        android:layout_marginTop="50dp">
 
         <com.liveness.dflivenesslibrary.view.DFGifView
             android:id="@+id/id_gv_play_action"
@@ -64,6 +68,7 @@
         android:layout_alignParentBottom="true"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/viewGroup"
             android:layout_width="fill_parent"

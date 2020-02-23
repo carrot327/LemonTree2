@@ -102,9 +102,9 @@ public class StartLivenessActivity extends BaseActivity {
         intent.putExtras(bundle);
         //设置返回图片结果
         intent.putExtra(DFActionLivenessActivity.KEY_DETECT_IMAGE_RESULT, true);
-        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_HAS_FACE, "Please hold still");
-        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_NO_FACE, "Please place your face inside the circle");
-        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_FACE_NOT_VALID, "Please move away from the screen");
+        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_HAS_FACE, getString(R.string.string_liveness_has_face_and_holdstill_hint));
+        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_NO_FACE, getString(R.string.string_liveness_no_face_hint));
+        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_FACE_NOT_VALID, getString(R.string.liveness_face_not_valid_hint));
         startActivityForResult(intent, LIVENESS_REQUEST_CODE);
     }
 

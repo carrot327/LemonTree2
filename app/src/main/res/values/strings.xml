@@ -101,6 +101,11 @@
     <string name="text_liveness_hint2">*Harap pastikan diri Anda sendiri yang melakukan operasi ini.</string>
     <string name="text_liveness_hint3">Silahkan letakkan wajah Anda di tengah</string>
     <string name="text_liveness_hint4">Harap menjauh dari sedikit</string>
+
+    <string name="string_liveness_has_face_and_holdstill_hint">Harap tetap diam</string>
+    <string name="string_liveness_no_face_hint">Silahkan letakkan wajah Anda di tengah</string>
+    <string name="liveness_face_not_valid_hint">Harap menjauh dari sedikit</string>
+
     <string name="allow_permission_and_try_again">Harap beri otorisasi dan coba lagi</string>
     <string name="text_delay_time">Batas waktu \npembayaran ini</string>
     <string name="text_no_pay_way">Tidak ada saluran pembayaran</string>
