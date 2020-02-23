@@ -51,6 +51,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
 
@@ -238,12 +241,55 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-
+                    startActivity(StartLivenessActivity.createIntent(mContext));
+//                    String licenseString = getAssetResource("DFLicense");
+//                    if (TextUtils.isEmpty(licenseString)) {
+//                        licenseString = getAssetResource("DFLicense");
+//                    }
+//                    showToast(licenseString);
                 }
                 return true;
             }
         });
     }
+
+    private String getAssetResource(String licenseName) {
+        StringBuilder sb = new StringBuilder();
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+
+        try {
+            isr = new InputStreamReader(this.mContext.getResources().getAssets().open(licenseName));
+            br = new BufferedReader(isr);
+            String line = null;
+
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+        } catch (IOException var18) {
+            var18.printStackTrace();
+        } finally {
+            if (isr != null) {
+                try {
+                    isr.close();
+                } catch (IOException var17) {
+                    var17.printStackTrace();
+                }
+            }
+
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException var16) {
+                    var16.printStackTrace();
+                }
+            }
+
+        }
+
+        return sb.toString();
+    }
+
 
     @Override
     protected void loadData(boolean hasRequestData) {

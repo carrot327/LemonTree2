@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.deepfinch.liveness.DFLivenessSDK;
+import com.dfsdk.liveness.DFLivenessSDK;
 import com.liveness.dflivenesslibrary.DFProductResult;
 import com.liveness.dflivenesslibrary.DFTransferResultInterface;
 import com.liveness.dflivenesslibrary.liveness.DFActionLivenessActivity;
@@ -89,13 +89,12 @@ public class StartLivenessActivity extends BaseActivity {
         });
     }
 
-//    private String MOTION_SEQUENCE = "HOLD_STILL BLINK";
-    private String MOTION_SEQUENCE = "HOLD_STILL BLINK MOUTH NOD YAW";
+    //    private String MOTION_SEQUENCE = "STILL BLINK";
+    private String MOTION_SEQUENCE = "STILL BLINK MOUTH NOD YAW";
 
     private void startActionLiveness() {
         Bundle bundle = new Bundle();
         bundle.putString(DFActionLivenessActivity.OUTTYPE, Constants.MULTIIMG);
-        //HOLD_STILL(静止), BLINK(眨眼), MOUTH（张嘴）, NOD（点头）, YAW（摇头）, 各个动作以空格隔开。 第一个动作必须为HOLD_STILL。
         bundle.putString(DFActionLivenessActivity.EXTRA_MOTION_SEQUENCE, MOTION_SEQUENCE);
 
         Intent intent = new Intent();
@@ -103,6 +102,9 @@ public class StartLivenessActivity extends BaseActivity {
         intent.putExtras(bundle);
         //设置返回图片结果
         intent.putExtra(DFActionLivenessActivity.KEY_DETECT_IMAGE_RESULT, true);
+        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_HAS_FACE, "Please hold still");
+        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_NO_FACE, "Please place your face inside the circle");
+        intent.putExtra(DFActionLivenessActivity.KEY_HINT_MESSAGE_FACE_NOT_VALID, "Please move away from the screen");
         startActivityForResult(intent, LIVENESS_REQUEST_CODE);
     }
 
@@ -114,8 +116,8 @@ public class StartLivenessActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //成功只有一种情况：上传照片成功和防hack成功。  失败有两种情况：识别失败和上传失败，此时都需重做。
         if (requestCode == LIVENESS_REQUEST_CODE) {
+            showToast(resultCode + "");
             if (resultCode == RESULT_OK) {
                 //上传照片，上传成功后，跳转到成功页。
                 ivCenterImage.setImageDrawable(getResources().getDrawable(R.drawable.bg_start_liveness));
@@ -125,17 +127,25 @@ public class StartLivenessActivity extends BaseActivity {
 
                 getAndUploadImg();
             } else {
-                //记录失败的次数，如果超过2次，则开启静默识别（只是省掉后续四个步骤）
-                mFailedCount++;
-                if (mFailedCount >= 2) {
-                    MOTION_SEQUENCE = "HOLD_STILL BLINK";
+                if (data != null) {
+                    int errorCode = data.getIntExtra(DFActionLivenessActivity.KEY_RESULT_ERROR_CODE, -10000);
+                    Log.e("onActivityResult", "action liveness cancel，error code:" + errorCode);
+                }else {
+                    showToast("data is null");
                 }
 //                startActivity(LivenessFailedActivity.createIntent(mContext));
-                //update view
-                ivCenterImage.setImageDrawable(getResources().getDrawable(R.drawable.bg_liveness_failed));
-                tvHintTextTop.setText(getResources().getString(R.string.text_analysis_failed));
-                tvHintTextBottom.setVisibility(View.INVISIBLE);
-                btnConfirm.setText(getResources().getString(R.string.text_try_again));
+
+
+                //记录失败的次数，如果超过2次，则开启静默识别（只是省掉后续四个步骤）
+//                mFailedCount++;
+//                if (mFailedCount >= 2) {
+//                    MOTION_SEQUENCE = "STILL BLINK";
+//                }
+//                //update view
+//                ivCenterImage.setImageDrawable(getResources().getDrawable(R.drawable.bg_liveness_failed));
+//                tvHintTextTop.setText(getResources().getString(R.string.text_analysis_failed));
+//                tvHintTextBottom.setVisibility(View.INVISIBLE);
+//                btnConfirm.setText(getResources().getString(R.string.text_try_again));
             }
         }
     }
@@ -154,7 +164,6 @@ public class StartLivenessActivity extends BaseActivity {
                     new UploadImg.UploadLivenessInfoListener() {
                         @Override
                         public void success() {
-                            Log.d("aaaaa", "uploadLivenessInfo success");
                             handler.sendEmptyMessage(1);
                         }
 
