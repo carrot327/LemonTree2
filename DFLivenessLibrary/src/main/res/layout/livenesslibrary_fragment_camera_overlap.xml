@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:overlay_circle_radius="150dp"
-        app:overlay_circle_top="150dp"
+        app:overlay_circle_top="80dp"
         android:visibility="visible"/>
 
 </com.liveness.dflivenesslibrary.camera.FixedAspectRatioFrameLayout>

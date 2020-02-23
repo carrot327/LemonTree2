@@ -41,7 +41,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="420dp">
 
         <com.liveness.dflivenesslibrary.view.DFGifView
             android:id="@+id/id_gv_play_action"
