@@ -1,6 +1,8 @@
 package com.sm.android.utils;
 
 
+import android.text.TextUtils;
+
 import java.math.BigDecimal;
 
 /**
@@ -93,5 +95,30 @@ public class StringFormatUtils {
     public static double formatDouble(double d, int i) {
         BigDecimal bg = new BigDecimal(d);
         return bg.setScale(i, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+    public static String formatIndMoney(String fee) {
+        if (!TextUtils.isEmpty(fee)) {
+            String originFee = fee;
+            if (fee.contains(".")) {
+                String[] split = fee.split("\\.");
+                originFee = split[0];
+            }
+            return String.format("Rp. %s", formatNumber(Integer.parseInt(originFee)));
+        } else {
+            return String.format("Rp. %s", "0");
+        }
+    }
+
+    public static String formatNumber(String selectInterest) {
+        if (!TextUtils.isEmpty(selectInterest)) {
+            return formatNumber(Integer.parseInt(selectInterest));
+        } else {
+            return "0";
+        }
+    }
+
+    public static String formatNumber(int selectInterest) {
+        return CurrencyFormatUtils.formatDecimal(String.valueOf(selectInterest));
     }
 }

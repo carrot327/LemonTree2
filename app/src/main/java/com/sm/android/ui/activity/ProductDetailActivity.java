@@ -20,6 +20,9 @@ import com.sm.android.utils.MarkUtil;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.sm.android.utils.StringFormatUtils.formatIndMoney;
+import static com.sm.android.utils.StringFormatUtils.formatNumber;
+
 
 public class ProductDetailActivity extends BaseActivity {
 
@@ -27,28 +30,23 @@ public class ProductDetailActivity extends BaseActivity {
     ImageView ivLogo;
     @BindView(R.id.tv_product_name)
     TextView tvProductName;
-    @BindView(R.id.tv_amount_range_text)
-    TextView tvAmountRangeText;
     @BindView(R.id.tv_amount_range)
     TextView tvAmountRange;
-    @BindView(R.id.tv_time_limit_text)
-    TextView tvTimeLimitText;
     @BindView(R.id.tv_time_limit)
     TextView tvTimeLimit;
-    @BindView(R.id.tv_month_rate_text)
-    TextView tvMonthRateText;
-    @BindView(R.id.tv_month_rate)
-    TextView tvMonthRate;
-    @BindView(R.id.tv_apply_condition)
-    TextView tvApplyCondition;
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.tv_title_bar_title)
     TextView tvTitleBarTitle;
-    @BindView(R.id.iv_tag_rid_out)
-    ImageView ivTag;
     @BindView(R.id.btn_apply)
     Button btnApply;
+
+    @BindView(R.id.tv_loan_info_interest)
+    TextView tvLoanInfoInterest;
+    @BindView(R.id.tv_loan_info_total_get_amount)
+    TextView tvLoanInfoTotalGetAmount;
+    @BindView(R.id.tv_loan_info_loan_amount)
+    TextView tvLoanInfoLoanAmount;
 
     public static final String PRODUCT_DATA = "product_data";
     private NewCustomerProductResBean.ProductListBean mProductData;
@@ -71,20 +69,30 @@ public class ProductDetailActivity extends BaseActivity {
 
     @Override
     protected void initializeView() {
+        if (!TextUtils.isEmpty(mProductData.rangeLimit) && !TextUtils.isEmpty(mProductData.monthRate)) {
+            Double maxBorrowRange = Double.valueOf(mProductData.rangeLimit);
+            Double dayRate = Double.valueOf(mProductData.monthRate);
+            Double interest = maxBorrowRange * dayRate;
+            Double getAmount = maxBorrowRange - interest;
+            tvLoanInfoInterest.setText(formatIndMoney(interest + ""));
+            tvLoanInfoTotalGetAmount.setText(formatIndMoney(getAmount + ""));
+        } else {
+            tvLoanInfoInterest.setText("0");
+            tvLoanInfoTotalGetAmount.setText(formatIndMoney("0"));
+        }
+
         tvTitleBarTitle.setText(mProductData.productName);
 
         Glide.with(mContext).load(mProductData.productLogoUrl).apply(RequestOptions.bitmapTransform(new RoundedCorners(20))).into(ivLogo);
         tvProductName.setText(mProductData.productName);
-        tvAmountRange.setText(mProductData.rangeLimit);//额度范围
+        tvAmountRange.setText(formatNumber(mProductData.rangeLimit));//额度范围
         tvTimeLimit.setText(mProductData.timeLimit);//借款期限
-        tvMonthRate.setText(mProductData.monthRate);
-        tvApplyCondition.setText(mProductData.applyCondition);
+        tvLoanInfoLoanAmount.setText(formatIndMoney(mProductData.rangeLimit));
+
         if (TextUtils.isEmpty(mProductData.productUrl)) {
             btnApply.setVisibility(View.GONE);
-            ivTag.setVisibility(View.VISIBLE);
         } else {
             btnApply.setVisibility(View.VISIBLE);
-            ivTag.setVisibility(View.GONE);
         }
     }
 
@@ -102,6 +110,7 @@ public class ProductDetailActivity extends BaseActivity {
             case R.id.btn_apply:
                 if (!TextUtils.isEmpty(mProductData.productUrl)) {
                     IntentUtils.openWebViewActivity(mContext, mProductData.productUrl);
+//                    IntentUtils.openWebViewActivity(mContext,"https://yn-coco-bao.oss-ap-southeast-1.aliyuncs.com/CocoTree-V1.1.apk");
                     MarkUtil.markCustomerProduct(mProductData.id);
                 }
 

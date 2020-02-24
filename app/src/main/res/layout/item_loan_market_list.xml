@@ -1,74 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rv_item"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:layout_marginStart="10dp"
+    android:layout_marginTop="5dp"
     android:layout_marginEnd="10dp"
     android:background="@drawable/slt_shadow_item"
     android:clickable="true"
     android:focusable="true"
     android:maxHeight="130dp"
-    android:padding="10dp"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="15dp"
     tools:targetApi="lollipop">
 
-
-    <ImageView
-        android:id="@+id/iv_icon"
-        android:layout_width="68dp"
-        android:layout_height="68dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/icon_login_turing_code" />
-
-    <TextView
-        android:id="@+id/tv_product_name"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/iv_icon"
-        android:layout_toRightOf="@id/iv_icon"
-        android:textColor="@color/CommonTextColor"
-        android:textSize="18sp"
-        tools:text="极速贷" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_product_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_product_name"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@id/iv_icon"
-        android:textColor="@color/grey_text_color"
-        android:textSize="12sp"
-        tools:text="最高可借" />
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/icon_login_turing_code" />
 
-    <TextView
-        android:id="@+id/tv_product_amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/iv_icon"
-        android:layout_toRightOf="@id/iv_icon"
-        android:textColor="@color/CommonTextColor"
-        android:textSize="14sp"
-        tools:text="3000.00" />
-
-    <TextView
-        android:id="@+id/tv_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="18dp"
-        android:background="@drawable/bg_button_border_theme_color"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        android:textColor="@color/theme_color"
-        android:textSize="12sp"
-        tools:text="Pinjam" />
+        <TextView
+            android:id="@+id/tv_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="18sp"
+            tools:text="Colada" />
+    </LinearLayout>
 
     <View
         android:id="@+id/view_divide"
@@ -76,40 +45,108 @@
         android:layout_height="1dp"
         android:layout_below="@+id/iv_icon"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:background="@color/app_divide_line" />
 
-    <TextView
-        android:id="@+id/tv_speed"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view_divide"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="#FC796D"
-        android:textSize="13sp"
-        tools:text="口子多" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_month_rate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view_divide"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toRightOf="@+id/tv_speed"
-        android:textColor="#FC796D"
-        android:textSize="13sp"
-        tools:text="月费率2%" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_tag_matched"
-        android:layout_width="66dp"
-        android:layout_height="45dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:src="@drawable/icon_match" />
-</RelativeLayout>
+            <TextView
+                android:id="@+id/tv_product_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="3000.00" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Maksimum"
+                android:textColor="@color/grey_text_color"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_product_interest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="0.05%/hari" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Bunga"
+                android:textColor="@color/grey_text_color"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_product_review_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="1hari"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Proses"
+                android:textColor="@color/grey_text_color"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/slt_btn_circle_corner_theme_color"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="Segera ambil"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+</LinearLayout>

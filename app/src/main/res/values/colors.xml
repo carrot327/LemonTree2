@@ -11,6 +11,7 @@
     <color name="text_theme_deep">#3575E9</color>
 
     <color name="text_bg_blue">#e3f4fc</color>
+    <color name="bg_page">#F9F9F9</color>
 
     <!--深蓝到浅紫的渐变 -->
     <color name="blue_gradient_start">#5b7bf4</color>
@@ -42,7 +43,7 @@
     <color name="green_gradient_end">#31DBAC</color>
     <!--文字颜色 -->
     <color name="text_black">#333333</color>
-    <color name="text_grey">#666666</color>
+    <color name="text_grey">#424242</color>
     <color name="text_blue">#3575E9</color>
     <color name="text_blue_deep">#3575E9</color>
     <color name="text_light">#cccccc</color>

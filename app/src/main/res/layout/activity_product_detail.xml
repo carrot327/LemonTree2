@@ -27,7 +27,7 @@
             android:layout_centerInParent="true"
             android:textColor="#000000"
             android:textSize="18sp"
-            tools:text="快来分期" />
+            tools:text="Colada" />
     </RelativeLayout>
 
     <View
@@ -58,88 +58,67 @@
             android:layout_marginTop="10dp"
             android:textColor="#3F3F3F"
             android:textSize="17sp"
-            tools:text="快来分期" />
-
-        <ImageView
-            android:id="@+id/iv_tag_rid_out"
-            android:layout_width="124dp"
-            android:layout_height="111dp"
-            android:layout_marginLeft="-30dp"
-            android:layout_toRightOf="@id/tv_product_name"
-            android:src="@drawable/icon_rid_out" />
-
+            tools:text="Colada" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_amount_range_text"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="额度范围(元)"
-            android:textColor="#606060"
-            android:textSize="13sp" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_amount_range"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_amount_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:text="3000.00" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Maksimum(Rp)"
+                android:textColor="@color/grey_text_color"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_amount_range_text"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="5dp"
-            android:text=""
-            android:textColor="#606060"
-            android:textSize="13sp"
-            tools:text="3000～1万" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tv_time_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/CommonTextColor"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                tools:text="1hari" />
 
-        <TextView
-            android:id="@+id/tv_time_limit_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="期限"
-            android:textColor="#606060"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tv_time_limit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_time_limit_text"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:text="1～3个月"
-            android:textColor="#606060"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tv_month_rate_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="月利率"
-            android:textColor="#606060"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tv_month_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_month_rate_text"
-            android:layout_alignStart="@id/tv_month_rate_text"
-            android:layout_marginTop="5dp"
-            android:text="2%"
-            android:textColor="#606060"
-            android:textSize="13sp" />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Lama pinjam"
+                android:textColor="@color/grey_text_color"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -151,19 +130,96 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="申请条件"
+        android:text="Informasi referensi"
         android:textColor="#3B3B3B" />
 
-    <TextView
-        android:id="@+id/tv_apply_condition"
-        android:layout_width="wrap_content"
+    <View
+        android:id="@+id/view_divide"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/iv_icon"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/app_divide_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:textColor="#606060"
-        android:textSize="13sp"
-        tools:text="sdfsdf\nsdfsdf\sdf " />
+        android:layout_marginTop="15dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Jumlah Pinjaman"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_loan_info_loan_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/text_grey"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="Rp.400,000" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Biaya Pinjaman"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_loan_info_interest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/text_grey"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="Rp.28,000" />
+    </RelativeLayout><!--Name-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="Jumlah total yang diterima"
+            android:textColor="@color/CommonTextColor"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_loan_info_total_get_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/text_grey"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="Rp.372,000" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -175,10 +231,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/slt_btn_circle_corner_theme_color"
-            android:text="立即申请"
+            android:text="Segera mengajukan"
+            android:textAllCaps="false"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>
