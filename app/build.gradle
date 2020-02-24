@@ -69,6 +69,12 @@ android {
         sakumanis_1202 {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_1202"]
         }
+        sakumanis_0219 {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_0219"]
+        }
+        rong3 {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "rong3"]
+        }
     }
 }
 

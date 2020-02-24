@@ -237,7 +237,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-
+                    ((MainActivity) getActivity()).showApplyTab();
                 }
                 return true;
             }

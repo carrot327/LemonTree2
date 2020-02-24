@@ -49,6 +49,7 @@ import com.sm.android.network.OKHttpClientEngine;
 import com.sm.android.presenter.MainPresenter;
 import com.sm.android.service.LocationService;
 import com.sm.android.ui.fragment.ApplyFragment;
+import com.sm.android.ui.fragment.FindFragment;
 import com.sm.android.ui.fragment.HomeFragment;
 import com.sm.android.ui.fragment.MineFragment;
 import com.sm.android.ui.widget.HomeTabView;
@@ -88,12 +89,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     public static boolean sHasNewUnreadMsg;
 
     private MagicIndicator mMagicIndicator;
-    private TabResourceBean tabResourceBean3Tab, tabResourceBean2Tab;
+    private TabResourceBean tabResourceBean2Tab, tabResourceBean3Tab, tabResourceBean4Tab;
     private MultiClickHelper mMultiClickHelper = new MultiClickHelper(2, 2000);
     private int mCurrentIndex = -1;
     private List<Fragment> mListFragments = new ArrayList<>();
-    private List<Fragment> mListFragments2Tab = new ArrayList<>();
     private List<Fragment> mListFragments3Tab = new ArrayList<>();
+    private List<Fragment> mListFragments4Tab = new ArrayList<>();
     public static boolean sHasGetAuthStatusList = false;
     public static boolean sHasGetBankCardList = false;
 
@@ -105,6 +106,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     public static String sFormatSelectTime;
     public static String sFormatSelectInterest;
     private FrameLayout mainFrameLayout;
+    private MineFragment mineFragment;
+    private FindFragment findFragment;
+    private ApplyFragment applyFragment;
+    private HomeFragment homeFragment;
 
     @Override
     protected int getLayoutResId() {
@@ -112,10 +117,15 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     }
 
     @Override
+    protected void initializePrepareData() {
+        initTabRes();
+    }
+
+    @Override
     protected void initializeView() {
         mainFrameLayout = findViewById(R.id.frame_main_fragment_container);
-        mListFragments = mListFragments3Tab;
-        initIndicator(tabResourceBean3Tab);
+        mListFragments = mListFragments4Tab;
+        initIndicator(tabResourceBean4Tab);
         switchTab(0);
     }
 
@@ -149,11 +159,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
@@ -179,38 +184,36 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         }
     }
 
-    @Override
-    protected void initializePrepareData() {
-        initTabRes();
-    }
-
 
     private void initTabRes() {
-        HomeFragment homeFragment = new HomeFragment();
-        ApplyFragment applyFragment = new ApplyFragment();
-        MineFragment mineFragment = new MineFragment();
+        homeFragment = new HomeFragment();
+        applyFragment = new ApplyFragment();
+        findFragment = new FindFragment();
+        mineFragment = new MineFragment();
 
-        tabResourceBean2Tab = new TabResourceBean();
         tabResourceBean3Tab = new TabResourceBean();
-
-        mListFragments2Tab.add(homeFragment);
-        mListFragments2Tab.add(mineFragment);
+        tabResourceBean4Tab = new TabResourceBean();
 
         mListFragments3Tab.add(homeFragment);
-        mListFragments3Tab.add(applyFragment);
+        mListFragments3Tab.add(findFragment);
         mListFragments3Tab.add(mineFragment);
 
-        tabResourceBean2Tab.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_mine};
-        tabResourceBean2Tab.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_mine_selected};
-        tabResourceBean2Tab.tabText = new String[]{"Pinjaman", "Saya"};
-        tabResourceBean2Tab.textColorNormal = R.color.tab_text;
-        tabResourceBean2Tab.textColorSelected = R.color.tab_text_hover;
+        mListFragments4Tab.add(homeFragment);
+        mListFragments4Tab.add(applyFragment);
+        mListFragments4Tab.add(findFragment);
+        mListFragments4Tab.add(mineFragment);
 
-        tabResourceBean3Tab.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_apply, R.drawable.icon_tab_mine};
-        tabResourceBean3Tab.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_apply_selected, R.drawable.icon_tab_mine_selected};
-        tabResourceBean3Tab.tabText = new String[]{"Pinjaman", "Informasi", "Saya"};
+        tabResourceBean3Tab.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_find, R.drawable.icon_tab_mine};
+        tabResourceBean3Tab.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_find_selected, R.drawable.icon_tab_mine_selected};
+        tabResourceBean3Tab.tabText = new String[]{"Pinjaman", "Find", "Saya"};
         tabResourceBean3Tab.textColorNormal = R.color.tab_text;
         tabResourceBean3Tab.textColorSelected = R.color.tab_text_hover;
+
+        tabResourceBean4Tab.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_apply, R.drawable.icon_tab_find, R.drawable.icon_tab_mine};
+        tabResourceBean4Tab.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_apply_selected, R.drawable.icon_tab_find_selected, R.drawable.icon_tab_mine_selected};
+        tabResourceBean4Tab.tabText = new String[]{"Pinjaman", "Informasi", "Find", "Saya"};
+        tabResourceBean4Tab.textColorNormal = R.color.tab_text;
+        tabResourceBean4Tab.textColorSelected = R.color.tab_text_hover;
 
     }
 
@@ -289,30 +292,29 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         refreshImmersiveMode();
     }
 
-    public void hideApplyTab() {
-        if (mListFragments.size() != 2) {
-            initIndicator(tabResourceBean2Tab);
-            mListFragments = mListFragments2Tab;
-            if (mCurrentIndex == 2) {
-                switchTab(1);
+    public void showApplyTab() {
+        if (!mListFragments.contains(applyFragment)) {
+            initIndicator(tabResourceBean4Tab);
+            mListFragments = mListFragments4Tab;
+            if (mListFragments.get(mCurrentIndex) instanceof MineFragment) {
+                switchTab(3);
             } else {
                 switchTab(0);
             }
         }
     }
 
-    public void showApplyTab() {
-        if (mListFragments.size() != 3) {
+    public void hideApplyTab() {
+        if (mListFragments.contains(applyFragment)) {
             initIndicator(tabResourceBean3Tab);
             mListFragments = mListFragments3Tab;
-            if (mListFragments.get(mCurrentIndex) instanceof MineFragment) {
+            if (mCurrentIndex == 3) {
                 switchTab(2);
             } else {
                 switchTab(0);
             }
         }
     }
-
 
     private void refreshImmersiveMode() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
