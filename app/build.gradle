@@ -4,22 +4,22 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.sakumanis.android"
 
         minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 250
-        versionName "2.5"//待上线
+        targetSdkVersion 29
+        versionCode 260
+        versionName "2.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
 
-        ndk {
-            abiFilters "armeabi-v7a","x86"
-        }
+//        ndk {
+//            abiFilters "armeabi-v7a","x86"
+//        }
     }
     signingConfigs {
         release {
@@ -85,7 +85,7 @@ dependencies {
     implementation project(':JsBridge')
     implementation project(':Permission')
     implementation project(':NetworkLite')
-    implementation project(':DFActionLiveness')
+    implementation project(':DFLivenessLibrary')
     implementation project(':UpdateSDK')
 
     implementation files('libs/BaiduLBS_Android.jar')

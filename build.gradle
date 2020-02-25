@@ -24,7 +24,7 @@ allprojects {
         maven { url "https://jitpack.io" }
         mavenCentral()
         flatDir {
-            dirs project(':DFActionLiveness').file('libs')
+            dirs project(':DFLivenessLibrary').file('libs')
         }
     }
 }
