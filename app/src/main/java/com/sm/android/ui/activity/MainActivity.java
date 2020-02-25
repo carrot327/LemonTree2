@@ -56,6 +56,7 @@ import com.sm.android.ui.widget.HomeTabView;
 import com.sm.android.uploadUtil.Permission;
 import com.sm.android.utils.IntentUtils;
 import com.sm.android.utils.MultiClickHelper;
+import com.sm.android.utils.StringUtils;
 import com.sm.android.utils.UpdateUtil;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
@@ -141,18 +142,26 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         LocationService.getInstance().registerListener();
         checkStartPermission();
 
-        if (!BuildConfig.DEBUG) {
+        if (true || !BuildConfig.DEBUG) {
             onCheckGooglePlayServices();
             FirebaseInstanceId.getInstance().getInstanceId()
                     .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                         @Override
                         public void onComplete(@NonNull Task<InstanceIdResult> task) {
                             if (!task.isSuccessful()) {
-                                Log.w("firebase", "getInstanceId failed", task.getException());
+                                Log.w("karlMsg", "getInstanceId failed", task.getException());
                                 return;
                             }
                             String token = task.getResult().getToken();
-                            Log.d("karl", token);
+
+//                            String msg = getString(R.string.msg_token_fmt, token);
+                            Log.d("karlMsg", "token" + token);
+                            showToast(token + "");
+//                            Log.d("karl", msg);
+//                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                            if (StringUtils.copy(mContext, token)) {
+                                showToast("复制成功");
+                            }
                         }
                     });
         }

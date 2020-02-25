@@ -136,7 +136,7 @@
                     android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:visibility="invisible">
 
                     <ImageView
                         android:layout_width="15dp"
@@ -165,10 +165,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginLeft="25dp"
-                    android:gravity="center"
                     android:layout_marginTop="10dp"
+                    android:gravity="center"
                     android:orientation="horizontal"
-                    android:visibility="visible">
+                    android:visibility="invisible">
 
                     <ImageView
                         android:layout_width="15dp"

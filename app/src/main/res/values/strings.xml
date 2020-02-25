@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Saku Manis</string>
 
+    <string name="default_notification_channel_id">defaultChannel</string>
+    <string name="fcm_message">FCM Message</string>
+
     <string name="sign_up" translatable="false">Daftar</string>
     <string name="text_apply_loan">Ajukan pinjaman</string>
     <string name="text_want_amount">Silakan pilih jumlah pinjaman?</string>
