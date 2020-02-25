@@ -113,7 +113,6 @@ public class ProductDetailActivity extends BaseActivity {
 //                    IntentUtils.openWebViewActivity(mContext,"https://yn-coco-bao.oss-ap-southeast-1.aliyuncs.com/CocoTree-V1.1.apk");
                     MarkUtil.markCustomerProduct(mProductData.id);
                 }
-
                 break;
         }
     }
