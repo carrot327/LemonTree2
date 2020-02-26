@@ -102,7 +102,7 @@
     <string name="text_liveness_hint3">Silahkan letakkan wajah Anda di tengah</string>
     <string name="text_liveness_hint4">Harap menjauh dari sedikit</string>
 
-    <string name="string_liveness_has_face_and_holdstill_hint">Harap tetap diam</string>
+    <string name="string_liveness_has_face_and_holdstill_hint">Tolong jangan bergerak</string>
     <string name="string_liveness_no_face_hint">Silahkan letakkan wajah Anda di tengah</string>
     <string name="liveness_face_not_valid_hint">Harap menjauh dari sedikit</string>
 
