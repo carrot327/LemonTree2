@@ -1,1 +1,1 @@
-include ':app', ':Permission', ':JsBridge', ":NetworkLite", ':UpdateSDK'
+include ':app', ':Permission', ':JsBridge', ":NetworkLite", ':UpdateSDK', ':DFLivenessLibrary'

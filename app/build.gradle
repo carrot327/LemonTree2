@@ -77,7 +77,7 @@ dependencies {
     implementation project(':JsBridge')
     implementation project(':Permission')
     implementation project(':NetworkLite')
-//    implementation project(':DFActionLiveness')
+    implementation project(':DFLivenessLibrary')
     implementation project(':UpdateSDK')
 
     implementation files('libs/BaiduLBS_Android.jar')

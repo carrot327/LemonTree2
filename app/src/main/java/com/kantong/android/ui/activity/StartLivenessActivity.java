@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.deepfinch.liveness.DFLivenessSDK;
+import com.dfsdk.liveness.DFLivenessSDK;
 import com.liveness.dflivenesslibrary.DFProductResult;
 import com.liveness.dflivenesslibrary.DFTransferResultInterface;
 import com.liveness.dflivenesslibrary.liveness.DFActionLivenessActivity;
