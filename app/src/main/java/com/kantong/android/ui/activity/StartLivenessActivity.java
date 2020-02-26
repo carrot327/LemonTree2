@@ -87,13 +87,13 @@ public class StartLivenessActivity extends BaseActivity {
         });
     }
 
-//    private String MOTION_SEQUENCE = "HOLD_STILL BLINK";
-    private String MOTION_SEQUENCE = "HOLD_STILL BLINK MOUTH NOD YAW";
+    //    private String MOTION_SEQUENCE = "STILL BLINK";
+    private String MOTION_SEQUENCE = "STILL BLINK MOUTH NOD YAW";
 
     private void startActionLiveness() {
         Bundle bundle = new Bundle();
         bundle.putString(DFActionLivenessActivity.OUTTYPE, Constants.MULTIIMG);
-        //HOLD_STILL(静止), BLINK(眨眼), MOUTH（张嘴）, NOD（点头）, YAW（摇头）, 各个动作以空格隔开。 第一个动作必须为HOLD_STILL。
+        //STILL(静止), BLINK(眨眼), MOUTH（张嘴）, NOD（点头）, YAW（摇头）, 各个动作以空格隔开。 第一个动作必须为HOLD_STILL。
         bundle.putString(DFActionLivenessActivity.EXTRA_MOTION_SEQUENCE, MOTION_SEQUENCE);
 
         Intent intent = new Intent();
@@ -121,17 +121,6 @@ public class StartLivenessActivity extends BaseActivity {
                 btnConfirm.setText(getResources().getString(R.string.text_liveness_btn));
 
                 getAndUploadImg();
-            } else {
-                //记录失败的次数，如果超过2次，则开启静默识别（只是省掉后续四个步骤）
-                mFailedCount++;
-                if (mFailedCount >= 2) {
-                    MOTION_SEQUENCE = "HOLD_STILL BLINK";
-                }
-//                startActivity(LivenessFailedActivity.createIntent(mContext));
-                //update view
-                ivCenterImage.setImageDrawable(getResources().getDrawable(R.drawable.bg_liveness_failed));
-                tvHintTextTop.setText(getResources().getString(R.string.text_analysis_failed));
-                btnConfirm.setText(getResources().getString(R.string.text_try_again));
             }
         }
     }
