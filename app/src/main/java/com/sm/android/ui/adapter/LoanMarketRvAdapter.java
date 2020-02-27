@@ -2,6 +2,7 @@ package com.sm.android.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.sm.android.R;
 import com.sm.android.bean.response.NewCustomerProductResBean;
 import com.sm.android.ui.activity.ProductDetailActivity;
 import com.sm.android.utils.StringFormatUtils;
 
 import java.util.List;
+
+import static com.sm.android.manager.BaseApplication.sFirebaseAnalytics;
 
 /**
  * 发现页超市
@@ -68,6 +72,10 @@ public class LoanMarketRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Intent intent = new Intent(mContext, ProductDetailActivity.class);
                 intent.putExtra(ProductDetailActivity.PRODUCT_DATA, itemBean);
                 mContext.startActivity(intent);
+
+                Bundle params = new Bundle();
+                params.putString("productName", itemBean.productName);
+                sFirebaseAnalytics.logEvent("find_item_click", params);
             }
         });
         holder.btn.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +84,10 @@ public class LoanMarketRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 Intent intent = new Intent(mContext, ProductDetailActivity.class);
                 intent.putExtra(ProductDetailActivity.PRODUCT_DATA, itemBean);
                 mContext.startActivity(intent);
+
+                Bundle params = new Bundle();
+                params.putString("productName", itemBean.productName);
+                sFirebaseAnalytics.logEvent("find_btn_click", params);
             }
         });
     }

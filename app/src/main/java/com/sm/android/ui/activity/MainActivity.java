@@ -142,29 +142,29 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         LocationService.getInstance().registerListener();
         checkStartPermission();
 
-        if (true || !BuildConfig.DEBUG) {
-            onCheckGooglePlayServices();
-            FirebaseInstanceId.getInstance().getInstanceId()
-                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                            if (!task.isSuccessful()) {
-                                Log.w("karlMsg", "getInstanceId failed", task.getException());
-                                return;
-                            }
-                            String token = task.getResult().getToken();
+        onCheckGooglePlayServices();
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("karlMsg", "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        String token = task.getResult().getToken();
 
 //                            String msg = getString(R.string.msg_token_fmt, token);
-                            Log.d("karlMsg", "token" + token);
-                            showToast(token + "");
+                        Log.d("karlMsg", "token" + token);
+//                            showToast(token + "");
 //                            Log.d("karl", msg);
 //                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        if (BuildConfig.DEBUG) {
                             if (StringUtils.copy(mContext, token)) {
                                 showToast("复制成功");
                             }
                         }
-                    });
-        }
+                    }
+                });
     }
 
     @Override
@@ -327,19 +327,19 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
     private void refreshImmersiveMode() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (mCurrentIndex == 0) {
+            if (mCurrentIndex == mListFragments.size() - 1) {//我的
+                ImmersionBar.with(this)
+                        .fitsSystemWindows(true)
+                        .statusBarColor(R.color.theme_color)
+                        .statusBarDarkFont(false)
+                        .navigationBarEnable(false)
+                        .init();
+            } else {
                 ImmersionBar.with(this)
                         .reset()
                         .fitsSystemWindows(true) // 解决状态栏和布局重叠问题，使用该属性，必须指定状态栏颜色
                         .statusBarColor(R.color.white)
                         .statusBarDarkFont(true)
-                        .navigationBarEnable(false)
-                        .init();
-            } else {//我的
-                ImmersionBar.with(this)
-                        .fitsSystemWindows(true)
-                        .statusBarColor(R.color.theme_color)
-                        .statusBarDarkFont(false)
                         .navigationBarEnable(false)
                         .init();
             }

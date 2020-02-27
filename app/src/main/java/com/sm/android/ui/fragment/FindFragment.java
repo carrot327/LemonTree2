@@ -65,56 +65,6 @@ public class FindFragment extends BaseFragment {
     /*
      *导流商家产品获取
      */
-    /*private void getDaoliuProduct() {
-        String url = UrlHostConfig.getFlowIOHost() + NetConstantValue.NET_REQUEST_URL_FLOWIO_GET_CUSTOMERPRODUCT;
-        StringBuilder wholeUrl = new StringBuilder();
-        wholeUrl.append(url + "?")
-                .append("app_clientid=" + Tools.getChannel())
-                .append("&app_version=" + Tools.getAppVersion())
-                .append("&app_name=android")
-                .append("&mobile=" + BaseApplication.sPhoneNum);
-        Log.d("karl", "wholeUrl:" + wholeUrl);
-
-        final Request request = new Request.Builder()
-                .url(wholeUrl.toString())
-                .get()
-                .build();
-        new OkHttpClient().newCall(request).enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                refreshLayoutLoanMarket.finishRefresh(200);
-                if (response != null && response.isSuccessful()) {
-                    //解析数据
-                    JsonParser parser = new JsonParser();
-                    JsonArray jsonArray = parser.parse(response.body().string()).getAsJsonArray();
-                    Gson gson = new Gson();
-                    List<NewCustomerProductResBean.ProductListBean> customerProductList = new ArrayList<>();
-                    for (JsonElement noticeResponse : jsonArray) {
-                        NewCustomerProductResBean.ProductListBean customerProductResBean = gson.fromJson(noticeResponse, NewCustomerProductResBean.ProductListBean.class);
-                        customerProductList.add(customerProductResBean);
-                    }
-
-                    //setAdapter
-                    LoanMarketRvAdapter adapter = new LoanMarketRvAdapter(mContext, customerProductList);
-
-                    ((Activity) mContext).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            rvDaoliu.setAdapter(adapter);
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-            }
-        });
-    }*/
-
-    /*
-     *导流商家产品获取
-     */
     private void getDaoliuProduct() {
         NetworkLiteHelper
                 .get()

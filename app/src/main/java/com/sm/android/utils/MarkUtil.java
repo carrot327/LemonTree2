@@ -1,6 +1,7 @@
 package com.sm.android.utils;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.sm.android.BuildConfig;
@@ -20,6 +21,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import okhttp3.Call;
+
+import static com.sm.android.manager.BaseApplication.sFirebaseAnalytics;
 
 /**
  * 埋点工具类
@@ -87,5 +90,13 @@ public class MarkUtil {
                     public void onFailure(Call call, Exception exception, int id) {
                     }
                 });
+    }
+
+    public static void fbMarkApplyClickEvent(String apply_item) {
+        Bundle params = new Bundle();
+        params.putString("apply_item", apply_item);
+        params.putString("user_id", BaseApplication.mUserId);
+        params.putString("user_phone", BaseApplication.sPhoneNum);
+        sFirebaseAnalytics.logEvent("apply_page_click", params);
     }
 }

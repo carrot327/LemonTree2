@@ -89,7 +89,7 @@ public class StartLivenessActivity extends BaseActivity {
         });
     }
 
-//    private String MOTION_SEQUENCE = "HOLD_STILL BLINK";
+    //    private String MOTION_SEQUENCE = "HOLD_STILL BLINK";
     private String MOTION_SEQUENCE = "STILL BLINK MOUTH NOD YAW";
 
     private void startActionLiveness() {
@@ -124,18 +124,6 @@ public class StartLivenessActivity extends BaseActivity {
                 btnConfirm.setText(getResources().getString(R.string.text_liveness_btn));
 
                 getAndUploadImg();
-            } else {
-//                //记录失败的次数，如果超过2次，则开启静默识别（只是省掉后续四个步骤）
-//                mFailedCount++;
-//                if (mFailedCount >= 2) {
-//                    MOTION_SEQUENCE = "STILL BLINK";
-//                }
-////                startActivity(LivenessFailedActivity.createIntent(mContext));
-//                //update view
-//                ivCenterImage.setImageDrawable(getResources().getDrawable(R.drawable.bg_liveness_failed));
-//                tvHintTextTop.setText(getResources().getString(R.string.text_analysis_failed));
-//                tvHintTextBottom.setVisibility(View.INVISIBLE);
-//                btnConfirm.setText(getResources().getString(R.string.text_try_again));
             }
         }
     }

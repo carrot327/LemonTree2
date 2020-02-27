@@ -29,12 +29,14 @@ import com.sm.android.network.OKHttpClientEngine;
 import com.sm.android.ui.activity.StartLivenessActivity;
 import com.sm.android.uploadUtil.UrlHostConfig;
 import com.sm.android.utils.IntentUtils;
+import com.sm.android.utils.MarkUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import okhttp3.Call;
 
+import static com.sm.android.manager.BaseApplication.sFirebaseAnalytics;
 import static com.sm.android.ui.activity.MainActivity.sFormatSelectAmount;
 import static com.sm.android.ui.activity.MainActivity.sFormatSelectInterest;
 import static com.sm.android.ui.activity.MainActivity.sFormatSelectTime;
@@ -117,7 +119,8 @@ public class ApplyFragment extends BaseFragment {
             case R.id.rl_user_info:
                 if (mBaseStatus == 0) {
                     IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
-                }else {
+                    MarkUtil.fbMarkApplyClickEvent("user_info");
+                } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
                 break;
@@ -126,7 +129,8 @@ public class ApplyFragment extends BaseFragment {
                     showToast(getString(R.string.apply_toast_text_1));
                 } else if (mCompanyStatus == 0) {
                     IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_COMPANY());
-                }else {
+                    MarkUtil.fbMarkApplyClickEvent("company_info");
+                } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
                 break;
@@ -137,7 +141,8 @@ public class ApplyFragment extends BaseFragment {
                     showToast(getString(R.string.apply_toast_text_2));
                 } else if (mRelationStatus == 0) {
                     IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_CONTACT());
-                }else {
+                    MarkUtil.fbMarkApplyClickEvent("contact_info");
+                } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
                 break;
@@ -150,7 +155,8 @@ public class ApplyFragment extends BaseFragment {
                     showToast(getString(R.string.apply_toast_text_3));
                 } else if (mOcrStatus == 0) {
                     IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
-                }else {
+                    MarkUtil.fbMarkApplyClickEvent("photoUpload");
+                } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
                 break;
@@ -161,6 +167,7 @@ public class ApplyFragment extends BaseFragment {
                             sFormatSelectAmount, sFormatSelectTime, sFormatSelectInterest));
                 } else if (!mHasFacePassed) {
                     startActivity(StartLivenessActivity.createIntent(mContext));
+                    MarkUtil.fbMarkApplyClickEvent("apply_page_confirm");
                 } else {
                     //打开信息确认页
                     IntentUtils.openWebViewActivity(mContext, UrlHostConfig.GET_H5_INFO_CONFIRM());
@@ -172,7 +179,7 @@ public class ApplyFragment extends BaseFragment {
     /**
      * 获取认证状态
      */
-    public void getAuthStatusList(Context context) {
+    private void getAuthStatusList(Context context) {
         NetworkLiteHelper
                 .postJson()
                 .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_GET_AUTH_STATE)
@@ -201,11 +208,10 @@ public class ApplyFragment extends BaseFragment {
                                     mRelationStatus += response.authStatusList.get(i).relationStatus;
                                     mOcrStatus += response.authStatusList.get(i).ocrStatus;
                                 }
-                                Log.d("ApplyFragment", "mBaseStatus:" + mBaseStatus);
-                                Log.d("ApplyFragment", "mCompanyStatus:" + mCompanyStatus);
-                                Log.d("ApplyFragment", "mRelationStatus:" + mRelationStatus);
-                                Log.d("ApplyFragment", "mOcrStatus:" + mOcrStatus);
-
+//                                Log.d("ApplyFragment", "mBaseStatus:" + mBaseStatus);
+//                                Log.d("ApplyFragment", "mCompanyStatus:" + mCompanyStatus);
+//                                Log.d("ApplyFragment", "mRelationStatus:" + mRelationStatus);
+//                                Log.d("ApplyFragment", "mOcrStatus:" + mOcrStatus);
                                 if (mBaseStatus > 0) {
                                     viewTag1.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_yellow));
                                     ivUserInfo.setImageDrawable(getResources().getDrawable(R.drawable.icon_user));
