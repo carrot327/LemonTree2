@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,12 +33,10 @@ import com.sm.android.base.BaseResponseBean;
 import com.sm.android.bean.TabResourceBean;
 import com.sm.android.bean.enventbus.BackPressEvent;
 import com.sm.android.bean.enventbus.LoginSuccessEvent;
-import com.sm.android.bean.enventbus.NewMsgEvent;
 import com.sm.android.bean.request.BankCardQueryReqBean;
 import com.sm.android.bean.request.CommonReqBean;
 import com.sm.android.bean.response.AuthStateResBean;
 import com.sm.android.bean.response.BankcardListResponseBean;
-import com.sm.android.bean.response.UnreadMsgStateResBean;
 import com.sm.android.iview.IMainView;
 import com.sm.android.manager.ActivityCollector;
 import com.sm.android.manager.BaseApplication;
@@ -90,11 +87,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     public static boolean sHasNewUnreadMsg;
 
     private MagicIndicator mMagicIndicator;
-    private TabResourceBean tabResourceBean2Tab, tabResourceBean3Tab, tabResourceBean4Tab;
+    private TabResourceBean tabSourceBean2Tab, tabSourceBean3TabA, tabSourceBean3TabF, tabSourceBean4Tab;
     private MultiClickHelper mMultiClickHelper = new MultiClickHelper(2, 2000);
     private int mCurrentIndex = -1;
     private List<Fragment> mListFragments = new ArrayList<>();
-    private List<Fragment> mListFragments3Tab = new ArrayList<>();
+    private List<Fragment> mListFragments2Tab = new ArrayList<>();
+    private List<Fragment> mListFragments3TabA = new ArrayList<>();
+    private List<Fragment> mListFragments3TabF = new ArrayList<>();
     private List<Fragment> mListFragments4Tab = new ArrayList<>();
     public static boolean sHasGetAuthStatusList = false;
     public static boolean sHasGetBankCardList = false;
@@ -126,7 +125,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     protected void initializeView() {
         mainFrameLayout = findViewById(R.id.frame_main_fragment_container);
         mListFragments = mListFragments4Tab;
-        initIndicator(tabResourceBean4Tab);
+        initIndicator(tabSourceBean4Tab);
         switchTab(0);
     }
 
@@ -201,29 +200,50 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         findFragment = new FindFragment();
         mineFragment = new MineFragment();
 
-        tabResourceBean3Tab = new TabResourceBean();
-        tabResourceBean4Tab = new TabResourceBean();
+        tabSourceBean2Tab = new TabResourceBean();
+        tabSourceBean3TabA = new TabResourceBean();
+        tabSourceBean3TabF = new TabResourceBean();
+        tabSourceBean4Tab = new TabResourceBean();
 
-        mListFragments3Tab.add(homeFragment);
-        mListFragments3Tab.add(findFragment);
-        mListFragments3Tab.add(mineFragment);
+        mListFragments2Tab.add(homeFragment);
+        mListFragments2Tab.add(mineFragment);
+
+        mListFragments3TabA.add(homeFragment);
+        mListFragments3TabA.add(applyFragment);
+        mListFragments3TabA.add(mineFragment);
+
+        mListFragments3TabF.add(homeFragment);
+        mListFragments3TabF.add(findFragment);
+        mListFragments3TabF.add(mineFragment);
 
         mListFragments4Tab.add(homeFragment);
         mListFragments4Tab.add(applyFragment);
         mListFragments4Tab.add(findFragment);
         mListFragments4Tab.add(mineFragment);
 
-        tabResourceBean3Tab.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_find, R.drawable.icon_tab_mine};
-        tabResourceBean3Tab.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_find_selected, R.drawable.icon_tab_mine_selected};
-        tabResourceBean3Tab.tabText = new String[]{"Pinjaman", "Find", "Saya"};
-        tabResourceBean3Tab.textColorNormal = R.color.tab_text;
-        tabResourceBean3Tab.textColorSelected = R.color.tab_text_hover;
+        tabSourceBean2Tab.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_mine};
+        tabSourceBean2Tab.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_mine_selected};
+        tabSourceBean2Tab.tabText = new String[]{"Pinjaman", "Saya"};
+        tabSourceBean2Tab.textColorNormal = R.color.tab_text;
+        tabSourceBean2Tab.textColorSelected = R.color.tab_text_hover;
 
-        tabResourceBean4Tab.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_apply, R.drawable.icon_tab_find, R.drawable.icon_tab_mine};
-        tabResourceBean4Tab.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_apply_selected, R.drawable.icon_tab_find_selected, R.drawable.icon_tab_mine_selected};
-        tabResourceBean4Tab.tabText = new String[]{"Pinjaman", "Informasi", "Find", "Saya"};
-        tabResourceBean4Tab.textColorNormal = R.color.tab_text;
-        tabResourceBean4Tab.textColorSelected = R.color.tab_text_hover;
+        tabSourceBean3TabA.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_apply, R.drawable.icon_tab_mine};
+        tabSourceBean3TabA.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_apply_selected, R.drawable.icon_tab_mine_selected};
+        tabSourceBean3TabA.tabText = new String[]{"Pinjaman", "Informasi", "Saya"};
+        tabSourceBean3TabA.textColorNormal = R.color.tab_text;
+        tabSourceBean3TabA.textColorSelected = R.color.tab_text_hover;
+
+        tabSourceBean3TabF.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_find, R.drawable.icon_tab_mine};
+        tabSourceBean3TabF.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_find_selected, R.drawable.icon_tab_mine_selected};
+        tabSourceBean3TabF.tabText = new String[]{"Pinjaman", "Find", "Saya"};
+        tabSourceBean3TabF.textColorNormal = R.color.tab_text;
+        tabSourceBean3TabF.textColorSelected = R.color.tab_text_hover;
+
+        tabSourceBean4Tab.iconNormal = new int[]{R.drawable.icon_tab_home, R.drawable.icon_tab_apply, R.drawable.icon_tab_find, R.drawable.icon_tab_mine};
+        tabSourceBean4Tab.iconSelected = new int[]{R.drawable.icon_tab_home_selected, R.drawable.icon_tab_apply_selected, R.drawable.icon_tab_find_selected, R.drawable.icon_tab_mine_selected};
+        tabSourceBean4Tab.tabText = new String[]{"Pinjaman", "Informasi", "Find", "Saya"};
+        tabSourceBean4Tab.textColorNormal = R.color.tab_text;
+        tabSourceBean4Tab.textColorSelected = R.color.tab_text_hover;
 
     }
 
@@ -304,7 +324,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
     public void showApplyTab() {
         if (!mListFragments.contains(applyFragment)) {
-            initIndicator(tabResourceBean4Tab);
+            initIndicator(tabSourceBean4Tab);
             mListFragments = mListFragments4Tab;
             if (mListFragments.get(mCurrentIndex) instanceof MineFragment) {
                 switchTab(3);
@@ -316,8 +336,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
     public void hideApplyTab() {
         if (mListFragments.contains(applyFragment)) {
-            initIndicator(tabResourceBean3Tab);
-            mListFragments = mListFragments3Tab;
+            initIndicator(tabSourceBean3TabF);
+            mListFragments = mListFragments3TabA;
             if (mCurrentIndex == 3) {
                 switchTab(2);
             } else {
