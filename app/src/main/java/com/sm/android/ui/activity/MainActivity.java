@@ -124,7 +124,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     @Override
     protected void initializeView() {
         mainFrameLayout = findViewById(R.id.frame_main_fragment_container);
-        mListFragments = mListFragments4Tab;
+        mListFragments = mListFragments2Tab;
         initIndicator(tabSourceBean4Tab);
         switchTab(0);
     }
@@ -322,29 +322,47 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         refreshImmersiveMode();
     }
 
-    public void showApplyTab() {
-        if (!mListFragments.contains(applyFragment)) {
-            initIndicator(tabSourceBean4Tab);
-            mListFragments = mListFragments4Tab;
-            if (mListFragments.get(mCurrentIndex) instanceof MineFragment) {
-                switchTab(3);
-            } else {
-                switchTab(0);
-            }
+
+    private void doSwitchTab() {
+        if (mListFragments.get(mCurrentIndex) instanceof MineFragment) {
+            switchTab(1);
+        } else {
+            switchTab(0);
         }
     }
 
-    public void hideApplyTab() {
-        if (mListFragments.contains(applyFragment)) {
-            initIndicator(tabSourceBean3TabF);
-            mListFragments = mListFragments3TabA;
-            if (mCurrentIndex == 3) {
-                switchTab(2);
-            } else {
-                switchTab(0);
-            }
+    public void show2Tab() {
+        if (mListFragments != mListFragments2Tab) {
+            initIndicator(tabSourceBean2Tab);
+            mListFragments = mListFragments2Tab;
+            doSwitchTab();
         }
     }
+
+    public void show3TabA() {
+        if (mListFragments != mListFragments3TabA) {
+            initIndicator(tabSourceBean3TabA);
+            mListFragments = mListFragments3TabA;
+            doSwitchTab();
+        }
+    }
+
+    public void show3TabF() {
+        if (mListFragments != mListFragments3TabF) {
+            initIndicator(tabSourceBean3TabF);
+            mListFragments = mListFragments3TabF;
+            doSwitchTab();
+        }
+    }
+
+    public void showAllTab() {
+        if (mListFragments != mListFragments4Tab) {
+            initIndicator(tabSourceBean4Tab);
+            mListFragments = mListFragments4Tab;
+            doSwitchTab();
+        }
+    }
+
 
     private void refreshImmersiveMode() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

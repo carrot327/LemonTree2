@@ -1,13 +1,11 @@
 package com.sm.android.ui.fragment;
 
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -58,7 +56,6 @@ import java.text.ParseException;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-import static android.view.Gravity.CENTER;
 import static com.sm.android.manager.BaseApplication.isOpenGodMode;
 import static com.sm.android.ui.activity.MainActivity.TAB_APPLY;
 import static com.sm.android.ui.activity.MainActivity.sFormatSelectAmount;
@@ -230,9 +227,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         btnHome.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-//                if (BuildConfig.DEBUG) {
+                if (BuildConfig.DEBUG) {
                     startActivity(StartLivenessActivity.createIntent(mContext));
-//                }
+                }
                 return true;
             }
         });
@@ -325,7 +322,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         if ("0000".equals(response.res_code)) {
             String type = response.type;
             if (!TextUtils.isEmpty(type)) {
-                setApplyTabVisible(type);
+                resetTabState(type);
                 switch (type) {
                     case "1":
                     case "11"://防止重复借款
@@ -454,11 +451,23 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
-    private void setApplyTabVisible(String type) {
+    private void resetTabState(String type) {
         if ("1".equals(type) || "3".equals(type)) {
-            ((MainActivity) getActivity()).showApplyTab();
+            if (1 == mHomeData.showRecommendProduct) {
+                //apply & find
+                ((MainActivity) getActivity()).showAllTab();
+            } else {
+                //apply  not find
+                ((MainActivity) getActivity()).show3TabA();
+            }
         } else {
-            ((MainActivity) getActivity()).hideApplyTab();
+            if (1 == mHomeData.showRecommendProduct) {
+                //no apply but find
+                ((MainActivity) getActivity()).show3TabF();
+            } else {
+                //no  apply  no find
+                ((MainActivity) getActivity()).show2Tab();
+            }
         }
     }
 

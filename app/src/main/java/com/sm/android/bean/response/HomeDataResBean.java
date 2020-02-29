@@ -27,4 +27,5 @@ public class HomeDataResBean extends BaseResponseBean {
     public String loan_number;//已借款次数
     public String freeServiceFee;//部分还款入口是否展示
     public String popEntrance;//展期是否展示，1 弹 0 不弹
+    public int showRecommendProduct;//是否展示推荐页   1展示  0不展示
 }
