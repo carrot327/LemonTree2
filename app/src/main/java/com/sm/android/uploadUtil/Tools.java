@@ -12,7 +12,9 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+
 import androidx.core.app.ActivityCompat;
+
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -104,7 +106,7 @@ public class Tools {
         }
 
 
-        File file = new File(Environment.getExternalStorageDirectory(), fileName + ".png");
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".png");
         try {
             FileOutputStream fos = new FileOutputStream(file);
             try {
@@ -123,9 +125,10 @@ public class Tools {
         CLog.d("compressImage", "compressImage: " + file);
         return file;
     }
+
     public static File convertByteArrayToFile(byte[] bytes) {
 
-        File file = new File(Environment.getExternalStorageDirectory(), Tools.getFileNameByTime());
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), Tools.getFileNameByTime());
         try {
             FileOutputStream fos = new FileOutputStream(file);
             try {
@@ -661,7 +664,7 @@ public class Tools {
     }
 
     /**
-     *获取电话号码
+     * 获取电话号码
      */
     public static String getNativePhoneNumber(Context context) {
 

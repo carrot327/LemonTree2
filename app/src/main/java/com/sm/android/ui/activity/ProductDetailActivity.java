@@ -2,6 +2,7 @@ package com.sm.android.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +16,11 @@ import com.sm.android.R;
 import com.sm.android.base.BaseActivity;
 import com.sm.android.bean.response.NewCustomerProductResBean;
 import com.sm.android.utils.IntentUtils;
-import com.sm.android.utils.MarkUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.sm.android.manager.BaseApplication.sFirebaseAnalytics;
 import static com.sm.android.utils.StringFormatUtils.formatIndMoney;
 import static com.sm.android.utils.StringFormatUtils.formatNumber;
 
@@ -110,8 +111,9 @@ public class ProductDetailActivity extends BaseActivity {
             case R.id.btn_apply:
                 if (!TextUtils.isEmpty(mProductData.productUrl)) {
                     IntentUtils.openWebViewActivity(mContext, mProductData.productUrl);
-//                    IntentUtils.openWebViewActivity(mContext,"https://yn-coco-bao.oss-ap-southeast-1.aliyuncs.com/CocoTree-V1.1.apk");
-                    MarkUtil.markCustomerProduct(mProductData.id);
+                    Bundle params = new Bundle();
+                    params.putString("productName", mProductData.productName);
+                    sFirebaseAnalytics.logEvent("product_detail_click", params);
                 }
                 break;
         }

@@ -2,6 +2,7 @@ package com.sm.android.uploadUtil;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 
 import com.sm.android.manager.BaseApplication;
 import com.sm.android.utils.CProgressDialogUtils;
@@ -27,6 +28,7 @@ public class UploadImg {
 
     private boolean uploadImageRequestFinished = false;
     private boolean uploadEncryptRequestFinished = false;
+    private boolean hasSendBackError = false;
 
     public interface UploadLivenessInfoListener {
         void success();
@@ -64,11 +66,15 @@ public class UploadImg {
         OK.getInstance().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                Log.d("UploadImg", "e:" + e);
                 uploadImageRequestFinished = true;
                 if (isAllRequestFinished()) {
                     CProgressDialogUtils.cancelProgressDialog((Activity) context);
                 }
-                mListener.error();
+                if (!hasSendBackError) {
+                    hasSendBackError = true;
+                    mListener.error();
+                }
             }
 
             @Override
@@ -126,14 +132,19 @@ public class UploadImg {
                         .addFormDataPart("face_rec_file", "liveness_file_encrypt",
                                 RequestBody.create(MediaType.parse("image/jpeg"), file)).build())
                 .build()).enqueue(new Callback() {
+
             @Override
             public void onFailure(Call call, IOException e) {
+                Log.d("UploadImg", "e:" + e);
+
                 uploadEncryptRequestFinished = true;
                 if (isAllRequestFinished()) {
                     CProgressDialogUtils.cancelProgressDialog((Activity) context);
                 }
-
-                mListener.error();
+                if (!hasSendBackError) {
+                    hasSendBackError = true;
+                    mListener.error();
+                }
             }
 
             @Override

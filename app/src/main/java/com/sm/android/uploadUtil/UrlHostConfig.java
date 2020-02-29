@@ -19,7 +19,7 @@ public class UrlHostConfig {
     //生产
     private static final String RELEASE_MAIN_HOST = "http://161.117.83.24";
     private static final String RELEASE_H5_HOST = "http://161.117.188.140";
-    private static final String RELEASE_FLOW_IO_HOST = "";
+    private static final String RELEASE_FLOW_IO_HOST = "http://161.117.83.24:32000";
     private static final String RELEASE_UPDATE_HOST = RELEASE_MAIN_HOST;
 
     /**

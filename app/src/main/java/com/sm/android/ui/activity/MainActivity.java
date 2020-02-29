@@ -141,30 +141,31 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         EventBus.getDefault().register(this);
         LocationService.getInstance().registerListener();
         checkStartPermission();
-
-        onCheckGooglePlayServices();
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("karlMsg", "getInstanceId failed", task.getException());
-                            return;
-                        }
-                        String token = task.getResult().getToken();
+        if (!BuildConfig.DEBUG) {
+            onCheckGooglePlayServices();
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                            if (!task.isSuccessful()) {
+                                Log.w("karlMsg", "getInstanceId failed", task.getException());
+                                return;
+                            }
+                            String token = task.getResult().getToken();
 
 //                            String msg = getString(R.string.msg_token_fmt, token);
-                        Log.d("karlMsg", "token" + token);
+                            Log.d("karlMsg", "token" + token);
 //                            showToast(token + "");
 //                            Log.d("karl", msg);
 //                            Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
-                        if (BuildConfig.DEBUG) {
-                            if (StringUtils.copy(mContext, token)) {
-                                showToast("复制成功");
+                            if (BuildConfig.DEBUG) {
+                                if (StringUtils.copy(mContext, token)) {
+                                    showToast("复制成功");
+                                }
                             }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     @Override

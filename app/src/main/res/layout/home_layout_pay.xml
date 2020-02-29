@@ -6,46 +6,6 @@
     android:layout_marginBottom="18dp"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="217dp"
-        android:layout_height="217dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/bg_circle_blue"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/tv_left_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
-            android:textColor="@color/white"
-            android:textSize="54sp"
-            tools:text="0" />
-
-        <TextView
-            android:id="@+id/tv_time_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_left_day"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="0dp"
-            android:text="Hari"
-            android:textColor="@color/white"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/tv_below_hint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_time_text"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="0dp"
-            android:text="Sebelum jatuh tempo"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

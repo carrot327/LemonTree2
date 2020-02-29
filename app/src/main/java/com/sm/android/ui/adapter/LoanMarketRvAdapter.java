@@ -62,7 +62,7 @@ public class LoanMarketRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
                 .into(holder.ivIcon);
         holder.productName.setText(itemBean.productName);
-        holder.amountRange.setText(StringFormatUtils.formatIndMoney(itemBean.rangeLimit));
+        holder.amountRange.setText(StringFormatUtils.formatNumber(itemBean.rangeLimit));
         holder.rate.setText(itemBean.monthRate + "%/hari");//eg. 0.05%/hari
 //        holder.reviewSpeed.setText(itemBean.loanSpeed + "hari");//直接写为1天
 

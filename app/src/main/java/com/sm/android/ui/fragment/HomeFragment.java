@@ -121,12 +121,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvLoanInfoInterest;
     @BindView(R.id.tv_loan_info_total_get_amount)
     TextView tvLoanInfoTotalGetAmount;
-    @BindView(R.id.tv_left_day)
-    TextView tvLeftDay;
-    @BindView(R.id.tv_time_text)
-    TextView tvTimeText;
-    @BindView(R.id.tv_below_hint)
-    TextView tvBelowHint;
     @BindView(R.id.tv_total_borrow_amount)
     TextView tvTotalBorrowAmount;
     @BindView(R.id.tv_pay_deadline)
@@ -236,9 +230,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         btnHome.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (BuildConfig.DEBUG) {
-//                    startActivity(StartLivenessActivity.createIntent(mContext));
-                }
+//                if (BuildConfig.DEBUG) {
+                    startActivity(StartLivenessActivity.createIntent(mContext));
+//                }
                 return true;
             }
         });
@@ -613,11 +607,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         rlParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         rlParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         rlParams.setMargins(0, UIUtils.dip2px(40), 0, 0);
-        tvLeftDay.setLayoutParams(rlParams);
-        tvLeftDay.setTextSize(54f);
-        tvTimeText.setVisibility(View.VISIBLE);
-        tvBelowHint.setVisibility(View.VISIBLE);
-        tvLeftDay.setText(diffTime + "");
         tvTotalBorrowAmount.setText(formatIndMoney(mHomeData.repayAmt));//待还金额
         tvPayDeadline.setText(mHomeData.finalRepaymentDate);//最后还款日期
 
@@ -627,17 +616,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      * 设置逾期页面数据
      */
     private void setOverdueLayoutView() {
-        tvLeftDay.setText(getString(R.string.home_text_has_delay) + "\n" + mHomeData.overdueDay + "\n" + getString(R.string.day));
         tvTotalBorrowAmount.setText(formatIndMoney(mHomeData.repayAmt));//待还金额
         tvPayDeadline.setText(mHomeData.finalRepaymentDate);//最后还款日期
 
         RelativeLayout.LayoutParams rlParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         rlParams.addRule(RelativeLayout.CENTER_IN_PARENT);
-        tvLeftDay.setGravity(CENTER);
-        tvLeftDay.setLayoutParams(rlParams);
-        tvTimeText.setVisibility(View.GONE);
-        tvBelowHint.setVisibility(View.GONE);
-        tvLeftDay.setTextSize(22f);
     }
 
     private void showHomeView(String contentView) {

@@ -132,7 +132,7 @@ public class StartLivenessActivity extends BaseActivity {
     private void getAndUploadImg() {
         DFProductResult mResult = ((DFTransferResultInterface) mContext.getApplication()).getResult();
         DFLivenessSDK.DFLivenessImageResult[] imageResultArr = mResult.getLivenessImageResults();
-
+        Log.d("aaaaa", "imageResultArr:" + imageResultArr);
         if (imageResultArr != null && imageResultArr.length > 0) {
             //byte[]->Bitmap->File
             new UploadImg().upload(mContext,
@@ -148,6 +148,7 @@ public class StartLivenessActivity extends BaseActivity {
 
                         @Override
                         public void error() {
+                            Log.d("aaaaa", "uploadLivenessInfo error");
                             handler.sendEmptyMessage(2);
                         }
                     });
@@ -165,6 +166,7 @@ public class StartLivenessActivity extends BaseActivity {
                     finish();//成功时finish页面，失败时保留。
                     break;
                 case 2:
+                    showToast("2");
                     startActivity(LivenessFailedActivity.createIntent(mContext));
                     break;
             }
