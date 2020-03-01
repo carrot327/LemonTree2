@@ -20,9 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--dontwarn com.deepfinch.**
--keep class com.deepfinch.** { *; }
-
 #
 #-------------------------------------------基本不用动区域开始----------------------------------------------
 #
@@ -190,6 +187,8 @@
 #
 # 实体类，设置成自己的包名路径
 -keep class com.cocotree.android.bean.**{*;}
+-keep class com.cocotree.utils.**{*;}
+-keep class com.update.updatesdk.**{*;}
 
 # ----------------------------- 其他的 -----------------------------
 # 删除代码中Log相关的代码
@@ -261,6 +260,10 @@
 # 百度地图
 -dontwarn com.baidu.**
 -keep class com.baidu.**{*;}
+
+# 活体检测
+-dontwarn com.dfsdk.**
+-keep class com.dfsdk.** { *; }
 
 # -----------------------------第三方不混淆,end -----------------------------
 #

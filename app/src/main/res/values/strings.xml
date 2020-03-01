@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Easy Kredit</string>
 
-    <string name="sign_up" translatable="false">Masuk/Daftar</string>
+    <string name="sign_up" translatable="false">Daftar</string>
     <string name="text_apply_loan">Ajukan pinjaman</string>
     <string name="text_want_amount">Silakan pilih jumlah pinjaman</string>
     <string name="text_want_time">Berapa lama Anda ingin meminjam?</string>
@@ -26,7 +26,7 @@
     <string name="btn_text_confirm">Konfirmasi</string>
     <string name="btn_text_extend_pay">Perpanjang tanggal pembayaran</string>
     <string name="top_text_check">Dalam peninjauan, harap bersabar</string>
-    <string name="top_text_fangkuan">Sedang dicairkan</string>
+    <string name="top_text_fangkuan">Dalam pencarian</string>
     <string name="btn_text_shenhe">Sedang ditinjau</string>
     <string name="btn_text_fangkuan">Pinjaman</string>
     <string name="btn_text_go_pay">Lunasi Sekarang</string>
@@ -94,7 +94,7 @@
     <string name="text_pls_input">Silahkan masuk</string>
     <string name="title_register_privacy">Kebijakan privasi</string>
     <string name="text_delay_fee">Biaya perpanjangan:</string>
-    <string name="dialog_loading">Loading...</string>
+    <string name="dialog_loading">Memuat...</string>
     <string name="text_liveness_btn">Mulai verifikasi</string>
     <string name="text_liveness_hint">Arahkan wajah Anda ke layar ponsel dan pastikan ada pencahayaan yang cukup</string>
     <string name="text_liveness_hint1">Harap tetap diam</string>
@@ -116,6 +116,8 @@
     <string name="text_home_tip">Jika Anda dapat melunasi pinjaman tepat waktu, aplikasi Anda berikutnya akan mendapatkan batas pinjaman atau jangka waktu pinjaman yang lebih tinggi.</string>
     <string name="text_remind_review_time">Waktu peninjuan kami adalah pukul 08:30 sampai 17:30.Jika anda mengajukan pinjaman lebih dari pukul 17:30, kita akan proses pinjaman anda di esok hari.</string>
     <string name="text_remind_answer_the_phone">Analis kami akan tinjau data anda hari ini atau akan Bungin anda besok. Harap di perhatikan telfon yang masuk.</string>
+
+    <string name="text_activities_remind">Jika Anda membayar sebelum tanggal jatuh tempo: \n\n1.limit pinjaman Anda berikutnya akan jadi  lebih tinggi, dan itu akan benar-benar melewati ulasan secepat mungkin.\n\n 2.Selain itu, anda memiliki kesempatan untuk mendapatkan kupon pembayaran.</string>
 
     <string name="permission_desc">Yth, agar dapat melayani dengan cepat, tepat dan Berkualitas, silahkan memberikan otorisasi hak akses Mobile Aplikasi :</string>
     <string name="permission_cancel">Tolak</string>

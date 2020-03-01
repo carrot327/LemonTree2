@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 26
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "HOST_URL", "\"https://cloudapi.accuauth.com\""
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "HOST_URL", "\"https://cloudapi.accuauth.com\""
+        }
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+
+    api(name: 'DFLivenessSDK', ext: 'aar')
+}

@@ -80,7 +80,7 @@
                         android:layout_toRightOf="@+id/text_telephone_start"
                         android:background="@null"
                         android:hint="@string/login_hint_mobile"
-                        android:inputType="phone"
+                        android:inputType="number"
                         android:maxLength="13"
                         android:singleLine="true"
                         android:text=""

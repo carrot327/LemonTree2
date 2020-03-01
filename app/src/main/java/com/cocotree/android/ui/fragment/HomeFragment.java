@@ -237,6 +237,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 //                    startActivity(StartLivenessActivity.createIntent(mContext));
 //                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
 //                    DialogFactory.createNoticeDialog(mContext, "Maaf, berdasarkan informasi Anda, kami saat ini hanya dapat memberi Anda pinjaman 9 hari.").show();
+//                    DialogFactory.createNoticeDialog(mContext, getResources().getString(R.string.text_activities_remind)).show();
+
                 }
                 return true;
             }

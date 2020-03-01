@@ -70,7 +70,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      */
     public void getHomeMainData() {
         final ProgressDialog dialog = new ProgressDialog(mContext);
-        dialog.setMessage("Loading...");
+        dialog.setMessage("Memuat...");
         dialog.show();
         HomeDataRequestBean homeTabRequestBean = new HomeDataRequestBean();
         homeTabRequestBean.orderid = "";
@@ -369,7 +369,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 上传数据
      */
     private void uploadNecessaryData() {
-        mDialog.setMessage("Loading...");
+        mDialog.setMessage("Memuat...");
         mDialog.show();
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
             @Override

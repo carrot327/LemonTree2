@@ -118,7 +118,7 @@ public class Tools {
         }
 
 
-        File file = new File(Environment.getExternalStorageDirectory(), fileName + ".png");
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".png");
         try {
             FileOutputStream fos = new FileOutputStream(file);
             try {
@@ -140,7 +140,7 @@ public class Tools {
 
     public static File convertByteArrayToFile(byte[] bytes) {
 
-        File file = new File(Environment.getExternalStorageDirectory(), Tools.getFileNameByTime());
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), Tools.getFileNameByTime());
         try {
             FileOutputStream fos = new FileOutputStream(file);
             try {

@@ -127,13 +127,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         mListFragments = mListFragments3Tab;
         initIndicator(tabResourceBean3Tab);
         switchTab(0);
-//        if (checkStartPermissions()) {
-//            showPermissionDialog();
-//        }
-//        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
-//            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
-//            DialogFactory.createPrivacyAgreementDialog(mContext).show();
-//        }
+        if (checkStartPermissions()) {
+            showPermissionDialog();
+        }
+        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
+            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
+            DialogFactory.createPrivacyAgreementDialog(mContext).show();
+        }
     }
 
     @Override

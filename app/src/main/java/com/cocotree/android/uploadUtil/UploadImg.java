@@ -27,6 +27,7 @@ public class UploadImg {
 
     private boolean uploadImageRequestFinished = false;
     private boolean uploadEncryptRequestFinished = false;
+    private boolean hasSendBackError = false;
 
     public interface UploadLivenessInfoListener {
         void success();
@@ -68,7 +69,10 @@ public class UploadImg {
                 if (isAllRequestFinished()) {
                     CProgressDialogUtils.cancelProgressDialog((Activity) context);
                 }
-                mListener.error();
+                if (!hasSendBackError) {
+                    hasSendBackError = true;
+                    mListener.error();
+                }
             }
 
             @Override
@@ -92,7 +96,10 @@ public class UploadImg {
                             }
 
                         } else {
-                            mListener.error();
+                            if (!hasSendBackError) {
+                                hasSendBackError = true;
+                                mListener.error();
+                            }
                             UIUtils.showToast(obj.optString("res_msg"));
                         }
                     }
@@ -126,14 +133,19 @@ public class UploadImg {
                         .addFormDataPart("face_rec_file", "liveness_file_encrypt",
                                 RequestBody.create(MediaType.parse("image/jpeg"), file)).build())
                 .build()).enqueue(new Callback() {
+
             @Override
             public void onFailure(Call call, IOException e) {
+                UIUtils.showToast("onFailure");
+
                 uploadEncryptRequestFinished = true;
                 if (isAllRequestFinished()) {
                     CProgressDialogUtils.cancelProgressDialog((Activity) context);
                 }
-
-                mListener.error();
+                if (!hasSendBackError) {
+                    hasSendBackError = true;
+                    mListener.error();
+                }
             }
 
             @Override
@@ -156,7 +168,10 @@ public class UploadImg {
                                 mListener.success();
                             }
                         } else {
-                            mListener.error();
+                            if (!hasSendBackError) {
+                                hasSendBackError = true;
+                                mListener.error();
+                            }
                             UIUtils.showToast(obj.optString("res_msg"));
                         }
                     }
