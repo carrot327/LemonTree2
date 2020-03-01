@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/iv_notice_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -21,29 +21,29 @@
         android:layout_height="40dp"
         android:layout_alignBottom="@id/iv_notice_background"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/bg_btn_shape_gradient_coupon"
         android:text="Oke"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
         android:gravity="center"
-        android:layout_marginTop="60dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_notice_content"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            tools:text="Umlah pinjaman maksimum mencapai \nRp.100,000"
-            android:textColor="#624932"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:textColor="@color/CommonTextColor"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="Jika Anda membayar sebelum tanggal jatuh tempo: \n\n1.limit pinjaman Anda berikutnya akan jadi  lebih tinggi, dan itu akan benar-benar melewati ulasan secepat mungkin.\n\n 2.Selain itu, anda memiliki kesempatan untuk mendapatkan kupon pembayaran." />
+    </ScrollView>
 </RelativeLayout>

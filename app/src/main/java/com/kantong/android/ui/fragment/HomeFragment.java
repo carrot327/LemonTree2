@@ -237,10 +237,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-                    startActivity(StartLivenessActivity.createIntent(mContext));
-//                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
-//                    DialogFactory.createNoticeDialog(mContext, "Maaf, berdasarkan informasi Anda, kami saat ini hanya dapat memberi Anda pinjaman 9 hari.").show();
-//                    IntentUtils.openWebViewActivity(mContext,"http://161.117.239.48:8082/#/pages/auth/workAuth/index?app_clientid=defaultChannel&app_name=android&app_version=2.1&phone=81287566687&user_id=1&user_name=&url_version=1581593843479");
+//                    startActivity(StartLivenessActivity.createIntent(mContext));
+//                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
+
+//                    DialogFactory.createNoticeDialog(mContext, getResources().getString(R.string.text_activities_remind)).show();
+//                    DialogFactory.createPrivacyAgreementDialog(mContext).show();
+
+//                    DialogFactory.createOneButtonCommonDialog(mContext, "Petunjuk", getResources().getString(R.string.text_activities_remind),
+//                            "Oke", (dialog, v2) -> {
+//                                dialog.dismiss();
+//                            }).show();
 
                 }
                 return true;
@@ -310,14 +316,24 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 if (mCouponData != null && "1".equals(mCouponData.couponStatus)) {
                     DialogFactory.createSelectCouponDialog(mContext, tvCoupon, tvFinalPayAmount, mOriginPayAmount, mAfterCutAmount, mCouponData).show();
                 } else {//0 未激活  2已使用   或逾期
-                    DialogFactory.createNoticeDialog(mContext, "Jika anda bisa bayarkan pinjaman anda sebelum tanggal jatuh tempo, anda akan mendapatkan kupon diskon untuk pembayaran pinjaman berikutnya. Dan limit pinjaman anda juga akan naik.").show();
+                    DialogFactory.createOneButtonCommonDialog(mContext, "Petunjuk", getResources().getString(R.string.text_activities_remind),
+                            "Oke", (BaseDialog dialog, View v) -> {
+                                dialog.dismiss();
+                            }).show();
                 }
                 break;
             case R.id.rl_coupon_borrow:
                 if (mCouponData != null && !TextUtils.isEmpty(mCouponData.premium_rate)) {
-                    DialogFactory.createNoticeDialog(mContext, "Setelah melunasi pinjaman kali ini anda akan mendapatkan satu kupon yang bisa potong " + mCouponData.premium_rate + "% dari jumlah pinjaman.").show();
+                    // FIXME: 2020-03-01 这里的提示不准确，不一定会给券。但当前可以直接这么写着。吸引用户
+                    DialogFactory.createOneButtonCommonDialog(mContext, "Petunjuk", "Setelah melunasi pinjaman kali ini anda akan mendapatkan satu kupon yang bisa potong " + mCouponData.premium_rate + "% dari jumlah pinjaman.",
+                            "Oke", (BaseDialog dialog, View v) -> {
+                                dialog.dismiss();
+                            }).show();
                 } else {
-                    DialogFactory.createNoticeDialog(mContext, "Jika anda bisa bayarkan pinjaman anda sebelum tanggal jatuh tempo, anda akan mendapatkan kupon diskon untuk pembayaran pinjaman berikutnya. Dan limit pinjaman anda juga akan naik.").show();
+                    DialogFactory.createOneButtonCommonDialog(mContext, "Petunjuk", getResources().getString(R.string.text_activities_remind),
+                            "Oke", (BaseDialog dialog, View v) -> {
+                                dialog.dismiss();
+                            }).show();
                 }
                 break;
         }
@@ -677,9 +693,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private void showSubmitSuccessDialog(String manageFee, String serviceFee) {
         String manage_fee = formatIndMoney(manageFee);
         String service_fee = formatIndMoney(serviceFee);
-        String dialogMsg = MessageFormat.format("Catatan:\n" +
-                "Jumlah pinjaman akan secara otomatis dikurangi oleh biaya manajemen ({0}) dan biaya administrasi ({1}) sebelum dicairkan ke akun bank Anda.", manage_fee, service_fee);
-        DialogFactory.createCommonDialog(mContext, getString(R.string.text_submit_success), dialogMsg, getString(R.string.text_cancel), new BaseDialog.OnClickListener() {
+        String dialogMsg = MessageFormat.format("Jumlah pinjaman akan secara otomatis dikurangi oleh \n biaya manajemen ({0}) \n dan biaya administrasi ({1}) \n sebelum dicairkan ke akun bank anda.", manage_fee, service_fee);
+        DialogFactory.createCommonDialog(mContext, "Catatan", dialogMsg, getString(R.string.text_cancel), new BaseDialog.OnClickListener() {
             @Override
             public void onClick(BaseDialog dialog, View view) {
                 dialog.dismiss();
@@ -828,7 +843,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
         if ("4".equals(mHomeData.type) && !SPUtils.getBoolean(ConstantValue.OPERATION_NORMAL_DIALOG_HAS_SHOWED, false)) {
             SPUtils.putBoolean(ConstantValue.OPERATION_NORMAL_DIALOG_HAS_SHOWED, true);
-            DialogFactory.createNoticeDialog(mContext, "Jumlah pinjaman maksimum mencapai \nRp." + mHomeData.maxAmtRange).show();
+            DialogFactory.createOneButtonCommonDialog(mContext, "Petunjuk", "Jumlah pinjaman maksimum mencapai \nRp." + mHomeData.maxAmtRange,
+                    "Oke", (dialog, view) -> {
+                        dialog.dismiss();
+                    }).show();
         } else if ("5".equals(mHomeData.type) && !SPUtils.getBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, false) && "1".equals(data.couponStatus)) {
             SPUtils.putBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, true);
             DialogFactory.createCouponDialog(mContext, data).show();

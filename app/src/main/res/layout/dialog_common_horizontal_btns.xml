@@ -24,7 +24,7 @@
             android:id="@+id/mhsv_dialog_common_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:mhsv_maxHeight="180dp">
+            app:mhsv_maxHeight="230dp">
 
             <TextView
                 android:id="@+id/tv_dialog_common_message"

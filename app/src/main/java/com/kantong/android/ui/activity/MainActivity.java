@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     public static boolean sHasNewUnreadMsg;
 
     private MagicIndicator mMagicIndicator;
-    private TabResourceBean tabResourceBean3Tab, tabResourceBean2Tab;
+    private TabResourceBean tabResourceBean2Tab,tabResourceBean3Tab;
     private MultiClickHelper mMultiClickHelper = new MultiClickHelper(2, 2000);
     private int mCurrentIndex = -1;
     private List<Fragment> mListFragments = new ArrayList<>();
@@ -123,16 +123,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     @Override
     protected void initializeView() {
         mainFrameLayout = findViewById(R.id.frame_main_fragment_container);
-        mListFragments = mListFragments3Tab;
-        initIndicator(tabResourceBean3Tab);
+        mListFragments = mListFragments2Tab;
+        initIndicator(tabResourceBean2Tab);
         switchTab(0);
         if (checkStartPermissions()) {
             showPermissionDialog();
         }
-//        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
-//            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
-//            DialogFactory.createPrivacyAgreementDialog(mContext).show();
-//        }
+        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
+            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
+            DialogFactory.createPrivacyAgreementDialog(mContext).show();
+        }
     }
 
     @Override
@@ -158,7 +158,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                                 return;
                             }
                             String token = task.getResult().getToken();
-                            Log.d("karl", token);
                         }
                     });
         }

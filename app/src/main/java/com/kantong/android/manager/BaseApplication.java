@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.kantong.android.BuildConfig;
 import com.kantong.android.uploadUtil.CLog;
@@ -33,48 +34,6 @@ public class BaseApplication extends Application implements DFTransferResultInte
 
         sInstance = this;
         initSPData();
-
-        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-
-                CLog.i(TAG, "onActivityCreated()....");
-            }
-
-            @Override
-            public void onActivityStarted(Activity activity) {
-
-                CLog.i(TAG, "onActivityStarted()....");
-            }
-
-            @Override
-            public void onActivityResumed(Activity activity) {
-
-                CLog.i(TAG, "onActivityResumed()....");
-            }
-
-            @Override
-            public void onActivityPaused(Activity activity) {
-
-                CLog.i(TAG, "onActivityPaused()....");
-            }
-
-            @Override
-            public void onActivityStopped(Activity activity) {
-
-                CLog.i(TAG, "onActivityStopped()....");
-            }
-
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-
-            }
-
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-
-            }
-        });
 
 //        WebHelper.instanceView(getApplicationContext());
 //        if (WebHelper.getWebView() != null) {

@@ -224,6 +224,14 @@ public class DialogFactory {
                 dialog.dismiss();
             }
         });
+        Window dialogWindow = dialog.getWindow();
+        if (dialogWindow != null) {
+            dialogWindow.setGravity(Gravity.CENTER);
+            WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+            lp.width = UIUtils.getScreenWidth() * 4 / 5;
+            lp.height = UIUtils.getScreenHeight() * 1 / 2;
+            dialogWindow.setAttributes(lp);
+        }
         return dialog;
     }
 
