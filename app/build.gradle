@@ -4,15 +4,15 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.lemontree.android"
 
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 170
-        versionName "1.7"
+        targetSdkVersion 28
+        versionCode 180
+        versionName "1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
@@ -72,6 +72,9 @@ android {
         }
         saku_api_0213 {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "saku_api_0213"]
+        }
+        fromSakuFind {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "fromSakuFind"]
         }
     }
 }

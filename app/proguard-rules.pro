@@ -190,7 +190,6 @@
 # 实体类，设置成自己的包名路径
 -keep class com.lemontree.android.bean.**{*;}
 -keep class com.lemontree.utils.**{*;}
-#-keep class com.lemontree.utils.UpdateUtil.**{*;}
 -keep class com.update.updatesdk.**{*;}
 
 

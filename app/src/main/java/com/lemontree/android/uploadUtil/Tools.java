@@ -12,11 +12,12 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import androidx.core.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 
 import com.lemontree.android.manager.BaseApplication;
 
@@ -104,7 +105,7 @@ public class Tools {
         }
 
 
-        File file = new File(Environment.getExternalStorageDirectory(), fileName + ".png");
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".png");
         try {
             FileOutputStream fos = new FileOutputStream(file);
             try {
@@ -125,7 +126,7 @@ public class Tools {
     }
     public static File convertByteArrayToFile(byte[] bytes) {
 
-        File file = new File(Environment.getExternalStorageDirectory(), Tools.getFileNameByTime());
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), Tools.getFileNameByTime());
         try {
             FileOutputStream fos = new FileOutputStream(file);
             try {

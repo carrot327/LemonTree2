@@ -127,25 +127,12 @@ public class StartLivenessActivity extends BaseActivity {
 
                 getAndUploadImg();
             } else {
-                if (data != null) {
-                    int errorCode = data.getIntExtra(DFActionLivenessActivity.KEY_RESULT_ERROR_CODE, -10000);
-                    Log.e("onActivityResult", "action liveness cancel，error code:" + errorCode);
-                }else {
-                    showToast("data is null");
-                }
-//                startActivity(LivenessFailedActivity.createIntent(mContext));
-
-
-                //记录失败的次数，如果超过2次，则开启静默识别（只是省掉后续四个步骤）
-//                mFailedCount++;
-//                if (mFailedCount >= 2) {
-//                    MOTION_SEQUENCE = "STILL BLINK";
+//                if (data != null) {
+//                    int errorCode = data.getIntExtra(DFActionLivenessActivity.KEY_RESULT_ERROR_CODE, -10000);
+//                    Log.e("onActivityResult", "action liveness cancel，error code:" + errorCode);
+//                }else {
+//                    showToast("data is null");
 //                }
-//                //update view
-//                ivCenterImage.setImageDrawable(getResources().getDrawable(R.drawable.bg_liveness_failed));
-//                tvHintTextTop.setText(getResources().getString(R.string.text_analysis_failed));
-//                tvHintTextBottom.setVisibility(View.INVISIBLE);
-//                btnConfirm.setText(getResources().getString(R.string.text_try_again));
             }
         }
     }

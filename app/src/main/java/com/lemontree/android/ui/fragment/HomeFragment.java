@@ -241,7 +241,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
-                    startActivity(StartLivenessActivity.createIntent(mContext));
+//                    startActivity(StartLivenessActivity.createIntent(mContext));
 //                    String licenseString = getAssetResource("DFLicense");
 //                    if (TextUtils.isEmpty(licenseString)) {
 //                        licenseString = getAssetResource("DFLicense");
@@ -857,7 +857,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             DialogFactory.createNoticeDialog(mContext, "Jumlah pinjaman maksimum mencapai \nRp." + mHomeData.maxAmtRange).show();
         } else if ("5".equals(mHomeData.type) && !SPUtils.getBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, false) && "1".equals(data.couponStatus)) {
             SPUtils.putBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, true);
-            DialogFactory.createCouponDialog(mContext, data).show();
+            if (!TextUtils.isEmpty(data.couponCutAmount) && !"0".equals(data.couponCutAmount)) {
+                DialogFactory.createCouponDialog(mContext, data).show();
+            }
         }
 
         if (View.VISIBLE == includeBorrow.getVisibility()) {

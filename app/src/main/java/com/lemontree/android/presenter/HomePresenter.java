@@ -7,13 +7,11 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
-import com.lemontree.android.BuildConfig;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BasePresenter;
 import com.lemontree.android.base.BaseResponseBean;
@@ -326,8 +324,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 上传数据
      */
     private void uploadNecessaryData() {
-        Log.d("karl", "aaa");
-        mDialog.setMessage("Loading...");
+        mDialog.setMessage("Memuat...");
         mDialog.show();
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
             @Override
