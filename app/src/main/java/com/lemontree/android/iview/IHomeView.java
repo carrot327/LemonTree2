@@ -8,6 +8,8 @@ import com.lemontree.android.bean.response.GetExtendFeeResBean;
 import com.lemontree.android.bean.response.GetPayWayListResBean;
 import com.lemontree.android.bean.response.HomeDataResBean;
 
+import java.util.List;
+
 public interface IHomeView extends IBaseView {
     //设置首页数据
     void setHomeData(HomeDataResBean homeData);
@@ -46,13 +48,6 @@ public interface IHomeView extends IBaseView {
 
     void noCoupon(CouponResBean data);
 
-    //处理运营弹框逻辑
-//    void processShowOperationDialog(OperationDialogResBean responseData);
-
-   /* //设置商城显示隐藏
-//    void setShoppingVisibility(HomeShoppingDataResBean responseData);
-
-    void showRecommendDialogOne(List<RecommendDialogResBean.ProductListBean> bean);
-
-    void showRecommendDialogTwo(List<RecommendDialogResBean.ProductListBean> bean);*/
+    // 设置文字banner
+    void setTextBanner(List<String> noticeList, List<String> urlList);
 }

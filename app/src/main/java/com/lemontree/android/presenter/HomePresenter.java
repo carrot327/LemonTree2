@@ -12,6 +12,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BasePresenter;
 import com.lemontree.android.base.BaseResponseBean;
@@ -25,6 +28,7 @@ import com.lemontree.android.bean.response.CouponResBean;
 import com.lemontree.android.bean.response.GetExtendFeeResBean;
 import com.lemontree.android.bean.response.GetPayWayListResBean;
 import com.lemontree.android.bean.response.HomeDataResBean;
+import com.lemontree.android.bean.response.HomeNoticeResponseBean;
 import com.lemontree.android.iview.IHomeView;
 import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.ConstantValue;
@@ -32,12 +36,21 @@ import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.uploadUtil.UploadDataBySingle;
 import com.lemontree.android.uploadUtil.UploadNecessaryData;
+import com.lemontree.android.uploadUtil.UrlHostConfig;
 import com.lemontree.android.utils.CProgressDialogUtils;
 import com.minchainx.permission.util.PermissionListener;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.lemontree.android.network.OKHttpClientEngine.getNetworkClient;
 import static com.lemontree.android.ui.fragment.HomeFragment.mSelectAmount;
@@ -55,13 +68,22 @@ public class HomePresenter extends BasePresenter<IHomeView> {
     public HomePresenter(Context context, IHomeView view, Fragment fragment) {
         super(context, view, fragment);
         this.mContext = context;
-
-        loadData(true);
         mDialog = new ProgressDialog(mContext);
+        loadData(true);
     }
 
     public void loadData(boolean showLoading) {
         getHomeMainData();
+
+        //获取首页公告通知
+//        getHomeNoticeList();
+        List<String> noticeList = new ArrayList<>();
+        List<String> urlList = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            noticeList.add("title_Jika Anda membayar sebelum tanggal jatuh tempo, limit pinjaman Anda berikutnya akan jadi" + i);
+            urlList.add(UrlHostConfig.H5_USER_INFO());
+        }
+        mView.setTextBanner(noticeList, urlList);
     }
 
     /**
@@ -463,17 +485,6 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                             if (mView != null) {
                                 mView.handleCouponInfo(response);
                             }
-
-//                            if (isNoNeedShowDialog) {
-//                                if ("1".equals(response.couponStatus)) {//1已激活
-//                                    mView.setCouponInfo(response);
-//                                } else if ("0".equals(response.couponStatus) || "2".equals(response.couponStatus)) {//0 未激活  2已使用
-//                                    mView.noCoupon();
-//                                    mView.setBorrowPageCouponText();
-//                                }
-//                            } else {
-//                                mView.showCouponDialog(response);
-//                            }
                         } else {
                             mView.noCoupon(response);
                         }
@@ -483,5 +494,41 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     public void onFailure(Call call, Exception exception, int id) {
                     }
                 });
+    }
+
+    /**
+     * 获取首页通知
+     */
+    private void getHomeNoticeList() {
+        String url = NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_HOME_NOTICE_LIST;
+        OkHttpClient okHttpClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                JsonParser parser = new JsonParser();
+                JsonArray jsonArray = new JsonArray();
+                if (response != null && response.code() == 200 && response.body() != null) {
+                    jsonArray = parser.parse(response.body().string()).getAsJsonArray();
+                }
+                Gson gson = new Gson();
+                List<String> noticeList = new ArrayList<>();
+                List<String> urlList = new ArrayList<>();
+                for (JsonElement noticeResponse : jsonArray) {
+                    HomeNoticeResponseBean noticeResponseBean = gson.fromJson(noticeResponse, HomeNoticeResponseBean.class);
+                    noticeList.add(noticeResponseBean.title);//只取title
+                    urlList.add(noticeResponseBean.linkUrl);
+                }
+                mView.setTextBanner(noticeList, urlList);
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+        });
     }
 }

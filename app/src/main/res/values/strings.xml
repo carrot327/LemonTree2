@@ -12,7 +12,7 @@
     <string name="text_bank">Bank penerima</string>
     <string name="text_bank_card">Akun koleksi</string>
     <string name="text_borrow_hint">*Apakah akan mengkonfirmasi pinjaman</string>
-    <string name="text_delay_hint">Kesulitan melunasi? Coba fitur tunda pelunasan!</string>
+    <string name="text_delay_hint">Kesulitan melunasi? Coba fitur perpanjangan</string>
     <string name="title_mine">Saya</string>
     <string name="text_login">Masuk</string>
     <string name="text_item_my_loan">Pinjaman saya</string>

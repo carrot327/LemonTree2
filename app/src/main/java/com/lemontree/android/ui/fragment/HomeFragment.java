@@ -46,6 +46,7 @@ import com.lemontree.android.utils.UIUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.superluo.textbannerlibrary.TextBannerView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -56,6 +57,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -179,14 +181,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     TextView tvCouponBorrow;
     @BindView(R.id.tv_final_pay_amount)
     TextView tvFinalPayAmount;
+    @BindView(R.id.tv_banner)
+    TextBannerView textBanner;
 
 
     private static final String VIEW_SEEK_BAR = "viewSeekBar";//home_layout_seek_bar
     private static final String VIEW_BORROW = "viewBorrow";//home_layout_borrow
     private static final String VIEW_PAY_AT_TIME = "viewPayAtTime";//home_layout_pay
     private static final String VIEW_PAY_EXTENT = "viewPayDelay";//home_layout_delay_pay
-
-    private static final int EXTENSION_DAYS = 7;//展期天数
 
     private String DEFAULT_SHOW_VIEW = VIEW_SEEK_BAR;
 
@@ -200,6 +202,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private CouponResBean mCouponData;
     private String mAfterCutAmount;
     private String mOriginPayAmount;
+    private List<String> mUrlList;
 
     @Override
     protected int getLayoutResId() {
@@ -302,6 +305,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         if (!isHidden()) {
             mPresenter.getHomeMainData();
         }
+        textBanner.startViewAnimator();
     }
 
     @Override
@@ -1078,6 +1082,37 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().removeAllStickyEvents();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        textBanner.stopViewAnimator();
+    }
+
+    /**
+     * 设置textBanner
+     *
+     * @param noticeList urlList
+     */
+    @Override
+    public void setTextBanner(List<String> noticeList, List<String> urlList) {
+        mUrlList = urlList;
+        textBanner.post(() -> {
+            if (noticeList.size() == 0) {
+                textBanner.setItemOnClickListener(null);
+            } else {
+                textBanner.setItemOnClickListener((data, position) -> {
+                    if (mUrlList != null && !mUrlList.isEmpty()) {
+                        String url = mUrlList.get(position);
+                        if (!TextUtils.isEmpty(url)) {
+                            IntentUtils.openWebViewActivity(mContext, url);
+                        }
+                    }
+                });
+            }
+            textBanner.setDatas(noticeList);
+        });
     }
 
 }

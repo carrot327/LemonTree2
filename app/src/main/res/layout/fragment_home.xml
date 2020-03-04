@@ -43,10 +43,10 @@
                 android:id="@+id/iv_titlebar_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
                 android:background="@null"
                 android:padding="5dp"
-                android:src="@drawable/icon_mine_notice_blue" />
+                android:src="@drawable/icon_mine_notice_blue"
+                android:visibility="invisible" />
 
             <View
                 android:id="@+id/msg_red_dot"
@@ -59,6 +59,46 @@
                 android:background="@drawable/bg_oval_light_red_dot"
                 android:visibility="invisible" />
         </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/home_text_banner">
+
+        <ImageView
+            android:id="@+id/iv_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="25dp"
+            android:background="@drawable/icon_notice" />
+
+        <ImageView
+            android:id="@+id/iv_banner_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/arrow_right_gray" />
+
+        <com.superluo.textbannerlibrary.TextBannerView
+            android:id="@+id/tv_banner"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_toStartOf="@+id/iv_banner_arrow"
+            android:layout_toEndOf="@+id/iv_notice"
+            android:background="@color/home_text_banner"
+            app:setGravity="center"
+            app:setInterval="4000"
+            app:setSingleLine="true"
+            app:setTextColor="@color/black"
+            app:setTextSize="12sp" />
+
     </RelativeLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -84,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="16dp">
+                android:paddingTop="20dp">
 
                 <!--滑条布局-->
                 <include
@@ -154,6 +194,7 @@
                         android:textSize="14sp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_part_pay"
                     android:layout_width="wrap_content"

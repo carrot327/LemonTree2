@@ -21,9 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.lemontree.android.uploadUtil.UrlHostConfig;
-import com.networklite.NetworkLiteHelper;
-import com.networklite.callback.GenericCallback;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
 import com.lemontree.android.base.BaseResponseBean;
@@ -45,6 +42,8 @@ import com.lemontree.android.uploadUtil.Tools;
 import com.lemontree.android.utils.IntentUtils;
 import com.lemontree.android.utils.SPUtils;
 import com.lemontree.android.utils.StringUtils;
+import com.networklite.NetworkLiteHelper;
+import com.networklite.callback.GenericCallback;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -140,7 +139,7 @@ public class LoginActivity extends BaseActivity {
                 StringUtils.modifyTextColor(
                         getString(R.string.login_text_privacy),
                         getString(R.string.login_text_Privasi),
-                        getResources().getColor(R.color.text_blue_deep)));
+                        getResources().getColor(R.color.theme_color)));
     }
 
     @Override

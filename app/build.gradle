@@ -16,10 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
-
-//        ndk {
-//            abiFilters "armeabi-v7a", "x86"
-//        }
     }
     signingConfigs {
         release {
@@ -109,6 +105,8 @@ dependencies {
     implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.superluo:textbannerview:1.0.2'
 
     implementation 'com.google.firebase:firebase-core:17.2.2'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'

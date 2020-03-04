@@ -93,6 +93,6 @@
     <color name="seek_bar_progress_green">#29cb8b</color>
     <color name="seek_bar_track_bg_green">#cff3e4</color>
 
-
+    <color name="home_text_banner">#FFF9F5</color>
 
 </resources>
