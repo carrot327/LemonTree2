@@ -16,10 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
-
-//        ndk {
-//            abiFilters "armeabi-v7a","x86"
-//        }
     }
     signingConfigs {
         release {
@@ -70,11 +66,8 @@ android {
         google_play {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "google_play"]
         }
-        nine_day {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "nine_day"]
-        }
-        seven_day {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "seven_day"]
+        fromSakuFind {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "fromSakuFind"]
         }
     }
 }

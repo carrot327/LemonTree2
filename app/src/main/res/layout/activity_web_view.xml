@@ -3,13 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/ll_web_view"
+    <com.github.lzyzsd.jsbridge.BridgeWebView
+        android:id="@+id/wvWebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-    </LinearLayout>
+        android:layerType="software" />
 
     <ProgressBar
         android:id="@+id/pbWebView"

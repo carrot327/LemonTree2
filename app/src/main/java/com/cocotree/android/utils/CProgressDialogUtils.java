@@ -16,11 +16,11 @@ public class CProgressDialogUtils {
     }
 
     public static void showProgressDialog(Activity activity) {
-        showProgressDialog(activity, "Loading", false, null);
+        showProgressDialog(activity, "Memuat", false, null);
     }
 
     public static void showProgressDialog(Activity activity, DialogInterface.OnCancelListener listener) {
-        showProgressDialog(activity, "Loading", true, listener);
+        showProgressDialog(activity, "Memuat", true, listener);
     }
 
     public static void showProgressDialog(Activity activity, String msg) {
