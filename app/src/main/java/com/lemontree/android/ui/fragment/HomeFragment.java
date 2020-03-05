@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.webkit.WebStorage;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -244,6 +245,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
+                    WebStorage.getInstance().deleteAllData();
+
 //                    startActivity(StartLivenessActivity.createIntent(mContext));
 //                    String licenseString = getAssetResource("DFLicense");
 //                    if (TextUtils.isEmpty(licenseString)) {

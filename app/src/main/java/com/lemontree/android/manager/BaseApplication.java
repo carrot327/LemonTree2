@@ -1,13 +1,11 @@
 package com.lemontree.android.manager;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.lemontree.android.BuildConfig;
-import com.lemontree.android.uploadUtil.CLog;
+import com.lemontree.android.uploadUtil.UrlHostConfig;
 import com.lemontree.android.utils.SPUtils;
 import com.liveness.dflivenesslibrary.DFProductResult;
 import com.liveness.dflivenesslibrary.DFTransferResultInterface;
@@ -32,6 +30,11 @@ public class BaseApplication extends Application implements DFTransferResultInte
 
         sInstance = this;
         initSPData();
+
+        WebHelper.instanceView(getApplicationContext());
+        if (WebHelper.getWebView() != null) {
+            WebHelper.getWebView().loadUrl(UrlHostConfig.getH5BaseHost());
+        }
     }
 
     public static BaseApplication getInstance() {
@@ -67,12 +70,12 @@ public class BaseApplication extends Application implements DFTransferResultInte
      */
     public void initSPData() {
         if (BuildConfig.DEBUG) {
-            //线上用户
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "登录信息(081266568320)";
-//            mUserId = "3835617";
-//            sPhoneNum = "081266568320";
+            //晶晶 colada  test
+            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+            sLoginState = true;
+            sUserName = "登录信息(081287566687)";
+            mUserId = "3832081";
+            sPhoneNum = "081287566687";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);

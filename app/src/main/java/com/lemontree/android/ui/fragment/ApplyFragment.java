@@ -114,7 +114,6 @@ public class ApplyFragment extends BaseFragment {
     @OnClick({R.id.rl_user_info, R.id.rl_company_info, R.id.rl_contact_info, R.id.rl_photo, R.id.btn_confirm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            //sdfsdfsdfsadfs
             case R.id.rl_user_info:
                 IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
                 break;

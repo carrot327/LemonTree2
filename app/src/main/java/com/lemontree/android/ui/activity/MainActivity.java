@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,7 +57,6 @@ import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.utils.IntentUtils;
 import com.lemontree.android.utils.MultiClickHelper;
 import com.lemontree.android.utils.PermissionUtils;
-import com.lemontree.android.utils.SPUtils;
 import com.lemontree.android.utils.UpdateUtil;
 import com.minchainx.permission.util.PermissionListener;
 import com.networklite.NetworkLiteHelper;
@@ -127,13 +125,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         mListFragments = mListFragments3Tab;
         initIndicator(tabResourceBean3Tab);
         switchTab(0);
-        if (checkStartPermissions()) {
-            showPermissionDialog();
-        }
-        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
-            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
-            DialogFactory.createPrivacyAgreementDialog(mContext).show();
-        }
+//        if (checkStartPermissions()) {
+//            showPermissionDialog();
+//        }
+//        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
+//            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
+//            DialogFactory.createPrivacyAgreementDialog(mContext).show();
+//        }
     }
 
     @Override

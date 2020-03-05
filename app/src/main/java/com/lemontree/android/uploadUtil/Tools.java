@@ -689,4 +689,16 @@ public class Tools {
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         return wifiInfo.getMacAddress();
     }
+
+    /**
+     * 是否是GP渠道
+     */
+    public static boolean isGooglePlayChannel() {
+        return "google_play".equals(Tools.getChannel());
+    }
+
+    public static boolean isNotGooglePlayChannel() {
+        return !isGooglePlayChannel();
+    }
+
 }
