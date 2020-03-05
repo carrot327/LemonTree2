@@ -115,9 +115,11 @@ public class ApplyFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_user_info:
+//                IntentUtils.openWebViewActivity(mContext, "http://161.117.188.77:8083/lemon/index.html?type=colada");
                 IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
                 break;
             case R.id.rl_company_info:
+//                IntentUtils.openWebViewActivity(mContext, "http://161.117.185.237:8080/#/login?app_clientid=h5&app_name=android&app_version=1.3.2&photoFast=true");
                 IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_COMPANY());
                 break;
             case R.id.rl_contact_info:

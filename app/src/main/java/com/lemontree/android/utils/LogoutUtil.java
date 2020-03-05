@@ -21,7 +21,7 @@ public class LogoutUtil {
         SPUtils.remove(ConstantValue.KEY_LATEST_LOGIN_NAME);
 
         WebStorage.getInstance().deleteAllData();
-        clearWebViewCache();
+//        clearWebViewCache();
 
     }
 
