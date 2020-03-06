@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -127,12 +126,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         mListFragments = mListFragments3Tab;
         initIndicator(tabResourceBean3Tab);
         switchTab(0);
-        if (checkStartPermissions()) {
-            showPermissionDialog();
-        }
-        if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
-            SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
-            DialogFactory.createPrivacyAgreementDialog(mContext).show();
+        if (!BuildConfig.DEBUG) {
+            if (checkStartPermissions()) {
+                showPermissionDialog();
+            }
+            if (SPUtils.getBoolean(ConstantValue.FIRST_OPEN_APP, true)) {
+                SPUtils.putBoolean(ConstantValue.FIRST_OPEN_APP, false);
+                DialogFactory.createPrivacyAgreementDialog(mContext).show();
+            }
         }
     }
 

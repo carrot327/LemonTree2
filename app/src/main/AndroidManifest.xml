@@ -102,6 +102,9 @@
         <activity
             android:name="com.lemontree.android.ui.activity.ProductDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.lemontree.android.ui.activity.ApplyFirstActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.lemontree.android.service.MyFirebaseMessagingService"
