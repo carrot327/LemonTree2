@@ -36,7 +36,7 @@
             android:value="${ANDROID_CHANNEL_VALUE}" />
 
 
-        <activity android:name="com.lemontree.android.ui.activity.PartPayActivity"/>
+        <activity android:name="com.lemontree.android.ui.activity.PartPayActivity" />
         <activity android:name="com.lemontree.android.ui.activity.LivenessFailedActivity" />
         <activity android:name="com.lemontree.android.ui.activity.LivenessSuccessActivity" />
         <activity android:name="com.lemontree.android.ui.activity.StartLivenessActivity" />
@@ -104,7 +104,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.lemontree.android.ui.activity.ApplyFirstActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
 
         <service
             android:name="com.lemontree.android.service.MyFirebaseMessagingService"

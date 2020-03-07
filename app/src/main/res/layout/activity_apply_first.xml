@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.lemontree.android.ui.activity.ApplyFirstActivity">
     <!--https://material.io/components/menus/menus.html#-->
@@ -71,7 +72,7 @@
   -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/outlinedTextField_Name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nama lengkap"
@@ -80,13 +81,14 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText_Name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_color" />
             </com.google.android.material.textfield.TextInputLayout>
             <!--</LinearLayout>-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/outlinedTextField_KTP"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nomor KTP"
@@ -95,9 +97,44 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText_KTP"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:textColor="@color/theme_color" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="Jumlah Anak" />
+
+                <Spinner
+                    android:id="@+id/spinner_children_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:entries="@array/numberOfChildren" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -122,6 +159,38 @@
 
             </RelativeLayout>
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="Status Pernikahan" />
+
+                <Spinner
+                    android:id="@+id/spinner_marital_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:entries="@array/maritalStatus" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -145,53 +214,16 @@
 
             </RelativeLayout>
 
-
-            <RelativeLayout
+            <View
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:paddingStart="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:text="Status Pernikahan" />
-
-                <Spinner
-                    android:id="@+id/spinner_marital_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:entries="@array/maritalStatus" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:paddingStart="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:text="Jumlah Anak" />
-
-                <Spinner
-                    android:id="@+id/spinner_children_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:entries="@array/numberOfChildren" />
-
-            </RelativeLayout>
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/outlinedTextField_DetailAddress"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Alamat Lengkap"
@@ -200,8 +232,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText_DetailAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2" />
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--     <TextView
@@ -210,7 +241,11 @@
                      android:layout_marginLeft="10dp"
                      android:text="Alamat lengkap" />-->
 
-
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:text="submit" />
         </LinearLayout>
     </ScrollView>
 

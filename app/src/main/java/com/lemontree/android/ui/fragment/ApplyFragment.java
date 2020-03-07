@@ -1,6 +1,5 @@
 package com.lemontree.android.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,11 +10,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
-import com.networklite.NetworkLiteHelper;
-import com.networklite.callback.GenericCallback;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseFragment;
 import com.lemontree.android.base.BaseResponseBean;
@@ -29,6 +23,11 @@ import com.lemontree.android.network.OKHttpClientEngine;
 import com.lemontree.android.ui.activity.StartLivenessActivity;
 import com.lemontree.android.uploadUtil.UrlHostConfig;
 import com.lemontree.android.utils.IntentUtils;
+import com.networklite.NetworkLiteHelper;
+import com.networklite.callback.GenericCallback;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -107,7 +106,7 @@ public class ApplyFragment extends BaseFragment {
 
     @Override
     protected void loadData(boolean hasRequestData) {
-        getAuthStatusList(mContext);
+        getAuthStatusList();
         getBankCardList();
     }
 
@@ -172,7 +171,7 @@ public class ApplyFragment extends BaseFragment {
     /**
      * 获取认证状态
      */
-    public void getAuthStatusList(Context context) {
+    public void getAuthStatusList() {
         NetworkLiteHelper
                 .postJson()
                 .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_GET_AUTH_STATE)

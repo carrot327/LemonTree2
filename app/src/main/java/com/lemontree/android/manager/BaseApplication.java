@@ -1,13 +1,10 @@
 package com.lemontree.android.manager;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.lemontree.android.BuildConfig;
-import com.lemontree.android.uploadUtil.CLog;
 import com.lemontree.android.utils.SPUtils;
 import com.liveness.dflivenesslibrary.DFProductResult;
 import com.liveness.dflivenesslibrary.DFTransferResultInterface;
@@ -67,11 +64,10 @@ public class BaseApplication extends Application implements DFTransferResultInte
      */
     public void initSPData() {
         if (BuildConfig.DEBUG) {
-            //线上用户
 //            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
 //            sLoginState = true;
 //            sUserName = "登录信息(081266568320)";
-//            mUserId = "3835617";
+//            mUserId = "3834736";
 //            sPhoneNum = "081266568320";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
