@@ -102,4 +102,8 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
+
+<!--    <style name="CustomAppTheme_textinputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="colorControlNormal">@color/Blue500</item>
+    </style>-->
 </resources>

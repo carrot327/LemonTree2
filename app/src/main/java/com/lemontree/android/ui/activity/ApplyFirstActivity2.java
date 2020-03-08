@@ -42,15 +42,10 @@ public class ApplyFirstActivity2 extends BaseActivity {
         });
 
         String[] COUNTRIES = new String[]{"Item 1", "Item 2", "Item 3", "Item 4"};
-
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(
-                        mContext,
-                        R.layout.dropdown_menu_popup_item,
-                        COUNTRIES);
+        String[] COUNTRIES2 = getResources().getStringArray(R.array.gender);
 
         AutoCompleteTextView editTextFilledExposedDropdown = findViewById(R.id.filled_exposed_dropdown);
-        editTextFilledExposedDropdown.setAdapter(adapter);
+        editTextFilledExposedDropdown.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, COUNTRIES2));
 
         TextInputLayout textInputLayout = findViewById(R.id.outlinedTextField);
         textInputLayout.setError("Error message");
