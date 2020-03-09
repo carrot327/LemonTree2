@@ -215,4 +215,14 @@ public interface ConstantValue {
      * 认证_基本信息
      */
     String NET_REQUEST_URL_BASIC_INFO = "/idcard/auth/idCardInfo";
+
+    /**
+     * 认证_公司信息
+     */
+    String NET_REQUEST_URL_COMPANY_INFO = "/app/auth/workInfo/save";
+
+    /**
+     * 认证_联系人信息
+     */
+    String NET_REQUEST_URL_CONTACTS_INFO = "/app/auth/relationship/save";
 }

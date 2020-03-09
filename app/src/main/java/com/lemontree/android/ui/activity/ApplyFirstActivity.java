@@ -82,8 +82,8 @@ public class ApplyFirstActivity extends BaseActivity {
     protected void initializeView() {
         String[] GENDER = getResources().getStringArray(R.array.gender);
         String[] EDUCATION = getResources().getStringArray(R.array.education);
-        String[] MARRY_STATE = getResources().getStringArray(R.array.maritalStatus);
-        String[] CHILDREN_NUMBER = getResources().getStringArray(R.array.numberOfChildren);
+        String[] MARRY_STATE = getResources().getStringArray(R.array.marital_status);
+        String[] CHILDREN_NUMBER = getResources().getStringArray(R.array.number_of_children);
 
         dropdownTvGender.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, GENDER));
         dropdownTvEducation.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, EDUCATION));

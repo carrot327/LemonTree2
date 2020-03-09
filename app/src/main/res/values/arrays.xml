@@ -7,24 +7,80 @@
 
     <string-array name="education">
         <item>Pascasarjana</item>
-        <item>sarjana</item>
+        <item>Sarjana</item>
         <item>Sekolah tinggi</item>
         <item>Sekolah menengah</item>
         <item>Sekolah dasar</item>
     </string-array>
 
-    <string-array name="maritalStatus">
+    <string-array name="marital_status">
         <item>Belum menikah</item>
         <item>Sudah menikah</item>
         <item>Bercerai</item>
     </string-array>
 
-    <string-array name="numberOfChildren">
+    <string-array name="number_of_children">
         <item>0</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>3+</item>
+    </string-array>
+
+
+    <string-array name="work_category">
+        <item>Akuntan/Pegawai Finansial</item>
+        <item>Sekuriti</item>
+        <item>Layanan Konsumen</item>
+        <item>Teknisi</item>
+        <item>Supir Taksi</item>
+        <item>Eksekutif </item>
+        <item>Administrasi</item>
+        <item>Teknologi Informasi </item>
+        <item>Konsultan / Analis </item>
+        <item>Marketing</item>
+        <item>Guru / Dosen</item>
+        <item>Militer, Siswa</item>
+        <item>Pengusaha</item>
+        <item>Polisi</item>
+        <item>Petani</item>
+        <item>Nelayan</item>
+        <item>Peternak</item>
+        <item>Tenaga Medis</item>
+        <item>Dokter</item>
+        <item>Pengacara</item>
+        <item>Koki</item>
+        <item>Peneliti</item>
+        <item>Desainer</item>
+        <item>Arsitek</item>
+        <item>Artis</item>
+        <item>Broker</item>
+        <item>Distributor</item>
+        <item>Transportasi Udara</item>
+        <item>Transportasi Darat</item>
+        <item>Buruh</item>
+        <item>Pengrajin</item>
+        <item>Ibu Rumah Tangga</item>
+        <item>Pegawai Pemerintah</item>
+        <item>Personil Informal</item>
+        <item>Lainny</item>
+    </string-array>
+
+    <string-array name="salary_range">
+        <item>Dibawah Rp. 2.000.000</item>
+        <item>Diantara Rp. 2.000.000 - Rp. 4.000.000</item>
+        <item>Diantara Rp. 4.000.000 - Rp. 8.000.000</item>
+        <item>Di atas Rp. 8.000.000</item>
+    </string-array>
+
+    <string-array name="contact_relation">
+        <item>Orang tua</item>
+        <item>Teman</item>
+        <item>Rekan kerja</item>
+        <item>Pasangan hidup</item>
+        <item>Teman sekelas</item>
+        <item>Kerabat</item>
+        <item>Saudara kandung</item>
     </string-array>
 </resources>
 

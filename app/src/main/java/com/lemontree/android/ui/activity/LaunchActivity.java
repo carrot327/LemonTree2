@@ -1,6 +1,5 @@
 package com.lemontree.android.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -36,8 +35,10 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Handler().postDelayed(() -> {
-            startActivity(new Intent(mContext, MainActivity.class));
+//            startActivity(new Intent(mContext, MainActivity.class));
 //            startActivity(ApplyFirstActivity.createIntent(mContext));
+//            startActivity(ApplySecondActivity.createIntent(mContext));
+            startActivity(ApplyThirdActivity.createIntent(mContext));
 
             finish();
         }, 100);
