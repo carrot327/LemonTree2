@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.lemontree.android.ui.activity.ApplyFirstActivity">
 
@@ -12,7 +11,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@color/white">
+        android:background="@color/theme_color">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -20,7 +19,7 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/icon_back" />
+            android:background="@drawable/icon_back_white" />
 
         <TextView
             android:id="@+id/tv_titlebar_title"
@@ -28,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Informasi identitas"
-            android:textColor="#000000"
+            android:textColor="@color/white"
             android:textSize="18sp" />
     </RelativeLayout>
 
@@ -72,38 +71,40 @@
                       android:layout_height="wrap_content" />
   -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/outlinedTextField_Name"
+                android:id="@+id/outline_Name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nama lengkap"
-                android:textColorHint="@color/Grey300"
-                app:errorEnabled="true">
+                android:textColorHint="@color/Grey400"
+                app:errorEnabled="true"
+                app:startIconDrawable="@drawable/icon_coupon">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText_Name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/theme_color" />
+                    android:inputType="textPersonName"
+                    android:textColor="@color/CommonTextColor" />
             </com.google.android.material.textfield.TextInputLayout>
             <!--</LinearLayout>-->
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/outlinedTextField_KTP"
+                android:id="@+id/outline_KTP"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nomor KTP"
-                android:textColorHint="@color/Grey300"
+                android:textColorHint="@color/Grey400"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText_KTP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:maxLines="1"
-                    android:textColor="@color/theme_color" />
+                    android:inputType="number"
+                    android:textColor="@color/CommonTextColor" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -194,87 +195,91 @@
                </RelativeLayout>-->
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outline_gender"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Jenis Kelamin"
-                android:textColorHint="@color/Grey300">
+                android:textColorHint="@color/Grey400">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_tv_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:textColor="@color/theme_color" />
+                    android:textColor="@color/CommonTextColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outline_education"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Pendidikan"
-                android:textColorHint="@color/Grey300">
+                android:textColorHint="@color/Grey400">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_tv_education"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:textColor="@color/theme_color" />
+                    android:textColor="@color/CommonTextColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
+                android:id="@+id/outline_marry_state"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Status Pernikahan"
-                android:textColorHint="@color/Grey300">
+                android:textColorHint="@color/Grey400">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_tv_marry_state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:textColor="@color/theme_color" />
+                    android:textColor="@color/CommonTextColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:id="@+id/outline_children_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Jumlah Anak"
-                android:textColorHint="@color/Grey300">
+                android:textColorHint="@color/Grey400">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_tv_children_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:textColor="@color/theme_color" />
+                    android:textColor="@color/CommonTextColor" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/outlinedTextField_DetailAddress"
+                android:id="@+id/outline_DetailAddress"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Alamat saat ini"
-                android:textColorHint="@color/Grey300"
+                android:textColorHint="@color/Grey400"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText_DetailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/theme_color" />
+                    android:textColor="@color/CommonTextColor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--     <TextView
@@ -283,7 +288,8 @@
                      android:layout_marginLeft="10dp"
                      android:text="Alamat lengkap" />-->
 
-            <com.google.android.material.button.MaterialButton
+            <Button
+                android:id="@+id/btn_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"

@@ -210,4 +210,9 @@ public interface ConstantValue {
      * 获取优惠券信息
      */
     String NET_REQUEST_URL_GET_COUPON_INFO = "/app/repayment/getAppCashCoupon";
+
+    /**
+     * 认证_基本信息
+     */
+    String NET_REQUEST_URL_BASIC_INFO = "/idcard/auth/idCardInfo";
 }

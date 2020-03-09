@@ -1,6 +1,8 @@
 package com.lemontree.android.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.annotation.Nullable;
 
@@ -33,14 +35,14 @@ public class LaunchActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* new Handler().postDelayed(() -> {
-//            startActivity(new Intent(mContext, MainActivity.class));
-            startActivity(ApplyFirstActivity.createIntent(mContext));
+        new Handler().postDelayed(() -> {
+            startActivity(new Intent(mContext, MainActivity.class));
+//            startActivity(ApplyFirstActivity.createIntent(mContext));
 
             finish();
-        }, 100);*/
+        }, 100);
 
-        startActivity(ApplyFirstActivity.createIntent(mContext));
+//        startActivity(ApplyFirstActivity.createIntent(mContext));
 
 
     }

@@ -3,6 +3,7 @@
     <color name="colorPrimary">#fab02a</color>
     <color name="colorPrimaryDark">#FF9800</color>
     <color name="colorAccent">#f2d18d</color>
+<!--    <color name="colorOnSurface">#fab02a</color>-->
 
     <!--主题颜色 -->
     <color name="theme_color">#fab02a</color>

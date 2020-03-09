@@ -20,6 +20,7 @@ import com.lemontree.android.bean.response.BankcardListResponseBean;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
+import com.lemontree.android.ui.activity.ApplyFirstActivity;
 import com.lemontree.android.ui.activity.StartLivenessActivity;
 import com.lemontree.android.uploadUtil.UrlHostConfig;
 import com.lemontree.android.utils.IntentUtils;
@@ -115,7 +116,9 @@ public class ApplyFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.rl_user_info:
                 if (mBaseStatus == 0) {
-                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
+//                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
+                    startActivity(ApplyFirstActivity.createIntent(mContext));
+
                 }else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
