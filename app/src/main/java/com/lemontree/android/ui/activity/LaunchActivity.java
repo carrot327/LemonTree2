@@ -38,7 +38,8 @@ public class LaunchActivity extends BaseActivity {
 //            startActivity(new Intent(mContext, MainActivity.class));
 //            startActivity(ApplyFirstActivity.createIntent(mContext));
 //            startActivity(ApplySecondActivity.createIntent(mContext));
-            startActivity(ApplyThirdActivity.createIntent(mContext));
+//            startActivity(ApplyThirdActivity.createIntent(mContext));
+            startActivity(ApplyFourActivity.createIntent(mContext));
 
             finish();
         }, 100);

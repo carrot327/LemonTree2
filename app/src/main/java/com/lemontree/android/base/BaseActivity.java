@@ -116,7 +116,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         initializePrepareData();
         initializeView();
         initializeTitleBar();
-        initializeImmersiveMode();
+//        initializeImmersiveMode();
         loadData();
     }
 

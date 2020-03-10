@@ -2,7 +2,10 @@
   <dictionary name="manny">
     <words>
       <w>clientid</w>
+      <w>gongzidan</w>
+      <w>gongzuochangjing</w>
       <w>lemontree</w>
+      <w>yingyezhizhao</w>
     </words>
   </dictionary>
 </component>
