@@ -45,58 +45,25 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="联系人1"
+                android:text="Kontak orang 1"
                 android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/icon_contact_avator" />
+                    android:src="@drawable/icon_relationship" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:hint="Nama kontak keluarga"
-                    android:textColorHint="@color/Grey400">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tv_contact_name_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:textColor="@color/CommonTextColor"
-                        android:textSize="14sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <ImageView
-                    android:id="@+id/iv_tag1"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/icon_telephone" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outline_relation1"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="130dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
@@ -113,58 +80,47 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_toLeftOf="@id/outline_relation1"
-                    android:layout_toRightOf="@id/iv_tag1"
-                    android:hint="Telepon"
-                    android:textColorHint="@color/Grey400"
-                    app:errorEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_telephone_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:inputType="number"
-                        android:textColor="@color/CommonTextColor"
-                        android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </RelativeLayout>
+            </LinearLayout>
 
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="联系人2"
-                android:textSize="20sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/tag_1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/icon_contact_avator" />
 
+                <Button
+                    android:id="@+id/btn_select_contact_1"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Pilih"
+                    android:textAllCaps="false" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/btn_select_contact_1"
+                    android:layout_toRightOf="@id/tag_1"
                     android:hint="Nama kontak keluarga"
                     android:textColorHint="@color/Grey400">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tv_contact_name_2"
+                        android:id="@+id/tv_contact_name_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
@@ -173,25 +129,65 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/iv_phone_2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/iv_tag_phone"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/icon_telephone" />
 
+
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outline_relation2"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@id/iv_tag_phone"
+                    android:hint="Telepon"
+                    android:textColorHint="@color/Grey400">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_telephone_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:editable="false"
+                        android:focusable="false"
+                        android:textColor="@color/CommonTextColor"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Kontak orang 2"
+                android:textSize="20sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_relationship" />
+
+                <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="130dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
@@ -208,23 +204,84 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/tag_2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_contact_avator" />
+
+                <Button
+                    android:id="@+id/btn_select_contact_2"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Pilih"
+                    android:textAllCaps="false" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_toLeftOf="@id/outline_relation2"
-                    android:layout_toRightOf="@id/iv_phone_2"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@id/btn_select_contact_2"
+                    android:layout_toRightOf="@id/tag_2"
+                    android:hint="Nama kontak keluarga"
+                    android:textColorHint="@color/Grey400">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tv_contact_name_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/CommonTextColor"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_tag_phone2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_telephone" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv_tag_phone2"
                     android:hint="Telepon"
-                    android:textColorHint="@color/Grey400"
-                    app:errorEnabled="true">
+                    android:textColorHint="@color/Grey400">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_telephone_2"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:inputType="number"
+                        android:editable="false"
+                        android:focusable="false"
                         android:textColor="@color/CommonTextColor"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -235,7 +292,7 @@
                 android:id="@+id/btn_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:text="Kirim" />
         </LinearLayout>
     </ScrollView>

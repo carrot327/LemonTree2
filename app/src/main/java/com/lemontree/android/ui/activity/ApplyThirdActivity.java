@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -20,12 +21,11 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
 import com.lemontree.android.base.BaseResponseBean;
-import com.lemontree.android.bean.request.WorkInfoReqBean;
+import com.lemontree.android.bean.request.ContactInfoReqBean;
 import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
@@ -37,6 +37,7 @@ import com.minchainx.permission.util.PermissionListener;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,20 +56,21 @@ public class ApplyThirdActivity extends BaseActivity {
     TextInputEditText tvContactName1;
     @BindView(R.id.tv_relation_1)
     AutoCompleteTextView tvRelation1;
-    @BindView(R.id.outline_relation1)
-    TextInputLayout outlineRelation1;
     @BindView(R.id.et_telephone_1)
     TextInputEditText etTelephone1;
     @BindView(R.id.tv_contact_name_2)
     TextInputEditText tvContactName2;
     @BindView(R.id.tv_relation_2)
     AutoCompleteTextView tvRelation2;
-    @BindView(R.id.outline_relation2)
-    TextInputLayout outlineRelation2;
     @BindView(R.id.et_telephone_2)
     TextInputEditText etTelephone2;
+    @BindView(R.id.btn_select_contact_1)
+    Button btnSelectContact1;
+    @BindView(R.id.btn_select_contact_2)
+    Button btnSelectContact2;
 
     private final int PICK_CONTACT = 101;
+
     private boolean mHasUploadAddressBook;
     private int clickedViewId;
 
@@ -85,9 +87,9 @@ public class ApplyThirdActivity extends BaseActivity {
     @Override
     protected void initializeView() {
         String[] RELATION = getResources().getStringArray(R.array.contact_relation);
-
         tvRelation1.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, RELATION));
         tvRelation2.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, RELATION));
+        tvContactName1.setEnabled(false);
     }
 
     @Override
@@ -100,7 +102,7 @@ public class ApplyThirdActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.iv_back, R.id.btn_confirm, R.id.tv_contact_name_1, R.id.tv_contact_name_2})
+    @OnClick({R.id.iv_back, R.id.btn_confirm, R.id.btn_select_contact_1, R.id.btn_select_contact_2, R.id.tv_contact_name_1, R.id.tv_contact_name_2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -109,8 +111,8 @@ public class ApplyThirdActivity extends BaseActivity {
             case R.id.btn_confirm:
                 checkContent();
                 break;
-            case R.id.tv_contact_name_1:
-            case R.id.tv_contact_name_2:
+            case R.id.btn_select_contact_1:
+            case R.id.btn_select_contact_2:
                 clickedViewId = view.getId();
                 new Permission(mContext, new String[]{Manifest.permission.READ_CONTACTS}, new PermissionListener() {
                     @Override
@@ -136,28 +138,31 @@ public class ApplyThirdActivity extends BaseActivity {
 
     private void checkContent() {
         boolean hasError = false;
-       /* if (TextUtils.isEmpty(tvWorkCategory.getText().toString())) {
-            tvWorkCategory.setError("Silakan isi");
+        if (TextUtils.isEmpty(tvRelation1.getText().toString())) {
+            tvRelation1.setError("Silakan isi");
             hasError = true;
         }
-        if (TextUtils.isEmpty(tvSalaryRange.getText().toString())) {
-            tvSalaryRange.setError("Silakan isi");
+        if (TextUtils.isEmpty(tvContactName1.getText().toString())) {
+            tvContactName1.setError("Silakan isi");
             hasError = true;
         }
-        if (TextUtils.isEmpty(etCompanyName.getText().toString())) {
-            etCompanyName.setError("Silakan isi");
-            hasError = true;
-        }
-
-        if (TextUtils.isEmpty(etCompanyAddress.getText().toString())) {
-            etCompanyAddress.setError("Silakan isi");
+        if (TextUtils.isEmpty(etTelephone1.getText().toString())) {
+            etTelephone1.setError("Silakan isi");
             hasError = true;
         }
 
-        if (TextUtils.isEmpty(etCompanyPhone.getText().toString())) {
-            etCompanyPhone.setError("Silakan isi");
+        if (TextUtils.isEmpty(tvRelation2.getText().toString())) {
+            tvRelation2.setError("Silakan isi");
             hasError = true;
-        }*/
+        }
+        if (TextUtils.isEmpty(tvContactName2.getText().toString())) {
+            tvContactName2.setError("Silakan isi");
+            hasError = true;
+        }
+        if (TextUtils.isEmpty(etTelephone2.getText().toString())) {
+            etTelephone2.setError("Silakan isi");
+            hasError = true;
+        }
 
         if (!hasError) {
             submit();
@@ -165,13 +170,26 @@ public class ApplyThirdActivity extends BaseActivity {
     }
 
     private void submit() {
-        WorkInfoReqBean workInfoReqBean = new WorkInfoReqBean();
+        ContactInfoReqBean reqBean = new ContactInfoReqBean();
+        ContactInfoReqBean.ContactBean contactBean = reqBean.new ContactBean();
+        contactBean.relation_name = tvContactName1.getText().toString();
+        contactBean.relation_phone = etTelephone1.getText().toString();
+        contactBean.relation_type = tvRelation1.getText().toString();
+        ContactInfoReqBean.ContactBean contactBean2 = reqBean.new ContactBean();
+        contactBean2.relation_name = tvContactName2.getText().toString();
+        contactBean2.relation_phone = etTelephone2.getText().toString();
+        contactBean2.relation_type = tvRelation2.getText().toString();
 
+        reqBean.relationship = new ArrayList<>();
+        reqBean.relationship.add(contactBean);
+        reqBean.relationship.add(contactBean2);
+
+        Log.d("karl", "map:" + new Gson().toJson(reqBean));
 
         NetworkLiteHelper
                 .postJson()
                 .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_COMPANY_INFO)
-                .content(new Gson().toJson(workInfoReqBean))
+                .content(new Gson().toJson(reqBean))
                 .build()
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {
                     @Override
@@ -256,15 +274,22 @@ public class ApplyThirdActivity extends BaseActivity {
                 phones.close();
             }
             Log.i("获取到的联系人", "name-->" + name + ";phoneNumber" + phoneNumber);
-            if (R.id.tv_contact_name_1 == clickedViewId) {
+            if (R.id.btn_select_contact_1 == clickedViewId) {
                 tvContactName1.setText(name);
                 etTelephone1.setText(phoneNumber);
+                if (!TextUtils.isEmpty(name)) {
+                    tvContactName1.setEnabled(true);
+                }
             } else {
                 tvContactName2.setText(name);
                 etTelephone2.setText(phoneNumber);
+                if (!TextUtils.isEmpty(name)) {
+                    tvContactName2.setEnabled(true);
+                }
             }
         } else {
             showToast("get contact failed");
         }
     }
+
 }
