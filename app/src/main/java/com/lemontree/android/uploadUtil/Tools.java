@@ -124,6 +124,29 @@ public class Tools {
         CLog.d("compressImage", "compressImage: " + file);
         return file;
     }
+
+    public static File getFileByBitmap(Bitmap bitmap, String fileName) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".png");
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            try {
+                fos.write(baos.toByteArray());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        }
+
+        CLog.d("compressImage", "compressImage: " + file);
+        return file;
+    }
+
     public static File convertByteArrayToFile(byte[] bytes) {
 
         File file = new File(BaseApplication.getContext().getExternalFilesDir(null), Tools.getFileNameByTime());
@@ -662,7 +685,7 @@ public class Tools {
     }
 
     /**
-     *获取电话号码
+     * 获取电话号码
      */
     public static String getNativePhoneNumber(Context context) {
 
@@ -688,5 +711,16 @@ public class Tools {
         WifiManager wifiManager = (WifiManager) BaseApplication.getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         return wifiInfo.getMacAddress();
+    }
+
+    /**
+     * 图片保存的文件命名
+     */
+    public static String getFileName() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA);
+        Date date = new Date(System.currentTimeMillis());
+        //图片名
+        String filename = format.format(date);
+        return filename;
     }
 }

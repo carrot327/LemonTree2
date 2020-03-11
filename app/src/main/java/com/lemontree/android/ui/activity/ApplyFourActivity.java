@@ -20,6 +20,7 @@ import androidx.core.content.FileProvider;
 
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
+import com.lemontree.android.uploadUtil.Tools;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,6 +29,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,27 +86,15 @@ public class ApplyFourActivity extends BaseActivity {
 
     public static final int FLAG_KTP1 = 101;
     public static final int FLAG_KTP_HOLD2 = 102;
-    public static final int FLAG_STAFF_CARD3 = 103;
-    public static final int FLAG_GZD4 = 104;
-    public static final int FLAG_GZXC5 = 105;
-    public static final int FLAG_YYZC6 = 106;
-
-    private static final int ALBUM_REQUEST_CODE_KTP = 101;
-    private static final int ALBUM_REQUEST_CODE_KTP_HOLD = 102;
-    private static final int ALBUM_REQUEST_CODE_STAFF_CARD = 103;// 员工卡
-    private static final int ALBUM_REQUEST_CODE_GZD = 104;//工资单
-    private static final int ALBUM_REQUEST_CODE_GZXC = 105;//工作现场
-    private static final int ALBUM_REQUEST_CODE_YYZC = 106;//营业执照
-
-    private static final int CAMERA_REQUEST_CODE_KTP = 201;
-    private static final int CAMERA_REQUEST_CODE_KTP_HOLD = 202;
-    private static final int CAMERA_REQUEST_CODE_STAFF_CARD = 203;
-    private static final int CAMERA_REQUEST_CODE_GZD = 204;
-    private static final int CAMERA_REQUEST_CODE_GZXC = 205;
-    private static final int CAMERA_REQUEST_CODE_YYZC = 206;
+    public static final int FLAG_STAFF_CARD3 = 103;// 员工卡
+    public static final int FLAG_GZD4 = 104;//工资单
+    public static final int FLAG_GZXC5 = 105;//工作现场
+    public static final int FLAG_YYZC6 = 106;//营业执照
 
     private File cameraSavePath;//拍照照片路径
     private Uri mUri;
+    private Map<String, File> imgMap = new HashMap<>();
+
 
     public static Intent createIntent(Context context) {
         return new Intent(context, ApplyFourActivity.class);
@@ -116,8 +107,6 @@ public class ApplyFourActivity extends BaseActivity {
 
     @Override
     protected void initializeView() {
-//        cameraSavePath = new File(Environment.getExternalStorageDirectory().getPath() + "/colada/authPic/" + System.currentTimeMillis() + ".jpg");
-
     }
 
     @Override
@@ -235,26 +224,31 @@ public class ApplyFourActivity extends BaseActivity {
         String photoPath = "";
         if (resultCode == RESULT_OK) {//相机
             if (requestCode == CAMERA_REQUEST_CODE) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//Android 7.0及以上获取文件 Uri
-//                    photoPath = String.valueOf(cameraSavePath);
-//                } else {
-//                    photoPath = mUri.getEncodedPath();
-//                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//Android 7.0及以上获取文件 Uri
+                    photoPath = String.valueOf(cameraSavePath);
+                } else {
+                    photoPath = mUri.getEncodedPath();
+                }
 
-//                Bitmap bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(mUri));
-//
-//
-//            File file = Tools.compressImage(bitmap, fileName);
-
-                Bitmap bm = null;
+                Bitmap bitmap = null;
                 try {
-                    bm = getBitmapFormUri(mUri);
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(mUri));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-                setImageSrc(bm);
+
+                File file = Tools.compressImage(bitmap, Tools.getFileName());
+
+
+//                Bitmap bm = null;
+//                try {
+//                    bm = getBitmapFormUri(mUri);
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                setImageSrc(bm);
 
             } else if (requestCode == ALBUM_REQUEST_CODE) {
 //                photoPath = GetPhotoFromPhotoAlbum.getRealPathFromUri(this, data.getData());
@@ -334,12 +328,12 @@ public class ApplyFourActivity extends BaseActivity {
         Bitmap bitmap = BitmapFactory.decodeStream(input, null, bitmapOptions);
         input.close();
 
-        return compressImage(bitmap);//再进行质量压缩
+        return bitmap;
     }
 
     public Bitmap compressImage(Bitmap image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        image.compress(Bitmap.CompressFormat.JPEG, 500, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         int options = 100;
         while (baos.toByteArray().length / 1024 > 100) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
             baos.reset();//重置baos即清空baos
