@@ -74,11 +74,23 @@
                 android:paddingRight="15dp">
 
                 <TextView
+                    android:id="@+id/tv_tag1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Bagian depan KTP"
                     android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@id/tv_tag1"
+                    android:text="*"
+                    android:textColor="@color/red"
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
@@ -89,7 +101,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/shape_bg_grey_border"
+                    android:background="@drawable/shape_bg_red_border"
                     android:visibility="visible" />
 
                 <ImageView
@@ -119,11 +131,23 @@
                 android:paddingRight="15dp">
 
                 <TextView
+                    android:id="@+id/tv_tag2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="Foto diri dengan \nmemegang KTP"
                     android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@id/tv_tag2"
+                    android:text="*"
+                    android:textColor="@color/red"
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
@@ -134,7 +158,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/shape_bg_grey_border"
+                    android:background="@drawable/shape_bg_red_border"
                     android:visibility="visible" />
 
                 <ImageView
@@ -320,6 +344,7 @@
                     android:src="@drawable/icon_camera" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

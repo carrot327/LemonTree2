@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<paths xmlns:android="http://schemas.android.com/apk/res/android">-->
+<!--    <external-files-path-->
+<!--        name="externalDownload"-->
+<!--        path="VersionChecker/" />-->
+<!--    <files-path-->
+<!--        name="download"-->
+<!--        path="VersionChecker/" />-->
+<!--</paths>-->
+
+
+    <resources xmlns:android="http://schemas.android.com/apk/res/android">
+        <paths>
+            <external-files-path path="VersionChecker/" name="externalDownload"/>
+            <files-path path="VersionChecker/" name="download"/>
+        </paths>
+    </resources>
