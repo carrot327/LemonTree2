@@ -693,7 +693,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private void showSubmitSuccessDialog(String manageFee, String serviceFee) {
         String manage_fee = formatIndMoney(manageFee);
         String service_fee = formatIndMoney(serviceFee);
-        String dialogMsg = MessageFormat.format("Jumlah pinjaman akan secara otomatis dikurangi oleh \n biaya manajemen ({0}) \n dan biaya administrasi ({1}) \n sebelum dicairkan ke akun bank anda.", manage_fee, service_fee);
+        String dialogMsg = MessageFormat.format("Jumlah pinjaman akan secara otomatis dikurangi oleh \n\n biaya manajemen ({0}) \n dan biaya administrasi ({1}) \n\n sebelum dicairkan ke akun bank anda.", manage_fee, service_fee);
         DialogFactory.createCommonDialog(mContext, "Catatan", dialogMsg, getString(R.string.text_cancel), new BaseDialog.OnClickListener() {
             @Override
             public void onClick(BaseDialog dialog, View view) {
@@ -849,7 +849,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                     }).show();
         } else if ("5".equals(mHomeData.type) && !SPUtils.getBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, false) && "1".equals(data.couponStatus)) {
             SPUtils.putBoolean(ConstantValue.COUPON_DIALOG_HAS_SHOWED, true);
-            DialogFactory.createCouponDialog(mContext, data).show();
+            if (!TextUtils.isEmpty(data.couponCutAmount) && !"0".equals(data.couponCutAmount)) {
+                DialogFactory.createCouponDialog(mContext, data).show();
+            }
         }
 
         if (View.VISIBLE == includeBorrow.getVisibility()) {
@@ -909,26 +911,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             mRefreshLayout.setEnableRefresh(true);
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000
             int currentProgress = seekBar.getProgress();
+
             if (0 <= currentProgress && currentProgress < 350000) {
                 mSelectAmount = 300000;
-            } else if (350000 <= currentProgress && currentProgress < 500000) {
-                mSelectAmount = 400000;
-            } else if (500000 <= currentProgress && currentProgress < 700000) {
-                mSelectAmount = 600000;
-            } else if (700000 <= currentProgress && currentProgress < 900000) {
-                mSelectAmount = 800000;
-            } else if (900000 <= currentProgress && currentProgress < 1100000) {
-                mSelectAmount = 1000000;
-            } else if (1100000 <= currentProgress && currentProgress < 1350000) {
-                mSelectAmount = 1200000;
-            } else if (1350000 <= currentProgress && currentProgress < 1550000) {
-                mSelectAmount = 1500000;
-            } else if (1550000 <= currentProgress && currentProgress < 1650000) {
-                mSelectAmount = 1600000;
-            } else if (1650000 <= currentProgress && currentProgress < 1950000) {
-                mSelectAmount = 1800000;
-            } else if (1950000 <= currentProgress) {
-                mSelectAmount = 2000000;
+            } else {
+                mSelectAmount = currentProgress / 100000 * 100000;
             }
             seekBar.setProgress(mSelectAmount);
         }
@@ -969,24 +956,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             } else {
                 if (0 <= currentProgress && currentProgress < 350000) {
                     mSelectAmount = 300000;
-                } else if (350000 <= currentProgress && currentProgress < 500000) {
-                    mSelectAmount = 400000;
-                } else if (500000 <= currentProgress && currentProgress < 700000) {
-                    mSelectAmount = 600000;
-                } else if (700000 <= currentProgress && currentProgress < 900000) {
-                    mSelectAmount = 800000;
-                } else if (900000 <= currentProgress && currentProgress < 1100000) {
-                    mSelectAmount = 1000000;
-                } else if (1100000 <= currentProgress && currentProgress < 1350000) {
-                    mSelectAmount = 1200000;
-                } else if (1350000 <= currentProgress && currentProgress < 1550000) {
-                    mSelectAmount = 1500000;
-                } else if (1550000 <= currentProgress && currentProgress < 1650000) {
-                    mSelectAmount = 1600000;
-                } else if (1650000 <= currentProgress && currentProgress < 1950000) {
-                    mSelectAmount = 1800000;
-                } else if (1950000 <= currentProgress) {
-                    mSelectAmount = 2000000;
+                } else {
+                    mSelectAmount = currentProgress / 100000 * 100000;
                 }
             }
             seekBar2.setProgress(mSelectAmount);

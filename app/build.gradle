@@ -16,7 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
-
 //        ndk {
 //            abiFilters "armeabi-v7a"
 //        }
@@ -66,6 +65,9 @@ android {
     productFlavors {
         defaultChannel {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChannel"]
+        }
+        fromSakuFind {
+            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "fromSakuFind"]
         }
     }
 }

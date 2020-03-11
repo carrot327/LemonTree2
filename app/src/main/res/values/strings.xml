@@ -21,7 +21,7 @@
     <string name="text_item_setting">Pengaturan</string>
     <string name="dialog_text_pay_method">Silahkan pilih metode pembayaran</string>
     <string name="top_text_status_9">Jumlah pinjaman sedang dikalkulasi, perbarui laman untuk melihat</string>
-    <string name="top_text_status_4">Pinjaman Anda telah tersedia, silahkan meminjam</string>
+    <string name="top_text_status_4">Pinjaman anda telah tersedia, silahkan meminjam</string>
     <string name="top_text_status_4_no_amount">Maaf, Saat ini anda tidak mendapatkan kenaikan limit.</string>
     <string name="btn_text_confirm">Konfirmasi</string>
     <string name="btn_text_extend_pay">Perpanjang tanggal pembayaran</string>
