@@ -89,7 +89,7 @@ public class StartLivenessActivity extends BaseActivity {
         });
     }
 
-    //    private String MOTION_SEQUENCE = "HOLD_STILL BLINK";
+    //    private String MOTION_SEQUENCE = "STILL BLINK";
     private String MOTION_SEQUENCE = "STILL BLINK MOUTH NOD YAW";
 
     private void startActionLiveness() {
@@ -142,13 +142,11 @@ public class StartLivenessActivity extends BaseActivity {
                     new UploadImg.UploadLivenessInfoListener() {
                         @Override
                         public void success() {
-                            Log.d("aaaaa", "uploadLivenessInfo success");
                             handler.sendEmptyMessage(1);
                         }
 
                         @Override
                         public void error() {
-                            Log.d("aaaaa", "uploadLivenessInfo error");
                             handler.sendEmptyMessage(2);
                         }
                     });
@@ -166,7 +164,6 @@ public class StartLivenessActivity extends BaseActivity {
                     finish();//成功时finish页面，失败时保留。
                     break;
                 case 2:
-                    showToast("2");
                     startActivity(LivenessFailedActivity.createIntent(mContext));
                     break;
             }

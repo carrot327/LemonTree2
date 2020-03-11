@@ -185,7 +185,7 @@ public class LoginActivity extends BaseActivity {
                 if (rlMsg.getVisibility() == View.VISIBLE) {
                     if (etMsgVerifyCode.getText().toString().trim().length() >= 4) {
                         login();
-                    }else {
+                    } else {
                         showToast("Silakan masukkan kode verifikasi");
                     }
                 } else {
@@ -221,7 +221,7 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onSuccess(Call call, GetUserTypeState response, int id) {
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code) && response.data != null) {
-                            if (5 == response.data.userState || 6 == response.data.userState) {
+                            if (5 == response.data.userState || 6 == response.data.userState) {//借款表的type。 5逾期待还  6正常待还
                                 Toast.makeText(mContext, R.string.toast_login_success, Toast.LENGTH_SHORT).show();
 
                                 SPUtils.putString(ConstantValue.KEY_LATEST_LOGIN_NAME, response.data.userName, false);

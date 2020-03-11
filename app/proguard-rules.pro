@@ -20,7 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--dontwarn com.deepfinch.**
--keep class com.deepfinch.** { *; }
+-dontwarn com.dfsdk.**
+-keep class com.dfsdk.** { *; }
 
 

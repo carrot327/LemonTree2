@@ -4,13 +4,13 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
     buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.sakumanis.android"
 
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 260
         versionName "2.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -61,15 +61,6 @@ android {
     productFlavors {
         defaultChannel {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChannel"]
-        }
-        sakumanis_1202 {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_1202"]
-        }
-        sakumanis_0219 {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "sakumanis_0219"]
-        }
-        rong3 {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "rong3"]
         }
     }
 }

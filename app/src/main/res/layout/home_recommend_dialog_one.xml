@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="155dp" />
+        app:layout_constraintGuide_begin="56dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_heng2"
@@ -33,14 +33,14 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/bg_home_card" />
+        android:src="@drawable/bg_dialog_coupon" />
 
     <!--左边-->
     <ImageView
         android:id="@+id/iv_logo_left"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="36dp"
         android:layout_marginTop="56dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintLeft_toLeftOf="parent"

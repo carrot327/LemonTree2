@@ -66,7 +66,7 @@ public class UploadImg {
         OK.getInstance().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d("UploadImg", "e:" + e);
+                UIUtils.showToast("onFailure");
                 uploadImageRequestFinished = true;
                 if (isAllRequestFinished()) {
                     CProgressDialogUtils.cancelProgressDialog((Activity) context);
@@ -98,7 +98,10 @@ public class UploadImg {
                             }
 
                         } else {
-                            mListener.error();
+                            if (!hasSendBackError) {
+                                hasSendBackError = true;
+                                mListener.error();
+                            }
                             UIUtils.showToast(obj.optString("res_msg"));
                         }
                     }
@@ -135,7 +138,7 @@ public class UploadImg {
 
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d("UploadImg", "e:" + e);
+                UIUtils.showToast("onFailure");
 
                 uploadEncryptRequestFinished = true;
                 if (isAllRequestFinished()) {
@@ -167,7 +170,10 @@ public class UploadImg {
                                 mListener.success();
                             }
                         } else {
-                            mListener.error();
+                            if (!hasSendBackError) {
+                                hasSendBackError = true;
+                                mListener.error();
+                            }
                             UIUtils.showToast(obj.optString("res_msg"));
                         }
                     }

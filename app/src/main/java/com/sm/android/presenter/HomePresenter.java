@@ -326,7 +326,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
      * 上传数据
      */
     private void uploadNecessaryData() {
-        mDialog.setMessage("Loading...");
+        mDialog.setMessage("Memuat...");
         mDialog.show();
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
             @Override

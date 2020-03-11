@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     protected void initializeView() {
         mainFrameLayout = findViewById(R.id.frame_main_fragment_container);
         mListFragments = mListFragments2Tab;
-        initIndicator(tabSourceBean4Tab);
+        initIndicator(tabSourceBean2Tab);
         switchTab(0);
     }
 
