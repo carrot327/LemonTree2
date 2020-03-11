@@ -165,7 +165,7 @@ public class ApplyFirstActivity extends BaseActivity {
 
         NetworkLiteHelper
                 .postJson()
-                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_BASIC_INFO)
+                .url(NetConstantValue.BASE_HOST + ConstantValue.AUTH_BASIC_INFO)
                 .content(new Gson().toJson(basicInfoReqBean))
                 .build()
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {

@@ -125,8 +125,9 @@ public class Tools {
         return file;
     }
 
-    public static File getFileByBitmap(Bitmap bitmap, String fileName) {
+    public static File bitmap2File(Bitmap bitmap, String fileName) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".png");
         try {
             FileOutputStream fos = new FileOutputStream(file);
@@ -135,17 +136,26 @@ public class Tools {
                 fos.flush();
                 fos.close();
             } catch (IOException e) {
-
                 e.printStackTrace();
             }
         } catch (FileNotFoundException e) {
-
             e.printStackTrace();
         }
-
         CLog.d("compressImage", "compressImage: " + file);
         return file;
     }
+/*
+    public static File saveFile(Bitmap bm, String fileName) throws IOException {
+//        FileOutputStream fileOutputStream = openFileOutput(fileName, MODE_PRIVATE);
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".jpg");
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        bos.flush();
+        bos.close();
+        return file;
+    }
+*/
 
     public static File convertByteArrayToFile(byte[] bytes) {
 

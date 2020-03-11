@@ -4,11 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
-
-import androidx.appcompat.app.AlertDialog;
-
-import android.os.Build;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -24,7 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.appcompat.app.AlertDialog;
+
 import com.lemontree.android.BuildConfig;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseDialog;
@@ -32,14 +30,15 @@ import com.lemontree.android.bean.response.CouponResBean;
 import com.lemontree.android.bean.response.HomeDialogDataResBean;
 import com.lemontree.android.bean.response.OperationDialogResBean;
 import com.lemontree.android.bean.response.RecommendDialogResBean;
+import com.lemontree.android.ui.widget.DrawableShowDialog;
 import com.lemontree.android.ui.widget.CommonDialog;
 import com.lemontree.android.ui.widget.HomePromptDialog;
 import com.lemontree.android.ui.widget.HomeRecommendDialogOne;
 import com.lemontree.android.ui.widget.HomeRecommendDialogTwo;
 import com.lemontree.android.ui.widget.PayWaySelectDialog;
 import com.lemontree.android.uploadUtil.Tools;
-import com.lemontree.android.utils.MarkUtil;
 import com.lemontree.android.utils.IntentUtils;
+import com.lemontree.android.utils.MarkUtil;
 import com.lemontree.android.utils.MyTimeUtils;
 import com.lemontree.android.utils.SPUtils;
 import com.lemontree.android.utils.StringUtils;
@@ -346,6 +345,27 @@ public class DialogFactory {
     }
 
     /**
+     * 首页 借款攻略/产品简介
+     *
+     * @param context
+     * @return
+     */
+    public static Dialog showImgByDrawable(final Context context, Drawable drawable) {
+        DrawableShowDialog dialog = new DrawableShowDialog(context, drawable, new DrawableShowDialog.Listener() {
+            @Override
+            public void contentClick(Dialog dialog, View view) {
+                dialog.dismiss();
+            }
+        });
+        Window dialogWindow = dialog.getWindow();
+        if (dialogWindow != null) {
+            dialogWindow.setBackgroundDrawableResource(R.color.transparence);
+        }
+        dialog.setCanceledOnTouchOutside(true);
+        return dialog;
+    }
+
+    /**
      * 导流
      *
      * @param context
@@ -564,7 +584,7 @@ public class DialogFactory {
         return dialog;
     }
 
-   public static String privacy_content = "<b><big>Colada Perjanjian Privasi</big></b><br><br> Kebijakan Privasi ini telah disusun untuk menjelaskan aplikasi perangkat lunak kami, situs web kami dan pengumpulan, penggunaan dan pengungkapan informasi tentang pengguna layanan lain yang kami sediakan (secara kolektif).\n" +
+    public static String privacy_content = "<b><big>Colada Perjanjian Privasi</big></b><br><br> Kebijakan Privasi ini telah disusun untuk menjelaskan aplikasi perangkat lunak kami, situs web kami dan pengumpulan, penggunaan dan pengungkapan informasi tentang pengguna layanan lain yang kami sediakan (secara kolektif).\n" +
             "\n" +
             "<br><br><b>Kami meminta Anda untuk memberikan izin untuk data berikut:</b>\n" +
             "<br><br>1. Informasi pendaftaran. Ketika Anda mendaftar ke Akun colada, kami akan meminta Anda untuk memberikan kami informasi pribadi seperti nama, email, dan nomor telepon Anda.\n" +

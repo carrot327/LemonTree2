@@ -128,7 +128,7 @@ public class ApplySecondActivity extends BaseActivity {
 
         NetworkLiteHelper
                 .postJson()
-                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_COMPANY_INFO)
+                .url(NetConstantValue.BASE_HOST + ConstantValue.AUTH__COMPANY_INFO)
                 .content(new Gson().toJson(workInfoReqBean))
                 .build()
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {

@@ -39,6 +39,7 @@ import com.lemontree.android.bean.request.BankCardQueryReqBean;
 import com.lemontree.android.bean.request.CommonReqBean;
 import com.lemontree.android.bean.response.AuthStateResBean;
 import com.lemontree.android.bean.response.BankcardListResponseBean;
+import com.lemontree.android.bean.response.GetUserTag;
 import com.lemontree.android.bean.response.UnreadMsgStateResBean;
 import com.lemontree.android.iview.IMainView;
 import com.lemontree.android.manager.ActivityCollector;
@@ -439,7 +440,39 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void loginSuccess(LoginSuccessEvent event) {
+        getUserTag();
+    }
 
+    private void getUserTag() {
+        NetworkLiteHelper
+                .postJson()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.GET_USER_TYPE)
+                .content(new Gson().toJson(new CommonReqBean()))
+                .build()
+                .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<GetUserTag>() {
+                    @Override
+                    public void onSuccess(Call call, GetUserTag response, int id) {
+                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code) && response.type != null) {
+                            if ("1".equals(response.type)) {
+                                BaseApplication.mUserTag = ConstantValue.WHITE_LIST;
+                            } else if ("2".equals(response.type)) {
+                                BaseApplication.mUserTag = ConstantValue.OLD_USER;
+                            } else if ("3".equals(response.type)) {
+                                BaseApplication.mUserTag = ConstantValue.DUAN_XIN;
+                            } else if ("4".equals(response.type)) {
+                                BaseApplication.mUserTag = ConstantValue.WILD;
+                            }
+                        } else {
+                            if (BuildConfig.DEBUG) {
+                                showToast("no user tag was found");
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call call, Exception exception, int id) {
+                    }
+                });
     }
 
     @Override

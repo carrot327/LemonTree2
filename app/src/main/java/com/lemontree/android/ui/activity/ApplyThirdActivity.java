@@ -188,7 +188,7 @@ public class ApplyThirdActivity extends BaseActivity {
 
         NetworkLiteHelper
                 .postJson()
-                .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_COMPANY_INFO)
+                .url(NetConstantValue.BASE_HOST + ConstantValue.AUTH__COMPANY_INFO)
                 .content(new Gson().toJson(reqBean))
                 .build()
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {

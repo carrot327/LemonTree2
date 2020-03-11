@@ -19,6 +19,7 @@ public class BaseApplication extends Application implements DFTransferResultInte
     public static String mUserId = "";
     public static String sPhoneNum = "";
     public static String mSharedPreferencesName;
+    public static String mUserTag="";
     public static boolean isOpenGodMode;
     private DFProductResult mResult;
 

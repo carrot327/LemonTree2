@@ -51,6 +51,10 @@ public interface ConstantValue {
     String IS_SELECT_COUPON = "isSelectCoupon"; //"1" 选中， "0" 未选中
     String LAST_ORDER_ID = "lastOrderId"; //"1" 选中， "0" 未选中
 
+    public static final String WHITE_LIST = "WHITE_LIST";
+    public static final String OLD_USER = "OLD_USER";
+    public static final String DUAN_XIN = "DUAN_XIN";
+    public static final String WILD = "WILD";
 
     /**
      * ======    H5    ======
@@ -214,15 +218,30 @@ public interface ConstantValue {
     /**
      * 认证_基本信息
      */
-    String NET_REQUEST_URL_BASIC_INFO = "/idcard/auth/idCardInfo";
+    String AUTH_BASIC_INFO = "/idcard/auth/idCardInfo";
 
     /**
      * 认证_公司信息
      */
-    String NET_REQUEST_URL_COMPANY_INFO = "/app/auth/workInfo/save";
+    String AUTH__COMPANY_INFO = "/app/auth/workInfo/save";
 
     /**
      * 认证_联系人信息
      */
-    String NET_REQUEST_URL_CONTACTS_INFO = "/app/auth/relationship/save";
+    String AUTH_CONTACTS_INFO = "/app/auth/relationship/save";
+
+    /**
+     * 认证_图片上传
+     */
+    String AUTH_IMG_INFO = "/ocr/auth/ocrKptInfo";
+
+    /**
+     * ocr check
+     */
+    String OCR_CHECK = "/ocr/advance/ocrCheck";
+
+    /**
+     * 获取用户标签
+     */
+    String GET_USER_TYPE = "/userLabel/queryCustomerType";
 }
