@@ -6,8 +6,6 @@ import android.view.View;
 
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
-import com.lemontree.android.uploadUtil.UrlHostConfig;
-import com.lemontree.android.utils.IntentUtils;
 
 public class LivenessSuccessActivity extends BaseActivity {
 
@@ -26,7 +24,8 @@ public class LivenessSuccessActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //打开信息确认页
-                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.GET_H5_INFO_CONFIRM());
+//                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.GET_H5_INFO_CONFIRM());
+                startActivity(InfoGetReadyActivity.createIntent(mContext));
                 finish();
             }
         });

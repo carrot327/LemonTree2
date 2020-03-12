@@ -34,22 +34,22 @@ public class UploadAuthImg {
                 .addFormDataPart("app_clientid", Tools.getChannel());
 
         if (imgMap.containsKey("KTP1")) {
-            builder.addFormDataPart("kpt_pre_file", "kpt_pre_file.jpg", RequestBody.create(MediaType.parse("image/png"), imgMap.get("KTP1")));
+            builder.addFormDataPart("kpt_pre_file", "kpt_pre_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("KTP1")));
         }
         if (imgMap.containsKey("KTP_HOLD2")) {
-            builder.addFormDataPart("self_kpt_pre_file", "self_kpt_pre_file.jpg", RequestBody.create(MediaType.parse("image/png"), imgMap.get("KTP_HOLD2")));
+            builder.addFormDataPart("self_kpt_pre_file", "self_kpt_pre_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("KTP_HOLD2")));
         }
         if (imgMap.containsKey("STAFF_CARD3")) {
-            builder.addFormDataPart("work_card_file", "work_card_file.jpg", RequestBody.create(MediaType.parse("image/png"), imgMap.get("STAFF_CARD3")));
+            builder.addFormDataPart("work_card_file", "work_card_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("STAFF_CARD3")));
         }
         if (imgMap.containsKey("GZD4")) {
-            builder.addFormDataPart("wage_card_file", "wage_card_file.jpg", RequestBody.create(MediaType.parse("image/png"), imgMap.get("GZD4")));
+            builder.addFormDataPart("wage_card_file", "wage_card_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("GZD4")));
         }
         if (imgMap.containsKey("GZXC5")) {
-            builder.addFormDataPart("license_card_file", "license_card_file.jpg", RequestBody.create(MediaType.parse("image/png"), imgMap.get("GZXC5")));
+            builder.addFormDataPart("license_card_file", "license_card_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("GZXC5")));
         }
         if (imgMap.containsKey("YYZC6")) {
-            builder.addFormDataPart("photo_card_file", "photo_card_file.jpg", RequestBody.create(MediaType.parse("image/png"), imgMap.get("YYZC6")));
+            builder.addFormDataPart("photo_card_file", "photo_card_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("YYZC6")));
         }
 
         RequestBody requestBody = builder.build();

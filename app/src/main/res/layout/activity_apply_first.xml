@@ -85,7 +85,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
-                    android:textColor="@color/CommonTextColor" />
+                    android:textColor="@color/CommonTextColor"
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
             <!--</LinearLayout>-->
 
@@ -102,9 +103,10 @@
                     android:id="@+id/textInputEditText_KTP"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"
                     android:inputType="number"
-                    android:textColor="@color/CommonTextColor" />
+                    android:maxLines="1"
+                    android:textColor="@color/CommonTextColor"
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -207,7 +209,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:textColor="@color/CommonTextColor" />
+                    android:textColor="@color/CommonTextColor"
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -225,14 +228,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:textColor="@color/CommonTextColor" />
+                    android:textColor="@color/CommonTextColor"
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outline_marry_state"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:id="@+id/outline_marry_state"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:hint="Status Pernikahan"
@@ -243,13 +247,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:textColor="@color/CommonTextColor" />
+                    android:textColor="@color/CommonTextColor"
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:id="@+id/outline_children_number"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -261,7 +266,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:editable="false"
-                    android:textColor="@color/CommonTextColor" />
+                    android:textColor="@color/CommonTextColor"
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -279,7 +285,8 @@
                     android:id="@+id/textInputEditText_DetailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/CommonTextColor" />
+                    android:textColor="@color/CommonTextColor"
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--     <TextView
@@ -293,6 +300,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
                 android:text="Kirim" />
         </LinearLayout>
     </ScrollView>

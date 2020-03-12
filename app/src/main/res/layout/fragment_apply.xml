@@ -262,18 +262,14 @@
 
                 </RelativeLayout>
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_confirm"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="70dp"
-                    android:background="@drawable/slt_btn_corner5_theme_color"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="50dp"
                     android:enabled="false"
-                    android:gravity="center"
                     android:text="@string/btn_text_submit"
-                    android:textColor="@color/white"
-                    android:textSize="19sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

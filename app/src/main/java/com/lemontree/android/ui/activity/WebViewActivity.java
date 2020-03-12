@@ -767,7 +767,7 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
                     }
                 });
             }
-        }, isGranted);
+        });
     }
 
     @Override

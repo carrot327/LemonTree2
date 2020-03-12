@@ -244,4 +244,14 @@ public interface ConstantValue {
      * 获取用户标签
      */
     String GET_USER_TYPE = "/userLabel/queryCustomerType";
+
+    /**
+     * 获取银行卡
+     */
+    String GET_BANK_NAME_LIST = "/app/auth/bankCard/support";
+
+    /**
+     * 获取额度
+     */
+    String CALCULATE_AMOUNT = "/app/order/calculationAmt";
 }

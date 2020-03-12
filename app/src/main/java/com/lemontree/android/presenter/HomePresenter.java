@@ -370,7 +370,7 @@ public class HomePresenter extends BasePresenter<IHomeView> {
                     }
                 });
             }
-        }, true);
+        });
     }
 
 

@@ -1,6 +1,5 @@
 package com.lemontree.android.ui.activity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
 import com.lemontree.android.manager.BaseApplication;
@@ -64,7 +64,7 @@ public class SettingActivity extends BaseActivity {
                 startActivity(new Intent(this, ProtocolPrivacyPolicyActivity.class));
                 break;
             case R.id.btn_logout:
-                new AlertDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT)
+       /*         new AlertDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT)
                         .setCancelable(false)
                         .setTitle(R.string.dialog_logout_confirm)
                         .setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
@@ -80,8 +80,23 @@ public class SettingActivity extends BaseActivity {
                             public void onClick(DialogInterface dialog, int which) {
                             }
                         })
+                        .show();*/
+
+                new MaterialAlertDialogBuilder(mContext)
+                        .setTitle(R.string.dialog_logout_confirm)
+                        .setPositiveButton(R.string.text_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                LogoutUtil.logout();
+                                startActivity(new Intent(mContext, MainActivity.class));
+                                finish();
+                            }
+                        })
+                        .setNegativeButton(R.string.text_cancel,null)
                         .show();
                 break;
+
+
         }
     }
 }

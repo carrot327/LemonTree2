@@ -55,25 +55,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_cancel"
-            style="@style/common_dialog_btn2"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
-            android:textColor="@color/Grey600"
             android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:text="@string/dialog_cancel"
             android:textAllCaps="false" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_confirm"
-            style="@style/common_dialog_btn2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:text="@string/dialog_confirm"
             android:textAllCaps="false" />

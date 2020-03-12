@@ -35,11 +35,12 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Handler().postDelayed(() -> {
-//            startActivity(new Intent(mContext, MainActivity.class));
+            startActivity(MainActivity.createIntent(mContext));
 //            startActivity(ApplyFirstActivity.createIntent(mContext));
 //            startActivity(ApplySecondActivity.createIntent(mContext));
 //            startActivity(ApplyThirdActivity.createIntent(mContext));
-            startActivity(ApplyFourActivity.createIntent(mContext));
+//            startActivity(ApplyFourActivity.createIntent(mContext));
+//            startActivity(InfoGetReadyActivity.createIntent(mContext));
 
             finish();
         }, 100);

@@ -32,6 +32,8 @@ import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.DialogFactory;
 import com.lemontree.android.presenter.HomePresenter;
+import com.lemontree.android.ui.activity.BankInfoActivity;
+import com.lemontree.android.ui.activity.InfoGetReadyActivity;
 import com.lemontree.android.ui.activity.MainActivity;
 import com.lemontree.android.ui.activity.PartPayActivity;
 import com.lemontree.android.ui.activity.ProtocolBorrowActivity;
@@ -574,12 +576,11 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                         // 检查顺序：银行卡-》活体-》信息确认
                         if (sHasGetBankCardList && sHasGetAuthStatusList) {
                             if (!sHasBankCard) {
-                                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_BANK_CARD_LIST(
-                                        sFormatSelectAmount, sFormatSelectTime, sFormatSelectInterest));
+                                startActivity(BankInfoActivity.createIntent(mContext));
                             } else if (!sHasFacePassed) {
                                 startActivity(StartLivenessActivity.createIntent(mContext));
                             } else {
-                                IntentUtils.openWebViewActivity(mContext, UrlHostConfig.GET_H5_INFO_CONFIRM());
+                                startActivity(InfoGetReadyActivity.createIntent(mContext));
                             }
                         } else {
                             mRefreshLayout.autoRefresh(0);

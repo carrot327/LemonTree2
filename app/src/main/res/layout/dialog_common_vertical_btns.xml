@@ -44,9 +44,8 @@
             android:layout_height="0dp"
             android:layout_weight="1">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_dialog_common_positive"
-                style="@style/common_dialog_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
@@ -62,9 +61,8 @@
 
         <View style="@style/split_line" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_dialog_common_negative"
-            style="@style/common_dialog_btn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

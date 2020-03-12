@@ -34,7 +34,7 @@ public class UploadKTPImg {
                 .addFormDataPart("app_clientid", Tools.getChannel());
 
         if (imgMap.containsKey("KTP1")) {
-            builder.addFormDataPart("kpt_pre_file", "kpt_pre_file.jpg", RequestBody.create(MediaType.parse("image/png"), imgMap.get("KTP1")));
+            builder.addFormDataPart("kpt_pre_file", "kpt_pre_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("KTP1")));
         }
 
         RequestBody requestBody = builder.build();

@@ -39,7 +39,7 @@ import com.lemontree.android.bean.request.BankCardQueryReqBean;
 import com.lemontree.android.bean.request.CommonReqBean;
 import com.lemontree.android.bean.response.AuthStateResBean;
 import com.lemontree.android.bean.response.BankcardListResponseBean;
-import com.lemontree.android.bean.response.GetUserTag;
+import com.lemontree.android.bean.response.GetUserTagRes;
 import com.lemontree.android.bean.response.UnreadMsgStateResBean;
 import com.lemontree.android.iview.IMainView;
 import com.lemontree.android.manager.ActivityCollector;
@@ -115,6 +115,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
 
     private List<String> permissionsList = new ArrayList<>();
     private ArrayList orderedlist = new ArrayList();
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
 
     @Override
     protected int getLayoutResId() {
@@ -449,9 +453,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
                 .url(NetConstantValue.BASE_HOST + ConstantValue.GET_USER_TYPE)
                 .content(new Gson().toJson(new CommonReqBean()))
                 .build()
-                .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<GetUserTag>() {
+                .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<GetUserTagRes>() {
                     @Override
-                    public void onSuccess(Call call, GetUserTag response, int id) {
+                    public void onSuccess(Call call, GetUserTagRes response, int id) {
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code) && response.type != null) {
                             if ("1".equals(response.type)) {
                                 BaseApplication.mUserTag = ConstantValue.WHITE_LIST;

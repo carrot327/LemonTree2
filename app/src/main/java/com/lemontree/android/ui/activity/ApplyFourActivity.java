@@ -26,6 +26,7 @@ import com.lemontree.android.manager.DialogFactory;
 import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.uploadUtil.Tools;
 import com.lemontree.android.uploadUtil.UploadAuthImg;
+import com.lemontree.android.uploadUtil.UploadKTPImg;
 import com.minchainx.permission.util.PermissionListener;
 
 import java.io.ByteArrayInputStream;
@@ -125,52 +126,6 @@ public class ApplyFourActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    private void uploadImg() {
-        new UploadAuthImg().upload(imgMap, new UploadAuthImg.UploadImgListener() {
-            @Override
-            public void success() {
-                handlerAuth.sendEmptyMessage(1);
-            }
-
-            @Override
-            public void error() {
-
-                handlerAuth.sendEmptyMessage(2);
-            }
-        });
-    }
-
-    @SuppressLint("HandlerLeak")
-    Handler handlerKtpCheck = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 1:
-                    break;
-                case 2:
-                    showToast("ktp can't find");
-                    ivShowKtp.setImageBitmap(null);
-                    break;
-            }
-        }
-    };
-
-    @SuppressLint("HandlerLeak")
-    Handler handlerAuth = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 1:
-
-                    break;
-                case 2:
-                    break;
-            }
-        }
-    };
-
     /**
      * 打开相册
      */
@@ -246,12 +201,45 @@ public class ApplyFourActivity extends BaseActivity {
         }
     }
 
+    private void uploadAllImg() {
+        new UploadAuthImg().upload(imgMap, new UploadAuthImg.UploadImgListener() {
+            @Override
+            public void success() {
+                handlerAuth.sendEmptyMessage(1);
+            }
+
+            @Override
+            public void error() {
+
+                handlerAuth.sendEmptyMessage(2);
+            }
+        });
+    }
+
+    @SuppressLint("HandlerLeak")
+    Handler handlerAuth = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    //跳转到银行卡页面
+                    startActivity(BankInfoActivity.createIntent(mContext));
+                    finish();
+                    break;
+                case 2:
+                    showToast("try again!");
+                    break;
+            }
+        }
+    };
+
     private void saveFileToMap(File file) {
         if (file == null) return;
         switch (mClickItemName) {
             case FLAG_KTP1:
                 imgMap.put("KTP1", file);
-//                checkOCR();
+                checkOCR();
                 break;
             case FLAG_KTP_HOLD2:
                 imgMap.put("KTP_HOLD2", file);
@@ -271,31 +259,45 @@ public class ApplyFourActivity extends BaseActivity {
         }
     }
 
-    int i = 0;
 
     private void checkOCR() {
-//        new UploadKTPImg().upload(imgMap, new UploadKTPImg.UploadImgListener() {
-//            @Override
-//            public void success() {
-//                handlerKtpCheck.sendEmptyMessage(1);
-//            }
-//
-//            @Override
-//            public void error() {
-//                handlerKtpCheck.sendEmptyMessage(2);
-//            }
-//        });
+        new UploadKTPImg().upload(imgMap, new UploadKTPImg.UploadImgListener() {
+            @Override
+            public void success() {
+                handlerKtpCheck.sendEmptyMessage(1);
+            }
 
-
-//
-//        if (i != 0) {
-//            handlerKtpCheck.sendEmptyMessage(2);
-//        }
-//        i++;
-
+            @Override
+            public void error() {
+                handlerKtpCheck.sendEmptyMessage(2);
+            }
+        });
     }
 
+    @SuppressLint("HandlerLeak")
+    Handler handlerKtpCheck = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    //do nothing
+                    break;
+                case 2:
+                    showToast("ktp can't find");
+                    ivShowKtp.setImageBitmap(null);
+                    break;
+            }
+        }
+    };
+
     private void setImageSrc(Bitmap bm) {
+        //设置图片圆角角度
+//        RoundedCorners roundedCorners = new RoundedCorners(30);
+//通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
+//        RequestOptions options = RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
+//        Glide.with(mContext).load(bm).apply(options).into(ivShowKtp);
+
         switch (mClickItemName) {
             case FLAG_KTP1:
                 ivShowKtp.setImageBitmap(bm);
@@ -388,7 +390,7 @@ public class ApplyFourActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_confirm:
-                uploadImg();
+                uploadAllImg();
                 break;
             case R.id.iv_pick_ktp:
                 goPhotoAlbum(ALBUM_REQUEST_CODE);

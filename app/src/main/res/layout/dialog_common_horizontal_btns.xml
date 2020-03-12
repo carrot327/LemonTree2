@@ -53,12 +53,11 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_dialog_common_negative"
-                style="@style/common_dialog_btn"
-                android:layout_width="75dp"
-                android:layout_height="28dp"
-                android:background="@drawable/slt_border_theme_color_6"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Batal" />
         </LinearLayout>
 
@@ -68,13 +67,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_dialog_common_positive"
-                style="@style/common_dialog_btn"
-                android:layout_width="75dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@drawable/slt_border_theme_color_6"
                 android:text="OK" />
 
             <ImageView

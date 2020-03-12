@@ -169,14 +169,10 @@ public class StartLivenessActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    Log.d("aaaaa", "1");
-
                     startActivity(LivenessSuccessActivity.createIntent(mContext));
                     finish();//成功时finish页面，失败时保留。
                     break;
                 case 2:
-                    Log.d("aaaaa", "2");
-
                     startActivity(LivenessFailedActivity.createIntent(mContext));
                     break;
             }
