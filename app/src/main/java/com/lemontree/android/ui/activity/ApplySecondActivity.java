@@ -92,25 +92,25 @@ public class ApplySecondActivity extends BaseActivity {
     private void checkContent() {
         boolean hasError = false;
         if (TextUtils.isEmpty(tvWorkCategory.getText().toString())) {
-            tvWorkCategory.setError("Silakan isi");
+            tvWorkCategory.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
         if (TextUtils.isEmpty(tvSalaryRange.getText().toString())) {
-            tvSalaryRange.setError("Silakan isi");
+            tvSalaryRange.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
         if (TextUtils.isEmpty(etCompanyName.getText().toString())) {
-            etCompanyName.setError("Silakan isi");
+            etCompanyName.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
 
         if (TextUtils.isEmpty(etCompanyAddress.getText().toString())) {
-            etCompanyAddress.setError("Silakan isi");
+            etCompanyAddress.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
 
         if (TextUtils.isEmpty(etCompanyPhone.getText().toString())) {
-            etCompanyPhone.setError("Silakan isi");
+            etCompanyPhone.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
         if (!hasError) {
@@ -128,13 +128,17 @@ public class ApplySecondActivity extends BaseActivity {
 
         NetworkLiteHelper
                 .postJson()
-                .url(NetConstantValue.BASE_HOST + ConstantValue.AUTH__COMPANY_INFO)
+                .url(NetConstantValue.BASE_HOST + ConstantValue.AUTH_COMPANY_INFO)
                 .content(new Gson().toJson(workInfoReqBean))
                 .build()
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
-                        showToast("success");
+//                        showToast("success");
+                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                            startActivity(ApplyThirdActivity.createIntent(mContext));
+                            finishActivity();
+                        }
                     }
 
                     @Override

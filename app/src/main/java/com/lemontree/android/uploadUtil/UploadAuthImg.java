@@ -1,6 +1,8 @@
 package com.lemontree.android.uploadUtil;
 
 import com.lemontree.android.manager.BaseApplication;
+import com.lemontree.android.manager.ConstantValue;
+import com.lemontree.android.manager.NetConstantValue;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,14 +54,10 @@ public class UploadAuthImg {
             builder.addFormDataPart("photo_card_file", "photo_card_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("YYZC6")));
         }
 
-        RequestBody requestBody = builder.build();
-
-        Request request = new Request.Builder()
-                .url(UrlHostConfig.getOCRAuthenticateUrl())
-                .post(requestBody)
-                .build();
-        Call call = OK.getInstance().newCall(request);
-        call.enqueue(new Callback() {
+        OK.getInstance().newCall(new Request.Builder()
+                .url(NetConstantValue.BASE_HOST + ConstantValue.AUTH_IMG_INFO)
+                .post(builder.build())
+                .build()).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 

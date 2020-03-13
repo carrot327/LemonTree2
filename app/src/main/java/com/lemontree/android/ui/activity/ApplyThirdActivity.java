@@ -38,8 +38,6 @@ import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,6 +88,7 @@ public class ApplyThirdActivity extends BaseActivity {
         tvRelation1.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, RELATION));
         tvRelation2.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, RELATION));
         tvContactName1.setEnabled(false);
+        tvContactName2.setEnabled(false);
     }
 
     @Override
@@ -138,30 +137,59 @@ public class ApplyThirdActivity extends BaseActivity {
 
     private void checkContent() {
         boolean hasError = false;
-        if (TextUtils.isEmpty(tvRelation1.getText().toString())) {
-            tvRelation1.setError("Silakan isi");
+        String name1 = tvContactName1.getText().toString();
+        String name2 = tvContactName2.getText().toString();
+        String phone1 = etTelephone1.getText().toString();
+        String phone2 = etTelephone2.getText().toString();
+        String relation1 = tvRelation1.getText().toString();
+        String relation2 = tvRelation2.getText().toString();
+
+        if (TextUtils.isEmpty(relation1)) {
+            tvRelation1.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
-        if (TextUtils.isEmpty(tvContactName1.getText().toString())) {
-            tvContactName1.setError("Silakan isi");
-            hasError = true;
-        }
-        if (TextUtils.isEmpty(etTelephone1.getText().toString())) {
-            etTelephone1.setError("Silakan isi");
+        if (TextUtils.isEmpty(relation2)) {
+            tvRelation2.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
 
-        if (TextUtils.isEmpty(tvRelation2.getText().toString())) {
-            tvRelation2.setError("Silakan isi");
+        if (TextUtils.isEmpty(name1)) {
+            tvContactName1.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
-        if (TextUtils.isEmpty(tvContactName2.getText().toString())) {
-            tvContactName2.setError("Silakan isi");
+        if (TextUtils.isEmpty(name2)) {
+            tvContactName2.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
         }
-        if (TextUtils.isEmpty(etTelephone2.getText().toString())) {
-            etTelephone2.setError("Silakan isi");
+
+        if (TextUtils.isEmpty(phone1)) {
+            phone1 = "";
+            etTelephone1.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        }
+        if (TextUtils.isEmpty(phone2)) {
+            phone2 = "";
+            etTelephone2.setError(getResources().getString(R.string.text_pls_input));
+            hasError = true;
+        }
+
+        //限制的有三项： 重要联系人不能等于紧急联系人、不能跟本人号码相同、号码位数不能小于9位
+        if (phone1.equals(phone2)) {
+            etTelephone1.setError("Tidak diizinkan mengisi kontak yang sama");
+            etTelephone2.setError("Tidak diizinkan mengisi kontak yang sama");
+            hasError = true;
+        }
+
+        if (phone1.equals(BaseApplication.sPhoneNum) || phone2.equals(BaseApplication.sPhoneNum)) {
+            // TODO: 2020-03-13
+            showToast("");
+            hasError = true;
+        }
+        if (phone1.length() < 9) {
+            etTelephone1.setError("9-13 digit");
+        }
+        if (phone2.length() < 9) {
+            etTelephone2.setError("9-13 digit");
         }
 
         if (!hasError) {
@@ -171,10 +199,12 @@ public class ApplyThirdActivity extends BaseActivity {
 
     private void submit() {
         ContactInfoReqBean reqBean = new ContactInfoReqBean();
+
         ContactInfoReqBean.ContactBean contactBean = reqBean.new ContactBean();
         contactBean.relation_name = tvContactName1.getText().toString();
         contactBean.relation_phone = etTelephone1.getText().toString();
         contactBean.relation_type = tvRelation1.getText().toString();
+
         ContactInfoReqBean.ContactBean contactBean2 = reqBean.new ContactBean();
         contactBean2.relation_name = tvContactName2.getText().toString();
         contactBean2.relation_phone = etTelephone2.getText().toString();
@@ -188,13 +218,16 @@ public class ApplyThirdActivity extends BaseActivity {
 
         NetworkLiteHelper
                 .postJson()
-                .url(NetConstantValue.BASE_HOST + ConstantValue.AUTH__COMPANY_INFO)
+                .url(NetConstantValue.BASE_HOST + ConstantValue.AUTH_CONTACTS_INFO)
                 .content(new Gson().toJson(reqBean))
                 .build()
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
-                        showToast("success");
+                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                            startActivity(ApplyFourActivity.createIntent(mContext));
+                            finishActivity();
+                        }
                     }
 
                     @Override
@@ -250,7 +283,6 @@ public class ApplyThirdActivity extends BaseActivity {
 
         Cursor c = getContentResolver().query(contactData, null, null, null, null);
 
-        Map<String, String> map = new HashMap<>();
         if (c != null && c.moveToFirst()) {
             String name = c.getString(c.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
             String hasPhone = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
@@ -273,7 +305,6 @@ public class ApplyThirdActivity extends BaseActivity {
                 }
                 phones.close();
             }
-            Log.i("获取到的联系人", "name-->" + name + ";phoneNumber" + phoneNumber);
             if (R.id.btn_select_contact_1 == clickedViewId) {
                 tvContactName1.setText(name);
                 etTelephone1.setText(phoneNumber);

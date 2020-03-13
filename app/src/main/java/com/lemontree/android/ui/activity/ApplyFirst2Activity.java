@@ -15,10 +15,10 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
 
-public class ApplyFirstActivity2 extends BaseActivity {
+public class ApplyFirst2Activity extends BaseActivity {
 
     public static Intent createIntent(Context context) {
-        return new Intent(context, ApplyFirstActivity2.class);
+        return new Intent(context, ApplyFirst2Activity.class);
     }
 
     @Override

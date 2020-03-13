@@ -239,7 +239,8 @@ public class ApplyFourActivity extends BaseActivity {
         switch (mClickItemName) {
             case FLAG_KTP1:
                 imgMap.put("KTP1", file);
-                checkOCR();
+                // TODO: 2020-03-13
+//                checkOCR();
                 break;
             case FLAG_KTP_HOLD2:
                 imgMap.put("KTP_HOLD2", file);

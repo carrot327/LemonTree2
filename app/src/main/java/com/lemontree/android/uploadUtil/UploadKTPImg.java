@@ -1,6 +1,8 @@
 package com.lemontree.android.uploadUtil;
 
 import com.lemontree.android.manager.BaseApplication;
+import com.lemontree.android.manager.ConstantValue;
+import com.lemontree.android.manager.NetConstantValue;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +42,7 @@ public class UploadKTPImg {
         RequestBody requestBody = builder.build();
 
         Request request = new Request.Builder()
-                .url(UrlHostConfig.getOCRAuthenticateUrl())
+                .url(NetConstantValue.BASE_HOST + ConstantValue.OCR_CHECK)
                 .post(requestBody)
                 .build();
         Call call = OK.getInstance().newCall(request);

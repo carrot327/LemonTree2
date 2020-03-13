@@ -159,6 +159,7 @@
                         android:layout_height="50dp"
                         android:editable="false"
                         android:focusable="false"
+                        android:maxLength="13"
                         android:textColor="@color/CommonTextColor"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -174,8 +175,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -282,6 +283,7 @@
                         android:layout_height="50dp"
                         android:editable="false"
                         android:focusable="false"
+                        android:maxLength="13"
                         android:textColor="@color/CommonTextColor"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>

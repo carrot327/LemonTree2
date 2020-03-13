@@ -11,7 +11,4 @@ public class ContactInfoReqBean extends CommonReqBean {
         public String relation_type;
         public String relation_phone;
     }
-
-
-
 }

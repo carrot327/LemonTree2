@@ -68,8 +68,8 @@
 
     <string-array name="salary_range">
         <item>Dibawah Rp. 2.000.000</item>
-        <item>Diantara Rp. 2.000.000 - Rp. 4.000.000</item>
-        <item>Diantara Rp. 4.000.000 - Rp. 8.000.000</item>
+        <item> Rp. 2.000.000 - Rp. 4.000.000</item>
+        <item> Rp. 4.000.000 - Rp. 8.000.000</item>
         <item>Di atas Rp. 8.000.000</item>
     </string-array>
 

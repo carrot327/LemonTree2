@@ -26,8 +26,6 @@ import com.lemontree.android.network.OKHttpClientEngine;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 
-import java.util.Objects;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -110,59 +108,60 @@ public class ApplyFirstActivity extends BaseActivity {
                 break;
             case R.id.btn_confirm:
                 checkContent();
-//                submit();
                 break;
 
         }
     }
 
     private void checkContent() {
-        boolean hasErrow = false;
+        boolean hasError = false;
         if (TextUtils.isEmpty(textInputEditTextName.getText().toString())) {
-            textInputEditTextName.setError("Silakan isi");
-            hasErrow = true;
+            textInputEditTextName.setError(getResources().getString(R.string.text_pls_input));
+            hasError = true;
         }
         if (TextUtils.isEmpty(textInputEditTextKTP.getText().toString())) {
-            textInputEditTextKTP.setError("Silakan isi");
-            hasErrow = true;
+            textInputEditTextKTP.setError(getResources().getString(R.string.text_pls_input));
+            hasError = true;
         }
         if (TextUtils.isEmpty(textInputEditTextDetailAddress.getText().toString())) {
-            textInputEditTextDetailAddress.setError("Silakan isi");
-            hasErrow = true;
+            textInputEditTextDetailAddress.setError(getResources().getString(R.string.text_pls_input));
+            hasError = true;
         }
 
         if (TextUtils.isEmpty(dropdownTvGender.getText().toString())) {
-            dropdownTvGender.setError("Silakan isi");
-            hasErrow = true;
+            dropdownTvGender.setError(getResources().getString(R.string.text_pls_input));
+            hasError = true;
         }
 
         if (TextUtils.isEmpty(dropdownTvEducation.getText().toString())) {
-            textInputEditTextDetailAddress.setError("Silakan isi");
-            hasErrow = true;
+            textInputEditTextDetailAddress.setError(getResources().getString(R.string.text_pls_input));
+            hasError = true;
         }
 
         if (TextUtils.isEmpty(dropdownTvMarryState.getText().toString())) {
-            textInputEditTextDetailAddress.setError("Silakan isi");
-            hasErrow = true;
+            textInputEditTextDetailAddress.setError(getResources().getString(R.string.text_pls_input));
+            hasError = true;
         }
         if (TextUtils.isEmpty(dropdownTvChildrenNumber.getText().toString())) {
-            textInputEditTextDetailAddress.setError("Silakan isi");
-            hasErrow = true;
+            textInputEditTextDetailAddress.setError(getResources().getString(R.string.text_pls_input));
+            hasError = true;
         }
 
-        if (!hasErrow) {
+        if (!hasError) {
             submit();
         }
     }
 
     private void submit() {
         BasicInfoReqBean basicInfoReqBean = new BasicInfoReqBean();
-        basicInfoReqBean.customer_name = Objects.requireNonNull(textInputEditTextName.getText()).toString();
-        basicInfoReqBean.id_card_no = Objects.requireNonNull(textInputEditTextKTP.getText()).toString();
+        basicInfoReqBean.customer_name = textInputEditTextName.getText().toString();
+        basicInfoReqBean.id_card_no = textInputEditTextKTP.getText().toString();
         basicInfoReqBean.sex = dropdownTvGender.getText().toString();
         basicInfoReqBean.education = dropdownTvEducation.getText().toString();
         basicInfoReqBean.marriage_condition = dropdownTvMarryState.getText().toString();
         basicInfoReqBean.children_count = dropdownTvChildrenNumber.getText().toString();
+        basicInfoReqBean.address = textInputEditTextDetailAddress.getText().toString();
+
 
         NetworkLiteHelper
                 .postJson()

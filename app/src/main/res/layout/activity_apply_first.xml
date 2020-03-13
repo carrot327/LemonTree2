@@ -7,7 +7,22 @@
     android:orientation="vertical"
     tools:context="com.lemontree.android.ui.activity.ApplyFirstActivity">
 
-    <!--https://material.io/components/menus/menus.html#-->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="enterAlways"
+            app:navigationIcon="@drawable/icon_back_white"
+            app:title="@string/text_about_us"
+            app:titleTextColor="@color/white" />
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="52dp"

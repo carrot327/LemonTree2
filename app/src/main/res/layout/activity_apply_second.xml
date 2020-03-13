@@ -108,6 +108,7 @@
                     android:id="@+id/et_company_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="phone"
                     android:textColor="@color/CommonTextColor"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -116,7 +117,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Alamat lengkap"
+                android:hint="Alamat lengkap perusahaan"
                 android:textColorHint="@color/Grey400"
                 app:errorEnabled="true">
 

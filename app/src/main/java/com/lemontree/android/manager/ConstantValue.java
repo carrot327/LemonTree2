@@ -223,7 +223,7 @@ public interface ConstantValue {
     /**
      * 认证_公司信息
      */
-    String AUTH__COMPANY_INFO = "/app/auth/workInfo/save";
+    String AUTH_COMPANY_INFO = "/app/auth/workInfo/save";
 
     /**
      * 认证_联系人信息

@@ -21,11 +21,12 @@ import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
 import com.lemontree.android.ui.activity.ApplyFirstActivity;
+import com.lemontree.android.ui.activity.ApplyFourActivity;
+import com.lemontree.android.ui.activity.ApplySecondActivity;
+import com.lemontree.android.ui.activity.ApplyThirdActivity;
 import com.lemontree.android.ui.activity.BankInfoActivity;
 import com.lemontree.android.ui.activity.InfoGetReadyActivity;
 import com.lemontree.android.ui.activity.StartLivenessActivity;
-import com.lemontree.android.uploadUtil.UrlHostConfig;
-import com.lemontree.android.utils.IntentUtils;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -125,7 +126,7 @@ public class ApplyFragment extends BaseFragment {
                 if (mBaseStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_1));
                 } else if (mCompanyStatus == 0) {
-                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_COMPANY());
+                    startActivity(ApplySecondActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
@@ -136,7 +137,7 @@ public class ApplyFragment extends BaseFragment {
                 } else if (mCompanyStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_2));
                 } else if (mRelationStatus == 0) {
-                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_CONTACT());
+                    startActivity(ApplyThirdActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
@@ -149,7 +150,7 @@ public class ApplyFragment extends BaseFragment {
                 } else if (mRelationStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_3));
                 } else if (mOcrStatus == 0) {
-                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_UPLOAD());
+                    startActivity(ApplyFourActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
@@ -207,41 +208,41 @@ public class ApplyFragment extends BaseFragment {
                                 if (mBaseStatus > 0) {
                                     viewTag1.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_yellow));
                                     ivUserInfo.setImageDrawable(getResources().getDrawable(R.drawable.icon_user));
-                                    ivArrowApply1.setVisibility(View.INVISIBLE);
+                                    ivArrowApply1.setImageDrawable(getResources().getDrawable(R.drawable.icon_finished));
                                 } else {
                                     viewTag1.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_grey));
                                     ivUserInfo.setImageDrawable(getResources().getDrawable(R.drawable.icon_user_disable));
-                                    ivArrowApply1.setVisibility(View.VISIBLE);
+                                    ivArrowApply1.setImageDrawable(getResources().getDrawable(R.drawable.icon_unfinish));
                                 }
 
                                 if (mCompanyStatus > 0) {
                                     viewTag2.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_green));
                                     ivCompany.setImageDrawable(getResources().getDrawable(R.drawable.icon_company));
-                                    ivArrowApply2.setVisibility(View.INVISIBLE);
+                                    ivArrowApply2.setImageDrawable(getResources().getDrawable(R.drawable.icon_finished));
                                 } else {
                                     viewTag2.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_grey));
                                     ivCompany.setImageDrawable(getResources().getDrawable(R.drawable.icon_company_disable));
-                                    ivArrowApply2.setVisibility(View.VISIBLE);
+                                    ivArrowApply2.setImageDrawable(getResources().getDrawable(R.drawable.icon_unfinish));
                                 }
 
                                 if (mRelationStatus > 0) {
                                     viewTag3.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_blue));
                                     ivContact.setImageDrawable(getResources().getDrawable(R.drawable.icon_contact));
-                                    ivArrowApply3.setVisibility(View.INVISIBLE);
+                                    ivArrowApply3.setImageDrawable(getResources().getDrawable(R.drawable.icon_finished));
                                 } else {
                                     viewTag3.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_grey));
                                     ivContact.setImageDrawable(getResources().getDrawable(R.drawable.icon_contact_disable));
-                                    ivArrowApply3.setVisibility(View.VISIBLE);
+                                    ivArrowApply3.setImageDrawable(getResources().getDrawable(R.drawable.icon_unfinish));
                                 }
 
                                 if (mOcrStatus > 0) {
                                     viewTag4.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_red));
                                     ivPhoto.setImageDrawable(getResources().getDrawable(R.drawable.icon_upload));
-                                    ivArrowApply4.setVisibility(View.INVISIBLE);
+                                    ivArrowApply4.setImageDrawable(getResources().getDrawable(R.drawable.icon_finished));
                                 } else {
                                     viewTag4.setBackground(getResources().getDrawable(R.drawable.shape_bg_circle_corner_grey));
                                     ivPhoto.setImageDrawable(getResources().getDrawable(R.drawable.icon_upload_disable));
-                                    ivArrowApply4.setVisibility(View.VISIBLE);
+                                    ivArrowApply4.setImageDrawable(getResources().getDrawable(R.drawable.icon_unfinish));
                                 }
 
                                 if (mBaseStatus > 0 && mCompanyStatus > 0 && mRelationStatus > 0 && mOcrStatus > 0) {
