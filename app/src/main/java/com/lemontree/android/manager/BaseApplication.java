@@ -65,11 +65,11 @@ public class BaseApplication extends Application implements DFTransferResultInte
      */
     public void initSPData() {
         if (BuildConfig.DEBUG) {
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "登录信息(081266568320)";
-//            mUserId = "4069407";
-//            sPhoneNum = "081266568320";
+            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+            sLoginState = true;
+            sUserName = "登录信息(081266568320)";
+            mUserId = "3832081";
+            sPhoneNum = "081266568320";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);

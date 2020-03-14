@@ -233,7 +233,8 @@ public interface ConstantValue {
     /**
      * 认证_图片上传
      */
-    String AUTH_IMG_INFO = "/ocr/auth/ocrKptInfo";
+//    String AUTH_IMG_INFO = "/ocr/auth/ocrKptInfo";
+    String AUTH_IMG_INFO = "/ocr/auth/newOcrKptInfo";
 
     /**
      * ocr check

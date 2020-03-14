@@ -141,7 +141,7 @@ public class ApplyFourActivity extends BaseActivity {
      */
     private void goCamera(int CAMERA_REQUEST_CODE) {
         checkCameraPermission();
-        cameraSavePath = new File(Environment.getExternalStorageDirectory().getPath() + "/" + System.currentTimeMillis() + ".png");
+        cameraSavePath = new File(Environment.getExternalStorageDirectory().getPath() + "/" + System.currentTimeMillis() + ".jpg");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //如果在Android7.0以上,使用FileProvider获取Uri
 //            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
@@ -188,7 +188,7 @@ public class ApplyFourActivity extends BaseActivity {
     }
 
     private void handleImage(Uri uri) {
-        Bitmap bitmap = null;
+        Bitmap bitmap;
         try {
             bitmap = getBitmapFormUriWithCompress(uri);
             File file = Tools.bitmap2File(bitmap, Tools.getFileName());
