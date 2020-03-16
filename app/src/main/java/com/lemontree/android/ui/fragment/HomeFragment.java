@@ -200,7 +200,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     private HomeDataResBean mHomeData = new HomeDataResBean();
     private String[] mPayWayList;
     private String mCurrentView;
-    private boolean isRefuse;
+    private boolean mIsRefuse;
     private CouponResBean mCouponData;
     private String mAfterCutAmount;
     private String mOriginPayAmount;
@@ -246,6 +246,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
+                    startActivity(InfoGetReadyActivity.createIntent(mContext));
+
 //                    startActivity(StartLivenessActivity.createIntent(mContext));
 //                    String licenseString = getAssetResource("DFLicense");
 //                    if (TextUtils.isEmpty(licenseString)) {
@@ -408,7 +410,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                             btnHome.setText(R.string.btn_text_confirm);//点击方法 showSubmitSuccessDialog
                         }
 
-                        if (isRefuse) {
+                        if (mIsRefuse) {
                             // TODO: 2020-01-13 翻译要确定。这里有点不正确
                             tvTopText.setText(R.string.top_text_status_4_no_amount);
                             hideSeekBar2();
@@ -589,7 +591,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
                         break;
                     case "4"://可借款
-                        if (isRefuse) {
+                        if (mIsRefuse) {
                             showRefuseDialog();
                         } else {
                             if (Double.parseDouble(mHomeData.amtShow) > 0) {
@@ -767,7 +769,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     public void setBorrowInfo(BorrowApplyInfoResBean data) {
         showApplyInfoLayout();
 
-        isRefuse = false;
+        mIsRefuse = false;
         // 赋值(apply和loan一起赋值)
         tvApplyInfoName.setText(BaseApplication.sUserName);
         if (!TextUtils.isEmpty(mHomeData.amtShow) && Double.parseDouble(mHomeData.amtShow) > 0) {
@@ -842,12 +844,14 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     @Override
     public void setRefuseState() {
-        isRefuse = true;
+        mIsRefuse = true;
         tvTopText.setText(R.string.top_text_status_4_no_amount);
         tvApplyInfoName.setText("-");
         tvApplyInfoAmount.setText("-");
         tvApplyInfoBankName.setText("-");
         tvApplyInfoBankCardNumber.setText("-");
+        hideSeekBar2();
+        btnHome.setEnabled(true);
     }
 
     @Override

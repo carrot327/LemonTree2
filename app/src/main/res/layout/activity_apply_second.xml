@@ -14,11 +14,11 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/icon_back_white" />
+            android:background="@drawable/icon_back_white2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,11 +43,13 @@
             android:paddingRight="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outline_work_category"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Jenis pekerjaan"
-                android:textColorHint="@color/Grey400">
+                android:textColorHint="@color/Grey400"
+                app:errorEnabled="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/tv_work_category"
@@ -60,12 +62,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outline_salary_range"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:hint="Kisaran gaji bulanan"
-                android:textColorHint="@color/Grey400">
+                android:textColorHint="@color/Grey400"
+                app:errorEnabled="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/tv_salary_range"
@@ -79,10 +82,10 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outline_company_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:hint="Nama perusahaan"
                 android:textColorHint="@color/Grey400"
                 app:errorEnabled="true">
@@ -96,7 +99,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/outline_DetailAddress"
+                android:id="@+id/outline_company_phone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,6 +117,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outline_company_address"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,11 +129,16 @@
                     android:id="@+id/et_company_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="number"
                     android:maxLines="1"
                     android:textColor="@color/CommonTextColor"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/text_remind_company_info" />
 
             <Button
                 android:id="@+id/btn_confirm"

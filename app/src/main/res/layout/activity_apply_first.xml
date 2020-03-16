@@ -30,11 +30,11 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/icon_back_white" />
+            android:background="@drawable/icon_back_white2" />
 
         <TextView
             android:id="@+id/tv_titlebar_title"
@@ -92,8 +92,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Nama lengkap"
                 android:textColorHint="@color/Grey400"
-                app:errorEnabled="true"
-                app:startIconDrawable="@drawable/icon_coupon">
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText_Name"
@@ -112,6 +111,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Nomor KTP"
                 android:textColorHint="@color/Grey400"
+                app:counterEnabled="true"
+                app:counterMaxLength="16"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -217,7 +218,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Jenis Kelamin"
-                android:textColorHint="@color/Grey400">
+                android:textColorHint="@color/Grey400"
+                app:errorEnabled="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_tv_gender"
@@ -234,9 +236,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:hint="Pendidikan"
-                android:textColorHint="@color/Grey400">
+                android:textColorHint="@color/Grey400"
+                app:errorEnabled="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_tv_education"
@@ -253,9 +255,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:hint="Status Pernikahan"
-                android:textColorHint="@color/Grey400">
+                android:textColorHint="@color/Grey400"
+                app:errorEnabled="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_tv_marry_state"
@@ -272,9 +274,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:hint="Jumlah Anak"
-                android:textColorHint="@color/Grey400">
+                android:textColorHint="@color/Grey400"
+                app:errorEnabled="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_tv_children_number"
@@ -291,7 +293,6 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:hint="Alamat saat ini"
                 android:textColorHint="@color/Grey400"
                 app:errorEnabled="true">

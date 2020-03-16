@@ -14,11 +14,11 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:background="@drawable/icon_back_white" />
+            android:background="@drawable/icon_back_white2" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +45,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
                 android:text="Kontak orang 1"
+                android:textColor="@color/CommonTextColor"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -62,6 +64,7 @@
                     android:src="@drawable/icon_relationship" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outline_relation_1"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,6 +113,7 @@
                     android:textAllCaps="false" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outline_name_1"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -145,6 +149,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outline_telephone_1"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,7 +164,6 @@
                         android:layout_height="50dp"
                         android:editable="false"
                         android:focusable="false"
-                        android:maxLength="13"
                         android:textColor="@color/CommonTextColor"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -168,8 +172,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="20dp"
                 android:text="Kontak orang 2"
+                android:textColor="@color/CommonTextColor"
                 android:textSize="20sp" />
 
 
@@ -187,6 +193,7 @@
                     android:src="@drawable/icon_relationship" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outline_relation_2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -234,6 +241,7 @@
                     android:textAllCaps="false" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outline_name_2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -270,6 +278,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outline_telephone_2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -283,12 +292,16 @@
                         android:layout_height="50dp"
                         android:editable="false"
                         android:focusable="false"
-                        android:maxLength="13"
                         android:textColor="@color/CommonTextColor"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/text_remind_company_info" />
 
             <Button
                 android:id="@+id/btn_confirm"

@@ -1,6 +1,7 @@
 package com.lemontree.android.ui.activity;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
@@ -30,6 +32,7 @@ import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
+import com.lemontree.android.uploadUtil.EmojiFilter;
 import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.uploadUtil.UploadDataBySingle;
 import com.lemontree.android.utils.SPUtils;
@@ -66,9 +69,20 @@ public class ApplyThirdActivity extends BaseActivity {
     Button btnSelectContact1;
     @BindView(R.id.btn_select_contact_2)
     Button btnSelectContact2;
+    @BindView(R.id.outline_relation_1)
+    TextInputLayout outlineRelation1;
+    @BindView(R.id.outline_name_1)
+    TextInputLayout outlineName1;
+    @BindView(R.id.outline_telephone_1)
+    TextInputLayout outlineTelephone1;
+    @BindView(R.id.outline_relation_2)
+    TextInputLayout outlineRelation2;
+    @BindView(R.id.outline_name_2)
+    TextInputLayout outlineName2;
+    @BindView(R.id.outline_telephone_2)
+    TextInputLayout outlineTelephone2;
 
     private final int PICK_CONTACT = 101;
-
     private boolean mHasUploadAddressBook;
     private int clickedViewId;
 
@@ -137,84 +151,118 @@ public class ApplyThirdActivity extends BaseActivity {
 
     private void checkContent() {
         boolean hasError = false;
-        String name1 = tvContactName1.getText().toString();
-        String name2 = tvContactName2.getText().toString();
-        String phone1 = etTelephone1.getText().toString();
-        String phone2 = etTelephone2.getText().toString();
+        String name1 = tvContactName1.getText().toString().trim();
+        String name2 = tvContactName2.getText().toString().trim();
+        String phone1 = etTelephone1.getText().toString().replaceAll(" ","");
+        String phone2 = etTelephone2.getText().toString().replaceAll(" ","");
         String relation1 = tvRelation1.getText().toString();
         String relation2 = tvRelation2.getText().toString();
 
+
         if (TextUtils.isEmpty(relation1)) {
-            tvRelation1.setError(getResources().getString(R.string.text_pls_input));
+            outlineRelation1.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        }else {
+            outlineRelation1.setErrorEnabled(false);
         }
+
         if (TextUtils.isEmpty(relation2)) {
-            tvRelation2.setError(getResources().getString(R.string.text_pls_input));
+            outlineRelation2.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        }else {
+            outlineRelation2.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(name1)) {
-            tvContactName1.setError(getResources().getString(R.string.text_pls_input));
+            outlineName1.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else if (EmojiFilter.containsEmoji(name1)) {
+            outlineName1.setError(getResources().getString(R.string.text_only_letters_allowed));
+            hasError = true;
+        }else {
+            outlineName1.setErrorEnabled(false);
         }
+
         if (TextUtils.isEmpty(name2)) {
-            tvContactName2.setError(getResources().getString(R.string.text_pls_input));
+            outlineName2.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else if (EmojiFilter.containsEmoji(name2)) {
+            outlineName2.setError(getResources().getString(R.string.text_only_letters_allowed));
+            hasError = true;
+        }else {
+            outlineName2.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(phone1)) {
             phone1 = "";
-            etTelephone1.setError(getResources().getString(R.string.text_pls_input));
+            outlineTelephone1.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        }else {
+            outlineTelephone1.setErrorEnabled(false);
         }
+
         if (TextUtils.isEmpty(phone2)) {
             phone2 = "";
-            etTelephone2.setError(getResources().getString(R.string.text_pls_input));
+            outlineTelephone2.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        }else {
+            outlineTelephone2.setErrorEnabled(false);
         }
 
         //限制的有三项： 重要联系人不能等于紧急联系人、不能跟本人号码相同、号码位数不能小于9位
         if (phone1.equals(phone2)) {
-            etTelephone1.setError("Tidak diizinkan mengisi kontak yang sama");
-            etTelephone2.setError("Tidak diizinkan mengisi kontak yang sama");
+            outlineTelephone1.setError("Tidak diizinkan mengisi kontak yang sama");
+            outlineTelephone2.setError("Tidak diizinkan mengisi kontak yang sama");
             hasError = true;
+        }
+        Log.d("ApplyThirdActivity3", phone1);
+        Log.d("ApplyThirdActivity3", BaseApplication.sPhoneNum);
+        if (phone1.equals(BaseApplication.sPhoneNum)) {
+            outlineTelephone1.setError("Tidak boleh sama dengan nomor ponsel Anda");
+            hasError = true;
+        }else {
+            outlineTelephone1.setErrorEnabled(false);
         }
 
-        if (phone1.equals(BaseApplication.sPhoneNum) || phone2.equals(BaseApplication.sPhoneNum)) {
-            // TODO: 2020-03-13
-            showToast("");
+        if (phone2.equals(BaseApplication.sPhoneNum)) {
+            outlineTelephone2.setError("Tidak boleh sama dengan nomor ponsel Anda");
             hasError = true;
+        }else {
+            outlineTelephone2.setErrorEnabled(false);
         }
+
         if (phone1.length() < 9) {
-            etTelephone1.setError("9-13 digit");
+            outlineTelephone1.setError("9-13 digit");
         }
         if (phone2.length() < 9) {
-            etTelephone2.setError("9-13 digit");
+            outlineTelephone2.setError("9-13 digit");
         }
 
         if (!hasError) {
-            submit();
+//            submit();
         }
     }
 
     private void submit() {
+        ProgressDialog progressDialog = new ProgressDialog(mContext);
+        progressDialog.setMessage("Memuat...");
+        progressDialog.show();
+
         ContactInfoReqBean reqBean = new ContactInfoReqBean();
 
         ContactInfoReqBean.ContactBean contactBean = reqBean.new ContactBean();
-        contactBean.relation_name = tvContactName1.getText().toString();
-        contactBean.relation_phone = etTelephone1.getText().toString();
+        contactBean.relation_name = tvContactName1.getText().toString().trim();
+        contactBean.relation_phone = etTelephone1.getText().toString().trim();
         contactBean.relation_type = tvRelation1.getText().toString();
 
         ContactInfoReqBean.ContactBean contactBean2 = reqBean.new ContactBean();
-        contactBean2.relation_name = tvContactName2.getText().toString();
-        contactBean2.relation_phone = etTelephone2.getText().toString();
+        contactBean2.relation_name = tvContactName2.getText().toString().trim();
+        contactBean2.relation_phone = etTelephone2.getText().toString().trim();
         contactBean2.relation_type = tvRelation2.getText().toString();
 
         reqBean.relationship = new ArrayList<>();
         reqBean.relationship.add(contactBean);
         reqBean.relationship.add(contactBean2);
-
-        Log.d("karl", "map:" + new Gson().toJson(reqBean));
 
         NetworkLiteHelper
                 .postJson()
@@ -224,6 +272,8 @@ public class ApplyThirdActivity extends BaseActivity {
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
+                        progressDialog.dismiss();
+
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
                             startActivity(ApplyFourActivity.createIntent(mContext));
                             finishActivity();
@@ -232,6 +282,7 @@ public class ApplyThirdActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(Call call, Exception exception, int id) {
+                        progressDialog.dismiss();
                     }
                 });
     }

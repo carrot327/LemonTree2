@@ -2,6 +2,7 @@ package com.lemontree.android.ui.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,6 +23,7 @@ import androidx.core.content.FileProvider;
 
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
+import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.DialogFactory;
 import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.uploadUtil.Tools;
@@ -33,6 +35,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -101,7 +104,7 @@ public class ApplyFourActivity extends BaseActivity {
     private Uri mUri;
     private Map<String, File> imgMap = new HashMap<>();
     int mClickItemName;
-
+    File mFile;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, ApplyFourActivity.class);
@@ -141,18 +144,6 @@ public class ApplyFourActivity extends BaseActivity {
      */
     private void goCamera(int CAMERA_REQUEST_CODE) {
         checkCameraPermission();
-        cameraSavePath = new File(Environment.getExternalStorageDirectory().getPath() + "/" + System.currentTimeMillis() + ".jpg");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //如果在Android7.0以上,使用FileProvider获取Uri
-//            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            mUri = FileProvider.getUriForFile(mContext, "com.lemontree.android.fileProvider", cameraSavePath);
-            Log.d("karl", "mUri:" + mUri);
-        } else { //否则使用Uri.fromFile(file)方法获取Uri
-            mUri = Uri.fromFile(cameraSavePath);
-        }
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
-        startActivityForResult(intent, CAMERA_REQUEST_CODE);
     }
 
     /**
@@ -179,6 +170,18 @@ public class ApplyFourActivity extends BaseActivity {
         }, new PermissionListener() {
             @Override
             public void onGranted() {
+                cameraSavePath = new File(Environment.getExternalStorageDirectory().getPath() + "/" + System.currentTimeMillis() + ".jpg");
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //如果在Android7.0以上,使用FileProvider获取Uri
+//            intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    mUri = FileProvider.getUriForFile(mContext, "com.lemontree.android.fileProvider", cameraSavePath);
+                    Log.d("karl", "mUri:" + mUri);
+                } else { //否则使用Uri.fromFile(file)方法获取Uri
+                    mUri = Uri.fromFile(cameraSavePath);
+                }
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
+                startActivityForResult(intent, CAMERA_REQUEST_CODE);
             }
 
             @Override
@@ -191,8 +194,8 @@ public class ApplyFourActivity extends BaseActivity {
         Bitmap bitmap;
         try {
             bitmap = getBitmapFormUriWithCompress(uri);
-            File file = Tools.bitmap2File(bitmap, Tools.getFileName());
-            saveFileToMap(file);
+//            File file = Tools.bitmap2File(bitmap, Tools.getFileName());
+            saveFileToMap(mFile);
             setImageSrc(bitmap);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -202,37 +205,24 @@ public class ApplyFourActivity extends BaseActivity {
     }
 
     private void uploadAllImg() {
+        ProgressDialog progressDialog = new ProgressDialog(mContext);
+        progressDialog.setMessage("Memuat...");
+        progressDialog.show();
         new UploadAuthImg().upload(imgMap, new UploadAuthImg.UploadImgListener() {
             @Override
             public void success() {
-                handlerAuth.sendEmptyMessage(1);
+                progressDialog.dismiss();
+                startActivity(BankInfoActivity.createIntent(mContext));
+                finish();
             }
 
             @Override
             public void error() {
+                progressDialog.dismiss();
 
-                handlerAuth.sendEmptyMessage(2);
             }
         });
     }
-
-    @SuppressLint("HandlerLeak")
-    Handler handlerAuth = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 1:
-                    //跳转到银行卡页面
-                    startActivity(BankInfoActivity.createIntent(mContext));
-                    finish();
-                    break;
-                case 2:
-                    showToast("try again!");
-                    break;
-            }
-        }
-    };
 
     private void saveFileToMap(File file) {
         if (file == null) return;
@@ -364,19 +354,35 @@ public class ApplyFourActivity extends BaseActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         int options = 100;
-        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
+        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
             baos.reset();//重置baos即清空baos
             //第一个参数 ：图片格式 ，第二个参数： 图片质量，100为最高，0为最差  ，第三个参数：保存压缩后的数据的流
             image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options，把压缩后的数据存放到baos中
             options -= 10;//每次都减少10
             if (options <= 0)
                 break;
+            long length = baos.toByteArray().length;
+            Log.d("ApplyFourActivity", "length:" + length);
+
         }
-        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
-        Log.d("ApplyFourActivity2", "bitmap.getWidth():" + bitmap.getWidth());
-        Log.d("ApplyFourActivity2", "bitmap.getHeight():" + bitmap.getHeight());
-        Log.d("ApplyFourActivity2", "bitmap.getByteCount():" + bitmap.getByteCount());
+        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据输出流存放到输入流中
+        Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把输入流数据生成图片
+
+        mFile = new File(BaseApplication.getContext().getExternalFilesDir(null), Tools.getFileNameByTime() + ".jpg");
+        Log.d("ApplyFourActivity", "BaseApplication.getContext().getExternalFilesDir(null):" + BaseApplication.getContext().getExternalFilesDir(null));
+        try {
+            FileOutputStream fos = new FileOutputStream(mFile);
+            try {
+                fos.write(baos.toByteArray());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Log.d("ApplyFourActivity", "mFile.length():" + mFile.length());
         return bitmap;
     }
 

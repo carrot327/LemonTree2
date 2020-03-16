@@ -47,7 +47,7 @@
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="110dp"

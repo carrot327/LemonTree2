@@ -10,6 +10,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -75,7 +77,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
      */
 
     protected void initializeImmersiveMode() {
-        setImmersiveMode(R.color.white, true);
+//        setImmersiveMode(R.color.white, true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = mContext.getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(mContext.getResources().getColor(R.color.theme_color));
+        }
     }
 
     protected void setImmersiveMode(@ColorRes int statusBarColor, boolean statusBarDarkFont) {
@@ -116,7 +124,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         initializePrepareData();
         initializeView();
         initializeTitleBar();
-//        initializeImmersiveMode();
+        initializeImmersiveMode();
         loadData();
     }
 

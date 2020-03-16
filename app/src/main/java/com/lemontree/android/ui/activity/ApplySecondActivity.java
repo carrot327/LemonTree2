@@ -1,5 +1,6 @@
 package com.lemontree.android.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.lemontree.android.R;
 import com.lemontree.android.base.BaseActivity;
@@ -22,6 +24,7 @@ import com.lemontree.android.bean.request.WorkInfoReqBean;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
+import com.lemontree.android.uploadUtil.Tools;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 
@@ -46,7 +49,18 @@ public class ApplySecondActivity extends BaseActivity {
     TextInputEditText etCompanyAddress;
     @BindView(R.id.et_company_phone)
     TextInputEditText etCompanyPhone;
+    @BindView(R.id.outline_work_category)
+    TextInputLayout outlineWorkCategory;
+    @BindView(R.id.outline_salary_range)
+    TextInputLayout outlineSalaryRange;
+    @BindView(R.id.outline_company_name)
+    TextInputLayout outlineCompanyName;
+    @BindView(R.id.outline_company_phone)
+    TextInputLayout outlineCompanyPhone;
+    @BindView(R.id.outline_company_address)
+    TextInputLayout outlineCompanyAddress;
 
+    private View.OnClickListener drapdownListener;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, ApplySecondActivity.class);
@@ -65,6 +79,9 @@ public class ApplySecondActivity extends BaseActivity {
         tvWorkCategory.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, WORK_CATEGORY));
         tvSalaryRange.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, SALARY_RANGE));
 
+        drapdownListener = v -> Tools.hideInput(mContext, v);
+        tvWorkCategory.setOnClickListener(drapdownListener);
+        tvSalaryRange.setOnClickListener(drapdownListener);
     }
 
     @Override
@@ -92,33 +109,50 @@ public class ApplySecondActivity extends BaseActivity {
     private void checkContent() {
         boolean hasError = false;
         if (TextUtils.isEmpty(tvWorkCategory.getText().toString())) {
-            tvWorkCategory.setError(getResources().getString(R.string.text_pls_input));
+            outlineWorkCategory.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineWorkCategory.setErrorEnabled(false);
         }
+
         if (TextUtils.isEmpty(tvSalaryRange.getText().toString())) {
-            tvSalaryRange.setError(getResources().getString(R.string.text_pls_input));
+            outlineSalaryRange.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineSalaryRange.setErrorEnabled(false);
         }
+
         if (TextUtils.isEmpty(etCompanyName.getText().toString())) {
-            etCompanyName.setError(getResources().getString(R.string.text_pls_input));
+            outlineCompanyName.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineCompanyName.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(etCompanyAddress.getText().toString())) {
-            etCompanyAddress.setError(getResources().getString(R.string.text_pls_input));
+            outlineCompanyAddress.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineCompanyAddress.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(etCompanyPhone.getText().toString())) {
-            etCompanyPhone.setError(getResources().getString(R.string.text_pls_input));
+            outlineCompanyPhone.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineCompanyPhone.setErrorEnabled(false);
         }
+
         if (!hasError) {
             submit();
         }
     }
 
     private void submit() {
+        ProgressDialog progressDialog = new ProgressDialog(mContext);
+        progressDialog.setMessage("Memuat...");
+        progressDialog.show();
+
         WorkInfoReqBean workInfoReqBean = new WorkInfoReqBean();
         workInfoReqBean.work_category = tvWorkCategory.getText().toString();
         workInfoReqBean.salary_range = tvSalaryRange.getText().toString();
@@ -134,7 +168,8 @@ public class ApplySecondActivity extends BaseActivity {
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
-//                        showToast("success");
+                        progressDialog.dismiss();
+
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
                             startActivity(ApplyThirdActivity.createIntent(mContext));
                             finishActivity();
@@ -143,6 +178,7 @@ public class ApplySecondActivity extends BaseActivity {
 
                     @Override
                     public void onFailure(Call call, Exception exception, int id) {
+                        progressDialog.dismiss();
                     }
                 });
     }

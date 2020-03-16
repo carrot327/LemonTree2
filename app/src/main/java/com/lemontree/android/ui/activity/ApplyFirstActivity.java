@@ -1,13 +1,11 @@
 package com.lemontree.android.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -23,6 +21,7 @@ import com.lemontree.android.bean.request.BasicInfoReqBean;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
+import com.lemontree.android.uploadUtil.Tools;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
 
@@ -67,6 +66,10 @@ public class ApplyFirstActivity extends BaseActivity {
     @BindView(R.id.outline_DetailAddress)
     TextInputLayout outlineDetailAddress;
 
+    private View.OnClickListener drapdownListener;
+    private ProgressDialog mProgressDialog;
+
+
     public static Intent createIntent(Context context) {
         return new Intent(context, ApplyFirstActivity.class);
     }
@@ -87,6 +90,12 @@ public class ApplyFirstActivity extends BaseActivity {
         dropdownTvEducation.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, EDUCATION));
         dropdownTvMarryState.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, MARRY_STATE));
         dropdownTvChildrenNumber.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, CHILDREN_NUMBER));
+
+        drapdownListener = v -> Tools.hideInput(mContext, v);
+        dropdownTvGender.setOnClickListener(drapdownListener);
+        dropdownTvEducation.setOnClickListener(drapdownListener);
+        dropdownTvMarryState.setOnClickListener(drapdownListener);
+        dropdownTvChildrenNumber.setOnClickListener(drapdownListener);
 
     }
 
@@ -116,35 +125,52 @@ public class ApplyFirstActivity extends BaseActivity {
     private void checkContent() {
         boolean hasError = false;
         if (TextUtils.isEmpty(textInputEditTextName.getText().toString())) {
-            textInputEditTextName.setError(getResources().getString(R.string.text_pls_input));
+            outlineName.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineName.setErrorEnabled(false);
         }
+
         if (TextUtils.isEmpty(textInputEditTextKTP.getText().toString())) {
-            textInputEditTextKTP.setError(getResources().getString(R.string.text_pls_input));
+            outlineKTP.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineKTP.setErrorEnabled(false);
         }
+
         if (TextUtils.isEmpty(textInputEditTextDetailAddress.getText().toString())) {
-            textInputEditTextDetailAddress.setError(getResources().getString(R.string.text_pls_input));
+            outlineDetailAddress.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineDetailAddress.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(dropdownTvGender.getText().toString())) {
-            dropdownTvGender.setError(getResources().getString(R.string.text_pls_input));
+            outlineGender.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineGender.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(dropdownTvEducation.getText().toString())) {
-            textInputEditTextDetailAddress.setError(getResources().getString(R.string.text_pls_input));
+            outlineEducation.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineEducation.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(dropdownTvMarryState.getText().toString())) {
-            textInputEditTextDetailAddress.setError(getResources().getString(R.string.text_pls_input));
+            outlineMarryState.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineMarryState.setErrorEnabled(false);
         }
+
         if (TextUtils.isEmpty(dropdownTvChildrenNumber.getText().toString())) {
-            textInputEditTextDetailAddress.setError(getResources().getString(R.string.text_pls_input));
+            outlineChildrenNumber.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
+        } else {
+            outlineChildrenNumber.setErrorEnabled(false);
         }
 
         if (!hasError) {
@@ -153,15 +179,17 @@ public class ApplyFirstActivity extends BaseActivity {
     }
 
     private void submit() {
+        mProgressDialog = new ProgressDialog(mContext);
+        mProgressDialog.setMessage("Memuat...");
+        mProgressDialog.show();
         BasicInfoReqBean basicInfoReqBean = new BasicInfoReqBean();
         basicInfoReqBean.customer_name = textInputEditTextName.getText().toString();
         basicInfoReqBean.id_card_no = textInputEditTextKTP.getText().toString();
         basicInfoReqBean.sex = dropdownTvGender.getText().toString();
         basicInfoReqBean.education = dropdownTvEducation.getText().toString();
         basicInfoReqBean.marriage_condition = dropdownTvMarryState.getText().toString();
-        basicInfoReqBean.children_count = dropdownTvChildrenNumber.getText().toString();
+        basicInfoReqBean.children_count = dropdownTvChildrenNumber.getText().toString().trim();
         basicInfoReqBean.address = textInputEditTextDetailAddress.getText().toString();
-
 
         NetworkLiteHelper
                 .postJson()
@@ -171,28 +199,22 @@ public class ApplyFirstActivity extends BaseActivity {
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
-                        if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            startActivity(ApplySecondActivity.createIntent(mContext));
-                            finishActivity();
+                        mProgressDialog.dismiss();
+                        if (response != null) {
+                            if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
+                                startActivity(ApplySecondActivity.createIntent(mContext));
+                                finishActivity();
+                            } else {
+                                showToast(response.res_msg);
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call call, Exception exception, int id) {
-                        // TODO: 2020-03-12
+                        mProgressDialog.dismiss();
                     }
                 });
-    }
-
-    @Override
-    protected void initializeImmersiveMode() {
-        // 不使用ImmersionBar，以防导致输入框不会自动上移
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = mContext.getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.theme_color));
-        }
     }
 
 }

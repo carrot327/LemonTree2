@@ -75,6 +75,7 @@ public class BankInfoActivity extends BaseActivity {
 
 
     private void getBankNameList() {
+
         NetworkLiteHelper
                 .postJson()
                 .url(NetConstantValue.BASE_HOST + ConstantValue.GET_BANK_NAME_LIST)
@@ -101,33 +102,25 @@ public class BankInfoActivity extends BaseActivity {
     }
 
     private boolean checkFormatSuccess() {
-        boolean hasErrow = false;
+        boolean hasError = false;
         if (TextUtils.isEmpty(dropdownTvBankName.getText().toString())) {
-            outlineBankName.setErrorEnabled(true);
             outlineBankName.setError("Silakan isi");
-            hasErrow = true;
+            hasError = true;
         } else if (!mBankNameList.contains(dropdownTvBankName.getText().toString())) {
             outlineBankName.setErrorEnabled(true);
             outlineBankName.setError("Silakan masukkan nama bank yang benar");//请输入正确的银行名称
-            hasErrow = true;
+            hasError = true;
         } else {
             outlineBankName.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(etBankNum.getText().toString())) {
-            outlineBankNum.setErrorEnabled(true);
             outlineBankNum.setError("Silakan isi");
-            hasErrow = true;
+            hasError = true;
         } else {
             outlineBankNum.setErrorEnabled(false);
         }
-
-
-        if (hasErrow) {
-            return false;
-        } else {
-            return true;
-        }
+        return !hasError;
     }
 
     private void submitBankInfo() {
@@ -139,13 +132,12 @@ public class BankInfoActivity extends BaseActivity {
         NetworkLiteHelper
                 .postJson()
                 .url(NetConstantValue.BASE_HOST + ConstantValue.NET_REQUEST_URL_BANKCARD_ADD)
-                .content(new Gson().toJson(new CommonReqBean()))
+                .content(new Gson().toJson(addBankInfoReqBean))
                 .build()
                 .execute(OKHttpClientEngine.getNetworkClient(), new GenericCallback<BaseResponseBean>() {
                     @Override
                     public void onSuccess(Call call, BaseResponseBean response, int id) {
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-//                            showToast("submit success!");
                             //进行活体。 活体完成后跳确认页，确认页中再上传信息
                             startActivity(StartLivenessActivity.createIntent(mContext));
                         }

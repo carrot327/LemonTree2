@@ -16,6 +16,8 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.core.app.ActivityCompat;
 
@@ -105,7 +107,7 @@ public class Tools {
         }
 
 
-        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".png");
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".jpg");
         try {
             FileOutputStream fos = new FileOutputStream(file);
             try {
@@ -125,10 +127,10 @@ public class Tools {
         return file;
     }
 
-    public static File bitmap2File(Bitmap bitmap, String fileName) throws IOException {
+    public static File bitmap2File(Bitmap bitmap, String fileName) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
-        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".png");
+        File file = new File(BaseApplication.getContext().getExternalFilesDir(null), fileName + ".jpg");
         try {
             FileOutputStream fos = new FileOutputStream(file);
             try {
@@ -732,5 +734,15 @@ public class Tools {
         //图片名
         String filename = format.format(date);
         return filename;
+    }
+
+    /**
+     * 强制隐藏输入法键盘
+     *
+     * @param view EditText
+     */
+    public static void hideInput(Context context, View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
