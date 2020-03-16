@@ -45,6 +45,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.lemontree.android.manager.BaseApplication.mHasShowHoldPicExample;
+import static com.lemontree.android.manager.BaseApplication.mHasShowPicExample;
+
 public class ApplyFourActivity extends BaseActivity {
 
     @BindView(R.id.iv_back)
@@ -400,11 +403,21 @@ public class ApplyFourActivity extends BaseActivity {
                 uploadAllImg();
                 break;
             case R.id.iv_pick_ktp:
-                goPhotoAlbum(ALBUM_REQUEST_CODE);
+                if (mHasShowPicExample){
+                    goPhotoAlbum(ALBUM_REQUEST_CODE);
+                }else {
+                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_example).show();
+                    mHasShowPicExample = true;
+                }
                 mClickItemName = FLAG_KTP1;
                 break;
             case R.id.iv_pick_hold_ktp:
-                goPhotoAlbum(ALBUM_REQUEST_CODE);
+                if (mHasShowPicExample){
+                    goPhotoAlbum(ALBUM_REQUEST_CODE);
+                }else {
+                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_example).show();
+                    mHasShowPicExample = true;
+                }
                 mClickItemName = FLAG_KTP_HOLD2;
                 break;
             case R.id.iv_pick_staff_card:
@@ -426,11 +439,21 @@ public class ApplyFourActivity extends BaseActivity {
 
 
             case R.id.iv_take_photo_ktp:
-                goCamera(CAMERA_REQUEST_CODE);
+                if (mHasShowPicExample){
+                    goCamera(CAMERA_REQUEST_CODE);
+                }else {
+                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_example).show();
+                    mHasShowPicExample = true;
+                }
                 mClickItemName = FLAG_KTP1;
                 break;
             case R.id.iv_take_photo_hold_ktp:
-                goCamera(CAMERA_REQUEST_CODE);
+                if (mHasShowHoldPicExample){
+                    goCamera(CAMERA_REQUEST_CODE);
+                }else {
+                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_hold_example).show();
+                    mHasShowHoldPicExample = true;
+                }
                 mClickItemName = FLAG_KTP_HOLD2;
                 break;
             case R.id.iv_take_photo_staff_card:

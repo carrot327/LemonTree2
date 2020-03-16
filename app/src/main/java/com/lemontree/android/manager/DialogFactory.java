@@ -30,12 +30,13 @@ import com.lemontree.android.bean.response.CouponResBean;
 import com.lemontree.android.bean.response.HomeDialogDataResBean;
 import com.lemontree.android.bean.response.OperationDialogResBean;
 import com.lemontree.android.bean.response.RecommendDialogResBean;
-import com.lemontree.android.ui.widget.DrawableShowDialog;
 import com.lemontree.android.ui.widget.CommonDialog;
+import com.lemontree.android.ui.widget.DrawableShowDialog;
 import com.lemontree.android.ui.widget.HomePromptDialog;
 import com.lemontree.android.ui.widget.HomeRecommendDialogOne;
 import com.lemontree.android.ui.widget.HomeRecommendDialogTwo;
 import com.lemontree.android.ui.widget.PayWaySelectDialog;
+import com.lemontree.android.ui.widget.PicExampleDialog;
 import com.lemontree.android.uploadUtil.Tools;
 import com.lemontree.android.utils.IntentUtils;
 import com.lemontree.android.utils.MarkUtil;
@@ -331,6 +332,27 @@ public class DialogFactory {
      */
     public static Dialog createHomePromptDialog(final Context context, int res) {
         HomePromptDialog dialog = new HomePromptDialog(context, res, new HomePromptDialog.CloseListener() {
+            @Override
+            public void close(Dialog dialog, View view) {
+                dialog.dismiss();
+            }
+        });
+        Window dialogWindow = dialog.getWindow();
+        if (dialogWindow != null) {
+            dialogWindow.setBackgroundDrawableResource(R.color.transparence);
+        }
+        dialog.setCanceledOnTouchOutside(false);
+        return dialog;
+    }
+
+    /**
+     * 认证图片示例图展示
+     *
+     * @param context
+     * @return
+     */
+    public static Dialog createExamplePicDialog(final Context context, int res) {
+        PicExampleDialog dialog = new PicExampleDialog(context, res, new PicExampleDialog.CloseListener() {
             @Override
             public void close(Dialog dialog, View view) {
                 dialog.dismiss();

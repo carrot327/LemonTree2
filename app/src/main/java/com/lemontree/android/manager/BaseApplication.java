@@ -25,6 +25,8 @@ public class BaseApplication extends Application implements DFTransferResultInte
     public static boolean mHasUpdateSmsSuccess;
     public static boolean mHasUpdateAppListSuccess;
     public static boolean mHasUpdateCallLogSuccess;
+    public static boolean mHasShowPicExample;
+    public static boolean mHasShowHoldPicExample;
     private DFProductResult mResult;
 
 
