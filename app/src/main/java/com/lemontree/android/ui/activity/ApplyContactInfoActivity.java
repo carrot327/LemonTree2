@@ -32,6 +32,7 @@ import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
+import com.lemontree.android.ui.widget.SimpleTextWatcher;
 import com.lemontree.android.uploadUtil.EmojiFilter;
 import com.lemontree.android.uploadUtil.Permission;
 import com.lemontree.android.uploadUtil.UploadDataBySingle;
@@ -47,7 +48,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-public class ApplyThirdActivity extends BaseActivity {
+public class ApplyContactInfoActivity extends BaseActivity {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -88,7 +89,7 @@ public class ApplyThirdActivity extends BaseActivity {
 
 
     public static Intent createIntent(Context context) {
-        return new Intent(context, ApplyThirdActivity.class);
+        return new Intent(context, ApplyContactInfoActivity.class);
     }
 
     @Override
@@ -103,6 +104,13 @@ public class ApplyThirdActivity extends BaseActivity {
         tvRelation2.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, RELATION));
         tvContactName1.setEnabled(false);
         tvContactName2.setEnabled(false);
+
+        tvRelation1.addTextChangedListener(new SimpleTextWatcher(tvRelation1, outlineRelation1));
+        tvRelation2.addTextChangedListener(new SimpleTextWatcher(tvRelation2, outlineRelation2));
+        etTelephone1.addTextChangedListener(new SimpleTextWatcher(etTelephone1, outlineTelephone1));
+        etTelephone2.addTextChangedListener(new SimpleTextWatcher(etTelephone2, outlineTelephone2));
+        tvRelation1.addTextChangedListener(new SimpleTextWatcher(tvRelation1, outlineRelation1));
+        tvRelation2.addTextChangedListener(new SimpleTextWatcher(tvRelation2, outlineRelation2));
     }
 
     @Override
@@ -153,8 +161,8 @@ public class ApplyThirdActivity extends BaseActivity {
         boolean hasError = false;
         String name1 = tvContactName1.getText().toString().trim();
         String name2 = tvContactName2.getText().toString().trim();
-        String phone1 = etTelephone1.getText().toString().replaceAll(" ","");
-        String phone2 = etTelephone2.getText().toString().replaceAll(" ","");
+        String phone1 = etTelephone1.getText().toString().replaceAll(" ", "");
+        String phone2 = etTelephone2.getText().toString().replaceAll(" ", "");
         String relation1 = tvRelation1.getText().toString();
         String relation2 = tvRelation2.getText().toString();
 
@@ -162,14 +170,14 @@ public class ApplyThirdActivity extends BaseActivity {
         if (TextUtils.isEmpty(relation1)) {
             outlineRelation1.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
-        }else {
+        } else {
             outlineRelation1.setErrorEnabled(false);
         }
 
         if (TextUtils.isEmpty(relation2)) {
             outlineRelation2.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
-        }else {
+        } else {
             outlineRelation2.setErrorEnabled(false);
         }
 
@@ -179,7 +187,7 @@ public class ApplyThirdActivity extends BaseActivity {
         } else if (EmojiFilter.containsEmoji(name1)) {
             outlineName1.setError(getResources().getString(R.string.text_only_letters_allowed));
             hasError = true;
-        }else {
+        } else {
             outlineName1.setErrorEnabled(false);
         }
 
@@ -189,7 +197,7 @@ public class ApplyThirdActivity extends BaseActivity {
         } else if (EmojiFilter.containsEmoji(name2)) {
             outlineName2.setError(getResources().getString(R.string.text_only_letters_allowed));
             hasError = true;
-        }else {
+        } else {
             outlineName2.setErrorEnabled(false);
         }
 
@@ -197,7 +205,7 @@ public class ApplyThirdActivity extends BaseActivity {
             phone1 = "";
             outlineTelephone1.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
-        }else {
+        } else {
             outlineTelephone1.setErrorEnabled(false);
         }
 
@@ -205,7 +213,7 @@ public class ApplyThirdActivity extends BaseActivity {
             phone2 = "";
             outlineTelephone2.setError(getResources().getString(R.string.text_pls_input));
             hasError = true;
-        }else {
+        } else {
             outlineTelephone2.setErrorEnabled(false);
         }
 
@@ -220,14 +228,14 @@ public class ApplyThirdActivity extends BaseActivity {
         if (phone1.equals(BaseApplication.sPhoneNum)) {
             outlineTelephone1.setError("Tidak boleh sama dengan nomor ponsel Anda");
             hasError = true;
-        }else {
+        } else {
             outlineTelephone1.setErrorEnabled(false);
         }
 
         if (phone2.equals(BaseApplication.sPhoneNum)) {
             outlineTelephone2.setError("Tidak boleh sama dengan nomor ponsel Anda");
             hasError = true;
-        }else {
+        } else {
             outlineTelephone2.setErrorEnabled(false);
         }
 
@@ -239,7 +247,7 @@ public class ApplyThirdActivity extends BaseActivity {
         }
 
         if (!hasError) {
-//            submit();
+            submit();
         }
     }
 
@@ -275,7 +283,7 @@ public class ApplyThirdActivity extends BaseActivity {
                         progressDialog.dismiss();
 
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            startActivity(ApplyFourActivity.createIntent(mContext));
+                            startActivity(ApplyPicInfoActivity.createIntent(mContext));
                             finishActivity();
                         }
                     }

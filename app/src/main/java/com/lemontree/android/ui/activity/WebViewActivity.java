@@ -113,9 +113,6 @@ public class WebViewActivity extends BaseActivity implements BridgeHandler {
 
     @Override
     protected void loadData() {
-        if (!isGetLocationPermission()) {
-            requestPermissions(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
     }
 
     private void initWebViewSetting() {

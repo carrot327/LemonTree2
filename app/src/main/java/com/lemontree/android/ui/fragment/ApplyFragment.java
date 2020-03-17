@@ -20,10 +20,10 @@ import com.lemontree.android.bean.response.BankcardListResponseBean;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
-import com.lemontree.android.ui.activity.ApplyFirstActivity;
-import com.lemontree.android.ui.activity.ApplyFourActivity;
-import com.lemontree.android.ui.activity.ApplySecondActivity;
-import com.lemontree.android.ui.activity.ApplyThirdActivity;
+import com.lemontree.android.ui.activity.ApplyBaseInfoActivity;
+import com.lemontree.android.ui.activity.ApplyCompanyInfoActivity;
+import com.lemontree.android.ui.activity.ApplyPicInfoActivity;
+import com.lemontree.android.ui.activity.ApplyContactInfoActivity;
 import com.lemontree.android.ui.activity.BankInfoActivity;
 import com.lemontree.android.ui.activity.InfoGetReadyActivity;
 import com.lemontree.android.ui.activity.StartLivenessActivity;
@@ -116,17 +116,19 @@ public class ApplyFragment extends BaseFragment {
             case R.id.rl_user_info:
                 if (mBaseStatus == 0) {
 //                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
-                    startActivity(ApplyFirstActivity.createIntent(mContext));
+                    startActivity(ApplyBaseInfoActivity.createIntent(mContext));
 
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
+//                startActivity(ApplyBaseInfoActivity.createIntent(mContext));
+
                 break;
             case R.id.rl_company_info:
                 if (mBaseStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_1));
                 } else if (mCompanyStatus == 0) {
-                    startActivity(ApplySecondActivity.createIntent(mContext));
+                    startActivity(ApplyCompanyInfoActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
@@ -137,10 +139,11 @@ public class ApplyFragment extends BaseFragment {
                 } else if (mCompanyStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_2));
                 } else if (mRelationStatus == 0) {
-                    startActivity(ApplyThirdActivity.createIntent(mContext));
+                    startActivity(ApplyContactInfoActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
+//                startActivity(ApplyContactInfoActivity.createIntent(mContext));
                 break;
             case R.id.rl_photo:
                 if (mBaseStatus == 0) {
@@ -150,10 +153,12 @@ public class ApplyFragment extends BaseFragment {
                 } else if (mRelationStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_3));
                 } else if (mOcrStatus == 0) {
-                    startActivity(ApplyFourActivity.createIntent(mContext));
+                    startActivity(ApplyPicInfoActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
                 }
+//                startActivity(ApplyPicInfoActivity.createIntent(mContext));
+
                 break;
             case R.id.btn_confirm:
                 // 检查顺序：银行卡-》活体-》信息确认

@@ -5,11 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.appcompat.widget.PopupMenu;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -21,6 +26,7 @@ import com.lemontree.android.bean.request.BasicInfoReqBean;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
+import com.lemontree.android.ui.widget.SimpleTextWatcher;
 import com.lemontree.android.uploadUtil.Tools;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
@@ -30,16 +36,16 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-public class ApplyFirstActivity extends BaseActivity {
+public class ApplyBaseInfoActivity extends BaseActivity {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
     @BindView(R.id.textInputEditText_Name)
-    TextInputEditText textInputEditTextName;
+    TextInputEditText etName;
     @BindView(R.id.textInputEditText_KTP)
-    TextInputEditText textInputEditTextKTP;
+    TextInputEditText etKTP;
     @BindView(R.id.dropdown_tv_gender)
-    AutoCompleteTextView dropdownTvGender;
+    AutoCompleteTextView dropTvGender;
     @BindView(R.id.dropdown_tv_education)
     AutoCompleteTextView dropdownTvEducation;
     @BindView(R.id.dropdown_tv_marry_state)
@@ -68,10 +74,12 @@ public class ApplyFirstActivity extends BaseActivity {
 
     private View.OnClickListener drapdownListener;
     private ProgressDialog mProgressDialog;
+    private TextWatcher textWatcher;
+    private boolean mHasError;
 
 
     public static Intent createIntent(Context context) {
-        return new Intent(context, ApplyFirstActivity.class);
+        return new Intent(context, ApplyBaseInfoActivity.class);
     }
 
     @Override
@@ -86,18 +94,26 @@ public class ApplyFirstActivity extends BaseActivity {
         String[] MARRY_STATE = getResources().getStringArray(R.array.marital_status);
         String[] CHILDREN_NUMBER = getResources().getStringArray(R.array.number_of_children);
 
-        dropdownTvGender.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, GENDER));
+        dropTvGender.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, GENDER));
         dropdownTvEducation.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, EDUCATION));
         dropdownTvMarryState.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, MARRY_STATE));
         dropdownTvChildrenNumber.setAdapter(new ArrayAdapter<>(mContext, R.layout.dropdown_menu_popup_item, CHILDREN_NUMBER));
 
         drapdownListener = v -> Tools.hideInput(mContext, v);
-        dropdownTvGender.setOnClickListener(drapdownListener);
+        dropTvGender.setOnClickListener(drapdownListener);
         dropdownTvEducation.setOnClickListener(drapdownListener);
         dropdownTvMarryState.setOnClickListener(drapdownListener);
         dropdownTvChildrenNumber.setOnClickListener(drapdownListener);
 
+        etName.addTextChangedListener(new SimpleTextWatcher(etName, outlineName));
+        etKTP.addTextChangedListener(new SimpleTextWatcher(etKTP, outlineKTP));
+        dropTvGender.addTextChangedListener(new SimpleTextWatcher(dropTvGender, outlineGender));
+        dropdownTvEducation.addTextChangedListener(new SimpleTextWatcher(dropdownTvEducation, outlineEducation));
+        dropdownTvMarryState.addTextChangedListener(new SimpleTextWatcher(dropdownTvMarryState, outlineMarryState));
+        dropdownTvChildrenNumber.addTextChangedListener(new SimpleTextWatcher(dropdownTvChildrenNumber, outlineChildrenNumber));
+        textInputEditTextDetailAddress.addTextChangedListener(new SimpleTextWatcher(textInputEditTextDetailAddress, outlineDetailAddress));
     }
+
 
     @Override
     protected void loadData() {
@@ -123,58 +139,30 @@ public class ApplyFirstActivity extends BaseActivity {
     }
 
     private void checkContent() {
-        boolean hasError = false;
-        if (TextUtils.isEmpty(textInputEditTextName.getText().toString())) {
-            outlineName.setError(getResources().getString(R.string.text_pls_input));
-            hasError = true;
-        } else {
-            outlineName.setErrorEnabled(false);
-        }
-
-        if (TextUtils.isEmpty(textInputEditTextKTP.getText().toString())) {
-            outlineKTP.setError(getResources().getString(R.string.text_pls_input));
-            hasError = true;
-        } else {
-            outlineKTP.setErrorEnabled(false);
-        }
-
-        if (TextUtils.isEmpty(textInputEditTextDetailAddress.getText().toString())) {
-            outlineDetailAddress.setError(getResources().getString(R.string.text_pls_input));
-            hasError = true;
-        } else {
-            outlineDetailAddress.setErrorEnabled(false);
-        }
-
-        if (TextUtils.isEmpty(dropdownTvGender.getText().toString())) {
-            outlineGender.setError(getResources().getString(R.string.text_pls_input));
-            hasError = true;
-        } else {
-            outlineGender.setErrorEnabled(false);
-        }
-
-        if (TextUtils.isEmpty(dropdownTvEducation.getText().toString())) {
-            outlineEducation.setError(getResources().getString(R.string.text_pls_input));
-            hasError = true;
-        } else {
-            outlineEducation.setErrorEnabled(false);
-        }
-
-        if (TextUtils.isEmpty(dropdownTvMarryState.getText().toString())) {
-            outlineMarryState.setError(getResources().getString(R.string.text_pls_input));
-            hasError = true;
-        } else {
-            outlineMarryState.setErrorEnabled(false);
-        }
-
-        if (TextUtils.isEmpty(dropdownTvChildrenNumber.getText().toString())) {
-            outlineChildrenNumber.setError(getResources().getString(R.string.text_pls_input));
-            hasError = true;
-        } else {
-            outlineChildrenNumber.setErrorEnabled(false);
-        }
-
-        if (!hasError) {
+        mHasError = false;
+        doCheck(etName, outlineName);
+        doCheck(etKTP, outlineKTP);
+        doCheck(dropTvGender, outlineGender);
+        doCheck(dropdownTvEducation, outlineEducation);
+        doCheck(dropdownTvMarryState, outlineMarryState);
+        doCheck(dropdownTvChildrenNumber, outlineChildrenNumber);
+        doCheck(textInputEditTextDetailAddress, outlineDetailAddress);
+        if (!mHasError) {
             submit();
+        }
+    }
+
+    private void doCheck(TextInputEditText et, TextInputLayout outline) {
+        if (TextUtils.isEmpty(et.getText().toString())) {
+            outline.setError(getResources().getString(R.string.text_pls_input));
+            mHasError = true;
+        }
+    }
+
+    private void doCheck(AutoCompleteTextView autoEt, TextInputLayout outline) {
+        if (TextUtils.isEmpty(autoEt.getText().toString())) {
+            outline.setError(getResources().getString(R.string.text_pls_input));
+            mHasError = true;
         }
     }
 
@@ -183,9 +171,9 @@ public class ApplyFirstActivity extends BaseActivity {
         mProgressDialog.setMessage("Memuat...");
         mProgressDialog.show();
         BasicInfoReqBean basicInfoReqBean = new BasicInfoReqBean();
-        basicInfoReqBean.customer_name = textInputEditTextName.getText().toString();
-        basicInfoReqBean.id_card_no = textInputEditTextKTP.getText().toString();
-        basicInfoReqBean.sex = dropdownTvGender.getText().toString();
+        basicInfoReqBean.customer_name = etName.getText().toString();
+        basicInfoReqBean.id_card_no = etKTP.getText().toString();
+        basicInfoReqBean.sex = dropTvGender.getText().toString();
         basicInfoReqBean.education = dropdownTvEducation.getText().toString();
         basicInfoReqBean.marriage_condition = dropdownTvMarryState.getText().toString();
         basicInfoReqBean.children_count = dropdownTvChildrenNumber.getText().toString().trim();
@@ -202,7 +190,7 @@ public class ApplyFirstActivity extends BaseActivity {
                         mProgressDialog.dismiss();
                         if (response != null) {
                             if (BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                                startActivity(ApplySecondActivity.createIntent(mContext));
+                                startActivity(ApplyCompanyInfoActivity.createIntent(mContext));
                                 finishActivity();
                             } else {
                                 showToast(response.res_msg);
@@ -216,5 +204,17 @@ public class ApplyFirstActivity extends BaseActivity {
                     }
                 });
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.custom_menu, menu);
+        return true;
+    }
 
+    public boolean showMenu(View anchor) {
+        PopupMenu popup = new PopupMenu(this, anchor);
+        popup.getMenuInflater().inflate(R.menu.custom_menu, popup.getMenu());
+        popup.show();
+        return true;
+    }
 }

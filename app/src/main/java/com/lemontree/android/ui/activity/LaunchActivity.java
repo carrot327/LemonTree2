@@ -36,16 +36,16 @@ public class LaunchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         new Handler().postDelayed(() -> {
             startActivity(MainActivity.createIntent(mContext));
-//            startActivity(ApplyFirstActivity.createIntent(mContext));
-//            startActivity(ApplySecondActivity.createIntent(mContext));
-//            startActivity(ApplyThirdActivity.createIntent(mContext));
-//            startActivity(ApplyFourActivity.createIntent(mContext));
+//            startActivity(ApplyBaseInfoActivity.createIntent(mContext));
+//            startActivity(ApplyCompanyInfoActivity.createIntent(mContext));
+//            startActivity(ApplyContactInfoActivity.createIntent(mContext));
+//            startActivity(ApplyPicInfoActivity.createIntent(mContext));
 //            startActivity(InfoGetReadyActivity.createIntent(mContext));
 
             finish();
         }, 100);
 
-//        startActivity(ApplyFirstActivity.createIntent(mContext));
+//        startActivity(ApplyBaseInfoActivity.createIntent(mContext));
 
 
     }

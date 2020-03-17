@@ -48,7 +48,7 @@ import butterknife.OnClick;
 import static com.lemontree.android.manager.BaseApplication.mHasShowHoldPicExample;
 import static com.lemontree.android.manager.BaseApplication.mHasShowPicExample;
 
-public class ApplyFourActivity extends BaseActivity {
+public class ApplyPicInfoActivity extends BaseActivity {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -110,7 +110,7 @@ public class ApplyFourActivity extends BaseActivity {
     File mFile;
 
     public static Intent createIntent(Context context) {
-        return new Intent(context, ApplyFourActivity.class);
+        return new Intent(context, ApplyPicInfoActivity.class);
     }
 
     @Override
@@ -365,14 +365,14 @@ public class ApplyFourActivity extends BaseActivity {
             if (options <= 0)
                 break;
             long length = baos.toByteArray().length;
-            Log.d("ApplyFourActivity", "length:" + length);
+            Log.d("ApplyPicInfoActivity", "length:" + length);
 
         }
         ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据输出流存放到输入流中
         Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把输入流数据生成图片
 
         mFile = new File(BaseApplication.getContext().getExternalFilesDir(null), Tools.getFileNameByTime() + ".jpg");
-        Log.d("ApplyFourActivity", "BaseApplication.getContext().getExternalFilesDir(null):" + BaseApplication.getContext().getExternalFilesDir(null));
+        Log.d("ApplyPicInfoActivity", "BaseApplication.getContext().getExternalFilesDir(null):" + BaseApplication.getContext().getExternalFilesDir(null));
         try {
             FileOutputStream fos = new FileOutputStream(mFile);
             try {
@@ -385,7 +385,7 @@ public class ApplyFourActivity extends BaseActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        Log.d("ApplyFourActivity", "mFile.length():" + mFile.length());
+        Log.d("ApplyPicInfoActivity", "mFile.length():" + mFile.length());
         return bitmap;
     }
 
@@ -400,23 +400,31 @@ public class ApplyFourActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_confirm:
-                uploadAllImg();
+                if (checkImg()) {
+                    uploadAllImg();
+                }
                 break;
             case R.id.iv_pick_ktp:
-                if (mHasShowPicExample){
+                if (mHasShowPicExample) {
                     goPhotoAlbum(ALBUM_REQUEST_CODE);
-                }else {
-                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_example).show();
+                } else {
+                    DialogFactory.createExamplePicDialog(mContext, R.drawable.icon_sfz_example, (dialog, view1) -> {
+                        goPhotoAlbum(ALBUM_REQUEST_CODE);
+                        dialog.dismiss();
+                    }).show();
                     mHasShowPicExample = true;
                 }
                 mClickItemName = FLAG_KTP1;
                 break;
             case R.id.iv_pick_hold_ktp:
-                if (mHasShowPicExample){
+                if (mHasShowHoldPicExample) {
                     goPhotoAlbum(ALBUM_REQUEST_CODE);
-                }else {
-                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_example).show();
-                    mHasShowPicExample = true;
+                } else {
+                    DialogFactory.createExamplePicDialog(mContext, R.drawable.icon_sfz_hold_example, (dialog, view12) -> {
+                        goPhotoAlbum(ALBUM_REQUEST_CODE);
+                        dialog.dismiss();
+                    }).show();
+                    mHasShowHoldPicExample = true;
                 }
                 mClickItemName = FLAG_KTP_HOLD2;
                 break;
@@ -439,19 +447,25 @@ public class ApplyFourActivity extends BaseActivity {
 
 
             case R.id.iv_take_photo_ktp:
-                if (mHasShowPicExample){
+                if (mHasShowPicExample) {
                     goCamera(CAMERA_REQUEST_CODE);
-                }else {
-                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_example).show();
+                } else {
+                    DialogFactory.createExamplePicDialog(mContext, R.drawable.icon_sfz_example, (dialog, view13) -> {
+                        goCamera(CAMERA_REQUEST_CODE);
+                        dialog.dismiss();
+                    }).show();
                     mHasShowPicExample = true;
                 }
                 mClickItemName = FLAG_KTP1;
                 break;
             case R.id.iv_take_photo_hold_ktp:
-                if (mHasShowHoldPicExample){
+                if (mHasShowHoldPicExample) {
                     goCamera(CAMERA_REQUEST_CODE);
-                }else {
-                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_hold_example).show();
+                } else {
+                    DialogFactory.createExamplePicDialog(mContext, R.drawable.icon_sfz_hold_example, (dialog, view14) -> {
+                        goCamera(CAMERA_REQUEST_CODE);
+                        dialog.dismiss();
+                    }).show();
                     mHasShowHoldPicExample = true;
                 }
                 mClickItemName = FLAG_KTP_HOLD2;
@@ -475,8 +489,8 @@ public class ApplyFourActivity extends BaseActivity {
             case R.id.iv_show_ktp:
                 if (ivShowKtp.getDrawable() != null) {
                     DialogFactory.showImgByDrawable(mContext, ivShowKtp.getDrawable()).show();
-//                    Log.d("ApplyFourActivity", "ivShowKtp.getHeight():" + ivShowKtp.getHeight());
-//                    Log.d("ApplyFourActivity", "ivShowKtp.getWidth():" + ivShowKtp.getWidth());
+//                    Log.d("ApplyPicInfoActivity", "ivShowKtp.getHeight():" + ivShowKtp.getHeight());
+//                    Log.d("ApplyPicInfoActivity", "ivShowKtp.getWidth():" + ivShowKtp.getWidth());
                 }
                 break;
             case R.id.iv_show_hold_ktp:
@@ -505,5 +519,13 @@ public class ApplyFourActivity extends BaseActivity {
                 }
                 break;
         }
+    }
+
+    private boolean checkImg() {
+        if (ivShowKtp.getDrawable() == null || ivShowHoldKtp.getDrawable() == null) {
+            showToast("Unggah foto yang terkait dengan KTP");
+            return false;
+        }
+        return true;
     }
 }

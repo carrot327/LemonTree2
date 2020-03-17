@@ -24,6 +24,7 @@ import com.lemontree.android.bean.request.WorkInfoReqBean;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
+import com.lemontree.android.ui.widget.SimpleTextWatcher;
 import com.lemontree.android.uploadUtil.Tools;
 import com.networklite.NetworkLiteHelper;
 import com.networklite.callback.GenericCallback;
@@ -33,7 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
 
-public class ApplySecondActivity extends BaseActivity {
+public class ApplyCompanyInfoActivity extends BaseActivity {
 
     @BindView(R.id.iv_back)
     ImageView ivBack;
@@ -63,7 +64,7 @@ public class ApplySecondActivity extends BaseActivity {
     private View.OnClickListener drapdownListener;
 
     public static Intent createIntent(Context context) {
-        return new Intent(context, ApplySecondActivity.class);
+        return new Intent(context, ApplyCompanyInfoActivity.class);
     }
 
     @Override
@@ -82,6 +83,13 @@ public class ApplySecondActivity extends BaseActivity {
         drapdownListener = v -> Tools.hideInput(mContext, v);
         tvWorkCategory.setOnClickListener(drapdownListener);
         tvSalaryRange.setOnClickListener(drapdownListener);
+
+
+        tvWorkCategory.addTextChangedListener(new SimpleTextWatcher(tvWorkCategory, outlineWorkCategory));
+        tvSalaryRange.addTextChangedListener(new SimpleTextWatcher(tvSalaryRange, outlineSalaryRange));
+        etCompanyName.addTextChangedListener(new SimpleTextWatcher(etCompanyName, outlineCompanyName));
+        etCompanyAddress.addTextChangedListener(new SimpleTextWatcher(etCompanyAddress, outlineCompanyAddress));
+        etCompanyPhone.addTextChangedListener(new SimpleTextWatcher(etCompanyPhone, outlineCompanyPhone));
     }
 
     @Override
@@ -171,7 +179,7 @@ public class ApplySecondActivity extends BaseActivity {
                         progressDialog.dismiss();
 
                         if (response != null && BaseResponseBean.SUCCESS.equals(response.res_code)) {
-                            startActivity(ApplyThirdActivity.createIntent(mContext));
+                            startActivity(ApplyContactInfoActivity.createIntent(mContext));
                             finishActivity();
                         }
                     }

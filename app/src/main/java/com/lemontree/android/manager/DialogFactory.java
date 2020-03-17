@@ -351,11 +351,12 @@ public class DialogFactory {
      * @param context
      * @return
      */
-    public static Dialog createExamplePicDialog(final Context context, int res) {
+    public static Dialog createExamplePicDialog(final Context context, int res,PicExampleDialog.CloseListener listener) {
         PicExampleDialog dialog = new PicExampleDialog(context, res, new PicExampleDialog.CloseListener() {
             @Override
             public void close(Dialog dialog, View view) {
-                dialog.dismiss();
+                listener.close(dialog,view);
+//                dialog.dismiss();
             }
         });
         Window dialogWindow = dialog.getWindow();
