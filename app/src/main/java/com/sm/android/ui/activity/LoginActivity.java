@@ -154,7 +154,7 @@ public class LoginActivity extends BaseActivity {
             Window window = mContext.getWindow();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(mContext.getResources().getColor(R.color.white));
+            window.setStatusBarColor(mContext.getResources().getColor(R.color.theme_color));
         }
     }
 
