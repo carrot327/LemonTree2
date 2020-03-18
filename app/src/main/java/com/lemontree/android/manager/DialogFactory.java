@@ -356,7 +356,6 @@ public class DialogFactory {
             @Override
             public void close(Dialog dialog, View view) {
                 listener.close(dialog,view);
-//                dialog.dismiss();
             }
         });
         Window dialogWindow = dialog.getWindow();

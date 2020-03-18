@@ -246,6 +246,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             @Override
             public boolean onLongClick(View v) {
                 if (BuildConfig.DEBUG) {
+
 //                    startActivity(InfoGetReadyActivity.createIntent(mContext));
 
 //                    DialogFactory.createExamplePicDialog(mContext,R.drawable.icon_sfz_example).show();
@@ -646,7 +647,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
 
     private void showPayWayDialog(String from, String[] payWayList) {
         if (payWayList != null && payWayList.length > 0) {
-            DialogFactory.payWaySelectMaterialDialog(mContext, getResources().getString(R.string.text_refresh_and_try_again), payWayList, from, "").show();
+            DialogFactory.payWaySelectMaterialDialog(mContext, "Silakan pilih metode pembayaran", payWayList, from, "").show();
         } else {
             showToast(getResources().getString(R.string.toast_text_refresh));
         }
@@ -814,7 +815,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     @Override
     public void showExtendPageData(GetExtendFeeResBean data) {
-        tvDelayTime.setText(data.extendDays);
+        tvDelayTime.setText("+ " + data.extendDays);
         tvPayDeadlineDelay.setText(MyTimeUtils.timeStamp2Date(data.shouldReturnTime));
         tvDelayInterest.setText(String.format("Rp.%s", formatNumber(Integer.parseInt(data.extendFee))));
     }

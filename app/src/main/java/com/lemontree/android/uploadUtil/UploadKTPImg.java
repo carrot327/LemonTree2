@@ -3,6 +3,7 @@ package com.lemontree.android.uploadUtil;
 import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
+import com.lemontree.android.utils.ToastUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,10 +34,11 @@ public class UploadKTPImg {
                 .addFormDataPart("user_id", BaseApplication.mUserId)
                 .addFormDataPart("app_version", Tools.getAppVersion())
                 .addFormDataPart("app_name", Tools.getAppName())
+                .addFormDataPart("phone", BaseApplication.sPhoneNum)
                 .addFormDataPart("app_clientid", Tools.getChannel());
 
         if (imgMap.containsKey("KTP1")) {
-            builder.addFormDataPart("kpt_pre_file", "kpt_pre_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("KTP1")));
+            builder.addFormDataPart("orc_rec_file", "orc_rec_file.jpg", RequestBody.create(MediaType.parse("image/jpeg"), imgMap.get("KTP1")));
         }
 
         RequestBody requestBody = builder.build();
@@ -58,11 +60,15 @@ public class UploadKTPImg {
 
                 try {
                     JSONObject obj = new JSONObject(response.body().string());
-                    if (obj.optString("res_code").equals("0000")) {
-
+                    String resCode = obj.optString("code");
+                    if (resCode.equals("SUCCESS")) {
                         mListener.success();
                     } else {
-
+                        if (resCode.equals("IMAGE_INVALID_SIZE")) {
+                            ToastUtils.showToast("Ukuran foto terlalu besar");
+                        } else if (resCode.equals("OCR_NO_RESULT")) {
+                            ToastUtils.showToast("Ktp tidak dikenali");
+                        }
                         mListener.error();
                     }
                 } catch (JSONException e) {

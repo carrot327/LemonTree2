@@ -7,8 +7,8 @@
     android:paddingBottom="40dp">
 
     <RelativeLayout
-        android:layout_width="217dp"
-        android:layout_height="217dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/bg_circle_red">
 
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="14dp"
         android:orientation="horizontal">
 

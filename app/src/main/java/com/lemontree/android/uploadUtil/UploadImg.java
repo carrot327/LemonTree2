@@ -49,6 +49,7 @@ public class UploadImg {
                 .addFormDataPart("app_name", Tools.getAppName())
                 .addFormDataPart("app_clientid", Tools.getChannel())
                 .addFormDataPart("pre_score", "1")
+                .addFormDataPart("phone", BaseApplication.sPhoneNum)
                 .addFormDataPart("try_count", failedCount + 1 + "")
                 .addFormDataPart("face_rec_file", "liveness.jpg",
                         RequestBody.create(MediaType.parse("image/jpeg"), file));
@@ -130,6 +131,7 @@ public class UploadImg {
                         .addFormDataPart("user_id", BaseApplication.mUserId)
                         .addFormDataPart("app_version", Tools.getAppVersion())
                         .addFormDataPart("app_name", Tools.getAppName())
+                        .addFormDataPart("phone", BaseApplication.sPhoneNum)
                         .addFormDataPart("app_clientid", Tools.getChannel())
                         .addFormDataPart("face_rec_file", "liveness_file_encrypt",
                                 RequestBody.create(MediaType.parse("image/jpeg"), file)).build())

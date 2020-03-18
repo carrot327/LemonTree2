@@ -232,8 +232,7 @@ public class ApplyPicInfoActivity extends BaseActivity {
         switch (mClickItemName) {
             case FLAG_KTP1:
                 imgMap.put("KTP1", file);
-                // TODO: 2020-03-13
-//                checkOCR();
+                checkOCR();
                 break;
             case FLAG_KTP_HOLD2:
                 imgMap.put("KTP_HOLD2", file);
@@ -275,10 +274,8 @@ public class ApplyPicInfoActivity extends BaseActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    //do nothing
                     break;
                 case 2:
-                    showToast("ktp can't find");
                     ivShowKtp.setImageBitmap(null);
                     break;
             }
