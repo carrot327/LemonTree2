@@ -19,7 +19,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <application
-        android:name="com.lemontree.android.manager.BaseApplication"
+        android:name=".manager.BaseApplication"
         android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,19 +30,19 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
+        <activity android:name=".ui.activity.PayCodeActivity"></activity>
 
         <meta-data
             android:name="ANDROID_CHANNEL"
             android:value="${ANDROID_CHANNEL_VALUE}" />
 
-
-        <activity android:name="com.lemontree.android.ui.activity.PartPayActivity" />
-        <activity android:name="com.lemontree.android.ui.activity.LivenessFailedActivity" />
-        <activity android:name="com.lemontree.android.ui.activity.LivenessSuccessActivity" />
-        <activity android:name="com.lemontree.android.ui.activity.StartLivenessActivity" />
-        <activity android:name="com.lemontree.android.ui.activity.TestActivity" />
+        <activity android:name=".ui.activity.PartPayActivity" />
+        <activity android:name=".ui.activity.LivenessFailedActivity" />
+        <activity android:name=".ui.activity.LivenessSuccessActivity" />
+        <activity android:name=".ui.activity.StartLivenessActivity" />
+        <activity android:name=".ui.activity.TestActivity" />
         <activity
-            android:name="com.lemontree.android.ui.activity.LaunchActivity"
+            android:name=".ui.activity.LaunchActivity"
             android:hardwareAccelerated="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,23 +51,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.lemontree.android.ui.activity.MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:hardwareAccelerated="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|stateUnchanged" />
         <activity
-            android:name="com.lemontree.android.ui.activity.LoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.lemontree.android.ui.activity.SettingActivity"
+            android:name=".ui.activity.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lemontree.android.ui.activity.AboutUsActivity"
+            android:name=".ui.activity.AboutUsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lemontree.android.ui.activity.WebViewActivity"
+            android:name=".ui.activity.WebViewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
@@ -81,61 +81,59 @@
             -->
         </activity>
         <activity
-            android:name="com.lemontree.android.ui.activity.FeedbackActivity"
+            android:name=".ui.activity.FeedbackActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.lemontree.android.ui.activity.ProtocolPrivacyPolicyActivity"
+            android:name=".ui.activity.ProtocolPrivacyPolicyActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lemontree.android.ui.activity.ProtocolRegisterActivity"
+            android:name=".ui.activity.ProtocolRegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lemontree.android.ui.activity.ProtocolBorrowActivity"
+            android:name=".ui.activity.ProtocolBorrowActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lemontree.android.ui.activity.BorrowRecordActivity"
+            android:name=".ui.activity.BorrowRecordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lemontree.android.ui.activity.BankCardManageActivity"
+            android:name=".ui.activity.BankCardManageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lemontree.android.ui.activity.ProductDetailActivity"
+            android:name=".ui.activity.ProductDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.lemontree.android.ui.activity.ApplyBaseInfoActivity"
+            android:name=".ui.activity.ApplyBaseInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.lemontree.android.ui.activity.ApplyCompanyInfoActivity"
+            android:name=".ui.activity.ApplyCompanyInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.lemontree.android.ui.activity.ApplyContactInfoActivity"
+            android:name=".ui.activity.ApplyContactInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.lemontree.android.ui.activity.ApplyPicInfoActivity"
+            android:name=".ui.activity.ApplyPicInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.lemontree.android.ui.activity.BankInfoActivity"
+            android:name=".ui.activity.BankInfoActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.lemontree.android.ui.activity.InfoGetReadyActivity"
+            android:name=".ui.activity.InfoGetReadyActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
         <service
-            android:name="com.lemontree.android.service.MyFirebaseMessagingService"
+            android:name=".service.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-        <!-- 解决7.0照相机崩溃问题 -->
+        </service> <!-- 解决7.0照相机崩溃问题 -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"

@@ -35,13 +35,12 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Handler().postDelayed(() -> {
-            startActivity(MainActivity.createIntent(mContext));
+            startActivity(PayCodeActivity.createIntent(mContext));
 //            startActivity(ApplyBaseInfoActivity.createIntent(mContext));
 //            startActivity(ApplyCompanyInfoActivity.createIntent(mContext));
 //            startActivity(ApplyContactInfoActivity.createIntent(mContext));
 //            startActivity(ApplyPicInfoActivity.createIntent(mContext));
 //            startActivity(InfoGetReadyActivity.createIntent(mContext));
-
             finish();
         }, 100);
 
