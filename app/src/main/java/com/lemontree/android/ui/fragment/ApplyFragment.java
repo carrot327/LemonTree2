@@ -22,8 +22,8 @@ import com.lemontree.android.manager.NetConstantValue;
 import com.lemontree.android.network.OKHttpClientEngine;
 import com.lemontree.android.ui.activity.ApplyBaseInfoActivity;
 import com.lemontree.android.ui.activity.ApplyCompanyInfoActivity;
-import com.lemontree.android.ui.activity.ApplyPicInfoActivity;
 import com.lemontree.android.ui.activity.ApplyContactInfoActivity;
+import com.lemontree.android.ui.activity.ApplyPicInfoActivity;
 import com.lemontree.android.ui.activity.BankInfoActivity;
 import com.lemontree.android.ui.activity.InfoGetReadyActivity;
 import com.lemontree.android.ui.activity.StartLivenessActivity;
@@ -114,27 +114,28 @@ public class ApplyFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_user_info:
-                if (mBaseStatus == 0) {
+              /*  if (mBaseStatus == 0) {
 //                    IntentUtils.openWebViewActivity(mContext, UrlHostConfig.H5_USER_INFO());
                     startActivity(ApplyBaseInfoActivity.createIntent(mContext));
 
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
-                }
-//                startActivity(ApplyBaseInfoActivity.createIntent(mContext));
+                }*/
+                startActivity(ApplyBaseInfoActivity.createIntent(mContext));
 
                 break;
             case R.id.rl_company_info:
-                if (mBaseStatus == 0) {
+               /* if (mBaseStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_1));
                 } else if (mCompanyStatus == 0) {
                     startActivity(ApplyCompanyInfoActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
-                }
+                }*/
+                startActivity(ApplyCompanyInfoActivity.createIntent(mContext));
                 break;
             case R.id.rl_contact_info:
-                if (mBaseStatus == 0) {
+               /* if (mBaseStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_1));
                 } else if (mCompanyStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_2));
@@ -142,11 +143,11 @@ public class ApplyFragment extends BaseFragment {
                     startActivity(ApplyContactInfoActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
-                }
-//                startActivity(ApplyContactInfoActivity.createIntent(mContext));
+                }*/
+                startActivity(ApplyContactInfoActivity.createIntent(mContext));
                 break;
             case R.id.rl_photo:
-                if (mBaseStatus == 0) {
+               /* if (mBaseStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_1));
                 } else if (mCompanyStatus == 0) {
                     showToast(getString(R.string.apply_toast_text_2));
@@ -156,8 +157,8 @@ public class ApplyFragment extends BaseFragment {
                     startActivity(ApplyPicInfoActivity.createIntent(mContext));
                 } else {
                     showToast(getString(R.string.apply_toast_text_has_done));
-                }
-//                startActivity(ApplyPicInfoActivity.createIntent(mContext));
+                }*/
+                startActivity(ApplyPicInfoActivity.createIntent(mContext));
 
                 break;
             case R.id.btn_confirm:

@@ -159,10 +159,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     LinearLayout applyInfoPage;
     @BindView(R.id.include_home_borrow_loan_info)
     LinearLayout loanInfoPage;
-    @BindView(R.id.ll_borrow_protocol)
-    LinearLayout llBorrowProtocol;
-    @BindView(R.id.tv_borrow_protocol)
-    TextView tvBorrowProtocol;
+//    @BindView(R.id.ll_borrow_protocol)
+//    LinearLayout llBorrowProtocol;
+//    @BindView(R.id.tv_borrow_protocol)
+//    TextView tvBorrowProtocol;
     @BindView(R.id.ll_part_pay)
     LinearLayout llPartPayEntry;
     @BindView(R.id.ll_delay_pay_entry)
@@ -238,9 +238,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         mSeekBarTime.setProgress(mSelectTime);
         mSbIndicatorTime.setText(mSelectTime + " hari");
         calcInterest();
-
-        tvPartPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-        tvDelayPayEntry.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         btnHome.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -324,7 +321,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         }
     }
 
-    @OnClick({R.id.iv_titlebar_right, R.id.iv_home_back, R.id.btn_home, R.id.ll_delay_pay_entry, R.id.tv_borrow_protocol, R.id.ll_part_pay, R.id.rl_coupon, R.id.rl_coupon_borrow})
+    @OnClick({R.id.iv_titlebar_right, R.id.iv_home_back, R.id.btn_home, R.id.ll_delay_pay_entry, R.id.ll_part_pay, R.id.rl_coupon, R.id.rl_coupon_borrow})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_home_back:
@@ -358,11 +355,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 intent.putExtra("payWayArr", mPayWayList);
                 startActivity(intent);
                 break;
-            case R.id.tv_borrow_protocol:
-                startActivity(new Intent(mContext, ProtocolBorrowActivity.class));
-                break;
             case R.id.rl_coupon:
-                if (mCouponData != null && "1".equals(mCouponData.couponStatus)) {
+                if (mCouponData != null && "1".equals(mCouponData.couponStatus) && Integer.valueOf(mCouponData.couponCutAmount) > 0) {
                     DialogFactory.createSelectCouponDialog(mContext, tvCoupon, tvFinalPayAmount, mOriginPayAmount, mAfterCutAmount, mCouponData).show();
                 } else {//0 未激活  2已使用   或逾期
                     DialogFactory.createNoticeDialog(mContext, "Jika anda bisa bayarkan pinjaman anda sebelum tanggal jatuh tempo, anda akan mendapatkan kupon diskon untuk pembayaran pinjaman berikutnya. Dan limit pinjaman anda juga akan naik.").show();
@@ -707,13 +701,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         extendPage.setVisibility(View.GONE);
         mRefreshLayout.setEnableRefresh(true);
         btnTitleBarBack.setVisibility(View.GONE);
-        llBorrowProtocol.setVisibility(View.INVISIBLE);
+//        llBorrowProtocol.setVisibility(View.INVISIBLE);
 
         if (VIEW_SEEK_BAR.equals(contentView)) {
             includeSeekBar.setVisibility(View.VISIBLE);
         } else if (VIEW_BORROW.equals(contentView)) {
             includeBorrow.setVisibility(View.VISIBLE);
-            llBorrowProtocol.setVisibility(View.INVISIBLE);//暂时隐藏
+//            llBorrowProtocol.setVisibility(View.INVISIBLE);//暂时隐藏
         } else if (VIEW_PAY_AT_TIME.equals(contentView)) {
             includePayAtTime.setVisibility(View.VISIBLE);
         } else if (VIEW_PAY_EXTENT.equals(contentView)) {
@@ -1076,21 +1070,26 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     @Override
     public void setTextBanner(List<String> noticeList, List<String> urlList) {
         mUrlList = urlList;
-        textBanner.post(() -> {
-            if (noticeList.size() == 0) {
-                textBanner.setItemOnClickListener(null);
-            } else {
-                textBanner.setItemOnClickListener((data, position) -> {
-                    if (mUrlList != null && !mUrlList.isEmpty()) {
-                        String url = mUrlList.get(position);
-                        if (!TextUtils.isEmpty(url)) {
-                            IntentUtils.openWebViewActivity(mContext, url);
+        if (mUrlList.size() == 0) {
+            textBanner.setVisibility(View.GONE);
+        } else {
+            textBanner.setVisibility(View.VISIBLE);
+            textBanner.post(() -> {
+                if (noticeList.size() == 0) {
+                    textBanner.setItemOnClickListener(null);
+                } else {
+                    textBanner.setItemOnClickListener((data, position) -> {
+                        if (mUrlList != null && !mUrlList.isEmpty()) {
+                            String url = mUrlList.get(position);
+                            if (!TextUtils.isEmpty(url)) {
+                                IntentUtils.openWebViewActivity(mContext, url);
+                            }
                         }
-                    }
-                });
-            }
-            textBanner.setDatas(noticeList);
-        });
+                    });
+                }
+                textBanner.setDatas(noticeList);
+            });
+        }
     }
 
 }

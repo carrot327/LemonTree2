@@ -30,7 +30,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".ui.activity.PayCodeActivity"></activity>
+        <activity android:name=".ui.activity.PayActivity"></activity>
 
         <meta-data
             android:name="ANDROID_CHANNEL"

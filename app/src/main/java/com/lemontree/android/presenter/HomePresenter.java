@@ -77,13 +77,13 @@ public class HomePresenter extends BasePresenter<IHomeView> {
 
         //获取首页公告通知
 //        getHomeNoticeList();
-        List<String> noticeList = new ArrayList<>();
+       /* List<String> noticeList = new ArrayList<>();
         List<String> urlList = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             noticeList.add("title_Jika Anda membayar sebelum tanggal jatuh tempo, limit pinjaman Anda berikutnya akan jadi" + i);
             urlList.add(UrlHostConfig.H5_USER_INFO());
         }
-        mView.setTextBanner(noticeList, urlList);
+        mView.setTextBanner(noticeList, urlList);*/
     }
 
     /**

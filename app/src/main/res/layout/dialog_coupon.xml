@@ -22,9 +22,8 @@
         android:layout_alignBottom="@id/iv_coupon_background"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="50dp"
-        android:background="@drawable/bg_btn_shape_gradient_coupon"
         android:text="Dapatkan"
-        android:textColor="@color/CommonTextColor" />
+        android:textColor="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"

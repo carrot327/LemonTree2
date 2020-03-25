@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -30,6 +31,7 @@ import com.lemontree.android.bean.response.CouponResBean;
 import com.lemontree.android.bean.response.HomeDialogDataResBean;
 import com.lemontree.android.bean.response.OperationDialogResBean;
 import com.lemontree.android.bean.response.RecommendDialogResBean;
+import com.lemontree.android.ui.activity.PayActivity;
 import com.lemontree.android.ui.widget.CommonDialog;
 import com.lemontree.android.ui.widget.DrawableShowDialog;
 import com.lemontree.android.ui.widget.HomePromptDialog;
@@ -351,11 +353,11 @@ public class DialogFactory {
      * @param context
      * @return
      */
-    public static Dialog createExamplePicDialog(final Context context, int res,PicExampleDialog.CloseListener listener) {
+    public static Dialog createExamplePicDialog(final Context context, int res, PicExampleDialog.CloseListener listener) {
         PicExampleDialog dialog = new PicExampleDialog(context, res, new PicExampleDialog.CloseListener() {
             @Override
             public void close(Dialog dialog, View view) {
-                listener.close(dialog,view);
+                listener.close(dialog, view);
             }
         });
         Window dialogWindow = dialog.getWindow();
@@ -524,33 +526,19 @@ public class DialogFactory {
         builder.setItems(myItems, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int position) {
-                String pay_way = items[position];
-                String pay_type = EXTEND_PAY.equals(from) ? "2" : "1";//NORMAL_PAY和PART_PAY为1
+                String pay_type_name = items[position];
+                String is_extent_pay = EXTEND_PAY.equals(from) ? "2" : "1";//NORMAL_PAY和PART_PAY为1
                 String isUseCoupon = "0";
                 if (NORMAL_PAY.equals(from) && 1 == (SPUtils.getInt(ConstantValue.IS_SELECT_COUPON, 1))) {
                     isUseCoupon = "1";
                 }
-                String suffixURL = ConstantValue.H5_REPAY + "?type=" + pay_way + "&from=" + pay_type;
 
-                String url = getH5BaseHost() + suffixURL + "&" +
-                        "app_clientid=" + Tools.getChannel() +
-                        "&app_name=android" +
-                        "&app_version=" + Tools.getAppVersion() +
-                        "&phone=" + BaseApplication.sPhoneNum +
-                        "&user_id=" + BaseApplication.mUserId +
-                        "&repayment_amount=" + payAmount +
-                        "&isUseCoupon=" + isUseCoupon +
-                        "&user_name=" + StringUtils.toUTF8(BaseApplication.sUserName);
-
-                IntentUtils.openWebViewActivity(context, url);
-                if (BuildConfig.DEBUG) {
-                    if ("0".equals(isUseCoupon)) {
-                        Toast.makeText(context, "未选用优惠券", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(context, "已选用优惠券", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                dialog.dismiss();
+                Intent intent = new Intent(context, PayActivity.class);
+                intent.putExtra("pay_type_name", pay_type_name);
+                intent.putExtra("is_extent_pay", is_extent_pay);
+                intent.putExtra("repayment_amount", payAmount);//部分还款才有此值
+                intent.putExtra("is_use_coupon", isUseCoupon);
+                context.startActivity(intent);
             }
         });
         return builder.create();

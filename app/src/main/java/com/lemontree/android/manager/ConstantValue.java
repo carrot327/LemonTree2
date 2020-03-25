@@ -255,4 +255,13 @@ public interface ConstantValue {
      * 获取额度
      */
     String CALCULATE_AMOUNT = "/app/order/calculationAmt";
+
+    /**
+     * 获取还款码
+     */
+    String GET_PAY_CODE = "/app/repayment/getPayCode";
+    /**
+     * 展期
+     */
+    String GET_DELAY_PAY_CODE = "/app/repayment/postpone";
 }

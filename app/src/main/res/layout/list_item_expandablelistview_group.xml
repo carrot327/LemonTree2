@@ -8,16 +8,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="50dp">
 
-        <ImageView
+        <TextView
             android:id="@+id/iv_group_left"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/icon_coupon" />
+            android:background="@color/theme_color_hover" />
 
         <TextView
             android:id="@+id/tv_group"
@@ -27,10 +27,12 @@
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/iv_group_left"
             android:gravity="center"
+            android:textColor="@color/CommonTextColor"
+            android:textStyle="bold"
             tools:text="group text" />
 
         <ImageView
-            android:id="@+id/iv_group"
+            android:id="@+id/iv_group_arrow"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_alignParentRight="true"

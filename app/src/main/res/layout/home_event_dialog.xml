@@ -17,7 +17,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="26dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/bg_dialog_home_event"
+        android:src="@drawable/bg_dialog_coupon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

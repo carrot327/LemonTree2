@@ -64,7 +64,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/home_text_banner">
+        android:background="@color/home_text_banner"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_notice"
@@ -113,7 +114,7 @@
 
         <com.lemontree.android.ui.widget.PtrHeader
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
+            android:layout_height="50dp" />
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/sv"
@@ -124,7 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="20dp">
+                android:paddingTop="10dp">
 
                 <!--滑条布局-->
                 <include
@@ -170,9 +171,9 @@
 
                 <LinearLayout
                     android:id="@+id/ll_delay_pay_entry"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:orientation="horizontal"
@@ -188,19 +189,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
-                        android:gravity="center"
+                        android:layout_marginRight="30dp"
+                        android:background="#14FFC107"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="7dp"
                         android:text="@string/text_delay_hint"
-                        android:textColor="@color/theme_color"
+                        android:textColor="@color/theme_color_hover"
                         android:textSize="14sp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_part_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:visibility="invisible">
@@ -215,41 +222,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
-                        android:gravity="center"
+                        android:layout_marginRight="30dp"
+                        android:background="#14FFC107"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="7dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="7dp"
                         android:text="Lunasi sebagian"
-                        android:textColor="@color/theme_color"
+                        android:textColor="@color/theme_color_hover"
                         android:textSize="14sp" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_borrow_protocol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="23dp"
-                    android:orientation="vertical"
-                    android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/text_perjanjian_pinjaman"
-                        android:textColor="@color/CommonTextColor"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tv_borrow_protocol"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/link_perjanjian_pinjaman"
-                        android:textColor="@color/text_blue_deep"
-                        android:textSize="12sp" />
-
-
-                </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

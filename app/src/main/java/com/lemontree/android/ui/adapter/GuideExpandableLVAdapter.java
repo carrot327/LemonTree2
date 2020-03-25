@@ -2,7 +2,6 @@ package com.lemontree.android.ui.adapter;
 
 import android.content.Context;
 import android.text.Html;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,11 +93,9 @@ public class GuideExpandableLVAdapter extends BaseExpandableListAdapter {
             convertView = mInflater.inflate(R.layout.list_item_expandablelistview_group, null);
         }
         TextView tv_group = convertView.findViewById(R.id.tv_group);
-        ImageView iv_group = convertView.findViewById(R.id.iv_group);
-        ImageView iv_group_left = convertView.findViewById(R.id.iv_group_left);
+        ImageView iv_group = convertView.findViewById(R.id.iv_group_arrow);
 
         iv_group.setVisibility(View.VISIBLE);
-        iv_group_left.setVisibility(View.VISIBLE);
 
         List<String> groupKey = new ArrayList<>();
         for (Map.Entry<String, String> key : map.entrySet()) {

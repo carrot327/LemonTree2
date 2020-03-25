@@ -35,7 +35,8 @@ public class LaunchActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         new Handler().postDelayed(() -> {
-            startActivity(PayCodeActivity.createIntent(mContext));
+            startActivity(MainActivity.createIntent(mContext));
+//            startActivity(PayActivity.createIntent(mContext));
 //            startActivity(ApplyBaseInfoActivity.createIntent(mContext));
 //            startActivity(ApplyCompanyInfoActivity.createIntent(mContext));
 //            startActivity(ApplyContactInfoActivity.createIntent(mContext));
