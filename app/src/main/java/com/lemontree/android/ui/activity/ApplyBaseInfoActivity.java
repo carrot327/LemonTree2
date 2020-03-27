@@ -84,7 +84,7 @@ public class ApplyBaseInfoActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_apply_first;
+        return R.layout.activity_apply_base_info;
     }
 
     @Override

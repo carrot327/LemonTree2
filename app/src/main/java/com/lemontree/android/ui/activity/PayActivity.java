@@ -69,11 +69,11 @@ public class PayActivity extends BaseActivity {
         mPayTypeName = intent.getStringExtra("pay_type_name");//还款方式（eg. MandiriVA）
         mRepayAmount = intent.getStringExtra("repayment_amount");
         mIsUseCoupon = intent.getStringExtra("is_use_coupon");
-        initGuideContent();
+//        initGuideContent();
 
         title.setText(mPayTypeName);
-        expandableListView.setAdapter(new GuideExpandableLVAdapter(mContext, guide_content));
-        expandableListView.setGroupIndicator(null);
+//        expandableListView.setAdapter(new GuideExpandableLVAdapter(mContext, guide_content));
+//        expandableListView.setGroupIndicator(null);
         if ("ConvenienceStore".equals(mPayTypeName)) {
             expandableListView.expandGroup(0);
         }

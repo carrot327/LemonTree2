@@ -160,37 +160,35 @@
         android:layout_marginRight="20dp"
         android:background="@color/app_divide_line" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="14dp"
+        android:orientation="vertical"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:text="Jumlah pembayaran terakhir"
             android:textColor="@color/CommonTextColor"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_final_pay_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:textColor="@color/text_theme"
-            android:textSize="18sp"
+            android:textSize="36sp"
             android:textStyle="bold"
             tools:text="Rp.428,000" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

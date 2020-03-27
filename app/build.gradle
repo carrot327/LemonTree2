@@ -11,8 +11,8 @@ android {
 
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 180
-        versionName "1.8"
+        versionCode 200
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true //矢量图支持
@@ -62,12 +62,6 @@ android {
     productFlavors {
         defaultChannel {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "defaultChannel"]
-        }
-        colada1220 {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "colada1220"]
-        }
-        saku_api_0213 {
-            manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "saku_api_0213"]
         }
         fromSakuFind {
             manifestPlaceholders = [ANDROID_CHANNEL_VALUE: "fromSakuFind"]

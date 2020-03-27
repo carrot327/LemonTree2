@@ -19,7 +19,7 @@ public class BaseApplication extends Application implements DFTransferResultInte
     public static String mUserId = "";
     public static String sPhoneNum = "";
     public static String mSharedPreferencesName;
-    public static String mUserTag="";
+    public static String mUserTag = "";
     public static boolean isOpenGodMode;
     public static boolean mHasUploadAddressBook;
     public static boolean mHasUpdateSmsSuccess;
@@ -71,11 +71,13 @@ public class BaseApplication extends Application implements DFTransferResultInte
      */
     public void initSPData() {
         if (BuildConfig.DEBUG) {
-            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-            sLoginState = true;
-            sUserName = "登录信息(081266568320)";
-            mUserId = "3835666";
-            sPhoneNum = "081266568320";
+//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+//            sLoginState = true;
+//            sUserName = "登录信息(081287566687)";
+//            mUserId = "3832610";
+//            mUserId = "3832081";//晶晶 测试id
+//            mUserId = "3835666";//有待还订单
+//            sPhoneNum = "081287566687";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);

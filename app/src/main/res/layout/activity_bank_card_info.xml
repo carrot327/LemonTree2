@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Nama bank"
                 android:textColorHint="@color/Grey400"
+                app:boxStrokeWidth="0.3dp"
                 app:helperText="Masukkan kata kunci">
 
                 <AutoCompleteTextView
@@ -68,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:hint="Nomor rekening"
-                android:textColorHint="@color/Grey400">
+                android:textColorHint="@color/Grey400"
+                app:boxStrokeWidth="0.3dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText_bankNum"

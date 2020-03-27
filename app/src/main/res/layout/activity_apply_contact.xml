@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.lemontree.android.ui.activity.ApplyCompanyInfoActivity">
 
@@ -78,6 +79,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outline_relation_1"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    app:boxStrokeWidth="0.3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -127,6 +129,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outline_name_1"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    app:boxStrokeWidth="0.3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -163,6 +166,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outline_telephone_1"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    app:boxStrokeWidth="0.3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -207,6 +211,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outline_relation_2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    app:boxStrokeWidth="0.3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -255,6 +260,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outline_name_2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    app:boxStrokeWidth="0.3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -292,6 +298,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outline_telephone_2"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                    app:boxStrokeWidth="0.3dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/iv_tag_phone2"

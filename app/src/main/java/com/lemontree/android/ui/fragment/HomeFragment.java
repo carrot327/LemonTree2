@@ -159,7 +159,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
     LinearLayout applyInfoPage;
     @BindView(R.id.include_home_borrow_loan_info)
     LinearLayout loanInfoPage;
-//    @BindView(R.id.ll_borrow_protocol)
+    //    @BindView(R.id.ll_borrow_protocol)
 //    LinearLayout llBorrowProtocol;
 //    @BindView(R.id.tv_borrow_protocol)
 //    TextView tvBorrowProtocol;
@@ -498,9 +498,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     private void setSeekBarValue() {
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
-            if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+            if (isOpenGodMode) {
                 mHomeData.maxAmtRange = "90000";
-//                mSelectAmount = 20000;
                 tvMinAmt.setText("Rp.20,000");
             }
             int maxAmountRange = Integer.parseInt(mHomeData.maxAmtRange);
@@ -959,7 +958,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000   1600,000  1800,000  2000,000
             int currentProgress = seekBar2.getProgress();
 
-            if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+            if (isOpenGodMode) {
                 //20000  40000  60000
                 if (0 <= currentProgress && currentProgress < 30000) {
                     mSelectAmount = 20000;
@@ -968,7 +967,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 } else if (50000 <= currentProgress && currentProgress < 70000) {
                     mSelectAmount = 60000;
                 } else if (70000 <= currentProgress && currentProgress < 90000) {
-                    mSelectAmount = 80000;
+                    mSelectAmount = 85000;
                 } else if (90000 == currentProgress) {
                     mSelectAmount = 90000;
                 }

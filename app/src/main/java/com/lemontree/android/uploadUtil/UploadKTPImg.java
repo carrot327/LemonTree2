@@ -1,5 +1,7 @@
 package com.lemontree.android.uploadUtil;
 
+import android.util.Log;
+
 import com.lemontree.android.manager.BaseApplication;
 import com.lemontree.android.manager.ConstantValue;
 import com.lemontree.android.manager.NetConstantValue;
@@ -61,6 +63,7 @@ public class UploadKTPImg {
                 try {
                     JSONObject obj = new JSONObject(response.body().string());
                     String resCode = obj.optString("code");
+                    Log.d("okh", "resCode" + resCode);
                     if (resCode.equals("SUCCESS")) {
                         mListener.success();
                     } else {

@@ -94,7 +94,7 @@ public class ApplyContactInfoActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_apply_third;
+        return R.layout.activity_apply_contact;
     }
 
     @Override
@@ -222,21 +222,20 @@ public class ApplyContactInfoActivity extends BaseActivity {
             outlineTelephone1.setError("Tidak diizinkan mengisi kontak yang sama");
             outlineTelephone2.setError("Tidak diizinkan mengisi kontak yang sama");
             hasError = true;
-        }
-        Log.d("ApplyThirdActivity3", phone1);
-        Log.d("ApplyThirdActivity3", BaseApplication.sPhoneNum);
-        if (phone1.equals(BaseApplication.sPhoneNum)) {
-            outlineTelephone1.setError("Tidak boleh sama dengan nomor ponsel Anda");
-            hasError = true;
         } else {
-            outlineTelephone1.setErrorEnabled(false);
-        }
+            if (phone1.equals(BaseApplication.sPhoneNum)) {
+                outlineTelephone1.setError("Tidak boleh sama dengan nomor ponsel Anda");
+                hasError = true;
+            } else {
+                outlineTelephone1.setErrorEnabled(false);
+            }
 
-        if (phone2.equals(BaseApplication.sPhoneNum)) {
-            outlineTelephone2.setError("Tidak boleh sama dengan nomor ponsel Anda");
-            hasError = true;
-        } else {
-            outlineTelephone2.setErrorEnabled(false);
+            if (phone2.equals(BaseApplication.sPhoneNum)) {
+                outlineTelephone2.setError("Tidak boleh sama dengan nomor ponsel Anda");
+                hasError = true;
+            } else {
+                outlineTelephone2.setErrorEnabled(false);
+            }
         }
 
         if (phone1.length() < 9) {

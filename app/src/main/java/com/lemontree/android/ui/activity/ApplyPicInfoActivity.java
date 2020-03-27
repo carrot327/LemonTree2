@@ -115,7 +115,7 @@ public class ApplyPicInfoActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_apply_four;
+        return R.layout.activity_apply_pic_info;
     }
 
     @Override

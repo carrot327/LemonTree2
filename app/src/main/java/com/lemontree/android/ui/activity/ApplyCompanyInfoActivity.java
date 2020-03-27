@@ -69,7 +69,7 @@ public class ApplyCompanyInfoActivity extends BaseActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_apply_second;
+        return R.layout.activity_apply_company_info;
     }
 
     @Override
