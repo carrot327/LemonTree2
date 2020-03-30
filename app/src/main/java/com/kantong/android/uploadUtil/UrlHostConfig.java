@@ -8,7 +8,7 @@ import com.kantong.android.utils.StringUtils;
 
 public class UrlHostConfig {
     //控制在debug模式下是否进入release域名   HTTP_TEST：用测试域名   HTTP_RELEASE:用生产域名
-    private static EvnConfig HOST_ENV = EvnConfig.HTTP_RELEASE;
+    public static EvnConfig HOST_ENV;
 
     //测试  暂无测试环境
     private static final String DEBUG_MAIN_HOST = "http://161.117.239.48:80";

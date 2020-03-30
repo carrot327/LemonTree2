@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.kantong.android.BuildConfig;
+import com.kantong.android.setting.EvnConfig;
 import com.kantong.android.uploadUtil.CLog;
 import com.kantong.android.uploadUtil.UrlHostConfig;
 import com.kantong.android.utils.SPUtils;
@@ -76,12 +77,13 @@ public class BaseApplication extends Application implements DFTransferResultInte
         if (BuildConfig.DEBUG) {
             //3836000 晶晶    //3832079  丛丛
             //3832081 晶晶测试环境
+            UrlHostConfig.HOST_ENV = EvnConfig.HTTP_TEST;//HTTP_RELEASE  HTTP_TEST
 
-//            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
-//            sLoginState = true;
-//            sUserName = "asdf";
-//            mUserId = "38360000";
-//            sPhoneNum = "81290324175";
+            SPUtils.putBoolean(ConstantValue.LOGIN_STATE, true);
+            sLoginState = true;
+            sUserName = "asdf";
+            mUserId = "3700003";
+            sPhoneNum = "81290324175";
         }
         sLoginState = SPUtils.getBoolean(ConstantValue.LOGIN_STATE, false);
         mSharedPreferencesName = SPUtils.getString(ConstantValue.USER_ID, "", true);

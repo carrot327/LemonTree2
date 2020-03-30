@@ -464,7 +464,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     private void setSeekBarValue() {
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
-            if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+            if (isOpenGodMode && ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId))) {//晶晶
                 mHomeData.maxAmtRange = "90000";
 //                mSelectAmount = 20000;
                 tvMinAmt.setText("Rp.20,000");
@@ -635,6 +635,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         rlParams.setMargins(0, UIUtils.dip2px(20), 0, 0);
         tvLeftDay.setLayoutParams(rlParams);
         tvLeftDay.setTextSize(54f);
+        tvLeftDay.setTextColor(getResources().getColor(R.color.theme_color));
         tvTimeText.setVisibility(View.VISIBLE);
         tvBelowHint.setVisibility(View.VISIBLE);
         tvLeftDay.setText(diffTime + "");
@@ -655,9 +656,10 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
         rlParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         tvLeftDay.setGravity(CENTER);
         tvLeftDay.setLayoutParams(rlParams);
-        tvTimeText.setVisibility(View.GONE);
-        tvBelowHint.setVisibility(View.GONE);
+        tvTimeText.setVisibility(View.INVISIBLE);
+        tvBelowHint.setVisibility(View.INVISIBLE);
         tvLeftDay.setTextSize(22f);
+        tvLeftDay.setTextColor(getResources().getColor(R.color.red));
     }
 
     private void showHomeView(String contentView) {
@@ -793,7 +795,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     @Override
     public void showExtendPageData(GetExtendFeeResBean data) {
-        tvDelayTime.setText(data.extendDays);
+        tvDelayTime.setText("+ " + data.extendDays);
         tvPayDeadlineDelay.setText(MyTimeUtils.timeStamp2Date(data.shouldReturnTime));
         tvDelayInterest.setText(String.format("Rp.%s", formatNumber(Integer.parseInt(data.extendFee))));
     }
@@ -940,7 +942,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000   1600,000  1800,000  2000,000
             int currentProgress = seekBar2.getProgress();
 
-            if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+            if (isOpenGodMode && ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId))) {//晶晶
                 //20000  40000  60000
                 if (0 <= currentProgress && currentProgress < 30000) {
                     mSelectAmount = 20000;
@@ -951,7 +953,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
                 } else if (70000 <= currentProgress && currentProgress < 90000) {
                     mSelectAmount = 80000;
                 } else if (90000 == currentProgress) {
-                    mSelectAmount = 90000;
                 }
             } else {
                 if (0 <= currentProgress && currentProgress < 350000) {
