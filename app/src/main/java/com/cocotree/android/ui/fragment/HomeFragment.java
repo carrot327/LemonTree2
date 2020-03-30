@@ -445,7 +445,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     private void setSeekBarValue() {
         if (!TextUtils.isEmpty(mHomeData.maxAmtRange)) {
-            if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+            if (isOpenGodMode && ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId))) {//晶晶
                 mHomeData.maxAmtRange = "90000";
 //                mSelectAmount = 20000;
                 tvMinAmt.setText("Rp.20,000");
@@ -780,7 +780,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
      */
     @Override
     public void showExtendPageData(GetExtendFeeResBean data) {
-        tvDelayTime.setText(data.extendDays);
+        tvDelayTime.setText("+ " + data.extendDays);
         tvPayDeadlineDelay.setText(MyTimeUtils.timeStamp2Date(data.shouldReturnTime));
         tvDelayInterest.setText(String.format("Rp.%s", formatNumber(Integer.parseInt(data.extendFee))));
     }
@@ -924,7 +924,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements IHomeVi
             //300,000  400,000  600,000  800,000  1000,000  1200,000  1500,000   1600,000  1800,000  2000,000
             int currentProgress = seekBar2.getProgress();
 
-            if (isOpenGodMode && (BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId)) {//晶晶
+            if (isOpenGodMode && ((BaseApplication.sPhoneNum != null && BaseApplication.sPhoneNum.contains("81287566687")) || "3832085".equals(BaseApplication.mUserId))) {//晶晶
                 //20000  40000  60000
                 if (0 <= currentProgress && currentProgress < 30000) {
                     mSelectAmount = 20000;
